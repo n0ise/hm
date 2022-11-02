@@ -20,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'hellomed_com' );
+define( 'DB_NAME', 'wordpress' );
 
 /** Database username */
-define( 'DB_USER', 'hellomed_com' );
+define( 'DB_USER', 'wordpress' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'wQbkQ531S1GkWGfc' );
+define( 'DB_PASSWORD', 'wordpress' );
 
 /** Database hostname */
-define( 'DB_HOST', 'sql478.your-server.de' );
+define( 'DB_HOST', 'database' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
