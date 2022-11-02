@@ -28,5 +28,5 @@ jobs:
           remote-protocol: "sftp"
           remote-host: ${{ secrets.FTP_SERVER }}
           remote-user: ${{ secrets.FTP_USERNAME }}
-          ssh-private-key: ${{ secrets.FTP_PASSWORD }}
+          remote-password: ${{ secrets.FTP_PASSWORD }}
           remote-path: "/stage.hellomed.com/"
