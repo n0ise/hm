@@ -1,0 +1,13 @@
+{
+    "core": null,
+    "plugins": [
+      ".",
+      "https://downloads.wordpress.org/plugin/ninja-forms.zip"
+    ],
+    "port": 8555,
+    "testsPort": 8556,
+    "config": {
+      "WP_DEBUG_DISPLAY": true
+    }
+  }
+  

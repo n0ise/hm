@@ -1,0 +1,11 @@
+{
+  "env": {
+    "wp_site": {
+      "url": "http://localhost:8555",
+      "user": "admin",
+      "pass": "password"
+    },
+    "userManagementLicenseKey":""
+  },
+  "projectId": "1nfcfb"
+}
