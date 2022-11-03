@@ -1,4 +1,4 @@
-name: Deploy Files
+name: milanmk/actions-file-deployer
 
 on:
   push:
