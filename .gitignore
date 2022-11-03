@@ -2,3 +2,5 @@ wp-config.php
 /wp-config.php
 .DS_Store
 wp-content/.DS_Store
+hellomed_com.sql
+.lando.yml
