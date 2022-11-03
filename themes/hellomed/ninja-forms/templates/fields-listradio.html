@@ -1,0 +1,66 @@
+<script id="tmpl-nf-field-listradio" type="text/template">
+    <ul aria-describedby="nf-error-{{{ data.id }}}">
+        {{{ data.renderOptions() }}}
+    </ul>
+</script>
+
+<script id='tmpl-nf-field-listradio-option' type='text/template'>
+    <!-- <# if ( ! data.visible ) { return '' } #>
+    <li>
+        <input type="radio"
+               id="nf-field-{{{ data.fieldID }}}-{{{ data.index }}}"
+               name="nf-field-{{{ data.fieldID }}}"
+               class="{{{ data.classes }}} nf-element {{{ ( data.value == data.currentValue  || 1 == data.selected ) ? 'nf-checked' : '' }}}" value="{{{ data.value }}}" {{{ ( data.value == data.currentValue  || 1 == data.selected ) ? 'checked="checked"' : '' }}}
+            aria-labelledby="nf-label-class-field-{{{ data.fieldID }}}-{{{ data.index }}}"
+            <# if( data.required ) { #>
+			required
+			<# } #>
+        >
+        <label for="nf-field-{{{ data.fieldID }}}-{{{ data.index }}}"
+               id="nf-label-class-field-{{{ data.fieldID }}}-{{{ data.index }}}" class="{{{ ( data.value == data.currentValue  || 1
+                       ==
+               data.selected ) ? 'nf-checked-label' : '' }}}">{{{ data.label }}}</label>
+    </li> -->
+
+
+    <div class="btn-packaging-wrapper">
+        <input id="packaging4" type="radio" name="packaging2" checked>
+        <label for="packaging4" class=" btn-packaging btn-comingsoon">
+          <span>Premium</span>
+          15€ einmalige Kosten        </label>
+        <!-- <div class="btn-packaging-image"></div> -->
+        <input id="packaging3" type="radio" name="packaging2"
+        id="nf-field-{{{ data.fieldID }}}-{{{ data.index }}}"
+        name="nf-field-{{{ data.fieldID }}}"
+        class="{{{ data.classes }}} nf-element {{{ ( data.value == data.currentValue  || 1 == data.selected ) ? 'nf-checked' : '' }}}" value="{{{ data.value }}}" {{{ ( data.value == data.currentValue  || 1 == data.selected ) ? 'checked="checked"' : '' }}}
+     aria-labelledby="nf-label-class-field-{{{ data.fieldID }}}-{{{ data.index }}}"
+     <# if( data.required ) { #>
+     required
+     <# } #>
+ >
+        <label for="nf-field-{{{ data.fieldID }}}-{{{ data.index }}}"  id="nf-label-class-field-{{{ data.fieldID }}}-{{{ data.index }}}" class="btn-packaging {{{ ( data.value == data.currentValue  || 1
+            ==
+    data.selected ) ? 'nf-checked-label' : '' }}}"><span>{{{ data.label }}}</span>Keine zusätzlichen Kosten
+</label>
+    <div class="btn-packaging-image"></div>
+
+    
+        <!-- <input id="packaging4" type="radio" name="packaging2" checked>
+        <label for="packaging4" class="btn-packaging">
+          <span>Einweg</span>
+          Keine zusätzlichen Kosten
+        </label>
+        <div class="btn-packaging-image"></div> -->
+      </div>
+</script>
+
+<script id='tmpl-nf-field-listradio-other' type='text/template'>
+    <li>
+        <input type="radio" name="nf-field-{{{ data.fieldID }}}" class="{{{ data.classes }}} nf-element" value="nf-other" {{{ ( ! data.valueFound ) ? 'checked="checked"' : '' }}}> <label>Other {{{ data.renderOtherText() }}}</label>
+    </li>
+</script>
+
+<script id='tmpl-nf-field-listradio-other-text' type='text/template'>
+    <input type="text" name="nf-field-{{{ data.fieldID }}}" class="nf-element" value="{{{ data.currentValue }}}">
+
+</script>
