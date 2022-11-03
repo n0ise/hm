@@ -29,4 +29,4 @@ jobs:
           remote-host: ${{ secrets.FTP_SERVER }}
           remote-user: ${{ secrets.FTP_USERNAME }}
           remote-password: ${{ secrets.FTP_PASSWORD }}
-          remote-path: "/stage.hellomed.com/wp-content/"
+          remote-path: "/var/www/stage.hellomed.com/wp-content/"
