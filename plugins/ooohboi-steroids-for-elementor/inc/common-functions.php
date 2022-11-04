@@ -260,6 +260,13 @@ $fields[] = array(
             'description'	=> sprintf( __( '%sStyle up the Post Content widget elements%s', 'ooohboi-steroids' ), '<span class="ob-option-desc">', '</span>' ), 
             'default'       => 'yes',
         ), 
+        array(
+            'id'            => 'ob_use_typo', 
+            'title'			=> 'TYPO', 
+            'type'			=> 'switcher',
+            'description'	=> sprintf( __( '%sMore controls to your Elementor Kit%s', 'ooohboi-steroids' ), '<span class="ob-option-desc">', '</span>' ), 
+            'default'       => 'yes',
+        ), 
     ),
 );
 

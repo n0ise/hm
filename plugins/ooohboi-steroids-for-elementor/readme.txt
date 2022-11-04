@@ -3,8 +3,8 @@ Contributors: OoohBoi
 Tags: page-builder, elementor, add-on, background-overlay, vertical text, ghost elements, overlapping columns
 Donate link: https://www.paypal.me/ooohboi
 Requires at least: 5.0
-Tested up to: 6.0
-Stable tag: 2.0.0
+Tested up to: 6.1
+Stable tag: 2.0.4
 Requires PHP: 7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0
@@ -17,7 +17,7 @@ An awesome set of tools, options and settings that expand Elementor defaults. In
 
 = What is new? =
 
-Added 1 new extension : POSTMAN
+More options to your Elementor Kit (Site Settings)
 
 == Installation ==
 
@@ -26,7 +26,7 @@ Added 1 new extension : POSTMAN
 
 == Upgrade Notice ==
 
-1.9.9 - Beware of the changes to the language file!
+2.0.4 - Beware of changes to the language file!
 
 == Frequently Asked Questions ==
 
@@ -40,7 +40,27 @@ Rest assured, you won't miss them because there will always be an eye-catching i
 
 No, you don't. It'll work with both free version of Elementor and Elementor PRO.
 
-== Changelog ==
+== Changelog == 
+
+= 2.0.4 =
+- New: TYPO - More options to your Elementor Kit (Site Settings)
+- Fix: OVERLAIZ - due to the class name changes to Container in Elementor v3.8 
+- Updates: cdnjs libraries; GSAP (3.11.3), ScrollTrigger (3.11.3), ScrollTo (3.11.3), MotionPath (3.11.3)
+
+= 2.0.3 =
+- Fix: POSTMAN - Quotations background color is being displayed atop the text
+- Fix: TABBR - '_ob_use_tabbr' critical error for Elementor 3.7 + 
+- New: POSTMAN - Padding option added to Quotations
+
+= 2.0.2 =
+- Fix: conflict with the latest Elementor v3.7.5  
+
+= 2.0.1 =
+- Fix: GLIDER - "glider-XXXXXXXX-gotoslide-0" link to a slide number 0 not working
+- Fix: WIDGET STALKER - Width value missing for Tablets and Mobiles since Ele 3.7
+- Fix: Replaced functions deprecated by Elementor 3.7
+- New: BREAKING BAD - Min height option added to Column 
+- Updates: cdnjs libraries; GSAP (3.11), ScrollTrigger (3.11), ScrollTo (3.11), MotionPath (3.11)
 
 = 2.0.0 =
 - New extension: POSTMAN - Style up Text Editor or Posts widget content (headings, paragraph, lists, blockquotes)

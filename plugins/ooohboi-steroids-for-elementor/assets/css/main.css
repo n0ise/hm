@@ -41,6 +41,9 @@
 	overflow: hidden;
 	position: relative;
 }
+.ob-is-glider .ob-swiper-bundle {
+	width: 100%;
+}
 .ob-is-glider .elementor-container > .elementor-row.swiper-wrapper, 
 .ob-is-glider .elementor-container > .swiper-wrapper {
 	flex-wrap: nowrap !important;
@@ -496,9 +499,11 @@ body:not(.elementor-editor-active) [data-element_type="widget"].fade-in.effect-f
 /* POSTMAN */
 .ob-postman .elementor-widget-container blockquote {
 	position: relative;
+	isolation: isolate;
 }
 .ob-postman .elementor-widget-container blockquote::before {
 	content: '';
 	position: absolute;
 	inset: 0;
+	z-index: -1;
 }

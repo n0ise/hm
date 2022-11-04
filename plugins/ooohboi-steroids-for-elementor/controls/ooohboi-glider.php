@@ -1,6 +1,5 @@
 <?php
 use Elementor\Controls_Manager;
-use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -708,7 +707,7 @@ class OoohBoi_Glider {
 				'default' => 'yes', 
 				'condition' => [
 					'_ob_glider_is_slider' => 'yes', 
-					'_ob_glider_effect' => 'slide', 
+					/*'_ob_glider_effect' => 'slide', */
 				],
 				'frontend_available' => true, 
 				'hide_in_inner' => true, 

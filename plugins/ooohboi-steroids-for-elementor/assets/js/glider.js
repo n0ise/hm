@@ -138,7 +138,7 @@
                     slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll_tablet' ),
                     spaceBetween: +this.getElementSettings( '_ob_glider_space_between_tablet' ) || 0,
                 };
-                breakpointsSettings[0] = {
+                breakpointsSettings[breakpoints.sm] = {
                     slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view_mobile' ),
                     slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll_mobile' ),
                     spaceBetween: +this.getElementSettings( '_ob_glider_space_between_mobile' ) || 0,
@@ -351,7 +351,7 @@
                     this.glider_external_controls.on( 'click', function( e ) {
 
                         var slide_num = parseInt( $( this ).attr( 'class' ).match(/-gotoslide-(\d+)/)[ 1 ] );
-                        if( slide_num > 0 ) this.target_swiper.slideTo( slide_num );
+                        if( slide_num >= 0 ) this.target_swiper.slideTo( slide_num );
 
                         e.preventDefault(); // bail
             
@@ -368,11 +368,6 @@
             'container': Glider, 
 
         };
-        /*
-        elementorFrontend.hooks.addAction( 'frontend/element_ready/container', function( $scope ) {
-            elementorFrontend.elementsHandler.addHandler( Glider, { $element: $scope } );
-        } );
-        */
         $.each( handlersList, function( widgetName, handlerClass ) {
 
             elementorFrontend.hooks.addAction( 'frontend/element_ready/' + widgetName, function( $scope ) {

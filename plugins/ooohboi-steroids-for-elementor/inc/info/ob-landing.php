@@ -10,40 +10,27 @@
 
             <div class="col-8">
 
-                <h3>What's new v2.0.0?</h3>
+                <h3>What's new to 2.0.4?</h3>
                 <p>
-                <strong>1 new extension: POSTMAN</strong>
+                <strong>A couple of major issues relating to the latest Elementor v3.8 are now being fixed, mostly those relating to the Flex Container.</strong>
                 </p>
                 <p>
-                Style up Text Editor or Posts widget content (headings, paragraph, lists, blockquotes). Basic styling, I know, but better than nothing, right?
+                Site Settings are now extended with a few useful options. The most likely there will be more in the future.
                 </p>
                 <p>
-                    <img src="<?php echo  SFE_DIR_URL . 'img/postman.png'; ?>" alt="Postman" />
+                <img src="<?php echo  SFE_DIR_URL . 'img/site-settings-news.png'; ?>" alt="Site Settings news" />
                 </p>
                 <p>
-                GLIDER went thru the major overhaul! As far as I can tell, it should be working like a Swiss clock.
+                All of the GreenSock's animation libraries (and plugins) are up to date! GSAP, ScrollTrigger, ScrollTo, and MotionPath have been "updated" to the latest 3.11.3
                 </p>
                 <p>
-                TABBR became even better now, I have added the option to position tabs any side and with a few more styling options it has become even more powerful than the PRO Tabs widget. 
+                Oh Animator extension remains disabled until Flex Containers are moved from beta to stable. 
                 </p>
-
-                <h3>What's new since v1.9.9?</h3>
-                <p>
-                <strong>2 brand new extensions: TABBR and COUNTERZ + improvements</strong>
+                <p style="background-color: #ffe1e1; padding: 28px;">
+                PLEASE support this plugin development! Think about a small monthly donation if you find it useful for your business. Even $1 from you could have a big impact on development, new features and quicker bug fixes.<br/>
+                Thank you!
                 </p>
-                <p>
-                TABBR extension allows you to style up default Tabs widget to the max! This was the most outdated and neglected widget of Elementor and many people rather installed a replacement widget. 
-                From now on you no longer need anything else but the TABBR extension. 
-                </p>
-                <p>
-                    <img src="<?php echo  SFE_DIR_URL . 'img/tabbr2.png'; ?>" alt="Tabbr" />
-                </p>
-                <p>
-                Frustrated by the lack of options to the Counter widget? Sure you are. COUNTERZ extension will make it shine again.
-                </p>
-                <p>
-                HOVERANIMATOR extension can now be disabled for the touch based devices...
-                </p>
+                <p>&nbsp;</p>
 
             </div>
 
