@@ -89,7 +89,7 @@ final class OoohBoi_Icobox {
 		$element->add_control(
 			'_ob_icobox_no_collapse',
 			[
-				'label' => sprintf( __( 'Prevent Icon and Title Collapse%sNEW!%s', 'ooohboi-steroids' ), '<sup class="ob-new-feature">', '</sup>' ),
+				'label' => __( 'Prevent Icon and Title Collapse', 'ooohboi-steroids' ),
 				'description' => __( 'The icon sits atop the title on mobiles. Prevent that, huh?', 'ooohboi-steroids' ), 
 				'separator' => 'before', 
 				'type' => Controls_Manager::SWITCHER,

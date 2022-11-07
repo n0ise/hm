@@ -338,3 +338,15 @@ add_action( 'wp_head', function(){
     <meta name="facebook-domain-verification" content="gapf5tqscvrmbe0pimp9wjc3s4upi4" />
     <?php
 });
+
+/* Create User Role */
+add_role(
+    'client', //  System name of the role.
+    __( 'Blister Client'  ) // Display name of the role.
+);
+
+add_role(
+    'admin_panel', //  System name of the role.
+    __( 'Hellomed Admin'  ) // Display name of the role.
+);
+

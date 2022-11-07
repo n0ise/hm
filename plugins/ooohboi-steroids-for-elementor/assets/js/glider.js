@@ -49,7 +49,10 @@
             }, 
 
             isGliderCandidate: function() {
-                return ( ! this.$element.closest( '.swiper' ).length && ! this.$element.find( '.swiper' ).length && this.$element.children( '[data-element_type="container"]' ).length > 1 );
+                return ( 
+                    ! this.$element.closest( '.swiper' ).length && 
+                    ! this.$element.find( '.swiper' ).length && 
+                    ( this.$element.find( '.e-con-inner' ).children( '[data-element_type="container"]' ).length > 1 || this.$element.children( '[data-element_type="container"]' ).length ) );
             }, 
 
             isOldGliderCandidate: function() { // it's not a container 
@@ -59,6 +62,9 @@
             onElementChange: function( changedProp ) {
 
                 if( changedProp === '_ob_glider_is_slider' ) { 
+
+                    console.log( 'Prop changed' );
+                    console.log( 'This is Glider candidate: ' + this.isGliderCandidate() );
 
                     if( this.isGliderCandidate() ) {
 
@@ -91,32 +97,58 @@
 
                 if( this.$element.find( '.ob-swiper-bundle' ).length ) return; // bail if the wraping element exists
 
-                this.$element.children( '[data-element_type="container"]' ).wrapAll( '<div class="ob-swiper-bundle swiper"></div>' ); 
+                var is_boxed = this.$element.hasClass( 'e-con-boxed' ) ? true : false;
+
+                if( ! is_boxed ) this.$element.children( '[data-element_type="container"]' ).wrapAll( '<div class="ob-swiper-bundle swiper"></div>' ); 
+                else this.$element.find( '.e-con-inner' ).children( '[data-element_type="container"]' ).wrapAll( '<div class="ob-swiper-bundle swiper"></div>' ); 
 
                 var wrapr = this.$element.find( '.ob-swiper-bundle' );
 
                 wrapr.children( '[data-element_type="container"]' ).addClass( 'swiper-slide' ).wrapAll( '<div class="swiper-wrapper"></div>' );
-                // append controls: next prev pagination
-                wrapr
-                .append( 
-                    '<div class="swiper-button-next"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin" viewBox="0 0 27 44"><path d="M27 22L5 44l-2.1-2.1L22.8 22 2.9 2.1 5 0l22 22z"></path></svg></div>' 
-                )
-                .append( 
-                    '<div class="swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin" viewBox="0 0 27 44"><path d="M0 22L22 0l2.1 2.1L4.2 22l19.9 19.9L22 44 0 22z"></path></svg></div>' 
-                )
-                .append( '<div class="swiper-pagination"></div>' );
 
                 // grab the settings...
                 var settingz = {};
+
+                settingz.icon_obj = this.getElementSettings( '_ob_glider_nav_icon' );
+                var default_next = $( '<div class="swiper-button-next"></div>' );
+                var deafult_prev = $( '<div class="swiper-button-prev"></div>' );
+                var default_pagi = $( '<div class="swiper-pagination"></div>' );
+
+                // append controls: next prev pagination
+                wrapr
+                .append( default_next )
+                .append( deafult_prev )
+                .append( default_pagi );
+
+                if( ! $.isEmptyObject( settingz.icon_obj ) ) {
+
+                    if( 'string' === typeof settingz.icon_obj.value ) {
+
+                        default_next.html( '<i aria-hidden="true" class="' + settingz.icon_obj.value + '"></i>' );
+                        deafult_prev.html( '<i aria-hidden="true" class="' + settingz.icon_obj.value + ' fa-flip-horizontal"></i>' );
+
+                    } else {
+
+                        $.get( settingz.icon_obj.value, null, function( data ) {
+                            default_next.html( document.adoptNode( $( 'svg', data )[ 0 ] ) );
+                        }, 'xml' );
+                        $.get( settingz.icon_obj.value, null, function( data ) {
+                            deafult_prev.html( document.adoptNode( $( 'svg', data )[ 0 ] ) );
+                        }, 'xml' );
+
+                    }
+
+                }
+
                 settingz.pagination_type = this.getElementSettings( '_ob_glider_pagination_type' ) || 'bullets';
                 settingz.allowTouchMove = this.getElementSettings( '_ob_glider_allow_touch_move' );
-                settingz.autoheight = this.getElementSettings( '_ob_glider_auto_h' );
-                settingz.effect = this.getElementSettings( '_ob_glider_effect' );
-                settingz.loop = this.getElementSettings( '_ob_glider_loop' );
-                settingz.direction = this.getElementSettings( '_ob_glider_direction' );
+                settingz.autoheight = this.getElementSettings( '_ob_glider_auto_h' ) || 'no';
+                settingz.effect = this.getElementSettings( '_ob_glider_effect' ) || 'slide';
+                settingz.loop = this.getElementSettings( '_ob_glider_loop' ) || false;
+                settingz.direction = this.getElementSettings( '_ob_glider_direction' ) || 'horizontal';
                 settingz.parallax = this.getElementSettings( '_ob_glider_parallax' );
-                settingz.speed = this.getElementSettings( '_ob_glider_speed' );
-                var autoplayed = this.getElementSettings( '_ob_glider_autoplay' );
+                settingz.speed = this.getElementSettings( '_ob_glider_speed' ) || 450;
+                var autoplayed = this.getElementSettings( '_ob_glider_autoplay' ) || false;
                 if( autoplayed ) {
                     settingz.autoplay = {
                         'delay': this.getElementSettings( '_ob_glider_autoplay_delay' ), 
@@ -124,26 +156,40 @@
                 } else settingz.autoplay = false;
                 settingz.mousewheel = this.getElementSettings( '_ob_glider_allow_mousewheel' );
 
-                /* by Xmastermind */
                 settingz.allowMultiSlides = this.getElementSettings( '_ob_glider_allow_multi_slides' );
                 var breakpointsSettings = {},
                 breakpoints = elementorFrontend.config.breakpoints;
-                breakpointsSettings[breakpoints.lg] = {
-                    slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view' ),
-                    slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll' ),
-                    spaceBetween: +this.getElementSettings( '_ob_glider_space_between' ) || 0,
+
+                // widescreen
+                if( undefined !== this.getElementSettings( '_ob_glider_slides_per_view_widescreen' ) ) {
+                    breakpointsSettings[breakpoints.xxl] = {
+                        slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view_widescreen' ) ) || 1,
+                        slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll_widescreen' ) ) || 1,
+                        spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between_widescreen' ) ) || 0,
+                    }; 
+                }
+                // desktop - default
+                breakpointsSettings[breakpoints.xl] = {
+                    slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view' ) ) || 1, 
+                    slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll' ) ) || 1, 
+                    spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between' ) ) || 0, 
                 };
+                // tablet
                 breakpointsSettings[breakpoints.md] = {
-                    slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view_tablet' ),
-                    slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll_tablet' ),
-                    spaceBetween: +this.getElementSettings( '_ob_glider_space_between_tablet' ) || 0,
-                };
+                    slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view_tablet' ) ) || 1,
+                    slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll_tablet' ) ) || 1,
+                    spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between_tablet' ) ) || 0,
+                }; 
+                // mobile
                 breakpointsSettings[breakpoints.sm] = {
-                    slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view_mobile' ),
-                    slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll_mobile' ),
-                    spaceBetween: +this.getElementSettings( '_ob_glider_space_between_mobile' ) || 0,
-                };
-                settingz.breakpoints = breakpointsSettings;
+                    slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view_mobile' ) ) || 1,
+                    slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll_mobile' ) ) || 1,
+                    spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between_mobile' ) ) || 0,
+                }; 
+
+                if( 'fade' === settingz.effect || 'yes' !== settingz.allowMultiSlides ) settingz.breakpoints = {}; // no breakpoints needed in this case
+                else settingz.breakpoints = breakpointsSettings; 
+
                 // centered slides - v1.7.9
                 settingz.slides_centered = this.getElementSettings( '_ob_glider_centered_slides' ); 
                 settingz.slides_centered_bounds = this.getElementSettings( '_ob_glider_centered_bounds_slides' ); 
@@ -158,7 +204,10 @@
                     direction: ( 'fade' === settingz.effect ? 'horizontal' : settingz.direction ), 
                     parallax: ( 'yes' === settingz.parallax ? true : false ),
                     speed: settingz.speed, 
-                    breakpoints: ( 'yes' === settingz.allowMultiSlides ? settingz.breakpoints : false ), 
+                    slidesPerView: 1, 
+                    slidesPerGroup: 1, 
+                    spaceBetween: 0, 
+                    breakpoints: settingz.breakpoints, 
                     centeredSlides: ( 'yes' === settingz.slides_centered ? true : false ), 
                     centeredSlidesBounds: ( 'yes' === settingz.slides_centered_bounds ? true : false ), 
                     roundLengths: ( 'yes' === settingz.slides_round_lenghts ? true : false ), 
@@ -174,6 +223,11 @@
                     autoplay: settingz.autoplay, 
                     mousewheel: ( 'yes' === settingz.mousewheel ? true : false ), 
                     watchOverflow : true, /* gotta force it down */ 
+                    on: {
+                        init: function () {
+                            wrapr.css( 'visibility', 'visible' );
+                        },
+                    },
                 };
                 // improved asset loading
                 if ( 'undefined' === typeof Swiper ) { // swiper not loaded
@@ -195,9 +249,6 @@
                     this.me_the_swiper = new Swiper( wrapr, swiper_config );
                     this.runSyncStuff( this.me_the_swiper );
                 }
-
-                // show the swiper
-                wrapr.css( 'visibility', 'visible' );
                 
                 if( this.isEdit ) {
                     var TMP_this = this;
@@ -219,30 +270,50 @@
                 if( wrapr_has_row.length ) wrapr = wrapr_has_row;
 
                 wrapr.children( '[data-element_type="column"]' ).addClass( 'swiper-slide' ).wrapAll( '<div class="swiper-wrapper"></div>' );
-                // append controls: next prev pagination
-                if( ! wrapr.find( '.swiper-button-next' ).first().length ) {
-                    wrapr.append( 
-                        '<div class="swiper-button-next"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin" viewBox="0 0 27 44"><path d="M27 22L5 44l-2.1-2.1L22.8 22 2.9 2.1 5 0l22 22z"></path></svg></div>' 
-                    );
-                }
-                if( ! wrapr.find( '.swiper-button-prev' ).first().length ) {
-                    wrapr.append( 
-                        '<div class="swiper-button-prev"><svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMin" viewBox="0 0 27 44"><path d="M0 22L22 0l2.1 2.1L4.2 22l19.9 19.9L22 44 0 22z"></path></svg></div>' 
-                    );
-                }
-                if( ! wrapr.find( '.swiper-pagination' ).first().length ) wrapr.append( '<div class="swiper-pagination"></div>' );
 
                 // grab the settings...
                 var settingz = {};
+
+                settingz.icon_obj = this.getElementSettings( '_ob_glider_nav_icon' );
+                var default_next = $( '<div class="swiper-button-next"></div>' );
+                var deafult_prev = $( '<div class="swiper-button-prev"></div>' );
+                var default_pagi = $( '<div class="swiper-pagination"></div>' );
+
+                // append controls: next prev pagination
+                wrapr
+                .append( default_next )
+                .append( deafult_prev )
+                .append( default_pagi );
+
+                if( ! $.isEmptyObject( settingz.icon_obj ) ) {
+
+                    if( 'string' === typeof settingz.icon_obj.value ) {
+
+                        default_next.html( '<i aria-hidden="true" class="' + settingz.icon_obj.value + '"></i>' );
+                        deafult_prev.html( '<i aria-hidden="true" class="' + settingz.icon_obj.value + ' fa-flip-horizontal"></i>' );
+
+                    } else {
+
+                        $.get( settingz.icon_obj.value, null, function( data ) {
+                            default_next.html( document.adoptNode( $( 'svg', data )[ 0 ] ) );
+                        }, 'xml' );
+                        $.get( settingz.icon_obj.value, null, function( data ) {
+                            deafult_prev.html( document.adoptNode( $( 'svg', data )[ 0 ] ) );
+                        }, 'xml' );
+
+                    }
+
+                }
+                
                 settingz.pagination_type = this.getElementSettings( '_ob_glider_pagination_type' ) || 'bullets';
                 settingz.allowTouchMove = this.getElementSettings( '_ob_glider_allow_touch_move' );
-                settingz.autoheight = this.getElementSettings( '_ob_glider_auto_h' );
-                settingz.effect = this.getElementSettings( '_ob_glider_effect' );
-                settingz.loop = this.getElementSettings( '_ob_glider_loop' );
-                settingz.direction = this.getElementSettings( '_ob_glider_direction' );
+                settingz.autoheight = this.getElementSettings( '_ob_glider_auto_h' ) || 'no';
+                settingz.effect = this.getElementSettings( '_ob_glider_effect' ) || 'slide';
+                settingz.loop = this.getElementSettings( '_ob_glider_loop' ) || false;
+                settingz.direction = this.getElementSettings( '_ob_glider_direction' ) || 'horizontal';
                 settingz.parallax = this.getElementSettings( '_ob_glider_parallax' );
-                settingz.speed = this.getElementSettings( '_ob_glider_speed' );
-                var autoplayed = this.getElementSettings( '_ob_glider_autoplay' );
+                settingz.speed = this.getElementSettings( '_ob_glider_speed' ) || 450;
+                var autoplayed = this.getElementSettings( '_ob_glider_autoplay' ) || false;
                 if( autoplayed ) {
                     settingz.autoplay = {
                         'delay': this.getElementSettings( '_ob_glider_autoplay_delay' ), 
@@ -250,26 +321,40 @@
                 } else settingz.autoplay = false;
                 settingz.mousewheel = this.getElementSettings( '_ob_glider_allow_mousewheel' );
 
-                /* by Xmastermind */
                 settingz.allowMultiSlides = this.getElementSettings( '_ob_glider_allow_multi_slides' );
                 var breakpointsSettings = {},
                 breakpoints = elementorFrontend.config.breakpoints;
-                breakpointsSettings[breakpoints.lg] = {
-                    slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view' ),
-                    slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll' ),
-                    spaceBetween: +this.getElementSettings( '_ob_glider_space_between' ) || 0,
+
+                // widescreen
+                if( undefined !== this.getElementSettings( '_ob_glider_slides_per_view_widescreen' ) ) {
+                    breakpointsSettings[breakpoints.xxl] = {
+                        slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view_widescreen' ) ) || 1,
+                        slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll_widescreen' ) ) || 1,
+                        spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between_widescreen' ) ) || 0,
+                    }; 
+                }
+                // desktop - default
+                breakpointsSettings[breakpoints.xl] = {
+                    slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view' ) ) || 1, 
+                    slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll' ) ) || 1, 
+                    spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between' ) ) || 0, 
                 };
+                // tablet
                 breakpointsSettings[breakpoints.md] = {
-                    slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view_tablet' ),
-                    slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll_tablet' ),
-                    spaceBetween: +this.getElementSettings( '_ob_glider_space_between_tablet' ) || 0,
-                };
-                breakpointsSettings[0] = {
-                    slidesPerView: this.getElementSettings( '_ob_glider_slides_per_view_mobile' ),
-                    slidesPerGroup: this.getElementSettings( '_ob_glider_slides_to_scroll_mobile' ),
-                    spaceBetween: +this.getElementSettings( '_ob_glider_space_between_mobile' ) || 0,
-                };
-                settingz.breakpoints = breakpointsSettings;
+                    slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view_tablet' ) ) || 1,
+                    slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll_tablet' ) ) || 1,
+                    spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between_tablet' ) ) || 0,
+                }; 
+                // mobile
+                breakpointsSettings[breakpoints.sm] = {
+                    slidesPerView: parseInt( this.getElementSettings( '_ob_glider_slides_per_view_mobile' ) ) || 1,
+                    slidesPerGroup: parseInt( this.getElementSettings( '_ob_glider_slides_to_scroll_mobile' ) ) || 1,
+                    spaceBetween: parseInt( this.getElementSettings( '_ob_glider_space_between_mobile' ) ) || 0,
+                }; 
+
+                if( 'fade' === settingz.effect || 'yes' !== settingz.allowMultiSlides ) settingz.breakpoints = {}; // no breakpoints needed in this case
+                else settingz.breakpoints = breakpointsSettings; 
+
                 // centered slides - v1.7.9
                 settingz.slides_centered = this.getElementSettings( '_ob_glider_centered_slides' ); 
                 settingz.slides_centered_bounds = this.getElementSettings( '_ob_glider_centered_bounds_slides' ); 
@@ -284,7 +369,10 @@
                     direction: ( 'fade' === settingz.effect ? 'horizontal' : settingz.direction ), 
                     parallax: ( 'yes' === settingz.parallax ? true : false ),
                     speed: settingz.speed, 
-                    breakpoints: ( 'yes' === settingz.allowMultiSlides ? settingz.breakpoints : false ), 
+                    slidesPerView: 1, 
+                    slidesPerGroup: 1, 
+                    spaceBetween: 0, 
+                    breakpoints: settingz.breakpoints, 
                     centeredSlides: ( 'yes' === settingz.slides_centered ? true : false ), 
                     centeredSlidesBounds: ( 'yes' === settingz.slides_centered_bounds ? true : false ), 
                     roundLengths: ( 'yes' === settingz.slides_round_lenghts ? true : false ), 
@@ -300,6 +388,11 @@
                     autoplay: settingz.autoplay, 
                     mousewheel: ( 'yes' === settingz.mousewheel ? true : false ), 
                     watchOverflow : true, /* gotta force it down */ 
+                    on: {
+                        init: function () {
+                            wrapr.css( 'visibility', 'visible' );
+                        },
+                    },
                 };
                 // improved asset loading
                 if ( 'undefined' === typeof Swiper ) { // swiper not loaded
@@ -321,9 +414,6 @@
                     this.me_the_swiper = new Swiper( wrapr, swiper_config );
                     this.runSyncStuff( this.me_the_swiper );
                 }
-
-                // show the swiper
-                wrapr.css( 'visibility', 'visible' );
 
                 if( this.isEdit ) {
                     var TMP_this = this;

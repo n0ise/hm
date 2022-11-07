@@ -2,14 +2,14 @@
 /**
  * Plugin Name: OoohBoi Steroids for Elementor
  * Description: An awesome set of tools/options/settings that extend Elementor default/existing widgets and elements. It keeps the editor tidy, saves valuable resources and improves the workflow.
- * Version:     2.0.4
+ * Version:     2.0.5
  * Author:      OoohBoi
  * Author URI:  https://www.youtube.com/c/OoohBoi
  * Text Domain: ooohboi-steroids
  * Domain Path: /lang
  * License: GPLv3
  * Elementor tested up to: 3.8.9
- * Elementor Pro tested up to: 3.7.9
+ * Elementor Pro tested up to: 3.8.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0
  */
 
@@ -33,7 +33,7 @@ final class OoohBoi_Steroids {
 	 *
 	 * @var string The plugin version.
 	 */
-	const VERSION = '2.0.4';
+	const VERSION = '2.0.5';
 
 	/**
 	 * Minimum Elementor Version
@@ -345,6 +345,56 @@ final class OoohBoi_Steroids {
 
     }
 
+	/**
+	 * Admin notice
+	 *
+	 * Warning when the site doesn't have a minimum required Elementor version.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function admin_notice_minimum_elementor_version() {
+
+		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
+
+		$message = sprintf(
+			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'ooohboi-steroids' ),
+			'<strong>' . esc_html__( 'Steroids for Elementor', 'ooohboi-steroids' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'ooohboi-steroids' ) . '</strong>',
+			 self::MINIMUM_ELEMENTOR_VERSION
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
+
+	}
+
+	/**
+	 * Admin notice
+	 *
+	 * Warning when the site doesn't have a minimum required PHP version.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 */
+	public function admin_notice_minimum_php_version() {
+
+		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
+
+		$message = sprintf(
+			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'ooohboi-steroids' ),
+			'<strong>' . esc_html__( 'Steroids for Elementor', 'ooohboi-steroids' ) . '</strong>',
+			'<strong>' . esc_html__( 'PHP', 'ooohboi-steroids' ) . '</strong>',
+			 self::MINIMUM_PHP_VERSION
+		);
+
+		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
+
+	}
+
 	/*
 		* Init Extensions
 		*
@@ -439,7 +489,7 @@ final class OoohBoi_Steroids {
 		}
 		// -----------------------------
 
-		wp_register_style( 'ooohboi-steroids-styles', plugins_url( 'assets/css/main.css', __FILE__ ), NULL, self::VERSION . '10082022' );
+		wp_register_style( 'ooohboi-steroids-styles', plugins_url( 'assets/css/main.css', __FILE__ ), NULL, self::VERSION . '04112022' );
 
 	}
 

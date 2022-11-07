@@ -10,7 +10,45 @@
 
             <div class="col-8">
 
-                <h3>What's new to 2.0.4?</h3>
+                <div>
+
+                    <h3>What's new to 2.0.5?</h3>
+                    <p>
+                    <strong>Thanks to a few generous donations, Glider extension has been completely renewed</strong>
+                    </p>
+                    <p>
+                    &mdash; Navigation<br/>
+                    From now on you can use/upload your own SVG file to replace the existing Prev/Next icons.<br/>
+                    Likewise, you can use one of the available FontAwesome icons supplied by Elementor.
+                    </p>
+                    <p>
+                    &mdash; Pagination<br/>
+                    Many more options added to make a stylish and decent pagination, not just a flee-size circles. 
+                    </p>
+                    <p>
+                    &mdash; Easing Effects<br/>
+                    For the beginning a dozen being added to the list of ready-made effects. Shall be more in the future I guess.
+                    </p>
+                    <p>
+                    &mdash; Flex Container ready<br/>
+                    All the bugs have been fixed ... well, not quite all of them, we know that's impossible.<br/>
+                    In case you spot the flaw - just send me the letter. Ground mail delivered, of course.
+                    </p>
+                    <p>
+                    <img src="<?php echo  SFE_DIR_URL . 'img/glider-renewed.png'; ?>" alt="Glider renewed with the version 2.0.5" />
+                    </p>
+                    <p><strong>Anything else?</strong> <br/>
+                    Yeah, remember when HOVERANIMATOR stopped working due to those silly class name "updates" since Elementor v3.8. So, that's been sorted too.
+                    </p>
+                    <p style="background-color: #ffe1e1; padding: 28px;">
+                    PLEASE support this plugin development! Think about a small monthly donation if you find it useful for your business. Even $1 from you could have a big impact on development, new features and quicker bug fixes.<br/>
+                    Thank you!
+                    </p>
+                    <p>&nbsp;</p>
+
+                </div>
+
+                <h3>v2.0.4</h3>
                 <p>
                 <strong>A couple of major issues relating to the latest Elementor v3.8 are now being fixed, mostly those relating to the Flex Container.</strong>
                 </p>
@@ -25,10 +63,6 @@
                 </p>
                 <p>
                 Oh Animator extension remains disabled until Flex Containers are moved from beta to stable. 
-                </p>
-                <p style="background-color: #ffe1e1; padding: 28px;">
-                PLEASE support this plugin development! Think about a small monthly donation if you find it useful for your business. Even $1 from you could have a big impact on development, new features and quicker bug fixes.<br/>
-                Thank you!
                 </p>
                 <p>&nbsp;</p>
 
@@ -45,6 +79,17 @@
                     <img src="<?php echo  SFE_DIR_URL . 'img/sponsor-needed.png'; ?>" alt="Sponsor needed" />
                     </a>
                 </p>
+
+                <hr />
+
+                <h3>BIG Thanks on generous donations:</h3>
+
+                <ul>
+                    <li>Manuel Borrelli, Stephen A Wall</li>
+                    <li>Scott Griffiths, Jeff Logan</li>
+                    <li>Jacob Bannier, Joni Kukkohovi</li>
+                    <li>#clbs</li>
+                </ul>
 
                 <hr />
 

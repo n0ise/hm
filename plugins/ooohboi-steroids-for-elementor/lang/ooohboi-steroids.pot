@@ -2,15 +2,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: OoohBoi Steroids for Elementor\n"
-"POT-Creation-Date: 2022-10-08 13:26+0200\n"
-"PO-Revision-Date: 2022-10-08 13:25+0200\n"
+"POT-Creation-Date: 2022-11-04 14:34+0100\n"
+"PO-Revision-Date: 2022-11-04 14:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: ooohboi-steroids.php\n"
@@ -36,13 +36,13 @@ msgstr ""
 #: controls/ooohboi-bullet.php:50 controls/ooohboi-butter-button.php:102
 #: controls/ooohboi-commentz.php:100 controls/ooohboi-commentz.php:1137
 #: controls/ooohboi-container-extras.php:97 controls/ooohboi-counterz.php:94
-#: controls/ooohboi-glider.php:120 controls/ooohboi-glider.php:134
-#: controls/ooohboi-glider.php:187 controls/ooohboi-glider.php:420
-#: controls/ooohboi-glider.php:580 controls/ooohboi-glider.php:661
-#: controls/ooohboi-glider.php:682 controls/ooohboi-glider.php:704
-#: controls/ooohboi-glider.php:744 controls/ooohboi-glider.php:779
-#: controls/ooohboi-glider.php:797 controls/ooohboi-glider.php:816
-#: controls/ooohboi-glider.php:835 controls/ooohboi-harakiri.php:95
+#: controls/ooohboi-glider.php:121 controls/ooohboi-glider.php:134
+#: controls/ooohboi-glider.php:221 controls/ooohboi-glider.php:324
+#: controls/ooohboi-glider.php:613 controls/ooohboi-glider.php:965
+#: controls/ooohboi-glider.php:1045 controls/ooohboi-glider.php:1065
+#: controls/ooohboi-glider.php:1088 controls/ooohboi-glider.php:1106
+#: controls/ooohboi-glider.php:1123 controls/ooohboi-glider.php:1141
+#: controls/ooohboi-glider.php:1159 controls/ooohboi-harakiri.php:95
 #: controls/ooohboi-harakiri.php:149 controls/ooohboi-harakiri.php:397
 #: controls/ooohboi-hover-animator.php:111
 #: controls/ooohboi-hover-animator.php:185
@@ -63,7 +63,8 @@ msgstr ""
 #: controls/ooohboi-pseudo.php:114 controls/ooohboi-searchcop.php:79
 #: controls/ooohboi-shadough.php:49 controls/ooohboi-spacerat.php:101
 #: controls/ooohboi-spacerat.php:378 controls/ooohboi-tabbr.php:95
-#: controls/ooohboi-tabbr.php:359 controls/ooohboi-widget-stalker.php:114
+#: controls/ooohboi-tabbr.php:359 controls/ooohboi-typo.php:90
+#: controls/ooohboi-widget-stalker.php:114
 #: inc/exopite-simple-options/fields/upload.php:131
 msgid "Yes"
 msgstr ""
@@ -73,13 +74,13 @@ msgstr ""
 #: controls/ooohboi-bullet.php:51 controls/ooohboi-butter-button.php:103
 #: controls/ooohboi-commentz.php:101 controls/ooohboi-commentz.php:1138
 #: controls/ooohboi-container-extras.php:98 controls/ooohboi-counterz.php:95
-#: controls/ooohboi-glider.php:121 controls/ooohboi-glider.php:135
-#: controls/ooohboi-glider.php:188 controls/ooohboi-glider.php:421
-#: controls/ooohboi-glider.php:581 controls/ooohboi-glider.php:662
-#: controls/ooohboi-glider.php:683 controls/ooohboi-glider.php:705
-#: controls/ooohboi-glider.php:745 controls/ooohboi-glider.php:780
-#: controls/ooohboi-glider.php:798 controls/ooohboi-glider.php:817
-#: controls/ooohboi-glider.php:836 controls/ooohboi-harakiri.php:96
+#: controls/ooohboi-glider.php:122 controls/ooohboi-glider.php:135
+#: controls/ooohboi-glider.php:222 controls/ooohboi-glider.php:325
+#: controls/ooohboi-glider.php:614 controls/ooohboi-glider.php:966
+#: controls/ooohboi-glider.php:1046 controls/ooohboi-glider.php:1066
+#: controls/ooohboi-glider.php:1089 controls/ooohboi-glider.php:1107
+#: controls/ooohboi-glider.php:1124 controls/ooohboi-glider.php:1142
+#: controls/ooohboi-glider.php:1160 controls/ooohboi-harakiri.php:96
 #: controls/ooohboi-harakiri.php:150 controls/ooohboi-harakiri.php:398
 #: controls/ooohboi-hover-animator.php:112
 #: controls/ooohboi-hover-animator.php:186
@@ -100,7 +101,8 @@ msgstr ""
 #: controls/ooohboi-pseudo.php:115 controls/ooohboi-searchcop.php:80
 #: controls/ooohboi-shadough.php:50 controls/ooohboi-spacerat.php:102
 #: controls/ooohboi-spacerat.php:379 controls/ooohboi-tabbr.php:96
-#: controls/ooohboi-tabbr.php:360 controls/ooohboi-widget-stalker.php:115
+#: controls/ooohboi-tabbr.php:360 controls/ooohboi-typo.php:91
+#: controls/ooohboi-widget-stalker.php:115
 #: inc/exopite-simple-options/fields/upload.php:129
 msgid "No"
 msgstr ""
@@ -122,10 +124,11 @@ msgstr ""
 #: controls/ooohboi-breaking-bad.php:493 controls/ooohboi-breaking-bad.php:618
 #: controls/ooohboi-breaking-bad.php:642 controls/ooohboi-commentz.php:165
 #: controls/ooohboi-commentz.php:706 controls/ooohboi-counterz.php:124
-#: controls/ooohboi-counterz.php:227 controls/ooohboi-imbox.php:115
-#: controls/ooohboi-oh-animator.php:352 controls/ooohboi-oh-animator.php:402
-#: controls/ooohboi-oh-animator.php:464 controls/ooohboi-oh-animator.php:513
-#: controls/ooohboi-tabbr.php:204 controls/ooohboi-widget-stalker.php:265
+#: controls/ooohboi-counterz.php:227 controls/ooohboi-glider.php:852
+#: controls/ooohboi-imbox.php:115 controls/ooohboi-oh-animator.php:352
+#: controls/ooohboi-oh-animator.php:402 controls/ooohboi-oh-animator.php:464
+#: controls/ooohboi-oh-animator.php:513 controls/ooohboi-tabbr.php:204
+#: controls/ooohboi-widget-stalker.php:265
 msgid "Center"
 msgstr ""
 
@@ -367,8 +370,7 @@ msgid "Align Widgets"
 msgstr ""
 
 #: controls/ooohboi-bullet.php:46
-#, php-format
-msgid "Move bullet to top%sNEW!%s"
+msgid "Move bullet to top"
 msgstr ""
 
 #: controls/ooohboi-bullet.php:47
@@ -398,7 +400,7 @@ msgstr ""
 #: controls/ooohboi-butter-button.php:175 controls/ooohboi-commentz.php:182
 #: controls/ooohboi-commentz.php:791 controls/ooohboi-commentz.php:1030
 #: controls/ooohboi-counterz.php:163 controls/ooohboi-counterz.php:262
-#: controls/ooohboi-glider.php:334 controls/ooohboi-kontrolz.php:107
+#: controls/ooohboi-glider.php:509 controls/ooohboi-kontrolz.php:107
 #: controls/ooohboi-paginini.php:59 controls/ooohboi-postman.php:345
 #: controls/ooohboi-tabbr.php:379 controls/ooohboi-tabbr.php:529
 msgid "Padding"
@@ -440,6 +442,7 @@ msgstr ""
 #: controls/ooohboi-butter-button.php:398 controls/ooohboi-commentz.php:284
 #: controls/ooohboi-commentz.php:465 controls/ooohboi-commentz.php:987
 #: controls/ooohboi-counterz.php:194 controls/ooohboi-counterz.php:293
+#: controls/ooohboi-glider.php:451 controls/ooohboi-glider.php:786
 #: controls/ooohboi-imbox.php:230 controls/ooohboi-imbox.php:244
 #: controls/ooohboi-imbox.php:376 controls/ooohboi-imbox.php:390
 #: controls/ooohboi-overlaiz.php:369 controls/ooohboi-overlaiz.php:388
@@ -458,8 +461,8 @@ msgstr ""
 #: controls/ooohboi-butter-button.php:280
 #: controls/ooohboi-butter-button.php:411 controls/ooohboi-commentz.php:295
 #: controls/ooohboi-commentz.php:477 controls/ooohboi-commentz.php:868
-#: controls/ooohboi-commentz.php:998 controls/ooohboi-glider.php:290
-#: controls/ooohboi-glider.php:537 controls/ooohboi-imbox.php:252
+#: controls/ooohboi-commentz.php:998 controls/ooohboi-glider.php:464
+#: controls/ooohboi-glider.php:799 controls/ooohboi-imbox.php:252
 #: controls/ooohboi-imbox.php:398 controls/ooohboi-kontrolz.php:95
 #: controls/ooohboi-kontrolz.php:207 controls/ooohboi-overlaiz.php:400
 #: controls/ooohboi-overlay-underlay.php:520
@@ -515,12 +518,12 @@ msgid "Text alignment"
 msgstr ""
 
 #: controls/ooohboi-commentz.php:164 controls/ooohboi-commentz.php:705
-#: controls/ooohboi-counterz.php:226
+#: controls/ooohboi-counterz.php:226 controls/ooohboi-glider.php:851
 msgid "Left"
 msgstr ""
 
 #: controls/ooohboi-commentz.php:166 controls/ooohboi-commentz.php:707
-#: controls/ooohboi-counterz.php:228
+#: controls/ooohboi-counterz.php:228 controls/ooohboi-glider.php:853
 msgid "Right"
 msgstr ""
 
@@ -575,7 +578,7 @@ msgstr ""
 msgid "Gravatar style"
 msgstr ""
 
-#: controls/ooohboi-commentz.php:415 controls/ooohboi-glider.php:510
+#: controls/ooohboi-commentz.php:415 controls/ooohboi-glider.php:707
 msgid "Size"
 msgstr ""
 
@@ -731,17 +734,17 @@ msgstr ""
 msgid "Align title"
 msgstr ""
 
-#: controls/ooohboi-glider.php:116
+#: controls/ooohboi-glider.php:117
 msgid "Create Slider?"
 msgstr ""
 
-#: controls/ooohboi-glider.php:117
+#: controls/ooohboi-glider.php:118
 msgid ""
 "This container containers will become slidable. TIP: Use this Switch to "
 "refresh your Glider."
 msgstr ""
 
-#: controls/ooohboi-glider.php:131
+#: controls/ooohboi-glider.php:132
 msgid "Adaptable height?"
 msgstr ""
 
@@ -750,196 +753,319 @@ msgid "Slider height"
 msgstr ""
 
 #: controls/ooohboi-glider.php:184
+msgid "Slider vertical height"
+msgstr ""
+
+#: controls/ooohboi-glider.php:186
+msgid "Some content might end up being cut off -- check all out carefully"
+msgstr ""
+
+#: controls/ooohboi-glider.php:219
+msgid "Infinite Loop"
+msgstr ""
+
+#: controls/ooohboi-glider.php:236
+msgid "Direction"
+msgstr ""
+
+#: controls/ooohboi-glider.php:240 controls/ooohboi-tabbr.php:182
+msgid "Horizontal"
+msgstr ""
+
+#: controls/ooohboi-glider.php:241 controls/ooohboi-tabbr.php:183
+msgid "Vertical"
+msgstr ""
+
+#: controls/ooohboi-glider.php:256
+msgid "Transition type"
+msgstr ""
+
+#: controls/ooohboi-glider.php:260
+msgid "Slide"
+msgstr ""
+
+#: controls/ooohboi-glider.php:261 controls/ooohboi-teleporter.php:316
+msgid "Fade"
+msgstr ""
+
+#: controls/ooohboi-glider.php:275
+#, php-format
+msgid "Easing%sNEW!%s"
+msgstr ""
+
+#: controls/ooohboi-glider.php:276
+msgid "Easing effect applied to Glider"
+msgstr ""
+
+#: controls/ooohboi-glider.php:280
+msgid "Linear"
+msgstr ""
+
+#: controls/ooohboi-glider.php:281 controls/ooohboi-oh-animator.php:1166
+msgid "Ease"
+msgstr ""
+
+#: controls/ooohboi-glider.php:282 controls/ooohboi-hover-animator.php:342
+#: controls/ooohboi-hover-animator.php:539
+#: controls/ooohboi-hover-animator.php:736
+#: controls/ooohboi-hover-animator.php:986
+#: controls/ooohboi-hover-animator.php:1152 controls/ooohboi-interactor.php:253
+#: controls/ooohboi-photomorph.php:221
+msgid "Ease-in"
+msgstr ""
+
+#: controls/ooohboi-glider.php:283 controls/ooohboi-hover-animator.php:343
+#: controls/ooohboi-hover-animator.php:540
+#: controls/ooohboi-hover-animator.php:737
+#: controls/ooohboi-hover-animator.php:987
+#: controls/ooohboi-hover-animator.php:1153 controls/ooohboi-interactor.php:254
+#: controls/ooohboi-photomorph.php:222
+msgid "Ease-out"
+msgstr ""
+
+#: controls/ooohboi-glider.php:284 controls/ooohboi-hover-animator.php:344
+#: controls/ooohboi-hover-animator.php:541
+#: controls/ooohboi-hover-animator.php:738
+#: controls/ooohboi-hover-animator.php:988
+#: controls/ooohboi-hover-animator.php:1154 controls/ooohboi-interactor.php:255
+#: controls/ooohboi-photomorph.php:223
+msgid "Ease-in-out"
+msgstr ""
+
+#: controls/ooohboi-glider.php:285
+msgid "Stagger"
+msgstr ""
+
+#: controls/ooohboi-glider.php:286
+msgid "Backward"
+msgstr ""
+
+#: controls/ooohboi-glider.php:287
+msgid "Quintic"
+msgstr ""
+
+#: controls/ooohboi-glider.php:288
+msgid "Circular"
+msgstr ""
+
+#: controls/ooohboi-glider.php:289
+msgid "Exponential"
+msgstr ""
+
+#: controls/ooohboi-glider.php:305
+msgid "Transition speed"
+msgstr ""
+
+#: controls/ooohboi-glider.php:321
 msgid "Hide Navigation"
 msgstr ""
 
-#: controls/ooohboi-glider.php:205 controls/ooohboi-kontrolz.php:46
-msgid "Navigation styles"
+#: controls/ooohboi-glider.php:342
+#, php-format
+msgid "Navigation styles%sNEW!%s"
 msgstr ""
 
-#: controls/ooohboi-glider.php:222
-msgid "Arrows Color"
+#: controls/ooohboi-glider.php:343 controls/ooohboi-glider.php:633
+msgid "Edit to trigger new styles!"
 msgstr ""
 
-#: controls/ooohboi-glider.php:239 controls/ooohboi-kontrolz.php:58
-msgid "Arrows Color - Hover"
+#: controls/ooohboi-glider.php:360
+msgid "Icon"
 msgstr ""
 
-#: controls/ooohboi-glider.php:256 controls/ooohboi-kontrolz.php:71
+#: controls/ooohboi-glider.php:361
+msgid "Select FontAwesome icon or upload your own SVG image"
+msgstr ""
+
+#: controls/ooohboi-glider.php:380
+msgid "Nav Color"
+msgstr ""
+
+#: controls/ooohboi-glider.php:398
+msgid "Nav Color - Hover"
+msgstr ""
+
+#: controls/ooohboi-glider.php:416 controls/ooohboi-kontrolz.php:71
 #: controls/ooohboi-paginini.php:47 controls/ooohboi-paginini.php:121
 #: controls/ooohboi-paginini.php:182
 msgid "Background Color"
 msgstr ""
 
-#: controls/ooohboi-glider.php:273 controls/ooohboi-kontrolz.php:83
+#: controls/ooohboi-glider.php:433 controls/ooohboi-kontrolz.php:83
 msgid "Background Color - Hover"
 msgstr ""
 
-#: controls/ooohboi-glider.php:307
+#: controls/ooohboi-glider.php:481
 msgid "Icon size"
 msgstr ""
 
-#: controls/ooohboi-glider.php:360 controls/ooohboi-kontrolz.php:128
-msgid "Calc - Y"
+#: controls/ooohboi-glider.php:535
+msgid "Calc Prev - Y"
 msgstr ""
 
-#: controls/ooohboi-glider.php:361 controls/ooohboi-glider.php:380
-#: controls/ooohboi-glider.php:398 controls/ooohboi-kontrolz.php:129
-#: controls/ooohboi-kontrolz.php:143 controls/ooohboi-kontrolz.php:156
+#: controls/ooohboi-glider.php:536 controls/ooohboi-glider.php:554
+#: controls/ooohboi-glider.php:573 controls/ooohboi-glider.php:591
+#: controls/ooohboi-kontrolz.php:129 controls/ooohboi-kontrolz.php:143
+#: controls/ooohboi-kontrolz.php:156
 msgid "Valid CSS only! Like: 25px or 15em or 100% - 50px or 50% + 3rem"
 msgstr ""
 
-#: controls/ooohboi-glider.php:378 controls/ooohboi-kontrolz.php:141
+#: controls/ooohboi-glider.php:553
+msgid "Calc Next - Y"
+msgstr ""
+
+#: controls/ooohboi-glider.php:571 controls/ooohboi-kontrolz.php:141
 msgid "Calc Prev - X"
 msgstr ""
 
-#: controls/ooohboi-glider.php:396 controls/ooohboi-kontrolz.php:154
+#: controls/ooohboi-glider.php:589 controls/ooohboi-kontrolz.php:154
 msgid "Calc Next - X"
 msgstr ""
 
-#: controls/ooohboi-glider.php:417
+#: controls/ooohboi-glider.php:610
 msgid "Hide Pagination"
 msgstr ""
 
-#: controls/ooohboi-glider.php:439 controls/ooohboi-kontrolz.php:170
-msgid "Pagination styles"
+#: controls/ooohboi-glider.php:632
+#, php-format
+msgid "Pagination styles%sNEW!%s"
 msgstr ""
 
-#: controls/ooohboi-glider.php:455
+#: controls/ooohboi-glider.php:650
 msgid "Pagination type"
 msgstr ""
 
-#: controls/ooohboi-glider.php:459
+#: controls/ooohboi-glider.php:654
 msgid "Bullets"
 msgstr ""
 
-#: controls/ooohboi-glider.php:460
+#: controls/ooohboi-glider.php:655
 msgid "Fraction"
 msgstr ""
 
-#: controls/ooohboi-glider.php:461
+#: controls/ooohboi-glider.php:656
 msgid "Progress Bar"
 msgstr ""
 
-#: controls/ooohboi-glider.php:475 controls/ooohboi-kontrolz.php:182
+#: controls/ooohboi-glider.php:671 controls/ooohboi-kontrolz.php:182
 msgid "Pagination Color"
 msgstr ""
 
-#: controls/ooohboi-glider.php:492 controls/ooohboi-kontrolz.php:195
+#: controls/ooohboi-glider.php:689 controls/ooohboi-kontrolz.php:195
 msgid "Pagination Color - Active"
 msgstr ""
 
-#: controls/ooohboi-glider.php:557
-msgid "Transition type"
+#: controls/ooohboi-glider.php:735
+msgid "Bullets width"
 msgstr ""
 
-#: controls/ooohboi-glider.php:562
-msgid "Slide"
+#: controls/ooohboi-glider.php:760
+msgid "Bullets height"
 msgstr ""
 
-#: controls/ooohboi-glider.php:563 controls/ooohboi-teleporter.php:316
-msgid "Fade"
+#: controls/ooohboi-glider.php:821
+msgid "Bullets spacing"
 msgstr ""
 
-#: controls/ooohboi-glider.php:577
+#: controls/ooohboi-glider.php:847
+msgid "Pagination alignment"
+msgstr ""
+
+#: controls/ooohboi-glider.php:870
+msgid "Pagination padding"
+msgstr ""
+
+#: controls/ooohboi-glider.php:894
+msgid "Pagination margin"
+msgstr ""
+
+#: controls/ooohboi-glider.php:918
+msgid "Pagination background color"
+msgstr ""
+
+#: controls/ooohboi-glider.php:934
+msgid "Pagination background border radius"
+msgstr ""
+
+#: controls/ooohboi-glider.php:962
 msgid "Show Multiple Slides"
 msgstr ""
 
-#: controls/ooohboi-glider.php:598
+#: controls/ooohboi-glider.php:983
 msgid "Slides Per View"
 msgstr ""
 
-#: controls/ooohboi-glider.php:619
+#: controls/ooohboi-glider.php:1004
 msgid "Slides to Scroll"
 msgstr ""
 
-#: controls/ooohboi-glider.php:620
+#: controls/ooohboi-glider.php:1005
 msgid "Scrolling multiple slides can break infinite loop."
 msgstr ""
 
-#: controls/ooohboi-glider.php:639
+#: controls/ooohboi-glider.php:1024
 msgid "Space Between Slides (px)"
 msgstr ""
 
-#: controls/ooohboi-glider.php:657
+#: controls/ooohboi-glider.php:1042
 msgid "Centered Slides"
 msgstr ""
 
-#: controls/ooohboi-glider.php:658
+#: controls/ooohboi-glider.php:1043
 msgid "Active slide will be centered."
 msgstr ""
 
-#: controls/ooohboi-glider.php:678
+#: controls/ooohboi-glider.php:1062
 msgid "Centered Slide Bounds"
 msgstr ""
 
-#: controls/ooohboi-glider.php:679
+#: controls/ooohboi-glider.php:1063
 msgid ""
 "Active slide will be centered without adding gaps at the beginning and end "
 "of slider."
 msgstr ""
 
-#: controls/ooohboi-glider.php:701
-msgid "Infinite Loop"
-msgstr ""
-
-#: controls/ooohboi-glider.php:720
-msgid "Direction"
-msgstr ""
-
-#: controls/ooohboi-glider.php:725 controls/ooohboi-tabbr.php:182
-msgid "Horizontal"
-msgstr ""
-
-#: controls/ooohboi-glider.php:726 controls/ooohboi-tabbr.php:183
-msgid "Vertical"
-msgstr ""
-
-#: controls/ooohboi-glider.php:740
+#: controls/ooohboi-glider.php:1084
 msgid "Parallax"
 msgstr ""
 
-#: controls/ooohboi-glider.php:741
+#: controls/ooohboi-glider.php:1085
 msgid "It will work with Elementor PRO Attributes only."
 msgstr ""
 
-#: controls/ooohboi-glider.php:760
-msgid "Transition speed"
-msgstr ""
-
-#: controls/ooohboi-glider.php:776
+#: controls/ooohboi-glider.php:1104
 msgid "Enable Touch Move"
 msgstr ""
 
-#: controls/ooohboi-glider.php:794
+#: controls/ooohboi-glider.php:1121
 msgid "Enable Mousewheel"
 msgstr ""
 
-#: controls/ooohboi-glider.php:812
+#: controls/ooohboi-glider.php:1138
 msgid "Deblur Slides"
 msgstr ""
 
-#: controls/ooohboi-glider.php:813
+#: controls/ooohboi-glider.php:1139
 msgid "Round values of slides width and height to prevent blurry texts?"
 msgstr ""
 
-#: controls/ooohboi-glider.php:832
+#: controls/ooohboi-glider.php:1157
 msgid "Autoplay"
 msgstr ""
 
-#: controls/ooohboi-glider.php:850
+#: controls/ooohboi-glider.php:1174
 msgid "Autoplay delay"
 msgstr ""
 
-#: controls/ooohboi-glider.php:851
+#: controls/ooohboi-glider.php:1175
 msgid "In miliseconds! 1000 is one second."
 msgstr ""
 
-#: controls/ooohboi-glider.php:868
+#: controls/ooohboi-glider.php:1192
 msgid "Control Glider externally!"
 msgstr ""
 
-#: controls/ooohboi-glider.php:870
+#: controls/ooohboi-glider.php:1194
 msgid ""
 "You can control this Glider instance from any link on this page by adding "
 "the custom class name to the link. \n"
@@ -947,7 +1073,7 @@ msgid ""
 "end. For instance: glider-NNNNNNN-gotoslide-3"
 msgstr ""
 
-#: controls/ooohboi-glider.php:882
+#: controls/ooohboi-glider.php:1206
 msgid "This Glider control class"
 msgstr ""
 
@@ -1163,8 +1289,7 @@ msgid ""
 msgstr ""
 
 #: controls/ooohboi-hover-animator.php:196
-#, php-format
-msgid "Disable on touch devices?%sNEW!%s"
+msgid "Disable on touch devices?"
 msgstr ""
 
 #: controls/ooohboi-hover-animator.php:198
@@ -1213,33 +1338,6 @@ msgstr ""
 #: controls/ooohboi-hover-animator.php:979
 #: controls/ooohboi-hover-animator.php:1145 controls/ooohboi-interactor.php:246
 msgid "Easing"
-msgstr ""
-
-#: controls/ooohboi-hover-animator.php:342
-#: controls/ooohboi-hover-animator.php:539
-#: controls/ooohboi-hover-animator.php:736
-#: controls/ooohboi-hover-animator.php:986
-#: controls/ooohboi-hover-animator.php:1152 controls/ooohboi-interactor.php:253
-#: controls/ooohboi-photomorph.php:221
-msgid "Ease-in"
-msgstr ""
-
-#: controls/ooohboi-hover-animator.php:343
-#: controls/ooohboi-hover-animator.php:540
-#: controls/ooohboi-hover-animator.php:737
-#: controls/ooohboi-hover-animator.php:987
-#: controls/ooohboi-hover-animator.php:1153 controls/ooohboi-interactor.php:254
-#: controls/ooohboi-photomorph.php:222
-msgid "Ease-out"
-msgstr ""
-
-#: controls/ooohboi-hover-animator.php:344
-#: controls/ooohboi-hover-animator.php:541
-#: controls/ooohboi-hover-animator.php:738
-#: controls/ooohboi-hover-animator.php:988
-#: controls/ooohboi-hover-animator.php:1154 controls/ooohboi-interactor.php:255
-#: controls/ooohboi-photomorph.php:223
-msgid "Ease-in-out"
 msgstr ""
 
 #: controls/ooohboi-hover-animator.php:364
@@ -1345,8 +1443,7 @@ msgid "Blur Hover"
 msgstr ""
 
 #: controls/ooohboi-icobox.php:92
-#, php-format
-msgid "Prevent Icon and Title Collapse%sNEW!%s"
+msgid "Prevent Icon and Title Collapse"
 msgstr ""
 
 #: controls/ooohboi-icobox.php:93
@@ -1395,8 +1492,7 @@ msgid "Description Margin"
 msgstr ""
 
 #: controls/ooohboi-imbox.php:93
-#, php-format
-msgid "Prevent Image and Title Collapse%sNEW!%s"
+msgid "Prevent Image and Title Collapse"
 msgstr ""
 
 #: controls/ooohboi-imbox.php:94
@@ -1632,6 +1728,22 @@ msgstr ""
 
 #: controls/ooohboi-interactor.php:642 controls/ooohboi-oh-animator.php:1064
 msgid "Right Bottom"
+msgstr ""
+
+#: controls/ooohboi-kontrolz.php:46
+msgid "Navigation styles"
+msgstr ""
+
+#: controls/ooohboi-kontrolz.php:58
+msgid "Arrows Color - Hover"
+msgstr ""
+
+#: controls/ooohboi-kontrolz.php:128
+msgid "Calc - Y"
+msgstr ""
+
+#: controls/ooohboi-kontrolz.php:170
+msgid "Pagination styles"
 msgstr ""
 
 #: controls/ooohboi-kontrolz.php:183
@@ -1945,10 +2057,6 @@ msgstr ""
 
 #: controls/ooohboi-oh-animator.php:1154
 msgid "These will make any animation look more natural"
-msgstr ""
-
-#: controls/ooohboi-oh-animator.php:1166
-msgid "Ease"
 msgstr ""
 
 #: controls/ooohboi-oh-animator.php:1167
@@ -2840,6 +2948,32 @@ msgstr ""
 msgid "Strongly advised: HIDDEN."
 msgstr ""
 
+#: controls/ooohboi-typo.php:40
+msgid "Remove horizontal scroller?"
+msgstr ""
+
+#: controls/ooohboi-typo.php:45 controls/ooohboi-typo.php:62
+msgid "Remove"
+msgstr ""
+
+#: controls/ooohboi-typo.php:46 controls/ooohboi-typo.php:63
+msgid "Leave"
+msgstr ""
+
+#: controls/ooohboi-typo.php:58
+msgid "Remove link underlines?"
+msgstr ""
+
+#: controls/ooohboi-typo.php:84
+msgid "Smooth link hovers?"
+msgstr ""
+
+#: controls/ooohboi-typo.php:85
+msgid ""
+"TIP: You can add \".smooth-hover\" custom class name to any widget in order "
+"to add smooth-hover behaviour to its hyperlinks"
+msgstr ""
+
 #: controls/ooohboi-videomasq.php:54
 msgid "Choose Video Mask"
 msgstr ""
@@ -3047,11 +3181,16 @@ msgstr ""
 msgid "%sStyle up the Post Content widget elements%s"
 msgstr ""
 
-#: inc/common-functions.php:268
+#: inc/common-functions.php:267
+#, php-format
+msgid "%sMore controls to your Elementor Kit%s"
+msgstr ""
+
+#: inc/common-functions.php:275
 msgid "Manage JS Libraries"
 msgstr ""
 
-#: inc/common-functions.php:274
+#: inc/common-functions.php:281
 #, php-format
 msgid ""
 "%sThe following libraries are currently available with Steroids for "
@@ -3059,56 +3198,56 @@ msgid ""
 "OFF.%s"
 msgstr ""
 
-#: inc/common-functions.php:280
+#: inc/common-functions.php:287
 msgid "LOCOMOTIVE SCROLL"
 msgstr ""
 
-#: inc/common-functions.php:281
+#: inc/common-functions.php:288
 #, php-format
 msgid ""
 "%1$sDetection of elements in viewport and smooth scrolling with parallax.%3$s"
 "%4$sSOURCE%5$s%2$s"
 msgstr ""
 
-#: inc/common-functions.php:292
+#: inc/common-functions.php:299
 msgid "Enable for Tablets"
 msgstr ""
 
-#: inc/common-functions.php:293
+#: inc/common-functions.php:300
 msgid "Enable for Mobiles"
 msgstr ""
 
-#: inc/common-functions.php:302
+#: inc/common-functions.php:309
 msgid "Multiplier"
 msgstr ""
 
-#: inc/common-functions.php:303
+#: inc/common-functions.php:310
 #, php-format
 msgid "%sBoost/reduce scrolling speed. 1 is the default.%s"
 msgstr ""
 
-#: inc/common-functions.php:312
+#: inc/common-functions.php:319
 msgid "Refresh on resize?"
 msgstr ""
 
-#: inc/common-functions.php:313
+#: inc/common-functions.php:320
 msgid ""
 "Things get messy on resize. That will do the silent page refresh upon the "
 "window resize/orientationchange."
 msgstr ""
 
-#: inc/common-functions.php:320
+#: inc/common-functions.php:327
 msgid "Enable freehand mode?"
 msgstr ""
 
-#: inc/common-functions.php:321
+#: inc/common-functions.php:328
 #, php-format
 msgid ""
 "That removes all the default %sdata-scroll-section%s attributes so you can "
 "set them at will."
 msgstr ""
 
-#: inc/common-functions.php:332
+#: inc/common-functions.php:339
 #, php-format
 msgid ""
 "%1$s Cross-browser JavaScript library/API which is used to create and "
@@ -3116,40 +3255,40 @@ msgid ""
 "%2$s"
 msgstr ""
 
-#: inc/common-functions.php:339
+#: inc/common-functions.php:346
 #, php-format
 msgid ""
 "%1$s A lightweight JavaScript animation library with a simple, yet powerful "
 "API.%3$s%4$sSOURCE%5$s%2$s"
 msgstr ""
 
-#: inc/common-functions.php:346
+#: inc/common-functions.php:353
 #, php-format
 msgid ""
 "%1$s Create badass fluid and smooth transitions between your website's pages."
 "%3$s%4$sSOURCE%5$s%2$s"
 msgstr ""
 
-#: inc/common-functions.php:353
+#: inc/common-functions.php:360
 #, php-format
 msgid ""
 "%1$sGreenSock's GSAP JavaScript animation library (including Draggable).%3$s"
 "%4$sSOURCE%5$s%2$s"
 msgstr ""
 
-#: inc/common-functions.php:360
+#: inc/common-functions.php:367
 #, php-format
 msgid "%1$sLet your page react to scroll changes.%3$s%4$sSOURCE%5$s%2$s"
 msgstr ""
 
-#: inc/common-functions.php:367
+#: inc/common-functions.php:374
 #, php-format
 msgid ""
 "%1$sAnimates the scroll position of the window or a DOM element.%3$s"
 "%4$sSOURCE%5$s%2$s"
 msgstr ""
 
-#: inc/common-functions.php:374
+#: inc/common-functions.php:381
 #, php-format
 msgid ""
 "%1$sAnimate anything (SVG, DOM, canvas, generic objects, whatever) along a "

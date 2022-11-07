@@ -1,4 +1,4 @@
-/*! elementor - v3.7.2 - 21-08-2022 */
+/*! elementor - v3.8.0 - 30-10-2022 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -35,7 +35,9 @@ var LockPro = /*#__PURE__*/function () {
           form = _this$elements.form,
           templateType = _this$elements.templateType;
       form.addEventListener('submit', this.onFormSubmit.bind(this));
-      templateType.addEventListener('change', this.onTemplateTypeChange.bind(this));
+      templateType.addEventListener('change', this.onTemplateTypeChange.bind(this)); // Force checking on render, to make sure that default values are also checked.
+
+      this.onTemplateTypeChange();
     }
   }, {
     key: "onFormSubmit",
@@ -159,11 +161,26 @@ module.exports = elementorModules.common.views.modal.Layout.extend({
   },
   initialize: function initialize() {
     elementorModules.common.views.modal.Layout.prototype.initialize.apply(this, arguments);
+    var lookupControlIdPrefix = 'elementor-new-template__form__';
+    var templateTypeSelectId = "".concat(lookupControlIdPrefix, "template-type");
     this.showLogo();
     this.showContentView();
     this.initElements();
     this.lockProBehavior = new _lockPro.default(this.elements);
     this.lockProBehavior.bindEvents();
+
+    var dynamicControlsVisibilityListener = function dynamicControlsVisibilityListener() {
+      elementorAdmin.templateControls.setDynamicControlsVisibility(lookupControlIdPrefix, elementor_new_template_form_controls);
+    };
+
+    this.getModal().onShow = function () {
+      dynamicControlsVisibilityListener();
+      document.getElementById(templateTypeSelectId).addEventListener('change', dynamicControlsVisibilityListener);
+    };
+
+    this.getModal().onHide = function () {
+      document.getElementById(templateTypeSelectId).removeEventListener('change', dynamicControlsVisibilityListener);
+    };
   },
   initElements: function initElements() {
     var container = this.$el[0],

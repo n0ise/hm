@@ -4,7 +4,7 @@ Tags: page-builder, elementor, add-on, background-overlay, vertical text, ghost 
 Donate link: https://www.paypal.me/ooohboi
 Requires at least: 5.0
 Tested up to: 6.1
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 Requires PHP: 7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0
@@ -17,7 +17,7 @@ An awesome set of tools, options and settings that expand Elementor defaults. In
 
 = What is new? =
 
-More options to your Elementor Kit (Site Settings)
+Glider is now completely renewed! More options to your Elementor Kit (Site Settings)
 
 == Installation ==
 
@@ -26,7 +26,7 @@ More options to your Elementor Kit (Site Settings)
 
 == Upgrade Notice ==
 
-2.0.4 - Beware of changes to the language file!
+2.0.5 - Beware of changes to the language file!
 
 == Frequently Asked Questions ==
 
@@ -41,6 +41,10 @@ Rest assured, you won't miss them because there will always be an eye-catching i
 No, you don't. It'll work with both free version of Elementor and Elementor PRO.
 
 == Changelog == 
+
+= 2.0.5 =
+- Update: GLIDER - now fully renewed; Navigation, Pagination, Easing effects, custom SVG icons...
+- Fix: HOVERANIMATOR - due to the class name changes to Flex Container in Elementor v3.8 this extension stopped working
 
 = 2.0.4 =
 - New: TYPO - More options to your Elementor Kit (Site Settings)
