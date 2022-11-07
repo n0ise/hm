@@ -318,7 +318,7 @@ function dcms_add_google_tag_manager_body() { ?>
 <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P977PPD" -->
 <!-- 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4KJF2M" -->
 
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
 <!-- End Google Tag Manager (noscript) -->
 
 <?php }
@@ -338,15 +338,3 @@ add_action( 'wp_head', function(){
     <meta name="facebook-domain-verification" content="gapf5tqscvrmbe0pimp9wjc3s4upi4" />
     <?php
 });
-
-/* Create User Role */
-add_role(
-    'client', //  System name of the role.
-    __( 'Blister Client'  ) // Display name of the role.
-);
-
-add_role(
-    'admin_panel', //  System name of the role.
-    __( 'Hellomed Admin'  ) // Display name of the role.
-);
-
