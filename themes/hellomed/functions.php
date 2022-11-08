@@ -318,7 +318,7 @@ function dcms_add_google_tag_manager_body() { ?>
 <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P977PPD" -->
 <!-- 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4KJF2M" -->
 
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
 <!-- End Google Tag Manager (noscript) -->
 
 <?php }
