@@ -323,6 +323,15 @@ function redirect_to_forgot_password() {
 	}
 }
 
+// redirect to custom login 
+add_action('login_init', function(){
+    if( !isset( $_GET['action'] ) ) {
+        wp_redirect( '/anmelden' );
+    }
+});
+
+
+
 /* Create User Role */
 add_role(
     'client', //  System name of the role.
