@@ -46,7 +46,7 @@ border-radius: .375rem;
 transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
                     </style>
                                                     <div class="auth-wrap">
-                                                        <div class="logo" style="width:140px;margin:0 auto;"><img src="https://hmm.lndo.site/wp-content/uploads/2022/05/hel_logo-01.svg"></div>
+                                                        <div class="logo" style="width:140px;margin:0 auto;"><img src="https://stage.hellomed.com/wp-content/uploads/2022/05/hel_logo-01.svg"></div>
                                                         <div class="auth-form" style="margin: 40px 0;
 padding: 40px;
 border-radius: 10px;
