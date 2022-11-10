@@ -11,8 +11,8 @@
 	</div>
 	<# } #>
 
-	<# if( data.formID == 3 ) { #>	
-			<!-- condition for funnel simone -->
+	<# if(( data.formID == 23 ) || ( data.formID == 20 )) { #>	
+			<!-- condition for funnel profile and register -->
 
 		<div class="row-of-buttons">
 	
@@ -20,5 +20,16 @@
 		</div>
 
 	<# } #>
+
+	<# if( data.formID == 21 ) { #>	
+		<!-- condition for funnel login  -->
+
+	<div class="row-of-buttons">
+
+		<input id="nf-field-{{{ data.id }}} funnel1_summary" class=" {{{ data.renderClasses() }}} nf-element btn submitbutton" type="button" value="{{{ data.label }}}" {{{ ( data.disabled ) ? 'disabled' : '' }}}>
+	
+		<br><br><br>or <a href="/register">register</a>|||||| <br><br><br><br><a href="/register">forgot password???!?!?!!?!</a> </div>
+
+<# } #>
 
 </script>

@@ -295,36 +295,6 @@ function disable_emojis_tinymce( $plugins ) {
 add_filter( 'elementor/frontend/print_google_fonts', '__return_false' );
 
 
-
-//  GTM in head
-function dcms_add_google_tag_manager_head() { ?>
-
-<!-- Google Tag Manager -->
-<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P4KJF2M');</script> -->
-<!-- End Google Tag Manager -->
-
-<?php }
-// add_action('wp_head', 'dcms_add_google_tag_manager_head');
-
-
-//  GTM in body - noscript
-function dcms_add_google_tag_manager_body() { ?>
-
-	<!-- Google Tag Manager (noscript) -->
-<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P977PPD" -->
-<!-- 	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4KJF2M" -->
-
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<?php }
-add_action( 'wp_body_open', 'dcms_add_google_tag_manager_body' );
-
-// Elementor empty query text
 add_action('elementor/query/query_results', function($query) {
 	$total = $query->found_posts;
 	if ($total == 0) {
@@ -338,3 +308,28 @@ add_action( 'wp_head', function(){
     <meta name="facebook-domain-verification" content="gapf5tqscvrmbe0pimp9wjc3s4upi4" />
     <?php
 });
+
+
+// redirect default reset password to new page, custom 
+add_action( 'login_form_lostpassword', 'redirect_to_forgot_password' );
+function redirect_to_forgot_password() {
+	if ( 'GET' == $_SERVER['REQUEST_METHOD'] ) {
+		if ( is_user_logged_in() ) {
+			$this->redirect_logged_in_user();
+			exit;
+		}
+		wp_redirect( home_url( '/forgot-password/' ) );
+		exit;
+	}
+}
+
+/* Create User Role */
+add_role(
+    'client', //  System name of the role.
+    __( 'Hellomed Patient'  ) // Display name of the role.
+);
+
+add_role(
+    'admin_panel', //  System name of the role.
+    __( 'Hellomed Admin'  ) // Display name of the role.
+);
