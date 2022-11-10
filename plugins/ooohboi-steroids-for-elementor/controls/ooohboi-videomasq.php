@@ -1,6 +1,6 @@
 <?php
 use Elementor\Controls_Manager;
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
+use Elementor\Controls_Stack;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -146,20 +146,20 @@ class OoohBoi_Videomasq {
 					'background_background' => [ 'video' ], 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							$selector => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
-							'_ob_videomasq_mask_size' => [ 'initial' ],
+							'_ob_videomasq_mask_size_tablet' => [ 'initial' ],
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							$selector => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
-							'_ob_videomasq_mask_size' => [ 'initial' ], 
+							'_ob_videomasq_mask_size_mobile' => [ 'initial' ], 
 						],
 					],
 				],

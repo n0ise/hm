@@ -1,13 +1,6 @@
 <?php
-/**
- * Safe SVG allowed tags
- *
- * @package safe-svg
- */
 
-/**
- * SVG Allowed Tags class.
- */
+
 class safe_svg_tags extends \enshrined\svgSanitize\data\AllowedTags {
 
 	/**

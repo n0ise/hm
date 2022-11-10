@@ -5,6 +5,8 @@
  *
  * PHP version 5 and 7
  *
+ * @category  Crypt
+ * @package   EC
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2017 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -146,7 +148,7 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
      * Used by the various key handlers
      *
      * @param string $str
-     * @return array
+     * @return \phpseclib3\Math\PrimeField\Integer
      */
     public function extractSecret($str)
     {
@@ -168,7 +170,8 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
         // 3.  Interpret the buffer as the little-endian integer, forming a
         //     secret scalar s.
         $dA = new \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger($h, 256);
-        return ['dA' => $dA, 'secret' => $str];
+        $dA->secret = $str;
+        return $dA;
     }
     /**
      * Encode a point as a string
@@ -194,7 +197,7 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
      */
     public function createRandomMultiplier()
     {
-        return $this->extractSecret(\WPMailSMTP\Vendor\phpseclib3\Crypt\Random::string(32))['dA'];
+        return $this->extractSecret(\WPMailSMTP\Vendor\phpseclib3\Crypt\Random::string(32));
     }
     /**
      * Converts an affine point to an extended homogeneous coordinate

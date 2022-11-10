@@ -1,0 +1,89 @@
+Log created: 2022-11-10 11:14:49
+Type: backup
+[2022-11-10 11:14:50][notice]Start backing up.
+[2022-11-10 11:14:50][notice]server info fcgi:On max execution time: 180 wp version:5.9 php version:7.4.33 db version:5.5.5 php ini:safe_mode: memory_limit:256M memory_get_usage:85.42 MB memory_get_peak_usage:86.41 MB extensions:PDO enabled curl enabled zlib enabled   is_multisite:0
+[2022-11-10 11:14:50][notice]Prepare to backup backup_db files.
+[2022-11-10 11:14:50][notice]Start exporting database.
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_nf3_relationships
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_wpmailsmtp_tasks_meta
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_pmxi_files
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_pmxe_templates
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_pmxe_posts
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_pmxi_images
+[2022-11-10 11:14:50][notice]Preparing to dump table hm_pmxe_exports
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_pmxi_posts
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_nf3_objects
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_nf3_forms
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_nf3_actions
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_pmxi_history
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_wpmailsmtp_debug_events
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_wpforms_tasks_meta
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_pmxi_hash
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_wpvivid_options
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_actionscheduler_groups
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_borlabs_cookie_content_blocker
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_borlabs_cookie_groups
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_pmxi_templates
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_actionscheduler_claims
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_borlabs_cookie_script_blocker
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_yoast_migrations
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_term_relationships
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_frm_forms
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_e_events
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_links
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_frm_fields
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_actionscheduler_logs
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_yoast_primary_term
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_e_submissions_values
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_borlabs_cookie_cookies
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_commentmeta
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_terms
+[2022-11-10 11:14:51][notice]Preparing to dump table hm_frm_item_metas
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_object_meta
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_term_taxonomy
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_termmeta
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_ninja_forms_uploads
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_yoast_indexable_hierarchy
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_users
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_e_notes_users_relations
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_yoast_seo_links
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_frm_items
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_comments
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_pmxi_imports
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_actionscheduler_actions
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_e_submissions_actions_log
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_fields
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_e_notes
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_e_submissions
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_pmxe_google_cats
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_form_meta
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_yoast_indexable
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_upgrades
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_chunks
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_action_meta
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_usermeta
+[2022-11-10 11:14:52][notice]Preparing to dump table hm_nf3_field_meta
+[2022-11-10 11:14:53][notice]Preparing to dump table hm_borlabs_cookie_consent_log
+[2022-11-10 11:14:53][notice]Preparing to dump table hm_borlabs_cookie_statistics
+[2022-11-10 11:14:53][notice]Preparing to dump table hm_options
+[2022-11-10 11:14:53][notice]Preparing to dump table hm_posts
+[2022-11-10 11:14:53][notice]Preparing to dump table hm_postmeta
+[2022-11-10 11:14:54][notice]Exporting database finished.
+[2022-11-10 11:14:54][notice]Start compressing database
+[2022-11-10 11:14:54][notice]Prepare to zip file. file: hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.sql
+[2022-11-10 11:14:56][notice]Adding zip files completed.hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.part001.zip, filesize: 7.12 MB
+[2022-11-10 11:14:56][notice]Compressing database completed
+[2022-11-10 11:14:56][notice]Backing up backup_db completed.
+[2022-11-10 11:14:56][notice]Connect site 
+[2022-11-10 11:14:56][notice]Start uploading hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.zip
+[2022-11-10 11:14:56][notice]{"result":"success","file_status":{"status":"start"}}
+[2022-11-10 11:14:56][notice]send chunk hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.zip offset 0
+[2022-11-10 11:14:56][notice]finished send chunk
+[2022-11-10 11:14:56][notice]send chunk hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.zip offset 2097152
+[2022-11-10 11:14:57][notice]finished send chunk
+[2022-11-10 11:14:57][notice]send chunk hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.zip offset 4194304
+[2022-11-10 11:14:57][notice]finished send chunk
+[2022-11-10 11:14:57][notice]send chunk hellomed.com_wpvivid-636ccf19ebb4a_2022-11-10-11-14_backup_db.zip offset 6291456
+[2022-11-10 11:14:57][notice]finished send chunk
+[2022-11-10 11:14:58][notice]upload finished
+[2022-11-10 11:14:58][notice]Finish upload to send_to_site_ex

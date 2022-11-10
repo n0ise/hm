@@ -1,6 +1,8 @@
 <?php
+use Elementor\Core\Breakpoints\Breakpoint;
 use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 
@@ -37,7 +39,7 @@ class OoohBoi_Overlaiz {
 		// selector based on the current element
 		$selector = '{{WRAPPER}} > .elementor-column-wrap > .elementor-background-overlay, {{WRAPPER}} > .elementor-widget-wrap > .elementor-background-overlay';
 		if( 'section' == $element->get_name() ) $selector = '{{WRAPPER}} > .elementor-background-overlay'; 
-		elseif( 'container' == $element->get_name() ) $selector = '{{WRAPPER}}.e-con::before'; 
+		elseif( 'container' == $element->get_name() ) $selector = '{{WRAPPER}}.e-container--column:before'; 
 
 
 		$element->add_control(
@@ -80,11 +82,11 @@ class OoohBoi_Overlaiz {
 					'unit' => '%',
 					'size' => 100,
 				],
-				'default' => [
+				'default_tablet' => [
 					'unit' => '%',
 					'size' => 100,
 				],
-				'default' => [
+				'default_mobile' => [
 					'unit' => '%',
 					'size' => 100,
 				],
@@ -107,12 +109,12 @@ class OoohBoi_Overlaiz {
 					'_ob_overlaiz_width_alt' => '', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							$selector => 'width: {{SIZE}}{{UNIT}};',
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							$selector => 'width: {{SIZE}}{{UNIT}};',
 						],
@@ -147,11 +149,11 @@ class OoohBoi_Overlaiz {
 					'unit' => '%',
 					'size' => 100,
 				],
-				'default' => [
+				'default_tablet' => [
 					'unit' => '%',
 					'size' => 100,
 				],
-				'default' => [
+				'default_mobile' => [
 					'unit' => '%',
 					'size' => 100,
 				],
@@ -174,12 +176,12 @@ class OoohBoi_Overlaiz {
 					'_ob_overlaiz_height_alt' => '', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							$selector => 'height: {{SIZE}}{{UNIT}};',
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							$selector => 'height: {{SIZE}}{{UNIT}};',
 						],
@@ -214,11 +216,11 @@ class OoohBoi_Overlaiz {
 					'unit' => '%',
 					'size' => 0,
 				],
-				'default' => [
+				'default_tablet' => [
 					'unit' => '%',
 					'size' => 0,
 				],
-				'default' => [
+				'default_mobile' => [
 					'unit' => '%',
 					'size' => 0,
 				],
@@ -241,12 +243,12 @@ class OoohBoi_Overlaiz {
 					'_ob_overlaiz_move_bg_x_alt' => '', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							$selector => 'left: {{SIZE}}{{UNIT}};',
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							$selector => 'left: {{SIZE}}{{UNIT}};',
 						],
@@ -281,11 +283,11 @@ class OoohBoi_Overlaiz {
 					'unit' => '%',
 					'size' => 0,
 				],
-				'default' => [
+				'default_tablet' => [
 					'unit' => '%',
 					'size' => 0,
 				],
-				'default' => [
+				'default_mobile' => [
 					'unit' => '%',
 					'size' => 0,
 				],
@@ -308,12 +310,12 @@ class OoohBoi_Overlaiz {
 					'_ob_overlaiz_move_bg_y_alt' => '', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							$selector => 'top: {{SIZE}}{{UNIT}};',
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							$selector => 'top: {{SIZE}}{{UNIT}};',
 						],
@@ -611,25 +613,25 @@ class OoohBoi_Overlaiz {
 					'_ob_overlaiz_popover_masq' => 'yes', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							$selector => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
 							'_ob_overlaiz_use_it' => 'yes', 
 							'background_overlay_background' => [ 'classic', 'gradient' ], 
-							'_ob_overlaiz_mask_size' => [ 'initial' ], 
+							'_ob_overlaiz_mask_size_tablet' => [ 'initial' ], 
 							'_ob_overlaiz_popover_masq' => 'yes', 
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							$selector => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
 							'_ob_overlaiz_use_it' => 'yes', 
 							'background_overlay_background' => [ 'classic', 'gradient' ], 
-							'_ob_overlaiz_mask_size' => [ 'initial' ], 
+							'_ob_overlaiz_mask_size_mobile' => [ 'initial' ], 
 							'_ob_overlaiz_popover_masq' => 'yes', 
 						],
 					],

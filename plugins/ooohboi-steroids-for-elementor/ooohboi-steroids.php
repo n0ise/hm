@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name: OoohBoi Steroids for Elementor
- * Description: An awesome set of tools/options/settings that extend Elementor default/existing widgets and elements. It keeps the editor tidy, saves valuable resources and improves the workflow.
- * Version:     2.0.5
+ * Description: An awesome set of tools, options and settings that expand Elementor defaults. Instead of creating new Elementor Widgets, these act like an upgrade of existing options or the self-standing panels.
+ * Version:     2.0.0
  * Author:      OoohBoi
  * Author URI:  https://www.youtube.com/c/OoohBoi
  * Text Domain: ooohboi-steroids
  * Domain Path: /lang
  * License: GPLv3
- * Elementor tested up to: 3.8.9
- * Elementor Pro tested up to: 3.8.0
+ * Elementor tested up to: 3.7.9
+ * Elementor Pro tested up to: 3.7.9
  * License URI: http://www.gnu.org/licenses/gpl-3.0
  */
 
@@ -33,7 +33,7 @@ final class OoohBoi_Steroids {
 	 *
 	 * @var string The plugin version.
 	 */
-	const VERSION = '2.0.5';
+	const VERSION = '2.0.0';
 
 	/**
 	 * Minimum Elementor Version
@@ -42,7 +42,7 @@ final class OoohBoi_Steroids {
 	 *
 	 * @var string Minimum Elementor version required to run the plugin.
 	 */
-	const MINIMUM_ELEMENTOR_VERSION = '3.6';
+	const MINIMUM_ELEMENTOR_VERSION = '3.4';
 
 	/**
 	 * Elementor Version for Containers
@@ -242,7 +242,7 @@ final class OoohBoi_Steroids {
 				'ooohboi-steroids-editor',
 				plugins_url( 'assets/js/ob-steroids-editor.js', __FILE__ ), 
 				[ 'elementor-editor', 'jquery' ],
-				self::VERSION . '15072022',
+				self::VERSION . '28062022z',
 				true
 			);
 			// data to JS via wp_localize_script
@@ -345,56 +345,6 @@ final class OoohBoi_Steroids {
 
     }
 
-	/**
-	 * Admin notice
-	 *
-	 * Warning when the site doesn't have a minimum required Elementor version.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 */
-	public function admin_notice_minimum_elementor_version() {
-
-		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
-
-		$message = sprintf(
-			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'ooohboi-steroids' ),
-			'<strong>' . esc_html__( 'Steroids for Elementor', 'ooohboi-steroids' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'ooohboi-steroids' ) . '</strong>',
-			 self::MINIMUM_ELEMENTOR_VERSION
-		);
-
-		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
-
-	}
-
-	/**
-	 * Admin notice
-	 *
-	 * Warning when the site doesn't have a minimum required PHP version.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @access public
-	 */
-	public function admin_notice_minimum_php_version() {
-
-		if ( isset( $_GET['activate'] ) ) unset( $_GET['activate'] );
-
-		$message = sprintf(
-			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'ooohboi-steroids' ),
-			'<strong>' . esc_html__( 'Steroids for Elementor', 'ooohboi-steroids' ) . '</strong>',
-			'<strong>' . esc_html__( 'PHP', 'ooohboi-steroids' ) . '</strong>',
-			 self::MINIMUM_PHP_VERSION
-		);
-
-		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
-
-	}
-
 	/*
 		* Init Extensions
 		*
@@ -415,8 +365,8 @@ final class OoohBoi_Steroids {
 							  'OoohBoi_Glider' => 'ob_use_glider', 'OoohBoi_PhotoGiraffe' => 'ob_use_photogiraffe', 'OoohBoi_Teleporter' => 'ob_use_teleporter', 'OoohBoi_SearchCop' => 'ob_use_searchcop', 'OoohBoi_Videomasq' => 'ob_use_videomasq', 
 							  'OoohBoi_Butter_Button' => 'ob_use_butterbutton', 'OoohBoi_Perspektive' => 'ob_use_perspektive', 'OoohBoi_Shadough' => 'ob_use_shadough', 'OoohBoi_PhotoMorph' => 'ob_use_photomorph', 'OoohBoi_Commentz' => 'ob_use_commentz', 
 							  'OoohBoi_SpaceRat' => 'ob_use_spacerat', 'OoohBoi_Imbox' => 'ob_use_imbox', 'OoohBoi_Icobox' => 'ob_use_icobox', 'OoohBoi_Hover_Animator' => 'ob_use_hoveranimator', 'OoohBoi_Kontrolz' => 'ob_use_kontrolz', 
-							  'OoohBoi_Widget_Stalker' => 'ob_use_widgetstalker', 'OoohBoi_Pseudo' => 'ob_use_pseudo', 'OoohBoi_Bullet' => 'ob_use_bullet', 'OoohBoi_Container_Extras' => 'ob_use_container_extras', 'OoohBoi_Counterz' => 'ob_use_counterz', 
-							  'OoohBoi_Tabbr' => 'ob_use_tabbr', 'OoohBoi_Postman' => 'ob_use_postman', /*'OoohBoi_Interactor' => 'ob_use_interactor', */ 'OoohBoi_Typo' => 'ob_use_typo' ];
+							  'OoohBoi_Widget_Stalker' => 'ob_use_widgetstalker', 'OoohBoi_Pseudo' => 'ob_use_pseudo', 'OoohBoi_Bullet' => 'ob_use_bullet', 'OoohBoi_Container_Extras' => 'ob_use_container_extras', 
+	'OoohBoi_Counterz' => 'ob_use_counterz', 'OoohBoi_Tabbr' => 'ob_use_tabbr', 'OoohBoi_Postman' => 'ob_use_postman'/*, 'OoohBoi_Interactor' => 'ob_use_interactor'*/ ];
 
 		/* since 1.9.1 & Elementor 3.6+ */
 		$exclude_with_containers = [];
@@ -438,7 +388,7 @@ final class OoohBoi_Steroids {
 
 			// include libraries that involve editor controls; Locomotive Scroll, GSAP/ScrollTrigger...
 			if( $ob_settings_options[ 'fieldset_locomotive' ][ 'ob_use_locomotive_scroll' ] && 'yes' === $ob_settings_options[ 'fieldset_locomotive' ][ 'ob_use_locomotive_scroll' ] ) new OoohBoi_Locomotion();
-			/*if( $container_active && $ob_settings_options[ 'ob_use_gsap' ] && 'yes' === $ob_settings_options[ 'ob_use_gsap' ] && $ob_settings_options[ 'ob_use_scroll_trigger' ] && 'yes' === $ob_settings_options[ 'ob_use_scroll_trigger' ] ) OoohBoi_Oh_Animator::init();*/
+			if( $container_active && $ob_settings_options[ 'ob_use_gsap' ] && 'yes' === $ob_settings_options[ 'ob_use_gsap' ] && $ob_settings_options[ 'ob_use_scroll_trigger' ] && 'yes' === $ob_settings_options[ 'ob_use_scroll_trigger' ] ) OoohBoi_Oh_Animator::init();
 		}
 		
 	}
@@ -489,7 +439,7 @@ final class OoohBoi_Steroids {
 		}
 		// -----------------------------
 
-		wp_register_style( 'ooohboi-steroids-styles', plugins_url( 'assets/css/main.css', __FILE__ ), NULL, self::VERSION . '04112022' );
+		wp_register_style( 'ooohboi-steroids-styles', plugins_url( 'assets/css/main.css', __FILE__ ), NULL, self::VERSION . '07072022' );
 
 	}
 
@@ -518,19 +468,19 @@ final class OoohBoi_Steroids {
 		}
 		// gsap
 		if( 1 === self::$sfe_lib_gsap ) {
-			wp_register_script( 'gsap-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js', [], self::VERSION, true ); 
+			wp_register_script( 'gsap-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js', [], self::VERSION, true ); 
 		}
 		// scroll trigger
 		if( 1 === self::$sfe_lib_scroll_trigger ) {
-			wp_register_script( 'scroll-trigger-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js', [], self::VERSION, true ); 
+			wp_register_script( 'scroll-trigger-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js', [], self::VERSION, true ); 
 		}
 		// scroll to
 		if( 1 === self::$sfe_lib_scroll_to ) {
-			wp_register_script( 'scroll-to-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollToPlugin.min.js', [], self::VERSION, true );
+			wp_register_script( 'scroll-to-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollToPlugin.min.js', [], self::VERSION, true ); 
 		}
 		// scroll motion path
 		if( 1 === self::$sfe_lib_motion_path ) {
-			wp_register_script( 'motion-path-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/MotionPathPlugin.min.js', [], self::VERSION, true ); 
+			wp_register_script( 'motion-path-js', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/MotionPathPlugin.min.js', [], self::VERSION, true ); 
 		}
 		// barba
 		if( 1 === self::$sfe_lib_barba && ! $ele_is_preview ) {
@@ -585,15 +535,13 @@ final class OoohBoi_Steroids {
 		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-bullet.php'; // OoohBoi Bullet 
 		// OoohBoi Container Extras ONLY IF ELEMENTOR >= ELEMENTOR_VERSION_CONTAINER
 		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-container-extras.php'; // OoohBoi Container Extras 
-		/*include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-oh-animator.php'; // OoohBoi Animator*/
-		/*include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-interactor.php'; // OoohBoi Interactor*/
+		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-oh-animator.php'; // OoohBoi Animator
+		/*include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-interactor.php';*/ // OoohBoi Interactor
 		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-counterz.php'; // OoohBoi Counterz
 		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-tabbr.php'; // OoohBoi Tabbr 
 		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-postman.php'; // OoohBoi Postman
 		// ----------
-		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-locomotion.php'; // OoohBoi Locomotion 
-		// kit add-ons
-		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-typo.php'; // OoohBoi Typo
+		include_once plugin_dir_path( __FILE__ ) . 'controls/ooohboi-locomotion.php'; // OoohBoi Locomotion
 	}
 
 }

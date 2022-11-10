@@ -90,7 +90,7 @@ final class OoohBoi_Imbox {
 		$element->add_control(
 			'_ob_imbox_no_collapse',
 			[
-				'label' => __( 'Prevent Image and Title Collapse', 'ooohboi-steroids' ),
+				'label' => sprintf( __( 'Prevent Image and Title Collapse%sNEW!%s', 'ooohboi-steroids' ), '<sup class="ob-new-feature">', '</sup>' ),
 				'description' => __( 'The thumbnail sits atop the title on mobiles. Prevent that, huh?', 'ooohboi-steroids' ), 
 				'separator' => 'before', 
 				'type' => Controls_Manager::SWITCHER,

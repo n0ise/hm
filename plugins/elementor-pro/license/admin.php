@@ -31,16 +31,26 @@ class Admin {
 
 		return [
 			API::STATUS_EXPIRED => [
-				'title' => esc_html__( 'Oh no! Your Elementor Pro license has expired.', 'elementor-pro' ),
-				'description' => esc_html__( 'Want to keep creating secure and high-performing websites? Renew your subscription to regain access to all of the Elementor Pro widgets, templates, updates & more', 'elementor-pro' ),
-				'button_text' => esc_html__( 'Renew Now', 'elementor-pro' ),
+				'title' => esc_html__(
+					'Oh no! Your Elementor Pro license has expired.',
+					'elementor-pro'
+				),
+				'description' =>
+					esc_html__(
+						'Want to keep creating secure and high-performing websites? Renew your subscription to regain access to all of the Elementor Pro widgets, templates, updates & more',
+						'elementor-pro'
+					),
+				'button_text' => esc_html__(
+					'Renew Now',
+					'elementor-pro'
+				),
 				'button_url' => API::RENEW_URL,
 				'button_type' => 'cta',
 			],
 			API::STATUS_DISABLED => [
 				'title' => esc_html__( 'Your License Is Inactive', 'elementor-pro' ),
 				'description' => sprintf(
-					/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+					/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 					esc_html__( '%1$sYour license key has been cancelled%2$s (most likely due to a refund request). Please consider acquiring a new license.', 'elementor-pro' ),
 					'<strong>',
 					'</strong>'
@@ -51,7 +61,7 @@ class Admin {
 			API::STATUS_INVALID => [
 				'title' => esc_html__( 'License Invalid', 'elementor-pro' ),
 				'description' => sprintf(
-					/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+					/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 					esc_html__( '%1$sYour license key doesn\'t match your current domain%2$s. This is most likely due to a change in the domain URL of your site (including HTTPS/SSL migration). Please deactivate the license and then reactivate it again.', 'elementor-pro' ),
 					'<strong>',
 					'</strong>'
@@ -62,7 +72,7 @@ class Admin {
 			API::STATUS_SITE_INACTIVE => [
 				'title' => esc_html__( 'License Mismatch', 'elementor-pro' ),
 				'description' => sprintf(
-					/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+					/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 					esc_html__( '%1$sYour license key doesn\'t match your current domain%2$s. This is most likely due to a change in the domain URL. Please deactivate the license and then reactivate it again.', 'elementor-pro' ),
 					'<strong>',
 					'</strong>'
@@ -266,12 +276,15 @@ class Admin {
 					<?php if ( API::STATUS_EXPIRED === $license_data['license'] ) : ?>
 						<p class="e-row-divider-bottom elementor-admin-alert elementor-alert-danger">
 							<?php printf(
-								/* translators: 1: Bold text opening tag, 2: Bold text closing tag, 3: Link opening tag, 4: Link closing tag. */
-								esc_html__( '%1$sOh no! Your Elementor Pro license has expired.%2$s Want to keep creating secure and high-performing websites? Renew your subscription to regain access to all of the Elementor Pro widgets, templates, updates & more. %3$sRenew now%4$s', 'elementor-pro' ),
+								/* translators: 1: Bold text Open Tag, 2: Bold text closing tag, 3: Link open tag, 4: Link closing tag. */
+								esc_html__(
+									'%1$sOh no! Your Elementor Pro license has expired.%2$s Want to keep creating secure and high-performing websites? Renew your subscription to regain access to all of the Elementor Pro widgets, templates, updates & more. %3$sRenew now%4$s',
+									'elementor-pro'
+								),
 								'<strong>',
 								'</strong>',
-								'<a href="https://go.elementor.com/renew/" target="_blank"><strong>',
-								'</strong></a>'
+								'<a href="https://go.elementor.com/renew/" target="_blank">',
+								'</a>'
 							); ?>
 						</p>
 					<?php endif; ?>
@@ -279,7 +292,7 @@ class Admin {
 					<?php if ( API::STATUS_SITE_INACTIVE === $license_data['license'] ) : ?>
 						<p class="e-row-divider-bottom elementor-admin-alert elementor-alert-danger">
 							<?php printf(
-								/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+								/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 								esc_html__( '%1$sYour license key doesn\'t match your current domain%2$s. This is most likely due to a change in the domain URL of your site (including HTTPS/SSL migration). Please deactivate the license and then reactivate it again.', 'elementor-pro' ),
 								'<strong>',
 								'</strong>'
@@ -290,7 +303,7 @@ class Admin {
 					<?php if ( API::STATUS_INVALID === $license_data['license'] ) : ?>
 						<p class="e-row-divider-bottom elementor-admin-alert elementor-alert-info">
 							<?php printf(
-								/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+								/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 								esc_html__( '%1$sYour license key doesn\'t match your current domain%2$s. This is most likely due to a change in the domain URL of your site (including HTTPS/SSL migration). Please deactivate the license and then reactivate it again.', 'elementor-pro' ),
 								'<strong>',
 								'</strong>'
@@ -305,7 +318,6 @@ class Admin {
 
 						if ( $connected_user ) :
 							echo sprintf(
-								/* translators: %s: Connected user. */
 								esc_html__( 'You\'re connected as %s.', 'elementor-pro' ),
 								'<strong>' . esc_attr( $this->get_connected_account() ) . '</strong>'
 							);
@@ -420,7 +432,7 @@ class Admin {
 
 		if ( API::is_license_active() && API::is_license_about_to_expire() ) {
 			$title = sprintf(
-				/* translators: %s: Days to expire. */
+				/* translators: Days to expire */
 				esc_html__( 'Your License Will Expire in %s.', 'elementor-pro' ),
 				human_time_diff(
 					current_time( 'timestamp' ),
@@ -430,12 +442,20 @@ class Admin {
 
 			if ( isset( $license_data['renewal_discount'] ) && 0 < $license_data['renewal_discount'] ) {
 				$description = sprintf(
-					/* translators: %s: Discount percent. */
-					esc_html__( 'Renew your license today, and get an exclusive, time-limited %s discount.', 'elementor-pro' ),
+					/* translators: Discount percent */
+					esc_html__(
+						'Renew your license today, and get an exclusive, time-limited %s discount.',
+						'elementor-pro'
+					),
 					$license_data['renewal_discount'] . '%'
 				);
 			} else {
-				$description = esc_html__( 'Renew your license today, to keep getting feature updates, premium support, Pro widgets & unlimited access to the template library.', 'elementor-pro' );
+				$description = sprintf(
+					esc_html__(
+						'Renew your license today, to keep getting feature updates, premium support, Pro widgets & unlimited access to the template library.',
+						'elementor-pro'
+					)
+				);
 			}
 
 			$admin_notices->print_admin_notice( [
@@ -594,7 +614,7 @@ class Admin {
 					<ol>
 						<li>
 							<?php printf(
-								/* translators: 1: Link opening tag, 2: Link closing tag. */
+								/* translators: 1: Link open tag, 2: Link closing tag. */
 								esc_html__( 'Log in to %1$syour account%2$s to get your license key.', 'elementor-pro' ),
 								'<a href="https://go.elementor.com/my-license/" target="_blank">',
 								'</a>'
@@ -602,7 +622,7 @@ class Admin {
 						</li>
 						<li>
 							<?php printf(
-								/* translators: 1: Link opening tag, 2: Link closing tag. */
+								/* translators: 1: Link open tag, 2: Link closing tag. */
 								esc_html__( 'If you don\'t yet have a license key, %1$sget Elementor Pro now%2$s.', 'elementor-pro' ),
 								'<a href="https://go.elementor.com/pro-license/" target="_blank">',
 								'</a>'
@@ -621,13 +641,7 @@ class Admin {
 
 					<input type="submit" class="button button-primary" value="<?php esc_attr_e( 'Activate', 'elementor-pro' ); ?>"/>
 
-					<p class="description">
-						<?php printf(
-							/* translators: %s: Example license key. */
-							esc_html__( 'Your license key should look something like this: %s', 'elementor-pro' ),
-							'<code>fb351f05958872E193feb37a505a84be</code>'
-						); ?>
-					</p>
+					<p class="description"><?php printf( esc_html__( 'Your license key should look something like this: %s', 'elementor-pro' ), '<code>fb351f05958872E193feb37a505a84be</code>' ); ?></p>
 
 				<?php else :
 					$license_data = API::get_license_data( true ); ?>
@@ -657,8 +671,11 @@ class Admin {
 					<?php if ( API::STATUS_EXPIRED === $license_data['license'] ) : ?>
 						<p class="elementor-admin-alert elementor-alert-danger">
 							<?php printf(
-								/* translators: 1: Bold text opening tag, 2: Bold text closing tag, 3: Link opening tag, 4: Link closing tag. */
-								esc_html__( '%1$sOh no! Your Elementor Pro license has expired.%2$s Want to keep creating secure and high-performing websites? Renew your subscription to regain access to all of the Elementor Pro widgets, templates, updates & more. %3$sRenew now%4$s', 'elementor-pro' ),
+							/* translators: 1: Bold text Open Tag, 2: Bold text closing tag, 3: Link open tag, 4: Link closing tag. */
+								esc_html__(
+									'%1$sOh no! Your Elementor Pro license has expired.%2$s Want to keep creating secure and high-performing websites? Renew your subscription to regain access to all of the Elementor Pro widgets, templates, updates & more. %3$sRenew now%4$s',
+									'elementor-pro'
+								),
 								'<strong>',
 								'</strong>',
 								'<a href="https://go.elementor.com/renew/" target="_blank">',
@@ -670,7 +687,7 @@ class Admin {
 					<?php if ( API::STATUS_SITE_INACTIVE === $license_data['license'] ) : ?>
 						<p class="elementor-admin-alert elementor-alert-danger">
 							<?php printf(
-								/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+								/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 								esc_html__( '%1$sYour license key doesn\'t match your current domain%2$s. This is most likely due to a change in the domain URL of your site (including HTTPS/SSL migration). Please deactivate the license and then reactivate it again.', 'elementor-pro' ),
 								'<strong>',
 								'</strong>'
@@ -681,7 +698,7 @@ class Admin {
 					<?php if ( API::STATUS_INVALID === $license_data['license'] ) : ?>
 						<p class="elementor-admin-alert elementor-alert-info">
 							<?php printf(
-								/* translators: 1: Bold text opening tag, 2: Bold text closing tag. */
+								/* translators: 1: Bold text Open Tag, 2: Bold text closing tag. */
 								esc_html__( '%1$sYour license key doesn\'t match your current domain%2$s. This is most likely due to a change in the domain URL of your site (including HTTPS/SSL migration). Please deactivate the license and then reactivate it again.', 'elementor-pro' ),
 								'<strong>',
 								'</strong>'
@@ -757,7 +774,7 @@ class Admin {
 		}
 	}
 
-	public function register_actions() {
+	public function __construct() {
 		add_action( 'admin_menu', [ $this, 'register_page' ], 800 );
 		add_action( 'admin_init', [ $this, 'handle_tracker_actions' ], 9 );
 		add_action( 'admin_post_elementor_pro_activate_license', [ $this, 'action_activate_license' ] );

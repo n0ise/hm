@@ -1,7 +1,7 @@
 <?php
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -151,22 +151,22 @@ class OoohBoi_Widget_Stalker {
                         '{{WRAPPER}}.elementor-widget.ob-got-stalker' => 'flex: {{VALUE}}; width: unset; min-width: 1px;', 
                     ],
                     'device_args' => [
-                        Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+                        Controls_Stack::RESPONSIVE_TABLET => [
                             'selectors' => [
                                 '{{WRAPPER}}.elementor-widget.ob-got-stalker' => 'flex: {{VALUE}}; width: unset; min-width: 1px;', 
                             ],
                             'condition' => [
                                 '_ob_widget_stalker_use' => 'yes', 
-                                '_ob_ws_width_method' => 'flex', 
+                                '_ob_ws_width_method_tablet' => 'flex', 
                             ],
                         ],
-                        Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+                        Controls_Stack::RESPONSIVE_MOBILE => [
                             'selectors' => [
                                 '{{WRAPPER}}.elementor-widget.ob-got-stalker' => 'flex: {{VALUE}}; width: unset; min-width: 1px;', 
                             ],
                             'condition' => [
                                 '_ob_widget_stalker_use' => 'yes', 
-                                '_ob_ws_width_method' => 'flex', 
+                                '_ob_ws_width_method_mobile' => 'flex', 
                             ],
                         ],
                     ],
@@ -189,22 +189,22 @@ class OoohBoi_Widget_Stalker {
                         '{{WRAPPER}}.elementor-widget.ob-got-stalker' => 'width: {{VALUE}}; flex: unset;',
                     ],
                     'device_args' => [
-                        Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+                        Controls_Stack::RESPONSIVE_TABLET => [
                             'selectors' => [
                                 '{{WRAPPER}}.elementor-widget.ob-got-stalker' => 'width: {{VALUE}}; flex: unset;',
                             ],
                             'condition' => [
                                 '_ob_widget_stalker_use' => 'yes', 
-                                '_ob_ws_width_method' => 'units', 
+                                '_ob_ws_width_method_tablet' => 'units', 
                             ],
                         ],
-                        Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+                        Controls_Stack::RESPONSIVE_MOBILE => [
                             'selectors' => [
                                 '{{WRAPPER}}.elementor-widget.ob-got-stalker' => 'width: {{VALUE}}; flex: unset;',
                             ],
                             'condition' => [
                                 '_ob_widget_stalker_use' => 'yes', 
-                                '_ob_ws_width_method' => 'units', 
+                                '_ob_ws_width_method_mobile' => 'units', 
                             ],
                         ],
                     ],

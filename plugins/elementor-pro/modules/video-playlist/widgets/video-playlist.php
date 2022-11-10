@@ -312,19 +312,22 @@ class Video_Playlist extends Base_Widget {
 						'title' => esc_html__( 'Sample Video', 'elementor-pro' ),
 						'youtube_url' => 'https://www.youtube.com/watch?v=XHOmBV4js_E',
 						'duration' => '0:16',
-						'thumbnail' => [ 'url' => 'https://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg' ],
+						'thumbnail' => [ 'url' => 'http://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg' ],
+
 					],
 					[
 						'title' => esc_html__( 'Sample Video', 'elementor-pro' ),
 						'youtube_url' => 'https://www.youtube.com/watch?v=XHOmBV4js_E',
 						'duration' => '0:16',
-						'thumbnail' => [ 'url' => 'https://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg' ],
+						'thumbnail' => [ 'url' => 'http://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg' ],
+
 					],
 					[
 						'title' => esc_html__( 'Sample Video', 'elementor-pro' ),
 						'youtube_url' => 'https://www.youtube.com/watch?v=XHOmBV4js_E',
 						'duration' => '0:16',
-						'thumbnail' => [ 'url' => 'https://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg' ],
+						'thumbnail' => [ 'url' => 'http://img.youtube.com/vi/XHOmBV4js_E/maxresdefault.jpg' ],
+
 					],
 				],
 				'frontend_available' => true,

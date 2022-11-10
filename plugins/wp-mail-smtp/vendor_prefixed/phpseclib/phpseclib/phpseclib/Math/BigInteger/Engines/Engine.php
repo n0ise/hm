@@ -5,6 +5,8 @@
  *
  * PHP version 5 and 7
  *
+ * @category  Math
+ * @package   BigInteger
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2017 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -12,6 +14,7 @@
  */
 namespace WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines;
 
+use WPMailSMTP\Vendor\ParagonIE\ConstantTime\Hex;
 use WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings;
 use WPMailSMTP\Vendor\phpseclib3\Crypt\Random;
 use WPMailSMTP\Vendor\phpseclib3\Exception\BadConfigurationException;
@@ -19,7 +22,9 @@ use WPMailSMTP\Vendor\phpseclib3\Math\BigInteger;
 /**
  * Base Engine.
  *
+ * @package Engine
  * @author  Jim Wigginton <terrafrost@php.net>
+ * @access  public
  */
 abstract class Engine implements \JsonSerializable
 {
@@ -141,7 +146,7 @@ abstract class Engine implements \JsonSerializable
                 $is_negative = \false;
                 if ($base < 0 && \hexdec($x[0]) >= 8) {
                     $this->is_negative = $is_negative = \true;
-                    $x = \WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings::bin2hex(~\WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings::hex2bin($x));
+                    $x = \WPMailSMTP\Vendor\ParagonIE\ConstantTime\Hex::encode(~\WPMailSMTP\Vendor\ParagonIE\ConstantTime\Hex::decode($x));
                 }
                 $this->value = $x;
                 $this->initialize($base);
@@ -228,7 +233,7 @@ abstract class Engine implements \JsonSerializable
      */
     public function toHex($twos_compliment = \false)
     {
-        return \WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings::bin2hex($this->toBytes($twos_compliment));
+        return \WPMailSMTP\Vendor\ParagonIE\ConstantTime\Hex::encode($this->toBytes($twos_compliment));
     }
     /**
      * Converts a BigInteger to a bit string (eg. base-2).

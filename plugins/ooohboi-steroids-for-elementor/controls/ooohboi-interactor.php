@@ -1,5 +1,6 @@
 <?php
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 use Elementor\Repeater;
 

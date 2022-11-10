@@ -1,5 +1,6 @@
 <?php
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 use Elementor\Group_Control_Typography;
 use Elementor\Core\Schemes\Typography;
@@ -525,7 +526,7 @@ class OoohBoi_Postman {
 				'label' => __( 'Quotation Color', 'ooohboi-steroids' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}}.ob-postman .elementor-widget-container blockquote' => 'color: {{VALUE}};',
+					'{{WRAPPER}}.ob-postman .elementor-widget-container blockquote > p' => 'color: {{VALUE}};',
 				],
 				'condition' => [
 					'_ob_postman_use' => 'yes', 
@@ -551,31 +552,12 @@ class OoohBoi_Postman {
 				],
 			]
         );
-        $element->add_responsive_control(
-			'_ob_postman_quotes_padding',
-			[
-				'label' => __( 'Quotation padding', 'ooohboi-steroids' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', 'rem', '%' ],
-				'default' => [
-					'unit' => 'px',
-					'size' => 0,
-                ],
-				'selectors' => [
-					'{{WRAPPER}}.ob-postman .elementor-widget-container blockquote' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};', 
-                    '{{WRAPPER}}.ob-postman .elementor-widget-container blockquote p' => 'padding: 0;', 
-                ],
-				'condition' => [
-					'_ob_postman_use' => 'yes', 
-				],
-			]
-        );
         $element->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
 				'name' => '_ob_postman_quotes_typography', 
 				'label' => __( 'Quotation Typography', 'ooohboi-steroids' ), 
-				'selector' => '{{WRAPPER}}.ob-postman .elementor-widget-container blockquote', 
+				'selector' => '{{WRAPPER}}.ob-postman .elementor-widget-container blockquote > p', 
 				'condition' => [
 					'_ob_postman_use' => 'yes', 
 				],

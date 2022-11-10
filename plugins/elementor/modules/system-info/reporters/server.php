@@ -17,12 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Server extends Base {
 
-	const KEY_PATH_WP_ROOT_DIR = 'wp_root';
-	const KEY_PATH_WP_CONTENT_DIR = 'wp_content';
-	const KEY_PATH_UPLOADS_DIR = 'uploads';
-	const KEY_PATH_ELEMENTOR_UPLOADS_DIR = 'elementor_uploads';
-	const KEY_PATH_HTACCESS_FILE = '.htaccess';
-
 	/**
 	 * Get server environment reporter title.
 	 *
@@ -297,7 +291,8 @@ class Server extends Base {
 
 	/**
 	 * Get write permissions.
-	 * Check whether the required paths for have writing permissions.
+	 *
+	 * Check whether the required folders has writing permissions.
 	 *
 	 * @since 1.9.0
 	 * @access public
@@ -310,32 +305,35 @@ class Server extends Base {
 	 *                          folders don't have writing permissions, False otherwise.
 	 * }
 	 */
-	public function get_write_permissions() : array {
+	public function get_write_permissions() {
 		$paths_to_check = [
-			static::KEY_PATH_WP_ROOT_DIR => $this->get_system_path( static::KEY_PATH_WP_ROOT_DIR ),
-			static::KEY_PATH_HTACCESS_FILE => $this->get_system_path( static::KEY_PATH_HTACCESS_FILE ),
-			static::KEY_PATH_UPLOADS_DIR => $this->get_system_path( static::KEY_PATH_UPLOADS_DIR ),
-			static::KEY_PATH_ELEMENTOR_UPLOADS_DIR => $this->get_system_path( static::KEY_PATH_ELEMENTOR_UPLOADS_DIR ),
+			ABSPATH => 'WordPress root directory',
 		];
-
-		$paths_permissions = $this->get_paths_permissions( $paths_to_check );
 
 		$write_problems = [];
 
-		if ( ! $paths_permissions[ static::KEY_PATH_WP_ROOT_DIR ]['write'] ) {
-			$write_problems[] = 'WordPress root directory';
+		$wp_upload_dir = wp_upload_dir();
+
+		if ( $wp_upload_dir['error'] ) {
+			$write_problems[] = 'WordPress root uploads directory';
 		}
 
-		if ( ! $paths_permissions[ static::KEY_PATH_UPLOADS_DIR ]['write'] ) {
-			$write_problems[] = 'WordPress uploads directory';
+		$elementor_uploads_path = $wp_upload_dir['basedir'] . '/elementor';
+
+		if ( is_dir( $elementor_uploads_path ) ) {
+			$paths_to_check[ $elementor_uploads_path ] = 'Elementor uploads directory';
 		}
 
-		if ( $paths_permissions[ self::KEY_PATH_ELEMENTOR_UPLOADS_DIR ]['exists'] && ! $paths_permissions[ self::KEY_PATH_ELEMENTOR_UPLOADS_DIR ]['write'] ) {
-			$write_problems[] = 'Elementor uploads directory';
+		$htaccess_file = ABSPATH . '/.htaccess';
+
+		if ( file_exists( $htaccess_file ) ) {
+			$paths_to_check[ $htaccess_file ] = '.htaccess file';
 		}
 
-		if ( $paths_permissions[ self::KEY_PATH_HTACCESS_FILE ]['exists'] && ! $paths_permissions[ self::KEY_PATH_HTACCESS_FILE ]['write'] ) {
-			$write_problems[] = '.htaccess file';
+		foreach ( $paths_to_check as $dir => $description ) {
+			if ( ! is_writable( $dir ) ) {
+				$write_problems[] = $description;
+			}
 		}
 
 		if ( $write_problems ) {
@@ -410,78 +408,6 @@ class Server extends Base {
 
 		return [
 			'value' => 'Connected',
-		];
-	}
-
-	/**
-	 * @param $paths [] Paths to check permissions.
-	 * @return array []{exists: bool, read: bool, write: bool, execute: bool}
-	 */
-	public function get_paths_permissions( $paths ) : array {
-		$permissions = [];
-
-		foreach ( $paths as $key_path => $path ) {
-			$permissions[ $key_path ] = $this->get_path_permissions( $path );
-		}
-
-		return $permissions;
-	}
-
-	/**
-	 * Get path by path key.
-	 *
-	 * @param $path_key
-	 * @return string
-	 */
-	public function get_system_path( $path_key ) : string {
-		switch ( $path_key ) {
-			case static::KEY_PATH_WP_ROOT_DIR:
-				return ABSPATH;
-
-			case static::KEY_PATH_WP_CONTENT_DIR:
-				return WP_CONTENT_DIR;
-
-			case static::KEY_PATH_HTACCESS_FILE:
-				return file_exists( ABSPATH . '/.htaccess' ) ? ABSPATH . '/.htaccess' : '';
-
-			case static::KEY_PATH_UPLOADS_DIR:
-				return wp_upload_dir()['basedir'] ?? '';
-
-			case static::KEY_PATH_ELEMENTOR_UPLOADS_DIR:
-				if ( empty( wp_upload_dir()['basedir'] ) ) {
-					return '';
-				}
-
-				$elementor_uploads_dir = wp_upload_dir()['basedir'] . '/elementor';
-
-				return is_dir( $elementor_uploads_dir ) ? $elementor_uploads_dir : '';
-
-			default:
-				return '';
-		}
-	}
-
-	/**
-	 * Check the permissions of a path.
-	 *
-	 * @param $path
-	 * @return array{exists: bool, read: bool, write: bool, execute: bool}
-	 */
-	public function get_path_permissions( $path ) : array {
-		if ( empty( $path ) ) {
-			return [
-				'exists' => false,
-				'read' => false,
-				'write' => false,
-				'execute' => false,
-			];
-		}
-
-		return [
-			'exists' => true,
-			'read' => is_readable( $path ),
-			'write' => is_writeable( $path ),
-			'execute' => is_executable( $path ),
 		];
 	}
 }

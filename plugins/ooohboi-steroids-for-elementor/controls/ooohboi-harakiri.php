@@ -1,8 +1,8 @@
 <?php
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 use Elementor\Group_Control_Background;
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -218,17 +218,17 @@ class OoohBoi_Harakiri {
 					'{{WRAPPER}}.ob-harakiri' => 'inline-size: {{SIZE}}{{UNIT}}; width: unset;', 
                 ],
                 'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'condition' => [
 							'_ob_use_harakiri' => 'yes', 
-							'_ob_harakiri_height' => [ 'initial' ], 
+							'_ob_harakiri_height_tablet' => [ 'initial' ], 
 							'_ob_harakiri_writing_mode!' => 'inherit', 
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'condition' => [
 							'_ob_use_harakiri' => 'yes', 
-							'_ob_harakiri_height' => [ 'initial' ], 
+							'_ob_harakiri_height_mobile' => [ 'initial' ], 
 							'_ob_harakiri_writing_mode!' => 'inherit', 
 						],
 					],
@@ -313,7 +313,7 @@ class OoohBoi_Harakiri {
 					'{{WRAPPER}} .elementor-widget-container' => 'mix-blend-mode: {{VALUE}};', 
 				],
 				'device_args' => [
-                    Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+                    Controls_Stack::RESPONSIVE_TABLET => [
                         'selectors' => [
                             '{{WRAPPER}} .elementor-widget-container' => 'mix-blend-mode: {{VALUE}};', 
                         ],
@@ -321,7 +321,7 @@ class OoohBoi_Harakiri {
 							'_ob_use_harakiri' => 'yes', 
 						],
                     ],
-                    Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+                    Controls_Stack::RESPONSIVE_MOBILE => [
                         'selectors' => [
                             '{{WRAPPER}} .elementor-widget-container' => 'mix-blend-mode: {{VALUE}};', 
                         ],

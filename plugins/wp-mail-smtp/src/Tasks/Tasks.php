@@ -76,7 +76,6 @@ class Tasks {
 
 		$tasks = [
 			SummaryEmailTask::class,
-			DebugEventsCleanupTask::class,
 		];
 
 		/**

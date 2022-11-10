@@ -5,6 +5,8 @@
  *
  * PHP version 5 and 7
  *
+ * @category  Math
+ * @package   BigInteger
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2017 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -16,7 +18,9 @@ use WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\GMP;
 /**
  * GMP Modular Exponentiation Engine
  *
+ * @package GMP
  * @author  Jim Wigginton <terrafrost@php.net>
+ * @access  public
  */
 abstract class DefaultEngine extends \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger\Engines\GMP
 {

@@ -264,7 +264,7 @@ abstract class Document extends Controls_Stack {
 	/**
 	 * @return null|Lock_Behavior
 	 */
-	public static function get_lock_behavior_v2() {
+	public function get_lock_behavior() {
 		return null;
 	}
 
@@ -328,8 +328,7 @@ abstract class Document extends Controls_Stack {
 			}
 		}
 
-		// apply this filter to allow the attributes to be modified by different sources
-		return apply_filters( 'elementor/document/wrapper_attributes', $attributes, $this );
+		return $attributes;
 	}
 
 	/**
@@ -1150,39 +1149,23 @@ abstract class Document extends Controls_Stack {
 		return $deleted && ! is_wp_error( $deleted );
 	}
 
-	public function force_delete() {
-		$deleted = wp_delete_post( $this->post->ID, true );
-
-		return $deleted && ! is_wp_error( $deleted );
-	}
-
 	/**
-	 * On import update dynamic content (e.g. post and term IDs).
 	 *
-	 * @since 3.8.0
+	 * @since 3.6.0
 	 *
-	 * @param array      $config   The config of the passed element.
-	 * @param array      $data     The data that requires updating/replacement when imported.
-	 * @param array|null $controls The available controls.
+	 * @param array $config
 	 *
-	 * @return array Element data.
+	 * @param array $map_old_new_post_ids
 	 */
-	public static function on_import_update_dynamic_content( array $config, array $data, $controls = null ) : array {
+	public static function on_import_replace_dynamic_content( $config, $map_old_new_post_ids ) {
 		foreach ( $config as &$element_config ) {
 			$element_instance = Plugin::$instance->elements_manager->create_element_instance( $element_config );
 
-			if ( is_null( $element_instance ) ) {
-				continue;
-			}
+			if ( $element_instance ) {
+				$element_config = $element_instance::on_import_replace_dynamic_content( $element_config, $map_old_new_post_ids );
 
-			if ( $element_instance->has_own_method( 'on_import_replace_dynamic_content' ) ) {
-				// TODO: Remove this check in the future.
-				$element_config = $element_instance::on_import_replace_dynamic_content( $element_config, $data['post_ids'] );
-			} else {
-				$element_config = $element_instance::on_import_update_dynamic_content( $element_config, $data, $element_instance->get_controls() );
+				$element_config['elements'] = static::on_import_replace_dynamic_content( $element_config['elements'], $map_old_new_post_ids );
 			}
-
-			$element_config['elements'] = static::on_import_update_dynamic_content( $element_config['elements'], $data );
 		}
 
 		return $config;

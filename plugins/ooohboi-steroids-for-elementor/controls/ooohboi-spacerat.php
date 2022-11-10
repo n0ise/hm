@@ -1,7 +1,7 @@
 <?php
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -297,23 +297,23 @@ class OoohBoi_SpaceRat {
 					'_ob_spacerat_popover_masq' => 'yes', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-spacerat .elementor-widget-container' => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
                             '_ob_spacerat_use' => 'yes', 
-							'_ob_spacerat_mask_size' => [ 'initial' ], 
+							'_ob_spacerat_mask_size_tablet' => [ 'initial' ], 
 							'_ob_spacerat_popover_masq' => 'yes', 
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-spacerat .elementor-widget-container' => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
                             '_ob_spacerat_use' => 'yes', 
-							'_ob_spacerat_mask_size' => [ 'initial' ], 
+							'_ob_spacerat_mask_size_mobile' => [ 'initial' ], 
 							'_ob_spacerat_popover_masq' => 'yes', 
 						],
 					],

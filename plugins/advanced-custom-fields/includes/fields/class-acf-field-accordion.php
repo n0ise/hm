@@ -11,11 +11,11 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 		 *
 		 *  This function will setup the field type data
 		 *
-		 * @date  30/10/17
-		 * @since 5.6.3
+		 *  @date    30/10/17
+		 *  @since   5.6.3
 		 *
-		 * @param  n/a
-		 * @return n/a
+		 *  @param   n/a
+		 *  @return  n/a
 		 */
 
 		function initialize() {
@@ -29,6 +29,7 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 				'multi_expand' => 0,
 				'endpoint'     => 0,
 			);
+
 		}
 
 
@@ -37,11 +38,11 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 		 *
 		 *  Create the HTML interface for your field
 		 *
-		 * @date  30/10/17
-		 * @since 5.6.3
+		 *  @date    30/10/17
+		 *  @since   5.6.3
 		 *
-		 * @param  array $field
-		 * @return n/a
+		 *  @param   array $field
+		 *  @return  n/a
 		 */
 
 		function render_field( $field ) {
@@ -107,6 +108,7 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 					'ui'           => 1,
 				)
 			);
+
 		}
 
 
@@ -137,6 +139,7 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 
 			// return
 			return $field;
+
 		}
 
 	}
@@ -144,6 +147,7 @@ if ( ! class_exists( 'acf_field__accordion' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field__accordion' );
+
 endif; // class_exists check
 
 ?>

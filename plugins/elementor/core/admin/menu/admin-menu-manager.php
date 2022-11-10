@@ -49,19 +49,17 @@ class Admin_Menu_Manager {
 	private function register_wp_menus() {
 		do_action( 'elementor/admin/menu/register', $this );
 
-		$hooks = [];
-
 		foreach ( $this->get_all() as $item_slug => $item ) {
 			$is_top_level = empty( $item->get_parent_slug() );
 
 			if ( $is_top_level ) {
-				$hooks[ $item_slug ] = $this->register_top_level_menu( $item_slug, $item );
+				$this->register_top_level_menu( $item_slug, $item );
 			} else {
-				$hooks[ $item_slug ] = $this->register_sub_menu( $item_slug, $item );
+				$this->register_sub_menu( $item_slug, $item );
 			}
 		}
 
-		do_action( 'elementor/admin/menu/after_register', $this, $hooks );
+		do_action( 'elementor/admin/menu/after_register', $this );
 	}
 
 	private function register_top_level_menu( $item_slug, Admin_Menu_Item $item ) {
@@ -70,12 +68,14 @@ class Admin_Menu_Manager {
 		$page_title = $has_page ? $item->get_page_title() : '';
 		$callback = $has_page ? [ $item, 'render' ] : '';
 
-		return add_menu_page(
+		add_menu_page(
 			$page_title,
 			$item->get_label(),
 			$item->get_capability(),
 			$item_slug,
-			$callback
+			$callback,
+			'', // TODO: Add support?
+			$item->get_position()
 		);
 	}
 
@@ -85,13 +85,14 @@ class Admin_Menu_Manager {
 		$page_title = $has_page ? $item->get_page_title() : '';
 		$callback = $has_page ? [ $item, 'render' ] : '';
 
-		return add_submenu_page(
+		add_submenu_page(
 			$item->get_parent_slug(),
 			$page_title,
 			$item->get_label(),
 			$item->get_capability(),
 			$item_slug,
-			$callback
+			$callback,
+			$item->get_position()
 		);
 	}
 

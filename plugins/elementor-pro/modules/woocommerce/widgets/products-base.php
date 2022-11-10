@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 abstract class Products_Base extends Base_Widget {
 
+
 	protected function register_controls() {
 
 		$this->start_controls_section(

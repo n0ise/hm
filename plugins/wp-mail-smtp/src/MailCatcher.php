@@ -268,9 +268,7 @@ class MailCatcher extends \PHPMailer implements MailCatcherInterface {
 				$conflicts = new Conflicts();
 
 				if ( $conflicts->is_detected() ) {
-					$conflict_plugin_names = implode( ', ', $conflicts->get_all_conflict_names() );
-
-					$message .= 'Conflicts: ' . esc_html( $conflict_plugin_names ) . "\r\n";
+					$message .= 'Conflicts: ' . esc_html( $conflicts->get_conflict_name() ) . "\r\n";
 				}
 
 				$error_message = $message . $error;

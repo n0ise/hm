@@ -1,0 +1,475 @@
+Log created: 2022-11-10 11:24:54
+Type: backup
+[2022-11-10 11:24:55][notice]Start backing up.
+[2022-11-10 11:24:55][notice]server info fcgi:On max execution time: 180 wp version:5.9 php version:7.4.33 db version:5.5.5 php ini:safe_mode: memory_limit:256M memory_get_usage:85.40 MB memory_get_peak_usage:86.39 MB extensions:PDO enabled curl enabled zlib enabled   is_multisite:0
+[2022-11-10 11:24:55][notice]Prepare to backup backup_uploads files.
+[2022-11-10 11:24:55][notice]Compressing zip file:hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip index:500
+[2022-11-10 11:24:59][notice]Compressing zip file:hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip success. index:500 file size:80.08 MB
+[2022-11-10 11:24:59][notice]Compressing zip file:hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip index:1000
+[2022-11-10 11:25:05][notice]Compressing zip file:hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip success. index:1000 file size:254.09 MB
+[2022-11-10 11:25:06][notice]Compressing zip file:hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip index:1500
+[2022-11-10 11:25:13][notice]Compressing zip file:hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip success. index:1500 file size:178.45 MB
+[2022-11-10 11:25:13][notice]Backing up backup_uploads completed.
+[2022-11-10 11:25:13][notice]Connect site 
+[2022-11-10 11:25:13][notice]Start uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip
+[2022-11-10 11:25:14][notice]{"result":"success","file_status":{"status":"start"}}
+[2022-11-10 11:25:14][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 0
+[2022-11-10 11:25:14][notice]finished send chunk
+[2022-11-10 11:25:14][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 2097152
+[2022-11-10 11:25:15][notice]finished send chunk
+[2022-11-10 11:25:15][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 4194304
+[2022-11-10 11:25:15][notice]finished send chunk
+[2022-11-10 11:25:15][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 6291456
+[2022-11-10 11:25:15][notice]finished send chunk
+[2022-11-10 11:25:15][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 8388608
+[2022-11-10 11:25:16][notice]finished send chunk
+[2022-11-10 11:25:16][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 10485760
+[2022-11-10 11:25:16][notice]finished send chunk
+[2022-11-10 11:25:16][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 12582912
+[2022-11-10 11:25:16][notice]finished send chunk
+[2022-11-10 11:25:16][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 14680064
+[2022-11-10 11:25:17][notice]finished send chunk
+[2022-11-10 11:25:17][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 16.00 MB speed:4194.3kb/s
+[2022-11-10 11:25:17][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 16777216
+[2022-11-10 11:25:17][notice]finished send chunk
+[2022-11-10 11:25:17][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 18874368
+[2022-11-10 11:25:18][notice]finished send chunk
+[2022-11-10 11:25:18][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 20971520
+[2022-11-10 11:25:18][notice]finished send chunk
+[2022-11-10 11:25:18][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 23068672
+[2022-11-10 11:25:18][notice]finished send chunk
+[2022-11-10 11:25:18][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 25165824
+[2022-11-10 11:25:19][notice]finished send chunk
+[2022-11-10 11:25:19][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 27262976
+[2022-11-10 11:25:19][notice]finished send chunk
+[2022-11-10 11:25:19][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 29360128
+[2022-11-10 11:25:19][notice]finished send chunk
+[2022-11-10 11:25:19][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 31457280
+[2022-11-10 11:25:20][notice]finished send chunk
+[2022-11-10 11:25:20][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 33554432
+[2022-11-10 11:25:20][notice]finished send chunk
+[2022-11-10 11:25:20][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 35651584
+[2022-11-10 11:25:20][notice]finished send chunk
+[2022-11-10 11:25:20][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 37748736
+[2022-11-10 11:25:21][notice]finished send chunk
+[2022-11-10 11:25:21][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 38.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:21][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 39845888
+[2022-11-10 11:25:21][notice]finished send chunk
+[2022-11-10 11:25:21][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 41943040
+[2022-11-10 11:25:21][notice]finished send chunk
+[2022-11-10 11:25:21][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 44040192
+[2022-11-10 11:25:22][notice]finished send chunk
+[2022-11-10 11:25:22][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 46137344
+[2022-11-10 11:25:22][notice]finished send chunk
+[2022-11-10 11:25:22][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 48234496
+[2022-11-10 11:25:22][notice]finished send chunk
+[2022-11-10 11:25:22][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 50331648
+[2022-11-10 11:25:23][notice]finished send chunk
+[2022-11-10 11:25:23][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 52428800
+[2022-11-10 11:25:23][notice]finished send chunk
+[2022-11-10 11:25:23][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 54525952
+[2022-11-10 11:25:23][notice]finished send chunk
+[2022-11-10 11:25:23][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 56623104
+[2022-11-10 11:25:24][notice]finished send chunk
+[2022-11-10 11:25:24][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 58720256
+[2022-11-10 11:25:24][notice]finished send chunk
+[2022-11-10 11:25:24][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 60817408
+[2022-11-10 11:25:24][notice]finished send chunk
+[2022-11-10 11:25:24][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 62914560
+[2022-11-10 11:25:25][notice]finished send chunk
+[2022-11-10 11:25:25][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 62.00 MB speed:6291.46kb/s
+[2022-11-10 11:25:25][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 65011712
+[2022-11-10 11:25:25][notice]finished send chunk
+[2022-11-10 11:25:25][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 67108864
+[2022-11-10 11:25:25][notice]finished send chunk
+[2022-11-10 11:25:25][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 69206016
+[2022-11-10 11:25:26][notice]finished send chunk
+[2022-11-10 11:25:26][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 71303168
+[2022-11-10 11:25:26][notice]finished send chunk
+[2022-11-10 11:25:26][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 73400320
+[2022-11-10 11:25:26][notice]finished send chunk
+[2022-11-10 11:25:26][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 75497472
+[2022-11-10 11:25:27][notice]finished send chunk
+[2022-11-10 11:25:27][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 77594624
+[2022-11-10 11:25:27][notice]finished send chunk
+[2022-11-10 11:25:27][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 79691776
+[2022-11-10 11:25:27][notice]finished send chunk
+[2022-11-10 11:25:27][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 81788928
+[2022-11-10 11:25:28][notice]finished send chunk
+[2022-11-10 11:25:28][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 83886080
+[2022-11-10 11:25:28][notice]finished send chunk
+[2022-11-10 11:25:28][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 85983232
+[2022-11-10 11:25:29][notice]finished send chunk
+[2022-11-10 11:25:29][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 84.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:29][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 88080384
+[2022-11-10 11:25:29][notice]finished send chunk
+[2022-11-10 11:25:29][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 90177536
+[2022-11-10 11:25:29][notice]finished send chunk
+[2022-11-10 11:25:29][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 92274688
+[2022-11-10 11:25:30][notice]finished send chunk
+[2022-11-10 11:25:30][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 94371840
+[2022-11-10 11:25:30][notice]finished send chunk
+[2022-11-10 11:25:30][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 96468992
+[2022-11-10 11:25:30][notice]finished send chunk
+[2022-11-10 11:25:30][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 98566144
+[2022-11-10 11:25:31][notice]finished send chunk
+[2022-11-10 11:25:31][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 100663296
+[2022-11-10 11:25:31][notice]finished send chunk
+[2022-11-10 11:25:31][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 102760448
+[2022-11-10 11:25:31][notice]finished send chunk
+[2022-11-10 11:25:31][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 104857600
+[2022-11-10 11:25:32][notice]finished send chunk
+[2022-11-10 11:25:32][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 106954752
+[2022-11-10 11:25:32][notice]finished send chunk
+[2022-11-10 11:25:32][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 109051904
+[2022-11-10 11:25:33][notice]finished send chunk
+[2022-11-10 11:25:33][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 106.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:33][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 111149056
+[2022-11-10 11:25:33][notice]finished send chunk
+[2022-11-10 11:25:33][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 113246208
+[2022-11-10 11:25:33][notice]finished send chunk
+[2022-11-10 11:25:33][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 115343360
+[2022-11-10 11:25:34][notice]finished send chunk
+[2022-11-10 11:25:34][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 117440512
+[2022-11-10 11:25:34][notice]finished send chunk
+[2022-11-10 11:25:34][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 119537664
+[2022-11-10 11:25:34][notice]finished send chunk
+[2022-11-10 11:25:34][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 121634816
+[2022-11-10 11:25:35][notice]finished send chunk
+[2022-11-10 11:25:35][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 123731968
+[2022-11-10 11:25:35][notice]finished send chunk
+[2022-11-10 11:25:35][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 125829120
+[2022-11-10 11:25:35][notice]finished send chunk
+[2022-11-10 11:25:35][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 127926272
+[2022-11-10 11:25:36][notice]finished send chunk
+[2022-11-10 11:25:36][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 130023424
+[2022-11-10 11:25:36][notice]finished send chunk
+[2022-11-10 11:25:36][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 132120576
+[2022-11-10 11:25:36][notice]finished send chunk
+[2022-11-10 11:25:36][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 134217728
+[2022-11-10 11:25:37][notice]finished send chunk
+[2022-11-10 11:25:37][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 130.00 MB speed:6291.46kb/s
+[2022-11-10 11:25:37][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 136314880
+[2022-11-10 11:25:37][notice]finished send chunk
+[2022-11-10 11:25:37][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 138412032
+[2022-11-10 11:25:38][notice]finished send chunk
+[2022-11-10 11:25:38][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 140509184
+[2022-11-10 11:25:38][notice]finished send chunk
+[2022-11-10 11:25:38][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 142606336
+[2022-11-10 11:25:38][notice]finished send chunk
+[2022-11-10 11:25:38][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 144703488
+[2022-11-10 11:25:39][notice]finished send chunk
+[2022-11-10 11:25:39][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 146800640
+[2022-11-10 11:25:39][notice]finished send chunk
+[2022-11-10 11:25:39][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 148897792
+[2022-11-10 11:25:39][notice]finished send chunk
+[2022-11-10 11:25:39][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 150994944
+[2022-11-10 11:25:40][notice]finished send chunk
+[2022-11-10 11:25:40][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 153092096
+[2022-11-10 11:25:40][notice]finished send chunk
+[2022-11-10 11:25:40][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 155189248
+[2022-11-10 11:25:40][notice]finished send chunk
+[2022-11-10 11:25:40][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 157286400
+[2022-11-10 11:25:41][notice]finished send chunk
+[2022-11-10 11:25:41][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 152.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:41][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 159383552
+[2022-11-10 11:25:41][notice]finished send chunk
+[2022-11-10 11:25:41][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 161480704
+[2022-11-10 11:25:41][notice]finished send chunk
+[2022-11-10 11:25:41][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 163577856
+[2022-11-10 11:25:42][notice]finished send chunk
+[2022-11-10 11:25:42][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 165675008
+[2022-11-10 11:25:42][notice]finished send chunk
+[2022-11-10 11:25:42][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 167772160
+[2022-11-10 11:25:42][notice]finished send chunk
+[2022-11-10 11:25:42][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 169869312
+[2022-11-10 11:25:43][notice]finished send chunk
+[2022-11-10 11:25:43][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 171966464
+[2022-11-10 11:25:43][notice]finished send chunk
+[2022-11-10 11:25:43][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 174063616
+[2022-11-10 11:25:43][notice]finished send chunk
+[2022-11-10 11:25:44][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 176160768
+[2022-11-10 11:25:44][notice]finished send chunk
+[2022-11-10 11:25:44][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 178257920
+[2022-11-10 11:25:44][notice]finished send chunk
+[2022-11-10 11:25:44][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 180355072
+[2022-11-10 11:25:44][notice]finished send chunk
+[2022-11-10 11:25:44][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 182452224
+[2022-11-10 11:25:45][notice]finished send chunk
+[2022-11-10 11:25:45][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 176.00 MB speed:6291.46kb/s
+[2022-11-10 11:25:45][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 184549376
+[2022-11-10 11:25:45][notice]finished send chunk
+[2022-11-10 11:25:45][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 186646528
+[2022-11-10 11:25:45][notice]finished send chunk
+[2022-11-10 11:25:45][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 188743680
+[2022-11-10 11:25:46][notice]finished send chunk
+[2022-11-10 11:25:46][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 190840832
+[2022-11-10 11:25:46][notice]finished send chunk
+[2022-11-10 11:25:46][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 192937984
+[2022-11-10 11:25:47][notice]finished send chunk
+[2022-11-10 11:25:47][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 195035136
+[2022-11-10 11:25:47][notice]finished send chunk
+[2022-11-10 11:25:47][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 197132288
+[2022-11-10 11:25:47][notice]finished send chunk
+[2022-11-10 11:25:47][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 199229440
+[2022-11-10 11:25:48][notice]finished send chunk
+[2022-11-10 11:25:48][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 201326592
+[2022-11-10 11:25:48][notice]finished send chunk
+[2022-11-10 11:25:48][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 203423744
+[2022-11-10 11:25:48][notice]finished send chunk
+[2022-11-10 11:25:48][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 205520896
+[2022-11-10 11:25:49][notice]finished send chunk
+[2022-11-10 11:25:49][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 198.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:49][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 207618048
+[2022-11-10 11:25:49][notice]finished send chunk
+[2022-11-10 11:25:49][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 209715200
+[2022-11-10 11:25:49][notice]finished send chunk
+[2022-11-10 11:25:49][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 211812352
+[2022-11-10 11:25:50][notice]finished send chunk
+[2022-11-10 11:25:50][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 213909504
+[2022-11-10 11:25:50][notice]finished send chunk
+[2022-11-10 11:25:50][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 216006656
+[2022-11-10 11:25:51][notice]finished send chunk
+[2022-11-10 11:25:51][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 218103808
+[2022-11-10 11:25:51][notice]finished send chunk
+[2022-11-10 11:25:51][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 220200960
+[2022-11-10 11:25:51][notice]finished send chunk
+[2022-11-10 11:25:51][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 222298112
+[2022-11-10 11:25:52][notice]finished send chunk
+[2022-11-10 11:25:52][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 224395264
+[2022-11-10 11:25:52][notice]finished send chunk
+[2022-11-10 11:25:52][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 226492416
+[2022-11-10 11:25:52][notice]finished send chunk
+[2022-11-10 11:25:52][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 228589568
+[2022-11-10 11:25:53][notice]finished send chunk
+[2022-11-10 11:25:53][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 220.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:53][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 230686720
+[2022-11-10 11:25:53][notice]finished send chunk
+[2022-11-10 11:25:53][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 232783872
+[2022-11-10 11:25:53][notice]finished send chunk
+[2022-11-10 11:25:53][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 234881024
+[2022-11-10 11:25:54][notice]finished send chunk
+[2022-11-10 11:25:54][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 236978176
+[2022-11-10 11:25:54][notice]finished send chunk
+[2022-11-10 11:25:54][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 239075328
+[2022-11-10 11:25:55][notice]finished send chunk
+[2022-11-10 11:25:55][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 241172480
+[2022-11-10 11:25:55][notice]finished send chunk
+[2022-11-10 11:25:55][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 243269632
+[2022-11-10 11:25:55][notice]finished send chunk
+[2022-11-10 11:25:55][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 245366784
+[2022-11-10 11:25:56][notice]finished send chunk
+[2022-11-10 11:25:56][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 247463936
+[2022-11-10 11:25:56][notice]finished send chunk
+[2022-11-10 11:25:56][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 249561088
+[2022-11-10 11:25:56][notice]finished send chunk
+[2022-11-10 11:25:56][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 251658240
+[2022-11-10 11:25:57][notice]finished send chunk
+[2022-11-10 11:25:57][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip Total size: 254.09 MB Uploaded: 242.00 MB speed:5767.17kb/s
+[2022-11-10 11:25:57][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 253755392
+[2022-11-10 11:25:57][notice]finished send chunk
+[2022-11-10 11:25:57][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 255852544
+[2022-11-10 11:25:57][notice]finished send chunk
+[2022-11-10 11:25:57][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 257949696
+[2022-11-10 11:25:58][notice]finished send chunk
+[2022-11-10 11:25:58][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 260046848
+[2022-11-10 11:25:58][notice]finished send chunk
+[2022-11-10 11:25:58][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 262144000
+[2022-11-10 11:25:59][notice]finished send chunk
+[2022-11-10 11:25:59][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 264241152
+[2022-11-10 11:25:59][notice]finished send chunk
+[2022-11-10 11:25:59][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part001.zip offset 266338304
+[2022-11-10 11:25:59][notice]finished send chunk
+[2022-11-10 11:25:59][notice]upload finished
+[2022-11-10 11:25:59][notice]Start uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip
+[2022-11-10 11:26:00][notice]{"result":"success","file_status":{"status":"start"}}
+[2022-11-10 11:26:00][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 0
+[2022-11-10 11:26:00][notice]finished send chunk
+[2022-11-10 11:26:00][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 2097152
+[2022-11-10 11:26:01][notice]finished send chunk
+[2022-11-10 11:26:01][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 4194304
+[2022-11-10 11:26:01][notice]finished send chunk
+[2022-11-10 11:26:01][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 6291456
+[2022-11-10 11:26:01][notice]finished send chunk
+[2022-11-10 11:26:01][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 8388608
+[2022-11-10 11:26:02][notice]finished send chunk
+[2022-11-10 11:26:02][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 10485760
+[2022-11-10 11:26:02][notice]finished send chunk
+[2022-11-10 11:26:02][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 12582912
+[2022-11-10 11:26:02][notice]finished send chunk
+[2022-11-10 11:26:02][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 14680064
+[2022-11-10 11:26:03][notice]finished send chunk
+[2022-11-10 11:26:03][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 16.00 MB speed:4194.3kb/s
+[2022-11-10 11:26:03][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 16777216
+[2022-11-10 11:26:03][notice]finished send chunk
+[2022-11-10 11:26:03][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 18874368
+[2022-11-10 11:26:04][notice]finished send chunk
+[2022-11-10 11:26:04][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 20971520
+[2022-11-10 11:26:04][notice]finished send chunk
+[2022-11-10 11:26:04][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 23068672
+[2022-11-10 11:26:04][notice]finished send chunk
+[2022-11-10 11:26:04][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 25165824
+[2022-11-10 11:26:05][notice]finished send chunk
+[2022-11-10 11:26:05][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 27262976
+[2022-11-10 11:26:05][notice]finished send chunk
+[2022-11-10 11:26:05][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 29360128
+[2022-11-10 11:26:05][notice]finished send chunk
+[2022-11-10 11:26:05][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 31457280
+[2022-11-10 11:26:06][notice]finished send chunk
+[2022-11-10 11:26:06][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 33554432
+[2022-11-10 11:26:06][notice]finished send chunk
+[2022-11-10 11:26:06][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 35651584
+[2022-11-10 11:26:06][notice]finished send chunk
+[2022-11-10 11:26:06][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 37748736
+[2022-11-10 11:26:07][notice]finished send chunk
+[2022-11-10 11:26:07][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 38.00 MB speed:5767.17kb/s
+[2022-11-10 11:26:07][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 39845888
+[2022-11-10 11:26:07][notice]finished send chunk
+[2022-11-10 11:26:07][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 41943040
+[2022-11-10 11:26:07][notice]finished send chunk
+[2022-11-10 11:26:07][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 44040192
+[2022-11-10 11:26:08][notice]finished send chunk
+[2022-11-10 11:26:08][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 46137344
+[2022-11-10 11:26:08][notice]finished send chunk
+[2022-11-10 11:26:08][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 48234496
+[2022-11-10 11:26:08][notice]finished send chunk
+[2022-11-10 11:26:08][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 50331648
+[2022-11-10 11:26:09][notice]finished send chunk
+[2022-11-10 11:26:09][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 52428800
+[2022-11-10 11:26:09][notice]finished send chunk
+[2022-11-10 11:26:09][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 54525952
+[2022-11-10 11:26:10][notice]finished send chunk
+[2022-11-10 11:26:10][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 56623104
+[2022-11-10 11:26:10][notice]finished send chunk
+[2022-11-10 11:26:10][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 58720256
+[2022-11-10 11:26:10][notice]finished send chunk
+[2022-11-10 11:26:10][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 60817408
+[2022-11-10 11:26:11][notice]finished send chunk
+[2022-11-10 11:26:11][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 60.00 MB speed:5767.17kb/s
+[2022-11-10 11:26:11][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 62914560
+[2022-11-10 11:26:11][notice]finished send chunk
+[2022-11-10 11:26:11][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 65011712
+[2022-11-10 11:26:11][notice]finished send chunk
+[2022-11-10 11:26:11][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 67108864
+[2022-11-10 11:26:12][notice]finished send chunk
+[2022-11-10 11:26:12][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 69206016
+[2022-11-10 11:26:12][notice]finished send chunk
+[2022-11-10 11:26:12][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 71303168
+[2022-11-10 11:26:12][notice]finished send chunk
+[2022-11-10 11:26:12][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 73400320
+[2022-11-10 11:26:13][notice]finished send chunk
+[2022-11-10 11:26:13][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 75497472
+[2022-11-10 11:26:13][notice]finished send chunk
+[2022-11-10 11:26:13][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 77594624
+[2022-11-10 11:26:13][notice]finished send chunk
+[2022-11-10 11:26:13][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 79691776
+[2022-11-10 11:26:14][notice]finished send chunk
+[2022-11-10 11:26:14][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 81788928
+[2022-11-10 11:26:14][notice]finished send chunk
+[2022-11-10 11:26:14][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 83886080
+[2022-11-10 11:26:14][notice]finished send chunk
+[2022-11-10 11:26:14][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 85983232
+[2022-11-10 11:26:15][notice]finished send chunk
+[2022-11-10 11:26:15][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 84.00 MB speed:6291.46kb/s
+[2022-11-10 11:26:15][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 88080384
+[2022-11-10 11:26:15][notice]finished send chunk
+[2022-11-10 11:26:15][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 90177536
+[2022-11-10 11:26:15][notice]finished send chunk
+[2022-11-10 11:26:15][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 92274688
+[2022-11-10 11:26:16][notice]finished send chunk
+[2022-11-10 11:26:16][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 94371840
+[2022-11-10 11:26:16][notice]finished send chunk
+[2022-11-10 11:26:16][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 96468992
+[2022-11-10 11:26:17][notice]finished send chunk
+[2022-11-10 11:26:17][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 98566144
+[2022-11-10 11:26:17][notice]finished send chunk
+[2022-11-10 11:26:17][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 100663296
+[2022-11-10 11:26:17][notice]finished send chunk
+[2022-11-10 11:26:17][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 102760448
+[2022-11-10 11:26:18][notice]finished send chunk
+[2022-11-10 11:26:18][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 104857600
+[2022-11-10 11:26:18][notice]finished send chunk
+[2022-11-10 11:26:18][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 106954752
+[2022-11-10 11:26:18][notice]finished send chunk
+[2022-11-10 11:26:18][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 109051904
+[2022-11-10 11:26:19][notice]finished send chunk
+[2022-11-10 11:26:19][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 106.00 MB speed:5767.17kb/s
+[2022-11-10 11:26:19][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 111149056
+[2022-11-10 11:26:19][notice]finished send chunk
+[2022-11-10 11:26:19][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 113246208
+[2022-11-10 11:26:19][notice]finished send chunk
+[2022-11-10 11:26:19][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 115343360
+[2022-11-10 11:26:20][notice]finished send chunk
+[2022-11-10 11:26:20][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 117440512
+[2022-11-10 11:26:20][notice]finished send chunk
+[2022-11-10 11:26:20][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 119537664
+[2022-11-10 11:26:21][notice]finished send chunk
+[2022-11-10 11:26:21][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 121634816
+[2022-11-10 11:26:21][notice]finished send chunk
+[2022-11-10 11:26:21][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 123731968
+[2022-11-10 11:26:21][notice]finished send chunk
+[2022-11-10 11:26:21][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 125829120
+[2022-11-10 11:26:22][notice]finished send chunk
+[2022-11-10 11:26:22][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 127926272
+[2022-11-10 11:26:22][notice]finished send chunk
+[2022-11-10 11:26:22][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 130023424
+[2022-11-10 11:26:22][notice]finished send chunk
+[2022-11-10 11:26:22][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 132120576
+[2022-11-10 11:26:23][notice]finished send chunk
+[2022-11-10 11:26:23][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 128.00 MB speed:5767.17kb/s
+[2022-11-10 11:26:23][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 134217728
+[2022-11-10 11:26:23][notice]finished send chunk
+[2022-11-10 11:26:23][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 136314880
+[2022-11-10 11:26:23][notice]finished send chunk
+[2022-11-10 11:26:23][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 138412032
+[2022-11-10 11:26:24][notice]finished send chunk
+[2022-11-10 11:26:24][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 140509184
+[2022-11-10 11:26:24][notice]finished send chunk
+[2022-11-10 11:26:24][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 142606336
+[2022-11-10 11:26:24][notice]finished send chunk
+[2022-11-10 11:26:25][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 144703488
+[2022-11-10 11:26:25][notice]finished send chunk
+[2022-11-10 11:26:25][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 146800640
+[2022-11-10 11:26:25][notice]finished send chunk
+[2022-11-10 11:26:25][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 148897792
+[2022-11-10 11:26:26][notice]finished send chunk
+[2022-11-10 11:26:26][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 150994944
+[2022-11-10 11:26:26][notice]finished send chunk
+[2022-11-10 11:26:26][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 153092096
+[2022-11-10 11:26:26][notice]finished send chunk
+[2022-11-10 11:26:26][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 155189248
+[2022-11-10 11:26:27][notice]finished send chunk
+[2022-11-10 11:26:27][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 150.00 MB speed:5767.17kb/s
+[2022-11-10 11:26:27][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 157286400
+[2022-11-10 11:26:27][notice]finished send chunk
+[2022-11-10 11:26:27][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 159383552
+[2022-11-10 11:26:27][notice]finished send chunk
+[2022-11-10 11:26:27][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 161480704
+[2022-11-10 11:26:28][notice]finished send chunk
+[2022-11-10 11:26:28][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 163577856
+[2022-11-10 11:26:28][notice]finished send chunk
+[2022-11-10 11:26:28][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 165675008
+[2022-11-10 11:26:28][notice]finished send chunk
+[2022-11-10 11:26:28][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 167772160
+[2022-11-10 11:26:29][notice]finished send chunk
+[2022-11-10 11:26:29][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 169869312
+[2022-11-10 11:26:29][notice]finished send chunk
+[2022-11-10 11:26:29][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 171966464
+[2022-11-10 11:26:29][notice]finished send chunk
+[2022-11-10 11:26:29][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 174063616
+[2022-11-10 11:26:30][notice]finished send chunk
+[2022-11-10 11:26:30][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 176160768
+[2022-11-10 11:26:30][notice]finished send chunk
+[2022-11-10 11:26:30][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 178257920
+[2022-11-10 11:26:30][notice]finished send chunk
+[2022-11-10 11:26:30][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 180355072
+[2022-11-10 11:26:31][notice]finished send chunk
+[2022-11-10 11:26:31][notice]Uploading hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip Total size: 178.45 MB Uploaded: 174.00 MB speed:6291.46kb/s
+[2022-11-10 11:26:31][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 182452224
+[2022-11-10 11:26:31][notice]finished send chunk
+[2022-11-10 11:26:31][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 184549376
+[2022-11-10 11:26:31][notice]finished send chunk
+[2022-11-10 11:26:31][notice]send chunk hellomed.com_wpvivid-636cd176ee6aa_2022-11-10-11-24_backup_uploads.part002.zip offset 186646528
+[2022-11-10 11:26:32][notice]finished send chunk
+[2022-11-10 11:26:32][notice]upload finished
+[2022-11-10 11:26:33][notice]Finish upload to send_to_site_ex

@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.8.1 - 07-11-2022 */
+/*! elementor-pro - v3.7.3 - 31-07-2022 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -3370,12 +3370,11 @@ var SiteTemplateHeader = function SiteTemplateHeader(props) {
       icon: "eicon-clock-o",
       content: props.modifiedDate
     }));
-  },
-      IndicatorDot = props.showInstances ? /*#__PURE__*/_react["default"].createElement(_indicatorBullet.Indicator, {
-    active: props.isActive
-  }) : '';
+  };
 
-  return /*#__PURE__*/_react["default"].createElement(_appUi.CardHeader, null, IndicatorDot, /*#__PURE__*/_react["default"].createElement(_appUi.Heading, {
+  return /*#__PURE__*/_react["default"].createElement(_appUi.CardHeader, null, /*#__PURE__*/_react["default"].createElement(_indicatorBullet.Indicator, {
+    active: props.isActive
+  }), /*#__PURE__*/_react["default"].createElement(_appUi.Heading, {
     tag: "h1",
     title: title,
     variant: "text-sm",
@@ -3391,8 +3390,7 @@ SiteTemplateHeader.propTypes = {
   extended: PropTypes.bool,
   modifiedDate: PropTypes.string,
   status: PropTypes.string,
-  title: PropTypes.string,
-  showInstances: PropTypes.bool
+  title: PropTypes.string
 };
 
 /***/ }),
@@ -3505,7 +3503,7 @@ function SiteTemplate(props) {
     classes.push("".concat(baseClassName, "--").concat(props.aspectRatio));
   }
 
-  var CardFooter = props.extended && props.showInstances ? /*#__PURE__*/_react["default"].createElement(_siteTemplateFooter.SiteTemplateFooter, props) : '';
+  var CardFooter = props.extended ? /*#__PURE__*/_react["default"].createElement(_siteTemplateFooter.SiteTemplateFooter, props) : '';
   return /*#__PURE__*/_react["default"].createElement(_appUi.Card, {
     className: classes.join(' '),
     ref: ref
@@ -3522,8 +3520,7 @@ SiteTemplate.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
-  type: PropTypes.string.isRequired,
-  showInstances: PropTypes.bool
+  type: PropTypes.string.isRequired
 };
 SiteTemplate.defaultProps = {
   isSelected: false
@@ -3867,9 +3864,9 @@ exports["default"] = ConditionSubId;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 
-__webpack_require__(/*! core-js/modules/es.object.keys.js */ "../node_modules/core-js/modules/es.object.keys.js");
-
 __webpack_require__(/*! core-js/modules/es.string.sub.js */ "../node_modules/core-js/modules/es.string.sub.js");
+
+__webpack_require__(/*! core-js/modules/es.object.keys.js */ "../node_modules/core-js/modules/es.object.keys.js");
 
 var _appUi = __webpack_require__(/*! @elementor/app-ui */ "@elementor/app-ui");
 
@@ -3881,13 +3878,14 @@ var _appUi = __webpack_require__(/*! @elementor/app-ui */ "@elementor/app-ui");
  * @class
  */
 function ConditionSubId(props) {
-  var settings = _react["default"].useMemo(function () {
-    return Object.keys(props.subIdAutocomplete).length ? getSettings(props.subIdAutocomplete) : null;
-  }, [props.subIdAutocomplete]);
-
-  if (!props.sub || !settings) {
+  if (!props.sub || !Object.keys(props.subIdAutocomplete).length) {
     return '';
-  }
+  } // eslint-disable-next-line react-hooks/rules-of-hooks
+
+
+  var settings = _react["default"].useMemo(function () {
+    return getSettings(props.subIdAutocomplete);
+  }, [props.subIdAutocomplete]);
 
   var onChange = function onChange(e) {
     return props.updateConditions(props.id, {
@@ -4891,14 +4889,13 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 function SiteEditor() {
   var _elementorAppProConfi, _elementorAppProConfi2;
 
-  var basePath = 'site-editor';
   var headerButtons = [{
     id: 'import',
     text: __('import', 'elementor-pro'),
     hideText: true,
     icon: 'eicon-download-circle-o',
     onClick: function onClick() {
-      return _router2["default"].appHistory.navigate(basePath + '/import');
+      return _router2["default"].appHistory.navigate('site-editor/import');
     }
   }]; // Remove Core cache.
 
@@ -4913,14 +4910,14 @@ function SiteEditor() {
     if (Object.keys(templates).length) {
       return /*#__PURE__*/_react["default"].createElement(_router.Redirect, {
         from: '/',
-        to: '/' + basePath + '/templates',
+        to: '/site-editor/templates',
         noThrow: true
       });
     }
 
     return /*#__PURE__*/_react["default"].createElement(_router.Redirect, {
       from: '/',
-      to: '/' + basePath + '/add-new',
+      to: '/site-editor/add-new',
       noThrow: true
     });
   };
@@ -4930,10 +4927,9 @@ function SiteEditor() {
     learnMoreUrl: "https://go.elementor.com/app-theme-builder-load-issue"
   }, /*#__PURE__*/_react["default"].createElement(_siteEditor.Layout, {
     allPartsButton: /*#__PURE__*/_react["default"].createElement(_siteEditor.AllPartsButton, {
-      url: '/' + basePath
+      url: "/site-editor"
     }),
-    headerButtons: headerButtons,
-    titleRedirectRoute: '/' + basePath
+    headerButtons: headerButtons
   }, /*#__PURE__*/_react["default"].createElement(_appUi.Grid, {
     container: true,
     className: "e-site-editor__content_container"
@@ -4943,17 +4939,17 @@ function SiteEditor() {
   }, /*#__PURE__*/_react["default"].createElement(_templates2["default"], null, /*#__PURE__*/_react["default"].createElement(_router.LocationProvider, {
     history: _router2["default"].appHistory
   }, /*#__PURE__*/_react["default"].createElement(_router.Router, null, /*#__PURE__*/_react["default"].createElement(SiteEditorDefault, {
-    path: basePath
+    path: "/site-editor"
   }), /*#__PURE__*/_react["default"].createElement(_templates["default"], {
-    path: basePath + '/templates'
+    path: "site-editor/templates"
   }), /*#__PURE__*/_react["default"].createElement(_templateType["default"], {
-    path: basePath + '/templates/:type/*id'
+    path: "site-editor/templates/:type/*id"
   }), /*#__PURE__*/_react["default"].createElement(_addNew["default"], {
-    path: basePath + '/add-new'
+    path: "site-editor/add-new"
   }), /*#__PURE__*/_react["default"].createElement(_conditions["default"], {
-    path: basePath + '/conditions/:id'
+    path: "site-editor/conditions/:id"
   }), /*#__PURE__*/_react["default"].createElement(_import["default"], {
-    path: basePath + '/import'
+    path: "site-editor/import"
   }), /*#__PURE__*/_react["default"].createElement(_siteEditor.NotFound, {
     "default": true
   }))))), /*#__PURE__*/_react["default"].createElement(_appUi.Grid, {

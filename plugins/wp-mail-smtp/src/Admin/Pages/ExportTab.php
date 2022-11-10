@@ -135,7 +135,6 @@ class ExportTab extends PageAbstract {
 					<label><input type="checkbox"><?php esc_html_e( 'Mailer', 'wp-mail-smtp' ); ?></label>
 					<label><input type="checkbox"><?php esc_html_e( 'Error Details', 'wp-mail-smtp' ); ?></label>
 					<label><input type="checkbox"><?php esc_html_e( 'Email log ID', 'wp-mail-smtp' ); ?></label>
-					<label><input type="checkbox"><?php esc_html_e( 'Source', 'wp-mail-smtp' ); ?></label>
 				</section>
 
 				<section class="wp-clearfix">

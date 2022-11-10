@@ -65,7 +65,7 @@ class OoohBoi_Tabbr {
 
     public static function add_attributes( $element ) {
 
-        if( ! in_array( $element->get_name(), [ 'tabs' ] ) ) return;
+        if( ! in_array( $element->get_name(), [ 'counter' ] ) ) return;
 		$settings = $element->get_settings();
         $is_tabbr = isset( $settings[ '_ob_use_tabbr' ] ) ? $settings[ '_ob_use_tabbr' ] : '';
         
@@ -135,7 +135,7 @@ class OoohBoi_Tabbr {
 				'device_args' => [
 					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [ 
 						'selectors' => [
-							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs' => 'flex-direction: {{_ob_tabbr_tabs_position.VALUE}}{{_ob_tabbr_tabs_order.VALUE}};',
+							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs' => 'flex-direction: {{_ob_tabbr_tabs_position_tablet.VALUE}}{{_ob_tabbr_tabs_order_tablet.VALUE}};',
 						],
 						'condition' => [
 							'_ob_use_tabbr' => 'yes', 
@@ -143,7 +143,7 @@ class OoohBoi_Tabbr {
 					],
 					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
-							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs' => 'flex-direction: {{_ob_tabbr_tabs_position.VALUE}}{{_ob_tabbr_tabs_order.VALUE}};',
+							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs' => 'flex-direction: {{_ob_tabbr_tabs_position_mobile.VALUE}}{{_ob_tabbr_tabs_order_mobile.VALUE}};',
 						],
 						'condition' => [
 							'_ob_use_tabbr' => 'yes', 
@@ -160,7 +160,7 @@ class OoohBoi_Tabbr {
             [
                 'label' => __( 'Tabs order', 'ooohboi-steroids' ),
                 'type' => Controls_Manager::SELECT,
-                'default' => ' ', 
+                'default' => '', 
                 'options' => [
 					' ' => __( 'TABS -- CONTENT', 'ooohboi-steroids' ), 
                     '-reverse' => __( 'CONTENT -- TABS', 'ooohboi-steroids' ),
@@ -214,8 +214,8 @@ class OoohBoi_Tabbr {
 				'device_args' => [
 					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [ 
 						'selectors' => [
-							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper .elementor-tab-title' => 'justify-content: {{_ob_tabbr_tabs_alignment.VALUE}};', 
-							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper' => 'align-self: {{_ob_tabbr_tabs_alignment.VALUE}};', 
+							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper .elementor-tab-title' => 'justify-content: {{_ob_tabbr_tabs_alignment_tablet.VALUE}};', 
+							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper' => 'align-self: {{_ob_tabbr_tabs_alignment_tablet.VALUE}};', 
 						],
 						'condition' => [
 							'_ob_use_tabbr' => 'yes', 
@@ -223,8 +223,8 @@ class OoohBoi_Tabbr {
 					],
 					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
-							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper .elementor-tab-title' => 'justify-content: {{_ob_tabbr_tabs_alignment.VALUE}};', 
-							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper' => 'align-self: {{_ob_tabbr_tabs_alignment.VALUE}};', 
+							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper .elementor-tab-title' => 'justify-content: {{_ob_tabbr_tabs_alignment_mobile.VALUE}};', 
+							'{{WRAPPER}}.ob-use-tabbr.elementor-element .elementor-tabs-wrapper' => 'align-self: {{_ob_tabbr_tabs_alignment_mobile.VALUE}};', 
 						],
 						'condition' => [
 							'_ob_use_tabbr' => 'yes', 
@@ -241,7 +241,7 @@ class OoohBoi_Tabbr {
 				'label' => __( 'Tabs width', 'ooohboi-steroids' ),
 				'description' => __( 'Enter any acceptable CSS value; 125px, 5vw, calc(30% - 10px), clamp(50px, 5vw + 10px, 155px), 12% ...', 'ooohboi-steroids' ),
 				'type' => Controls_Manager::TEXT, 
-				'default' => '30%', 
+				'default' => '100%', 
 				'selectors' => [
 					'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-wrapper' => 'min-width: {{VALUE}}; width: {{VALUE}};', 
 					'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-content-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-content-wrapper' => 'width: 100%;', 
@@ -252,7 +252,7 @@ class OoohBoi_Tabbr {
 				'device_args' => [
 					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [ 
 						'selectors' => [
-							'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-wrapper' => 'min-width: {{_ob_tab_width.VALUE}}; width: {{_ob_tab_width.VALUE}};', 
+							'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-wrapper' => 'min-width: {{_ob_tab_width_tablet.VALUE}}; width: {{_ob_tab_width_tablet.VALUE}};', 
 							'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-content-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-content-wrapper' => 'width: 100%;', 
 						],
 						'condition' => [
@@ -261,7 +261,7 @@ class OoohBoi_Tabbr {
 					],
 					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
-							'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-wrapper' => 'min-width: {{_ob_tab_width.VALUE}}; width: {{_ob_tab_width.VALUE}};', 
+							'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-wrapper' => 'min-width: {{_ob_tab_width_mobile.VALUE}}; width: {{_ob_tab_width_mobile.VALUE}};', 
 							'{{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-vertical .elementor-tabs-content-wrapper, {{WRAPPER}}.ob-use-tabbr.elementor-tabs-view-horizontal .elementor-tabs-content-wrapper' => 'width: 100%;', 
 						],
 						'condition' => [

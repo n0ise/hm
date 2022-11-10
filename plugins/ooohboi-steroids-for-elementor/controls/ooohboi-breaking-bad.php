@@ -1,8 +1,8 @@
 <?php
 use Elementor\Controls_Manager; 
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 use Elementor\Plugin;
-use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -217,22 +217,22 @@ class OoohBoi_Breaking_Bad {
 					'{{WRAPPER}}.ob-is-breaking-bad.ob-bb-inner' => 'flex: {{VALUE}}; width: unset; min-width: 1px;', 
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-is-breaking-bad.ob-bb-inner' => 'flex: {{VALUE}}; width: unset; min-width: 1px;', 
 						],
 						'condition' => [
 							'_ob_bbad_use_it' => 'yes', 
-							'_ob_bbad_inner_width_method' => 'flex', 
+							'_ob_bbad_inner_width_method_tablet' => 'flex', 
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-is-breaking-bad.ob-bb-inner' => 'flex: {{VALUE}}; width: unset; min-width: 1px;', 
 						],
 						'condition' => [
 							'_ob_bbad_use_it' => 'yes', 
-							'_ob_bbad_inner_width_method' => 'flex', 
+							'_ob_bbad_inner_width_method_mobile' => 'flex', 
 						],
 					],
 				],
@@ -257,22 +257,22 @@ class OoohBoi_Breaking_Bad {
 					'{{WRAPPER}}.ob-is-breaking-bad.ob-bb-inner' => 'width: {{VALUE}}; flex: unset;',
 				],
 				'device_args' => [
-					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
+					Controls_Stack::RESPONSIVE_TABLET => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-is-breaking-bad.ob-bb-inner' => 'width: {{VALUE}}; flex: unset;',
 						],
 						'condition' => [
 							'_ob_bbad_use_it' => 'yes', 
-							'_ob_bbad_inner_width_method' => 'units', 
+							'_ob_bbad_inner_width_method_tablet' => 'units', 
 						],
 					],
-					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
+					Controls_Stack::RESPONSIVE_MOBILE => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-is-breaking-bad.ob-bb-inner' => 'width: {{VALUE}}; flex: unset;',
 						],
 						'condition' => [
 							'_ob_bbad_use_it' => 'yes', 
-							'_ob_bbad_inner_width_method' => 'units', 
+							'_ob_bbad_inner_width_method_mobile' => 'units', 
 						],
 					],
 				],
@@ -432,32 +432,6 @@ href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/O
 				'size_units' => [ 'px', 'em', 'vh' ],
 				'selectors' => [
 					'{{WRAPPER}}.elementor-column, {{WRAPPER}}.elementor-column > .elementor-widget-wrap' => 'height: {{SIZE}}{{UNIT}};', 
-                ],
-			]
-		);
-		// --------------------------------------------------------------------------------------------- CONTROL Column height
-		$element->add_responsive_control(
-            '_ob_bbad_column_min_height',
-            [
-				'label' => __( 'Min Height', 'ooohboi-steroids' ),
-				'type' => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'max' => 1000,
-						'step' => 1,
-					],
-					'em' => [
-						'max' => 100,
-						'step' => 1,
-					],
-					'vh' => [
-						'max' => 100,
-						'step' => 1,
-					],
-                ],
-				'size_units' => [ 'px', 'em', 'vh' ],
-				'selectors' => [
-					'{{WRAPPER}}.elementor-column, {{WRAPPER}}.elementor-column > .elementor-widget-wrap' => 'min-height: {{SIZE}}{{UNIT}};', 
                 ],
 			]
 		);

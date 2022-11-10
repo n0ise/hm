@@ -1,5 +1,6 @@
 <?php
 use Elementor\Controls_Manager;
+use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -43,7 +44,7 @@ class OoohBoi_Bullet {
 		$element->add_control(
 			'_ob_bullet_move_top',
 			[
-				'label' => __( 'Move bullet to top', 'ooohboi-steroids' ), 
+				'label' => sprintf( __( 'Move bullet to top%sNEW!%s', 'ooohboi-steroids' ), '<sup class="ob-new-feature">', '</sup>' ), 
 				'description' => __( 'NOTE: Takes effect with more than just one line of text!', 'ooohboi-steroids' ), 
 				'separator' => 'before', 
 				'type' => Controls_Manager::SWITCHER,

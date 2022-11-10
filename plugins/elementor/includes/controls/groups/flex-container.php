@@ -61,11 +61,9 @@ class Group_Control_Flex_Container extends Group_Control_Base {
 			'responsive' => true,
 		];
 
-		// Only use the flex direction prefix class inside the editor.
-		$flex_direction_prefix_class = Plugin::$instance->editor->is_edit_mode() ? [ 'prefix_class' => 'e-con--' ] : [];
-
-		$fields['_is_row'] = array_merge( $flex_direction_prefix_class, [
+		$fields['_is_row'] = [
 			'type' => Controls_Manager::HIDDEN,
+			'prefix_class' => 'e-container--',
 			'default' => 'row',
 			'condition' => [
 				'direction' => [
@@ -73,10 +71,11 @@ class Group_Control_Flex_Container extends Group_Control_Base {
 					'row-reverse',
 				],
 			],
-		] );
+		];
 
-		$fields['_is_column'] = array_merge( $flex_direction_prefix_class, [
+		$fields['_is_column'] = [
 			'type' => Controls_Manager::HIDDEN,
+			'prefix_class' => 'e-container--',
 			'default' => 'column',
 			'condition' => [
 				'direction' => [
@@ -85,7 +84,7 @@ class Group_Control_Flex_Container extends Group_Control_Base {
 					'column-reverse',
 				],
 			],
-		] );
+		];
 
 		$fields['justify_content'] = [
 			'label' => esc_html_x( 'Justify Content', 'Flex Container Control', 'elementor' ),
@@ -173,7 +172,7 @@ class Group_Control_Flex_Container extends Group_Control_Base {
 					'max' => 50,
 				],
 			],
-			'size_units' => [ 'px', '%', 'vw', 'em', 'rem' ],
+			'size_units' => [ 'px', '%', 'vw', 'em' ],
 			'selectors' => [
 				'{{SELECTOR}}' => '--gap: {{SIZE}}{{UNIT}};',
 			],

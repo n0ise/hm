@@ -161,8 +161,9 @@ function acf_save_post( $post_id = 0, $values = null ) {
 function _acf_do_save_post( $post_id = 0 ) {
 
 	// phpcs:disable WordPress.Security.NonceVerification.Missing -- Verified elsewhere.
-	if ( ! empty( $_POST['acf'] ) ) {
-		acf_update_values( $_POST['acf'], $post_id ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized by WP when saved.
+	// Check and update $_POST data.
+	if ( $_POST['acf'] ) {
+		acf_update_values( $_POST['acf'], $post_id );
 	}
 	// phpcs:enable WordPress.Security.NonceVerification.Missing
 }

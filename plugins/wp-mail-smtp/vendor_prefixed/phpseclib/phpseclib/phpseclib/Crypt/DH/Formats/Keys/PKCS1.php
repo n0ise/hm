@@ -13,6 +13,8 @@
  * DSA, whose format isn't really formally described anywhere, so might as well
  * use it to describe this, too.
  *
+ * @category  Crypt
+ * @package   DH
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2015 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -27,13 +29,16 @@ use WPMailSMTP\Vendor\phpseclib3\Math\BigInteger;
 /**
  * "PKCS1" Formatted DH Key Handler
  *
+ * @package DH
  * @author  Jim Wigginton <terrafrost@php.net>
+ * @access  public
  */
 abstract class PKCS1 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\Formats\Keys\PKCS1
 {
     /**
      * Break a public or private key down into its constituent components
      *
+     * @access public
      * @param string $key
      * @param string $password optional
      * @return array
@@ -42,7 +47,7 @@ abstract class PKCS1 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\Formats\
     {
         $key = parent::load($key, $password);
         $decoded = \WPMailSMTP\Vendor\phpseclib3\File\ASN1::decodeBER($key);
-        if (!$decoded) {
+        if (empty($decoded)) {
             throw new \RuntimeException('Unable to decode BER');
         }
         $components = \WPMailSMTP\Vendor\phpseclib3\File\ASN1::asn1map($decoded[0], \WPMailSMTP\Vendor\phpseclib3\File\ASN1\Maps\DHParameter::MAP);
@@ -54,6 +59,7 @@ abstract class PKCS1 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\Formats\
     /**
      * Convert EC parameters to the appropriate format
      *
+     * @access public
      * @return string
      */
     public static function saveParameters(\WPMailSMTP\Vendor\phpseclib3\Math\BigInteger $prime, \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger $base, array $options = [])

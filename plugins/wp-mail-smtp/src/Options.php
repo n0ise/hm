@@ -434,7 +434,6 @@ class Options {
 	 * @since 1.6.0 Added Sendinblue.
 	 * @since 1.7.0 Added Do Not Send.
 	 * @since 1.8.0 Added Pepipost API.
-	 * @since 3.6.0 Added Debug Events Retention Period.
 	 *
 	 * @param string $group
 	 * @param string $key
@@ -758,16 +757,6 @@ class Options {
 
 				break;
 
-			case 'debug_events':
-				switch ( $key ) {
-					case 'retention_period':
-						/** @noinspection PhpUndefinedConstantInspection */
-						$return = $this->is_const_defined( $group, $key ) ? intval( WPMS_DEBUG_EVENTS_RETENTION_PERIOD ) : $value;
-						break;
-				}
-
-				break;
-
 			default:
 				// Always return the default value if nothing from above matches the request.
 				$return = $value;
@@ -1077,15 +1066,6 @@ class Options {
 				}
 
 				break;
-
-			case 'debug_events';
-				switch ( $key ) {
-					case 'retention_period':
-						$return = defined( 'WPMS_DEBUG_EVENTS_RETENTION_PERIOD' );
-						break;
-				}
-
-				break;
 		}
 
 		return apply_filters( 'wp_mail_smtp_options_is_const_defined', $return, $group, $key );
@@ -1192,9 +1172,6 @@ class Options {
 						switch ( $option_name ) {
 							case 'email_debug':
 								$options[ $group ][ $option_name ] = (bool) $option_value;
-								break;
-							case 'retention_period':
-								$options[ $group ][ $option_name ] = (int) $option_value;
 								break;
 						}
 				}

@@ -3,6 +3,8 @@
 /**
  * DSA Public Key
  *
+ * @category  Crypt
+ * @package   DSA
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2015 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
@@ -16,7 +18,9 @@ use WPMailSMTP\Vendor\phpseclib3\Crypt\DSA\Formats\Signature\ASN1 as ASN1Signatu
 /**
  * DSA Public Key
  *
+ * @package DSA
  * @author  Jim Wigginton <terrafrost@php.net>
+ * @access  public
  */
 class PublicKey extends \WPMailSMTP\Vendor\phpseclib3\Crypt\DSA implements \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\PublicKey
 {
@@ -25,6 +29,7 @@ class PublicKey extends \WPMailSMTP\Vendor\phpseclib3\Crypt\DSA implements \WPMa
      * Verify a signature
      *
      * @see self::verify()
+     * @access public
      * @param string $message
      * @param string $signature
      * @return mixed

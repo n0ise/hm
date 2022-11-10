@@ -20,6 +20,10 @@ abstract class Base_Promotion_Item implements Promotion_Menu_Item {
 		return Settings::PAGE_ID;
 	}
 
+	public function get_position() {
+		return null;
+	}
+
 	public function get_capability() {
 		return 'manage_options';
 	}
@@ -38,11 +42,11 @@ abstract class Base_Promotion_Item implements Promotion_Menu_Item {
 			<div class="elementor-blank_state">
 				<img src="<?php echo esc_url( $this->get_image_url() ); ?>" />
 
-				<h3><?php Utils::print_unescaped_internal_string( $this->get_promotion_title() ); ?></h3>
+				<h2><?php Utils::print_unescaped_internal_string( $this->get_promotion_title() ); ?></h2>
 
 				<p><?php $this->render_promotion_description(); ?></p>
 
-				<a class="elementor-button elementor-button-default elementor-button-go-pro" href="<?php echo esc_url( $this->get_cta_url() ); ?>">
+				<a class="elementor-button elementor-button-default elementor-button-go-pro" target="_blank" href="<?php echo esc_url( $this->get_cta_url() ); ?>">
 					<?php Utils::print_unescaped_internal_string( $this->get_cta_text() ); ?>
 				</a>
 			</div>
