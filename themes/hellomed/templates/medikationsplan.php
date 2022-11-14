@@ -2,7 +2,12 @@
 
 <!-- include_once header.php from template  -->
 <?php include_once('header.php'); ?>
-<!-- and sidebar  -->
+
+
+<!-- show the content if the user is logged in   -->
+<?php if(is_user_logged_in()) { ?>
+
+<!-- and show  sidebar  -->
 <?php include_once('sidebar.php'); ?>
 
 <!-- here is the content of the Medikationsplan page  -->
@@ -22,6 +27,25 @@ $json = file_get_contents('weekly_plan.json');
 $json_data = json_decode($json, true);
  print_r($json_data);
  ?>
+
+<?php }
+else { ?>
+<!-- or show the message and redirect if the user is ooout  -->
+    <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
+                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
+                <hr>
+                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<?php header("Refresh:10; url=/anmelden"); 
+} ?>
+
 <!-- da footer  -->
 <?php
 include_once('footer.php');

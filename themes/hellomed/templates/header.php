@@ -15,12 +15,12 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 <!-- include css.css from olly UI-->
 <link rel="stylesheet" href="https://ui.hellomed.com/css/css.css">
-
 <!-- <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css.css"> -->
-
-<div class="app">
+    <div class="app">
 <div class="header">
     <img src="../../../wp-content/uploads/2022/05/hel_logo-01.svg" alt="logo" class="logo" width="300"> 
+    <?php if(is_user_logged_in()) { ?>
+      
     <div class="dropdown">
         <div class="dropdown-photo">
             <img src="<?php echo get_avatar_url($user_id); ?>" />
@@ -35,10 +35,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 <?php echo $user_role; ?> (ID <?php echo $user_id; ?>)
                 <!-- and the logout  -->
                 <a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a>
-
-
+<?php } else {
+//something?
+ } ?>
 
             </div>
         </div>
     </div>
-</div>
+</div> 

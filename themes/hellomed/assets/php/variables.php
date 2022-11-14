@@ -5,6 +5,9 @@ get_currentuserinfo();
 // and declaring... each field as a variable, eventually we can exclude or include just on select pages, with a condition like this:
 // if (is_page('profile')) {
 // } bla bla bla ...now it is set for ALL
+// if user is not logged in show a message 
+if (is_user_logged_in()) { 
+
 $user_id = $current_user->ID;
 $user = get_userdata( $user_id );
 $user_roles = $user->roles;
@@ -80,4 +83,8 @@ $days_left = $days_left . ' days left';
 
 // it is same for $user_id, this is for testing, it is inside acf, may be deleted later
  $new_user_id = get_field('new_user_id');
+
+} else {
+    
+}
 ?>
