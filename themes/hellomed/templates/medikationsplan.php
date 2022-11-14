@@ -5,14 +5,7 @@
 <!-- and sidebar  -->
 <?php include_once('sidebar.php'); ?>
 
-<!-- here is the content of the profile page  -->
-<form action="" method="post">
-<style>
-
-.form-floating>.form-control {
-    height:70px !important;
-}
-</style>
+<!-- here is the content of the Medikationsplan page  -->
 <div class="content">
     <div class="h2 mb-5 border-bottom">Medikationsplan</div>
     <div class="medplan-tabs"></div>
