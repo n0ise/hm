@@ -20,6 +20,8 @@ $user_first_name = $user->user_firstname;
 $user_last_name = $user->user_lastname;
 $user_display_name = $user->display_name;
 $gebur= get_field('geburt', 'user_' . $user_id);
+// convert date into ymd format
+$gebur_ymd = date('Y-m-d', strtotime($gebur));
 $user_phone = get_field('telephone', 'user_' . $user_id);
 $allerg = get_field('allergies', 'user_' . $user_id);
 $user_city = get_field('stadt', 'user_' . $user_id);
@@ -33,55 +35,19 @@ $status = get_field('status', 'user_' . $user_id);
      $status = '<span style="color:green;">' . $status . '</span>';
  }
 else {  $status = '<span style="color:red;">' . $status . '</span>'; }
-// show the rezept with dmy
-$rezept_enddmy = get_field('rezept_end', 'user_' . $user_id);
-
-// show the rezept, and how many days are left (it's in unix time)
+// show the rezept_end with ymd
 
 $rezept_end = get_field('rezept_end', 'user_' . $user_id);
-$rezept_end = strtotime($rezept_end);
-$rezept_end = date('d.m.Y', $rezept_end);
-$rezept_end = strtotime($rezept_end);
-$today = strtotime(date('d.m.Y'));
-$days_left = ($rezept_end - $today) / (60 * 60 * 24);
-$days_left = round($days_left);
-$days_left = $days_left . ' days left';
-// test purposes, follow "if" needs to be refactored, perhaps with switch case or something not this ugly
- if ($days_left == '0 days left') {
-     $days_left = 'Today is the last day';
- }
- if ($days_left == '1 days left') {
-     $days_left = 'Tomorrow is the last day';
- }
- if ($days_left == '-1 days left') {
-     $days_left = 'Yesterday was the last day';
- }
- if ($days_left < 0) {
-     $days_left = 'Rezept is expired';
- }
- if ($days_left == '1 days left') {
-     $days_left = 'Tomorrow is the last day';
- }
- if ($days_left == '2 days left') {
-     $days_left = 'In 2 days is the last day';
- }
- if ($days_left == '3 days left') {
-     $days_left = 'In 3 days is the last day';
- }
- if ($days_left == '4 days left') {
-     $days_left = 'In 4 days is the last day';
- }
- if ($days_left == '5 days left') {
-     $days_left = 'In 5 days is the last day';
- }
- if ($days_left == '6 days left') {
-     $days_left = 'In 6 days is the last day';
- }
- if ($days_left == '7 days left') {
-     $days_left = 'In a week is the last day';
- }
+// show how many days left in human readable format
+ $days_left = human_time_diff( strtotime($rezept_end), current_time('timestamp') );
 
-// it is same for $user_id, this is for testing, it is inside acf, may be deleted later
+// if days left are less than 30, make it red. this is another visual silly test
+  if ($days_left < 7) {
+      $days_left = '<span style="color:red;">Expiring in ' . $days_left . '</span>';
+  }
+ else {  $days_left = '<span style="color:green;">Expired ' . $days_left . '</span>'; }
+
+// it is same for $user_id, this is for testing, it is inside acf, may be deleted later (or used for matching with AVOCADO API Request)
  $new_user_id = get_field('new_user_id');
 
 } else {
