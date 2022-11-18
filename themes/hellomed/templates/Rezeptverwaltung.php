@@ -9,7 +9,7 @@
 <!-- and sidebar  -->
 <?php include_once('sidebar_admin.php'); ?>
 <div class="content">
-    <div class="h2 mb-5 border-bottom">Dashboard</div>
+    <div class="h2 mb-5 border-bottom">Rezeptverwaltung</div>
     <table class="table table-striped">
       <thead>
         <tr><th>Lorem</th><th>Lorem</th><th>Lorem</th><th>Lorem</th></tr>
