@@ -13,6 +13,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <!-- include css.css from olly UI-->
 <link rel="stylesheet" href="https://ui.hellomed.com/css/css.css">
 <!-- <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css.css"> -->
