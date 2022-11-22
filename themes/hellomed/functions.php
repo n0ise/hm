@@ -319,3 +319,10 @@ add_role(
     'admin_panel', //  System name of the role.
     __( 'Hellomed Admin'  ) // Display name of the role.
 );
+
+
+//prevent email from breaking
+add_filter( 'wp_mail_content_type','prevent_email_from_breaking' );
+function prevent_email_from_breaking() {
+        return "text/html";
+}
