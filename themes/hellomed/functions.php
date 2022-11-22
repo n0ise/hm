@@ -326,3 +326,36 @@ add_filter( 'wp_mail_content_type','prevent_email_from_breaking' );
 function prevent_email_from_breaking() {
         return "text/html";
 }
+
+add_action('admin_enqueue_scripts', function() {
+	wp_enqueue_script('edit-script', get_stylesheet_directory_uri() . '/assets/js/edit-ajax.js', ['jquery'], '', true);
+});
+
+add_action('wp_ajax_edit_patient', function() {
+	$first_name = $_POST['first_name'];
+	// user_id
+	$user_id = $_POST['user_id'];
+
+    // save field to user profile 
+	update_user_meta( $user_id, 'first_name', $first_name );
+	update_user_meta( $user_id, 'last_name', $_POST['last_name'] );
+	update_user_meta( $user_id, 'user_email', $_POST['user_email'] );
+	update_user_meta( $user_id, 'telephone', $_POST['telephone'] );
+	update_user_meta( $user_id, 'strasse', $_POST['strasse'] );
+	update_user_meta( $user_id, 'postcode', $_POST['postcode'] );
+	update_user_meta( $user_id, 'stadt', $_POST['stadt'] );
+	update_user_meta( $user_id, 'allergies', $_POST['allergies'] );
+	update_user_meta( $user_id, 'medikamente', $_POST['medikamente'] );
+	update_user_meta( $user_id, 'rezept_end', $_POST['rezept_end'] );
+	update_user_meta( $user_id, 'start_date', $_POST['start_date'] );
+	update_user_meta( $user_id, 'status', $_POST['status'] );
+	update_user_meta( $user_id, 'insurance_company', $_POST['insurance_company'] );
+	update_user_meta( $user_id, 'insurance_number', $_POST['insurance_number'] );
+	update_user_meta( $user_id, 'new_user_id', $_POST['new_user_id'] );
+
+
+// echo 'success' .$first_name;
+	// return success message
+	// wp_send_json_success(); 
+	wp_die();
+});
