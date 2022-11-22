@@ -1,10 +1,4 @@
 
-<?php if ( true ) : ?>
-
-	<?php if ( $attributes['show_title'] ) : ?>
-		<h2><?php _e( 'Sign In', 'hellomed-custom-login' ); ?></h2>
-	<?php endif; ?>
-
 <div class="auth-wrap">
   <div class="logo">
     <a href="index.php">
@@ -16,7 +10,6 @@
       <div class="col-12">
         <div class="h2 m-0">Login</div>
       </div>
-
 
 	<!-- Show errors if there are any -->
 	<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
@@ -90,6 +83,3 @@
 
 
 
-
-
-<?php endif; ?>

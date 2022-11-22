@@ -59,23 +59,23 @@ class Hellomed_Custom_Login_Plugin {
 		// Information needed for creating the plugin's pages
 		$page_definitions = array(
 			'anmelden' => array(
-				'title' => __( 'Sign In', 'hellomed-custom-login' ),
+				'title' => __( 'Anmelden', 'hellomed-custom-login' ),
 				'content' => '[custom-login-form]'
 			),
 			'member-account' => array(
-				'title' => __( 'Your Account', 'hellomed-custom-login' ),
+				'title' => __( 'Ihr Konto', 'hellomed-custom-login' ),
 				'content' => '[account-info]'
 			),
 			'registrieren' => array(
-				'title' => __( 'Register', 'hellomed-custom-login' ),
+				'title' => __( 'Registrieren', 'hellomed-custom-login' ),
 				'content' => '[custom-register-form]'
 			),
-			'member-password-lost' => array(
-				'title' => __( 'Forgot Your Password?', 'hellomed-custom-login' ),
+			'passwort-vergessen' => array(
+				'title' => __( 'Passwort vergessen?', 'hellomed-custom-login' ),
 				'content' => '[custom-password-lost-form]'
 			),
-			'member-password-reset' => array(
-				'title' => __( 'Pick a New Password', 'hellomed-custom-login' ),
+			'neues-passwort-eingabe' => array(
+				'title' => __( 'Wählen Sie ein neues Passwort', 'hellomed-custom-login' ),
 				'content' => '[custom-password-reset-form]'
 			)
 		);
@@ -222,7 +222,7 @@ class Hellomed_Custom_Login_Plugin {
 				exit;
 			}
 
-			wp_redirect( home_url( 'member-password-lost' ) );
+			wp_redirect( home_url( 'passwort-vergessen' ) );
 			exit;
 		}
 	}
@@ -244,7 +244,7 @@ class Hellomed_Custom_Login_Plugin {
 				exit;
 			}
 
-			$redirect_url = home_url( 'member-password-reset' );
+			$redirect_url = home_url( 'neues-passwort-eingabe' );
 			$redirect_url = add_query_arg( 'login', esc_attr( $_REQUEST['login'] ), $redirect_url );
 			$redirect_url = add_query_arg( 'key', esc_attr( $_REQUEST['key'] ), $redirect_url );
 
@@ -500,7 +500,7 @@ class Hellomed_Custom_Login_Plugin {
 			$errors = retrieve_password();
 			if ( is_wp_error( $errors ) ) {
 				// Errors found
-				$redirect_url = home_url( 'member-password-lost' );
+				$redirect_url = home_url( 'passwort-vergessen' );
 				$redirect_url = add_query_arg( 'errors', join( ',', $errors->get_error_codes() ), $redirect_url );
 			} else {
 				// Email sent
@@ -538,7 +538,7 @@ class Hellomed_Custom_Login_Plugin {
 			if ( isset( $_POST['pass1'] ) ) {
 				if ( $_POST['pass1'] != $_POST['pass2'] ) {
 					// Passwords don't match
-					$redirect_url = home_url( 'member-password-reset' );
+					$redirect_url = home_url( 'neues-passwort-eingabe' );
 
 					$redirect_url = add_query_arg( 'key', $rp_key, $redirect_url );
 					$redirect_url = add_query_arg( 'login', $rp_login, $redirect_url );
@@ -550,7 +550,7 @@ class Hellomed_Custom_Login_Plugin {
 
 				if ( empty( $_POST['pass1'] ) ) {
 					// Password is empty
-					$redirect_url = home_url( 'member-password-reset' );
+					$redirect_url = home_url( 'neues-passwort-eingabe' );
 
 					$redirect_url = add_query_arg( 'key', $rp_key, $redirect_url );
 					$redirect_url = add_query_arg( 'login', $rp_login, $redirect_url );
