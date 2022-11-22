@@ -11,8 +11,6 @@ function my_theme_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
 
-
-
 /* deactivate it , keeping in case we need it
 * Creating a doctor CPT*/
   
@@ -268,6 +266,7 @@ function custom_post_type_reviews() {
 	 $output = "<script>console.log( 'Debug Objects: " . $data . "' );</script>";
 	echo $output;
 	}
+
 //Disable emojis in WordPress
 add_action( 'init', 'smartwp_disable_emojis' );
 
@@ -308,28 +307,6 @@ add_action( 'wp_head', function(){
     <meta name="facebook-domain-verification" content="gapf5tqscvrmbe0pimp9wjc3s4upi4" />
     <?php
 });
-
-
-// redirect default reset password to new page, custom 
-add_action( 'login_form_lostpassword', 'redirect_to_forgot_password' );
-function redirect_to_forgot_password() {
-	if ( 'GET' == $_SERVER['REQUEST_METHOD'] ) {
-		if ( is_user_logged_in() ) {
-			$this->redirect_logged_in_user();
-			exit;
-		}
-		wp_redirect( home_url( '/forgot-password/' ) );
-		exit;
-	}
-}
-
-// redirect to custom login 
-add_action('login_init', function(){
-    if( !isset( $_GET['action'] ) ) {
-        wp_redirect( '/anmelden' );
-    }
-});
-
 
 
 /* Create User Role */

@@ -4,8 +4,8 @@
 
 <div id="primary" class="content-area">
 
-                <main id="main" class="site-main" role="main">
-                                <?php
+<main id="main" class="site-main" role="main">
+<?php
 
 // show the reset password form 
 if ( isset( $_GET['action'] ) && 'reset' == $_GET['action'] ) :
