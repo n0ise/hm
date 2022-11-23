@@ -181,7 +181,7 @@ class Hellomed_Custom_Login_Plugin {
 			}
 		} else {
 			// Non-admin users always go to their account page after login
-			$redirect_url = home_url( 'member-account' );
+			$redirect_url = home_url( '/onboarding' );
 		}
 
 		return wp_validate_redirect( $redirect_url, home_url() );
@@ -466,10 +466,12 @@ class Hellomed_Custom_Login_Plugin {
 			if ( ! get_option( 'users_can_register' ) ) {
 				// Registration closed, display error
 				$redirect_url = add_query_arg( 'register-errors', 'closed', $redirect_url );
-			} elseif ( ! $this->verify_recaptcha() ) {
-				// Recaptcha check failed, display error
-				$redirect_url = add_query_arg( 'register-errors', 'captcha', $redirect_url );
-			} else {
+			} 
+			// elseif ( ! $this->verify_recaptcha() ) {
+			// 	// Recaptcha check failed, display error
+			// 	$redirect_url = add_query_arg( 'register-errors', 'captcha', $redirect_url );
+			// } 
+			else {
 				$email = $_POST['email'];
 				$first_name = sanitize_text_field( $_POST['first_name'] );
 				$last_name = sanitize_text_field( $_POST['last_name'] );
@@ -746,7 +748,7 @@ class Hellomed_Custom_Login_Plugin {
 
 			case 'incorrect_password':
 				$err = __(
-					"<a href='%s'>Passwort vergessen?</a>? Das eingegebene Passwort war falsch.",
+					"<a href='%s'>Passwort vergessen?</a> Das eingegebene Passwort war falsch.",
 					'hellomed-custom-login'
 				);
 				return sprintf( $err, wp_lostpassword_url() );

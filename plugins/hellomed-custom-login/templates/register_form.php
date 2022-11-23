@@ -1,35 +1,53 @@
-<div id="register-form" class="widecolumn">
-	<?php if ( $attributes['show_title'] ) : ?>
-		<h3><?php _e( 'Register', 'hellomed-custom-login' ); ?></h3>
-	<?php endif; ?>
+<div class="auth-wrap">
+  <div class="logo">
+    <a href="index.php">
+	<img src="https://hm.lndo.site/wp-content/uploads/2022/05/hel_logo-01.svg">
+    </a>
+  </div>
 
-	<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
+	<form id="signupform" action="<?php echo wp_registration_url(); ?>" method="post">
+		
+	<div class="auth-form my-4">
+    <div class="row gy-3">
+      <div class="col-12">
+        <div class="h2 m-0">Registrierung</div>
+      </div>
+	
+	  <?php if ( count( $attributes['errors'] ) > 0 ) : ?>
 		<?php foreach ( $attributes['errors'] as $error ) : ?>
 			<p>
 				<?php echo $error; ?>
 			</p>
 		<?php endforeach; ?>
 	<?php endif; ?>
+	
+	  <div class="col-12">
+        <div class="form-floating">
+			
+			<input  class="form-control" type="text" name="first_name" id="first-name" placeholder=" ">
+			<label for="first_name"><?php _e( 'Name', 'hellomed-custom-login' ); ?></label>
+		</div>
+      </div>
 
-	<form id="signupform" action="<?php echo wp_registration_url(); ?>" method="post">
-		<p class="form-row">
-			<label for="email"><?php _e( 'Email', 'hellomed-custom-login' ); ?> <strong>*</strong></label>
-			<input type="text" name="email" id="email">
-		</p>
+	  <div class="col-12">
+        <div class="form-floating">
+			
+			<input  class="form-control" type="text" name="last_name" id="last-name" placeholder=" ">
+			<label for="last_name"><?php _e( 'Nachname', 'hellomed-custom-login' ); ?></label>
+		</div>
+      </div>
 
-		<p class="form-row">
-			<label for="first_name"><?php _e( 'First name', 'hellomed-custom-login' ); ?></label>
-			<input type="text" name="first_name" id="first-name">
-		</p>
+	  <div class="col-12">
+        <div class="form-floating">
 
-		<p class="form-row">
-			<label for="last_name"><?php _e( 'Last name', 'hellomed-custom-login' ); ?></label>
-			<input type="text" name="last_name" id="last-name">
-		</p>
+			<input class="form-control"  type="text" name="email" id="email" placeholder=" ">
+			<label for="email"><?php _e( 'Email', 'hellomed-custom-login' ); ?> </label>
+		</div>
+      </div>
 
-		<p class="form-row">
-			<?php _e( 'Notiz: Es wird ein automatisches Passwort generiert und per E-Mail zugesandt. ', 'hellomed-custom-login' ); ?>
-		</p>
+		<!-- <p class="form-row">
+			//?php _e( 'Notiz: Es wird ein automatisches Passwort generiert und per E-Mail zugesandt. ', 'hellomed-custom-login' ); ?>
+		</p> -->
 
 		<?php if ( $attributes['recaptcha_site_key'] ) : ?>
 			<div class="recaptcha-container">
@@ -37,11 +55,20 @@
 			</div>
 		<?php endif; ?>
 
-		<p></p>
+		<!-- <p></p> -->
 
-		<p class="signup-submit">
-			<input type="submit" name="submit" class="register-button"
-			       value="<?php _e( 'Register', 'hellomed-custom-login' ); ?>"/>
-		</p>
+		<div class="col-12">
+			<input id="hideInputLog"  type="submit" name="submit" class="register-button"
+			       value="<?php _e( 'Registrieren', 'hellomed-custom-login' ); ?>"/>
+				   <label for="hideInputLog" class="btn btn-primary btn-lg">Registrieren</label> 
+				</div>
+				</div>
+  </div>
 	</form>
+
+	<div class="text-center">
+    <a class="text-secondary" href="anmelden">Bereits Mitglied? Jetz anmelden!</a>
+
+  </div>	
+	
 </div>
