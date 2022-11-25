@@ -44,7 +44,7 @@
 		<div class="col-12">
 			<input type="submit" name="submit" id="hideInputLog"
 			       class="button" value="<?php _e( 'Reset Password', 'hellomed-custom-login' ); ?>" />
-				   <label for="hideInputLog" class="btn btn-primary btn-lg">Passwort zurücksetzen</label> 
+				   <label for="hideInputLog" class="btn btn-primary btn-lg">Passwort festlegen</label> 
 				</div>
 
 <?php if ( count( $attributes['errors'] ) > 0 ) : ?>

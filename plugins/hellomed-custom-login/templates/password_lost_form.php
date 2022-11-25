@@ -6,10 +6,6 @@
 			</a>
 		</div>
 
-
-	
-
-
 	<form id="lostpasswordform" action="<?php echo wp_lostpassword_url(); ?>" method="post">
 
   <div class="auth-form my-4">
@@ -28,8 +24,6 @@
 			);
 		?>
 	</p>
-
-	
 
 	<div class="col-12">
 		<div class="form-floating">

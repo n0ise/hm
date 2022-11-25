@@ -35,6 +35,7 @@ $gender = get_field('geschlecht', 'user_' . $user_id);
 $medikamente= get_field('medikamente', 'user_' . $user_id);
 $start_date = get_field('start_date', 'user_' . $user_id);
 $status = get_field('status', 'user_' . $user_id);
+$patient_caregiver = get_field('patient_caregiver', 'user_' . $user_id);
 // if status is disabled, make it red. this is a visual silly test
  if ($status == 'Aktive') {
      $status = '<span style="color:green;">' . $status . '</span>';

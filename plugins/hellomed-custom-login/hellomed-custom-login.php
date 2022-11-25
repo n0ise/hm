@@ -38,6 +38,8 @@ class Hellomed_Custom_Login_Plugin {
 		add_filter( 'retrieve_password_message', array( $this, 'replace_retrieve_password_message' ), 10, 4 );
 		add_filter( 'retrieve_password_title', array ( $this, 'replace_retrieve_password_title' ), 10, 4 );
 
+		add_filter( 'wp_new_user_notification_email', array ( $this,  'custom_wp_new_user_notification_email'), 10, 4 );
+
 
 		// Setup
 		add_action( 'wp_print_footer_scripts', array( $this, 'add_captcha_js_to_footer' ) );
@@ -475,8 +477,13 @@ class Hellomed_Custom_Login_Plugin {
 				$email = $_POST['email'];
 				$first_name = sanitize_text_field( $_POST['first_name'] );
 				$last_name = sanitize_text_field( $_POST['last_name'] );
+				$patient_caregiver = $_POST['patientcaregiverid'] ;
 
-				$result = $this->register_user( $email, $first_name, $last_name );
+				// echo "<script type='text/javascript'>alert('$patient_caregiver');</script>";
+
+				$result = $this->register_user( $email, $first_name, $last_name, $patient_caregiver );
+
+			
 
 				if ( is_wp_error( $result ) ) {
 					// Parse errors into a string and append as parameter to redirect
@@ -563,9 +570,39 @@ class Hellomed_Custom_Login_Plugin {
 
 				}
 
+				if (  strlen($_POST['pass1']) < 8 ) {
+					// Password is empty
+					$redirect_url = home_url( 'neues-passwort-eingabe' );
+
+					$redirect_url = add_query_arg( 'key', $rp_key, $redirect_url );
+					$redirect_url = add_query_arg( 'login', $rp_login, $redirect_url );
+					$redirect_url = add_query_arg( 'error', 'password_weak', $redirect_url );
+
+					wp_redirect( $redirect_url );
+					exit;
+
+				}
+
+
 				// Parameter checks OK, reset password
 				reset_password( $user, $_POST['pass1'] );
-				wp_redirect( home_url( 'anmelden?password=changed' ) );
+
+				$user_id = $user->ID;
+
+				update_field('confirmed_or_not', 1, 'user_' . $user_id);
+
+				if( $user ) {
+					wp_set_current_user( $user_id, $user->user_login );
+					wp_set_auth_cookie( $user_id );
+					do_action( 'wp_login', $user->user_login );
+	
+				}
+
+				
+
+				// wp_redirect( home_url( 'anmelden?password=changed' ) );
+				wp_redirect( home_url('onboarding'));
+
 			} else {
 				echo "Invalid request.";
 			}
@@ -624,6 +661,108 @@ class Hellomed_Custom_Login_Plugin {
 
 	}
 
+
+	public function custom_wp_new_user_notification_email( $wp_new_user_notification_email, $user, $blogname ) {
+
+		// $user_login = stripslashes( $user->user_login );
+		// $user_email = stripslashes( $user->user_email );
+		// $login_url	= wp_login_url();
+
+		// $message  = __( 'Hi there,' ) . "/r/n/r/n";
+		// $message .= sprintf( __( "Welcome to %s! Here's how to log in:" ), get_option('blogname') ) . "/r/n/r/n";
+		// $message .= wp_login_url() . "/r/n";
+		// $message .= sprintf( __('Username: %s'), $user_login ) . "/r/n";
+		// $message .= sprintf( __('Email: %s'), $user_email ) . "/r/n";
+		// $message .= __( 'Password: The one you entered in the registration form. (For security reason, we save encripted password)' ) . "/r/n/r/n";
+		// $message .= sprintf( __('If you have any problems, please contact me at %s.'), get_option('admin_email') ) . "/r/n/r/n";
+		// $message .= __( 'bye!' );
+
+					$user_firstname = $user->user_firstname;
+					$user_lastname = $user->user_lastname;
+
+
+					$key = get_password_reset_key( $user );
+					if ( is_wp_error( $key ) ) {
+						return;
+					}
+
+				/* translators: %s: User login. */
+				$message  = __( 'Hallo, ', 'hellomed-custom-login' ) ;
+				$message .= sprintf( __( '%s ', 'hellomed-custom-login' ), $user_firstname ) ;
+				$message .= sprintf( __( '%s,', 'hellomed-custom-login' ), $user_lastname ) . "\r\n\r\n";
+
+				$message .= __( 'vielen Dank für Ihre Anmeldung und willkommen bei hellomed.' ) . "\r\n\r\n";
+				// $message .= sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
+				$message .= __( 'Um Ihre Anmeldung fortzuführen und Identität zu bestätigen, klicken Sie auf diesen Link und legen Sie Ihr eigenes Passwort fest:' ) . "\r\n\r\n";
+				$message .= network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
+				$message .= __( 'Wenn Sie Probleme beim Einloggen in Ihr Konto haben, kontaktieren Sie uns unter patient@hellomed.com' ) . "\r\n\r\n";
+				$message .= __( 'Schön das Sie bei uns sind.' ) . "\r\n\r\n";
+				$message .= __( 'Ihr hellomed Team' ) . "\r\n\r\n";
+				
+
+				// $message .= wp_login_url() . "\r\n";
+
+				$message = str_replace('<','',$message);
+				$message = str_replace('>','',$message);
+				$message = str_replace("\r\n",'<br>',$message);
+
+
+
+
+			// $wp_new_user_notification_email = array(
+			// 	'to'      => $user->user_email,
+			// 	/* translators: Login details notification email subject. %s: Site title. */
+			// 	'subject' => __( '[%s] Login Detailss' ),
+			// 	'message' => $message,
+			// 	'headers' => '',
+			// );
+
+			// $wp_new_user_notification_email = apply_filters( 'wp_new_user_notification_email', $wp_new_user_notification_email, $user, $blogname );
+
+			// wp_mail(
+			// 	$wp_new_user_notification_email['to'],
+			// 	wp_specialchars_decode( sprintf( $wp_new_user_notification_email['subject'], $blogname ) ),
+			// 	$wp_new_user_notification_email['message'],
+			// 	$wp_new_user_notification_email['headers']
+			// );
+
+
+
+		$wp_new_user_notification_email['subject'] = sprintf( 'Welcome to %s', $blogname );
+		$wp_new_user_notification_email['headers'] = array('Content-Type: text/html; charset=UTF-8');
+		$wp_new_user_notification_email['message'] = $message;
+	
+		return $wp_new_user_notification_email;
+
+	}
+
+
+
+	// function  custom_wp_new_user_notification_email(  $wp_new_user_notification_email, $user,  $blogname ) {
+ 
+	// 	$user_login =  stripslashes( $user->user_login );
+	// 	 $user_email = stripslashes(  $user->user_email );
+	// 	$login_url   = wp_login_url();
+	// 	$message  = __(  'Hi there,' ) . "/r/n/r/n";
+	// 	$message  .= sprintf( __( "Welcome to %s! Here's  how to log in:" ),  get_option('blogname') ) . "/r/n/r/n";
+	// 	 $message .= wp_login_url() . "/r/n";
+	// 	 $message .= sprintf( __('Username:  %s'), $user_login ) . "/r/n";
+	// 	 $message .= sprintf( __('Email: %s'),  $user_email ) . "/r/n";
+	// 	$message .=  __( 'Password: The one you entered in  the registration form. (For security  reason, we save encripted password)' ) .  "/r/n/r/n";
+	// 	$message .= sprintf(  __('If you have any problems, please  contact me at %s.'),  get_option('admin_email') ) .  "/r/n/r/n";
+	// 	$message .= __( 'bye!'  );
+	 
+	// 	 $wp_new_user_notification_email['subject']  = sprintf( '[%s] Your credentials.',  $blogname );
+	// 	 $wp_new_user_notification_email['headers']  = array('Content-Type: text/html;  charset=UTF-8');
+	// 	 $wp_new_user_notification_email['message']  = $message;
+	 
+	// 	return  $wp_new_user_notification_email;
+	// }
+
+
+
+
+
 	//
 	// HELPER FUNCTIONS
 	//
@@ -637,7 +776,7 @@ class Hellomed_Custom_Login_Plugin {
 	 *
 	 * @return int|WP_Error         The id of the user that was created, or error if failed.
 	 */
-	private function register_user( $email, $first_name, $last_name ) {
+	private function register_user( $email, $first_name, $last_name, $patient_caregiver ) {
 		$errors = new WP_Error();
 
 		// Email address is used as both username and email. It is also the only
@@ -664,7 +803,12 @@ class Hellomed_Custom_Login_Plugin {
 			'nickname'      => $first_name,
 		);
 
-		$user_id = wp_insert_user( $user_data );
+		$user_id = wp_insert_user( $user_data , );
+
+		update_field('patient_caregiver', $patient_caregiver, 'user_' . $user_id);
+
+		update_field('confirmed_or_not', 0, 'user_' . $user_id);
+
 		wp_new_user_notification( $user_id, $password );
 
 		return $user_id;
@@ -719,7 +863,7 @@ class Hellomed_Custom_Login_Plugin {
 				wp_redirect( admin_url() );
 			}
 		} else {
-			wp_redirect( home_url( 'member-account' ) );
+			wp_redirect( home_url( '/onboarding' ) );
 		}
 	}
 
@@ -780,13 +924,16 @@ class Hellomed_Custom_Login_Plugin {
 
 			case 'expiredkey':
 			case 'invalidkey':
-				return __( 'Der genutzte Passwort-Vergessen Link ist nicht mehr gültig.', 'hellomed-custom-login' );
+				return __( 'Der Link ist bereits abgelaufen', 'hellomed-custom-login' );
 
 			case 'password_reset_mismatch':
 				return __( "Die eingegebenen Passwörter stimmen nicht überein.", 'hellomed-custom-login' );
 
 			case 'password_reset_empty':
 				return __( "Entschuldigung, das Passwort muss ausgefüllt werden.", 'hellomed-custom-login' );
+
+				case 'password_weak':
+					return __( "Bitte legen Sie ein starkes Passwort für Ihr Konto fest. Für das Passwort sind mindestens 8 Zeichen zulässig.", 'hellomed-custom-login' );
 
 			default:
 				break;

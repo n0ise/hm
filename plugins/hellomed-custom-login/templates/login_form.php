@@ -26,8 +26,6 @@
 		</p>
 	<?php endif; ?>
 
-
-	 
       <div class="col-12">
         <div class="form-floating">
 		<input type="text" class="form-control" name="log" id="user_login" placeholder=" ">
@@ -40,6 +38,9 @@
 		<label for="user_pass"><?php _e( 'Passwort', 'hellomed-custom-login' ); ?></label>
         </div>
       </div>
+
+	
+
       <div class="col-12">
 	  <input id="hideInputLog" type="submit" value="<?php _e( 'Sign In', 'hellomed-custom-login' ); ?>">
 		<label for="hideInputLog" class="btn btn-primary btn-lg">Anmelden</label> 
@@ -59,7 +60,7 @@
 	<?php if ( $attributes['logged_out'] ) : ?>
 		<p class="login-info">
 		<br>
-			<?php _e( 'You have signed out. Would you like to sign in again?', 'hellomed-custom-login' ); ?>
+			<?php _e( 'Sie haben sich abgemeldet. Möchten Sie sich erneut anmelden?', 'hellomed-custom-login' ); ?>
 		</p>
 	<?php endif; ?>
 

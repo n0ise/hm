@@ -21,10 +21,25 @@
 		<?php endforeach; ?>
 	<?php endif; ?>
 	
+		<div class="col-12">
+				<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" name="patientcaregiverid" value="patient" id="patientcaregiverid1" required="required" >
+			<label class="form-check-label" for="patientcaregiverid1">
+				Patient
+			</label>
+			</div>
+			<div class="form-check form-check-inline">
+			<input class="form-check-input" type="radio" name="patientcaregiverid" value="caregiver" id="patientcaregiverid2" required="required" >
+			<label class="form-check-label" for="patientcaregiverid2">
+				Caregiver
+			</label>
+			</div>
+		</div>
+
 	  <div class="col-12">
         <div class="form-floating">
 			
-			<input  class="form-control" type="text" name="first_name" id="first-name" placeholder=" ">
+			<input  class="form-control" type="text" name="first_name" id="first-name" required="required" placeholder=" ">
 			<label for="first_name"><?php _e( 'Name', 'hellomed-custom-login' ); ?></label>
 		</div>
       </div>
@@ -32,7 +47,7 @@
 	  <div class="col-12">
         <div class="form-floating">
 			
-			<input  class="form-control" type="text" name="last_name" id="last-name" placeholder=" ">
+			<input  class="form-control" type="text" name="last_name" id="last-name" required="required" placeholder=" ">
 			<label for="last_name"><?php _e( 'Nachname', 'hellomed-custom-login' ); ?></label>
 		</div>
       </div>
@@ -40,9 +55,31 @@
 	  <div class="col-12">
         <div class="form-floating">
 
-			<input class="form-control"  type="text" name="email" id="email" placeholder=" ">
+			<input class="form-control"  type="text" name="email" id="email" required="required" placeholder=" ">
 			<label for="email"><?php _e( 'Email', 'hellomed-custom-login' ); ?> </label>
 		</div>
+      </div>
+
+
+	  <div class="col-12">
+				<div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
+			<label class="form-check-label" for="flexCheckDefault">
+				Checkbox 1
+			</label>
+			</div>
+			<div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
+			<label class="form-check-label" for="flexCheckChecked">
+			Checkbox 2
+			</label>
+			</div>
+			<div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" >
+			<label class="form-check-label" for="flexCheckChecked2">
+			Checkbox 3
+			</label>
+			</div>
       </div>
 
 		<!-- <p class="form-row">
