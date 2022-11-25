@@ -312,7 +312,7 @@ add_action( 'wp_head', function(){
 /* Create User Role */
 add_role(
     'client', //  System name of the role.
-    __( 'Hellomed Patient'  ) // Display name of the role.
+    __( 'Client'  ) // Display name of the role.
 );
 
 add_role(
@@ -360,6 +360,7 @@ add_action('wp_ajax_edit_patient', function() {
 	wp_die();
 });
 
+
  // fill patient/caregiver filed in ninja form, with the custom field for patient/caregiver taken from the registration form
  add_filter( 'ninja_forms_render_default_value', 'fill_ninja_patient', 10, 3 );
  function fill_ninja_patient( $default_value, $field_type, $field_settings ) {
@@ -370,3 +371,33 @@ add_action('wp_ajax_edit_patient', function() {
 	return $default_value;
    
  } 
+
+
+add_filter( 'manage_users_columns', 'column_register_wpse_101322' );
+
+add_filter( 'manage_users_custom_column', 'column_display_wpse_101322', 10, 3 );
+
+function column_register_wpse_101322( $columns )
+{
+
+    $columns['patient_caregiver'] = 'Client Role';
+	$columns['confirmed_or_not'] = 'Confirmed email';
+    return $columns;
+}
+
+ function column_display_wpse_101322( $value, $column_name, $user_id )
+{
+  $user_info = get_user_meta( $user_id, 'patient_caregiver', true );
+  $user_info2 = get_user_meta( $user_id, 'confirmed_or_not', true );
+
+
+  if($column_name == 'patient_caregiver') 
+  return $user_info;
+
+  if($column_name == 'confirmed_or_not') 
+  return $user_info2;
+
+  return $value;
+}
+
+
