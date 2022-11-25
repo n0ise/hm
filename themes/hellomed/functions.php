@@ -359,3 +359,14 @@ add_action('wp_ajax_edit_patient', function() {
 	// wp_send_json_success(); 
 	wp_die();
 });
+
+ // fill patient/caregiver filed in ninja form, with the custom field for patient/caregiver taken from the registration form
+ add_filter( 'ninja_forms_render_default_value', 'fill_ninja_patient', 10, 3 );
+ function fill_ninja_patient( $default_value, $field_type, $field_settings ) {
+    if ( $field_settings['key'] == 'patient_caregiver_input' ) {
+// default value of the acf field patient_caregiver 
+		$default_value = get_field('patient_caregiver', 'user_'.get_current_user_id());
+	}
+	return $default_value;
+   
+ } 
