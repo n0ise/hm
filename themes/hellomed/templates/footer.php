@@ -1,16 +1,15 @@
-
-<footer>
+<footer class="hm-footer">
   <div class="container">
-  <div class="row">
-    <div class="col">
-      1 of 3
+    <div>
+      <a href>Impressum</a>
+      <a href>AGB</a>
+      <a href>Datenschutz</a>
     </div>
-    <div class="col-6">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
+    <div>
+      <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard.svg">
+      <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard-Copy.svg">
+      <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard-Copy-2.svg">
+      <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard-Copy-3.svg">
     </div>
   </div>
-</div>
 </footer>
