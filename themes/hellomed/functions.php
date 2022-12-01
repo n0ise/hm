@@ -304,8 +304,8 @@ add_action('elementor/query/query_results', function($query) {
 
 add_action( 'wp_head', function(){
     ?>
-    <meta name="facebook-domain-verification" content="gapf5tqscvrmbe0pimp9wjc3s4upi4" />
-    <?php
+<meta name="facebook-domain-verification" content="gapf5tqscvrmbe0pimp9wjc3s4upi4" />
+<?php
 });
 
 
@@ -327,15 +327,18 @@ function prevent_email_from_breaking() {
         return "text/html";
 }
 
-add_action('admin_enqueue_scripts', function() {
-	wp_enqueue_script('edit-script', get_stylesheet_directory_uri() . '/assets/js/edit-ajax.js', ['jquery'], '', true);
-});
+// here temporarily, might remove later
+// add_action('admin_enqueue_scripts', function() {
+// 	wp_enqueue_script('edit-script', get_stylesheet_directory_uri() . '/assets/js/edit-ajax.js', ['jquery'], '', true);
+// });
+// add_action('admin_enqueue_scripts', function() {
+// 	wp_enqueue_script('add-script', get_stylesheet_directory_uri() . '/assets/js/add-ajax.js', ['jquery'], '', true);
+// });
 
 add_action('wp_ajax_edit_patient', function() {
 	$first_name = $_POST['first_name'];
 	// user_id
 	$user_id = $_POST['user_id'];
-
     // save field to user profile 
 	update_user_meta( $user_id, 'first_name', $first_name );
 	update_user_meta( $user_id, 'last_name', $_POST['last_name'] );
@@ -345,15 +348,17 @@ add_action('wp_ajax_edit_patient', function() {
 	update_user_meta( $user_id, 'postcode', $_POST['postcode'] );
 	update_user_meta( $user_id, 'stadt', $_POST['stadt'] );
 	update_user_meta( $user_id, 'allergies', $_POST['allergies'] );
-	update_user_meta( $user_id, 'medikamente', $_POST['medikamente'] );
-	update_user_meta( $user_id, 'rezept_end', $_POST['rezept_end'] );
+	update_user_meta( $user_id, 'geschlecht', $_POST['geschlecht'] );
+	update_user_meta( $user_id, 'geburt', $_POST['geburt'] );
+	// update_user_meta( $user_id, 'medikamente', $_POST['medikamente'] );
+	// update_user_meta( $user_id, 'rezept_end', $_POST['rezept_end'] );
 	update_user_meta( $user_id, 'start_date', $_POST['start_date'] );
 	update_user_meta( $user_id, 'status', $_POST['status'] );
 	update_user_meta( $user_id, 'insurance_company', $_POST['insurance_company'] );
 	update_user_meta( $user_id, 'insurance_number', $_POST['insurance_number'] );
 	update_user_meta( $user_id, 'new_user_id', $_POST['new_user_id'] );
 
-
+// debug stuff, might remove later 
 // echo 'success' .$first_name;
 	// return success message
 	// wp_send_json_success(); 
@@ -400,4 +405,27 @@ function column_register_wpse_101322( $columns )
   return $value;
 }
 
+
+// add a new input field, after field nf-field-588, in ninja form
+add_action( 'ninja_forms_after_fields', 'add_new_field' );
+function add_new_field() {
+	$field_id = 588;
+	$field = Ninja_Forms()->form()->get_field( $field_id );
+	$form_id = $field->get_form_id();
+	$form = Ninja_Forms()->form( $form_id )->get();
+	$fields = $form->get_fields();
+	$field_index = array_search( $field_id, array_keys( $fields ) );
+	$new_field = Ninja_Forms()->form()->field()->get();
+	$new_field->update_settings( array(
+		'key' => 'patient_caregiver_input',
+		'label' => 'Patient/Caregiver',
+		'type' => 'textbox',
+		'order' => $field_index + 1,
+		'parent_id' => $form_id,
+		'default_value' => get_field('patient_caregiver', 'user_'.get_current_user_id()),
+	) );
+	$new_field->save();
+	$form->add_field( $new_field );
+	$form->save();
+}
 
