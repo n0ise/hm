@@ -1,3 +1,6 @@
+<nav class="hm-offcanvas">
+    <ul></ul>
+</nav>
 <footer class="hm-footer">
   <div class="container">
     <div>
