@@ -205,9 +205,7 @@ $user = get_userdata($user_id);
             var status = $('#status').val();
             var email = $('#email').val();
             var new_user_id = $('#new_user_id').val();
-
-
-            var ajaxurl = "https://hm.lndo.site/wp-admin/admin-ajax.php";
+            var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
 
             var data = {
                 'action': 'edit_patient',

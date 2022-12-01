@@ -168,7 +168,6 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                     var medicine_name_pzn = jQuery('#medicine_name_pzn').val();
                     var medicine_amount = jQuery('#medicine_amount').val();
                     var status_prescription = jQuery('#status_prescription').val();
-                  
                     var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
                     var data = {
                         'action': 'edit_patient',
@@ -181,7 +180,6 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                         'medicine_name_pzn': medicine_name_pzn,
                         'medicine_amount': medicine_amount,
                         'status_prescription': status_prescription,
-                      
                         'rezept_id': <?php echo $rezept_id; ?>,
                         'user_id': <?php echo $user_id; ?>
                     }
