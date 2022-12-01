@@ -49,12 +49,12 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
         <div class="d-none d-lg-block">
             <nav class="hm-nav">
                 <!-- check the page slug and make the correspondent <li> with class active -->
-                <li class="<?php if (is_page('admin_dashboard')) { echo 'active'; } ?>"><a
-                        href="/admin-dashboard">Dashboard</a></li>
-                <li class="<?php if (is_page('admin-nutzerverwaltung')) { echo 'active'; } ?>"><a
-                        href="/admin-nutzerverwaltung">Nutzerverwaltung</a></li>
-                <li class="<?php if (is_page('admin-rezeptverwaltung')) { echo 'active'; } ?>"><a
-                        href="/admin-rezeptverwaltung">Rezeptverwaltung</a></li>
+                <a class="<?php if (is_page('admin-dashboard')) { echo 'active'; } ?>"
+                    href="/admin-dashboard">Dashboard</a>
+                <a class="<?php if (is_page('admin-nutzerverwaltung')) { echo 'active'; } ?>"
+                    href="/admin-nutzerverwaltung">Nutzerverwaltung</a>
+                <a class="<?php if (is_page('admin-rezeptverwaltung')) { echo 'active'; } ?>"
+                    href="/admin-rezeptverwaltung">Rezeptverwaltung</a>
             </nav>
         </div>
         <div class="d-none d-lg-block">
