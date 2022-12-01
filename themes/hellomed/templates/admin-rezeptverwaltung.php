@@ -44,12 +44,17 @@ $users = get_users($args);
                         $user_rezept = get_field('rezept_input', 'user_' . $user->ID);
                         $prescription_date_by_doctor = get_field('prescription_doctor_by_name', 'user_' . $user->ID);
                         $prescription_status = get_field('prescription_status', 'user_' . $user->ID);
-                        
-                        // if user_rezept is not empty
-                        if (!empty($user_rezept)) {
+                        // var_dump($user_rezept['0']['rezept_file']);
+                    
+                        // if user_rezept is not false (better validation)
+                        if ($user_rezept['0']['rezept_file']) {
                             foreach ($user_rezept as $rezept) {
+                        // if (!empty($user_rezept)) {
+                        //     foreach ($user_rezept as $rezept) {
                                 
                         //    var_dump($rezept);
+                        
+                    
                   ?>
                     <tr>
                         <td>
