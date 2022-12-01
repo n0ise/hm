@@ -1,7 +1,3 @@
-<?php
-// include variables with all fields from acf/wp
-include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
-?>
 <!DOCTYPE html>
 
 <meta charset="utf-8">
@@ -9,39 +5,90 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 
 <title>#hellostage 🤘🏻</title>
 
-<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="wp-content/themes/hellomed/assets/img/favicon.svg" type="image/svg+xml">
 
+<!-- Bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- include css.css from olly UI-->
-<link rel="stylesheet" href="https://ui.hellomed.com/css/css.css">
-<!-- <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css.css"> -->
-    <div class="app">
-<div class="header">
-    <img src="../../../wp-content/uploads/2022/05/hel_logo-01.svg" alt="logo" class="logo" width="300"> 
-    <?php if(is_user_logged_in()) { ?>
-      
-    <div class="dropdown">
-        <div class="dropdown-photo">
-            <img src="<?php echo get_avatar_url($user_id); ?>" />
+<!-- Lodash -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+<!-- include jquery, might remove later  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<!-- include variables with all fields from acf/wp -->
+<?php 
+include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
+?>
+
+<!-- Custom js -->
+<script src="wp-content/themes/hellomed/assets/js/ios-safari.js"></script>
+<script src="wp-content/themes/hellomed/assets/js/off-canvas.js"></script>
+
+<!-- if page is medikamente, load this  -->
+<?php if (is_page('medikamente')) { ?>
+<script src="wp-content/themes/hellomed/assets/js/medikamente.js"></script>
+<?php } ?>
+
+<!-- UI CSS -->
+<link rel="stylesheet" href="https://ui.hellomed.com/css/index.css">
+<!-- local css, for lando  -->
+<!-- <link rel="stylesheet" href="/UI/css/index.css"> -->
+
+<header class="hm-header">
+    <div class="container">
+        <div class="hm-logo">
+            <a href="index.html">
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/logo.svg">
+            </a>
         </div>
-        <div class="dropdown-user">
-            <div class="dropdown-name">
-                <!-- show user name  -->
-                <?php echo $user_name;  echo $status; ?>
+        <!-- checking if logged in and show the whole nav header -->
+        <?php if(is_user_logged_in()) { ?>
+        <div class="d-none d-lg-block">
+            <nav class="hm-nav">
+                <!-- check the page slug and make the correspondent <li> with class active -->
+                <li class="<?php if (is_page('admin_dashboard')) { echo 'active'; } ?>"><a
+                        href="/admin-dashboard">Dashboard</a></li>
+                <li class="<?php if (is_page('admin-nutzerverwaltung')) { echo 'active'; } ?>"><a
+                        href="/admin-nutzerverwaltung">Nutzerverwaltung</a></li>
+                <li class="<?php if (is_page('admin-rezeptverwaltung')) { echo 'active'; } ?>"><a
+                        href="/admin-rezeptverwaltung">Rezeptverwaltung</a></li>
+            </nav>
+        </div>
+        <div class="d-none d-lg-block">
+            <div class="hm-dropdown dropdown-toggle" data-bs-toggle="dropdown">
+                <div class="hm-dropdown-photo">
+                    <img src="<?php echo get_avatar_url($user_id); ?>" />
+                </div>
+                <div class="hm-dropdown-user">
+                    <div class="hm-dropdown-name"><?php echo $user_name; ?>
+                    </div>
+                    <div class="hm-dropdown-role"><?php echo $user_role; ?></div>
+                </div>
             </div>
-            <div class="dropdown-role">
-                <!-- show user role and userID     -->
-                <?php echo $user_role; ?> (ID <?php echo $user_id; ?>)
-                <!-- and the logout  -->
-                <a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a>
-<?php } else {
-//something?
- } ?>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="os-hilfe">FAQ & Hilfe</a></li>
+                <li><a class="dropdown-item" href="os-einstellungen">Einstellungen</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
+            </ul>
+        </div>
 
-            </div>
+        <div class="d-lg-none">
+            <nav class="hm-nav">
+                <a href="tel:+49306941132" class="active">030 6941132</a>
+            </nav>
+        </div>
+        <div class="d-lg-none">
+            <div class="hm-hamburger"><i></i><i></i><i></i></div>
+
         </div>
     </div>
-</div> 
+    <?php } else {
+                //TODO something? 
+                     } ?>
+</header>
