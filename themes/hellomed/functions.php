@@ -357,6 +357,21 @@ add_action('wp_ajax_edit_patient', function() {
 	update_user_meta( $user_id, 'insurance_company', $_POST['insurance_company'] );
 	update_user_meta( $user_id, 'insurance_number', $_POST['insurance_number'] );
 	update_user_meta( $user_id, 'new_user_id', $_POST['new_user_id'] );
+	// update prescription_id 
+	$rezept_input = get_field('rezept_input', 'user_' . $user_id);
+	$rezept_input[0]['rezept_id'] = $_POST['rezept_id'];
+	update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+	// update doctor_name 
+	$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
+	update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+	// update prescription_date_by_doctor 
+	$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
+	update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+	// update status_prescription
+	$rezept_input[0]['status_prescription'] = $_POST['status_prescription'];
+	update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+
+
 
 // debug stuff, might remove later 
 // echo 'success' .$first_name;
@@ -428,4 +443,3 @@ function add_new_field() {
 	$form->add_field( $new_field );
 	$form->save();
 }
-
