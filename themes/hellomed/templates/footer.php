@@ -15,4 +15,8 @@
       <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard-Copy-3.svg">
     </div>
   </div>
+  <!-- if page is medikamente, load this  -->
+<?php if (is_page('os-medikationsplan')) { ?>
+<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
+<?php } ?>
 </footer>
