@@ -1,6 +1,6 @@
 <?php /* Template Name: OS Einstellungen */ ?>
 <!-- include_once header.php from template  -->
-<?php include_once('header.php'); 
+<?php include_once('os-header.php'); 
 // current user id
 $user_id = get_current_user_id();
 
