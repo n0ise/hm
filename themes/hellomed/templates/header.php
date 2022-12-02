@@ -28,7 +28,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 <script src="wp-content/themes/hellomed/assets/js/off-canvas.js"></script>
 
 <!-- if page is medikamente, load this  -->
-<?php if (is_page('medikamente')) { ?>
+<?php if (is_page('os-medikationsplan')) { ?>
 <script src="wp-content/themes/hellomed/assets/js/medikamente.js"></script>
 <?php } ?>
 
@@ -52,7 +52,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 <a class="<?php if (is_page('admin-dashboard')) { echo 'active'; } ?>"
                     href="/admin-dashboard">Dashboard</a>
                 <a class="<?php if (is_page('admin-nutzerverwaltung')) { echo 'active'; } ?>"
-                    href="/admin-nutzerverwaltung">Nutzerverwaltung</a>
+                    href="/admin-nutzerverwaltung?status=Alle">Nutzerverwaltung</a>
                 <a class="<?php if (is_page('admin-rezeptverwaltung')) { echo 'active'; } ?>"
                     href="/admin-rezeptverwaltung">Rezeptverwaltung</a>
             </nav>
