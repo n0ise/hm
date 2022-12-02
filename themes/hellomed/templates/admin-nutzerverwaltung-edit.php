@@ -73,10 +73,9 @@ $user = get_userdata($user_id);
                         <label>Geburtstag</label>
                     </div>
                 </div>
-                <!-- // TODO add this, what's this? -->
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
-                        <input id="krank" type="text" class="form-control" placeholder=" ">
+                        <input id="sickness" type="text" class="form-control" placeholder=" ">
                         <label>Krankheiten</label>
                     </div>
                 </div>
@@ -180,7 +179,10 @@ $user = get_userdata($user_id);
     }
   edit_patient($user_id); ?>
             <!-- add a success div  -->
-            <div id="success"></div>
+       <!-- add a space gap here -->
+
+    
+            <div id="successdown"></div>
         </div>
     </div>
 
@@ -201,7 +203,7 @@ $user = get_userdata($user_id);
             var insurance_company = $('#insurance_company').val();
             var insurance_number = $('#insurance_number').val();
             var start_date = $('#start_date').val();
-            // var rezept_end = $('#rezept_end').val();
+            var sickness = $('#sickness').val();
             var status = $('#status').val();
             var email = $('#email').val();
             var new_user_id = $('#new_user_id').val();
@@ -222,7 +224,7 @@ $user = get_userdata($user_id);
                 'insurance_company': insurance_company,
                 'insurance_number': insurance_number,
                 'start_date': start_date,
-                // 'rezept_end': rezept_end,
+                'rezept_end': sickness,
                 'geschlecht': geschlecht,
                 'status': status,
                 'email': email,
@@ -233,6 +235,8 @@ $user = get_userdata($user_id);
 
                 $('#success').addClass('alert alert-success');
                 $('#success').html('Profile updated');
+                $('#successdown').addClass('alert alert-success');
+                $('#successdown').html('Profile updated');
                 // show updated fields  in the success message 
 
                 // updated #username with first_name value 
@@ -252,7 +256,7 @@ $user = get_userdata($user_id);
                 $('#insurance_company').val(insurance_company);
                 $('#insurance_number').val(insurance_number);
                 $('#start_date').val(start_date);
-                // $('#rezept_end').val(rezept_end);
+                $('#sickness').val(sickness);
                 $('#status').val(status);
                 $('#email').val(email);
                 $('#new_user_id').val(new_user_id);
