@@ -4,7 +4,6 @@
 <?php include_once('header.php'); ?>
 <!-- if logged in and can administrate -->
 <?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
-
 <main>
     <div class="container">
         <div class="hm-content">
@@ -16,7 +15,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo count_users()['avail_roles']['client']; ?></h5>
                             <p class="card-text">Nutzer auf Hellomed angemeldet</p>
-                            <a href="/admin-nutzerverwaltung" class="btn btn-primary">Anzeigen</a>
+                            <a href="/admin-nutzerverwaltung?status=Alle" class="btn btn-primary">Anzeigen</a>
                         </div>
                     </div>
                 </div>

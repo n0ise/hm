@@ -52,17 +52,26 @@
                     <?php 
       $status="All";
       if (isset($_GET['status'])) {
-      echo $status;
           $status = $_GET['status'];
+        //   sort by status 
+            if ($status == "Alle") {
+                $users = get_users(array('role' => 'client'));
+            } else {
+                $users = get_users(array('role' => 'client', 'meta_key' => 'status', 'meta_value' => $status));
+            }
           // $users = get_users(array('role' => 'client', 'meta_key' => 'status', 'meta_value' => $status));
-          // take all fields for roles client 
-          $args = array(
-              'role' => 'client',
-              'orderby' => 'user_status',
-              'order' => 'ASC'
-          );
-          $users = get_users($args);
+            // $users = get_users(array('role' => 'client', 'meta_key' => 'status', 'meta_value' => $status));
 
+         
+        //   $users = get_users($args);
+// add 3 buttons to filter by status
+?>
+<small>sort by</small>
+<a href="admin-nutzerverwaltung?status=Alle"> <button type="button" class="btn btn-primary">Alle</button></a>
+<a href="admin-nutzerverwaltung?status=Wartend"> <button type="button" class="btn btn-warning">Wartend</button>
+<a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button" class="btn btn-success">Aktiv</button>
+
+<?php
           
           foreach ($users as $user) {
 // var_dump($user);
