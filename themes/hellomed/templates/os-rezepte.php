@@ -8,7 +8,9 @@ Template Name: OS Rezepte
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in()) { ?>
 <?php
-$user_id=$_GET['user_id'];
+// get logged in user id 
+$user_id = get_current_user_id();
+
 // get all acf repeater rezepte_file for $user_id
 $rezepte_file = get_field('rezept_input', 'user_' . $user_id);
 var_dump($rezepte_file);
