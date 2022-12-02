@@ -199,24 +199,32 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
             </div>
         </div>
     </main>
-    <?php
-
-}
+    <?php } 
 else { ?>
-    <!-- or show the message and redirect if the user is ooout  -->
+<!-- here if the user is not logged in, going raaaus  -->
+<main>
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                    <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                    <hr>q
-                    <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
+        <div class="hm-content">
+
+            <div class="h2 mb-5">NO.</div>
+            <div class="alert alert-danger" role="alert">
+                <!-- image centered  -->
+                <div class="text-center">
+                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
+                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
                 </div>
+
+                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
+                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
+                <hr>
+                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
             </div>
         </div>
-        <?php header("Refresh:10; url=/anmelden"); 
+    </div>
+</main>
+<?php header("Refresh:10; url=/anmelden"); 
 }
+
 // da footer 
 include_once('footer.php');
 ?>

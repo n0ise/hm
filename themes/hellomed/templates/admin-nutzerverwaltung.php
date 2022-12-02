@@ -115,11 +115,19 @@
 
 <?php } 
 else { ?>
-<!-- or show the message and redirect if the user is ooout  -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
+<!-- here if the user is not logged in, going raaaus  -->
+<main>
+    <div class="container">
+        <div class="hm-content">
+
+            <div class="h2 mb-5">NO.</div>
             <div class="alert alert-danger" role="alert">
+                <!-- image centered  -->
+                <div class="text-center">
+                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
+                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
+                </div>
+
                 <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
                 <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
                 <hr>
@@ -127,7 +135,8 @@ else { ?>
             </div>
         </div>
     </div>
-    <?php header("Refresh:10; url=/anmelden"); 
+</main>
+<?php header("Refresh:10; url=/anmelden"); 
 }
 
 // da footer 
