@@ -239,16 +239,12 @@ $user = get_userdata($user_id);
                 $('#successdown').html('Profile updated');
                 // show updated fields  in the success message 
 
-                // updated #username with first_name value 
-                // show new data in their fields after saving
                 $('#first_name').val(first_name);
                 $('#last_name').val(last_name);
-                // updated #username with first_name value from ajax
-                // $('#username').html(first_name);
                 $('#telephone').val(telephone);
                 $('#strasse').val(strasse);
                 $('#postcode').val(postcode);
-                // $('#city').val(city);
+                $('#allergies').val(allergies);
                 $('#stadt').val(stadt);
                 $('#geburt').val(geburt);
                 $('#allergies').val(allergies);

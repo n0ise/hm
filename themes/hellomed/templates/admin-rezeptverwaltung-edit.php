@@ -35,7 +35,7 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control"
+                            <input id="prescription_id" type="text" class="form-control"
                                 value="<?php echo $rezept_input[0]['prescription_id']; ?>">
                             <label>Prescription ID</label>
                         </div>
@@ -165,6 +165,7 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                     var prescription_id = jQuery('#prescription_id').val();
                     var doctor_name = jQuery('#doctor_name').val();
                     var prescription_date_by_doctor = jQuery('#prescription_date_by_doctor').val();
+                    var prescription_id = jQuery('#prescription_id').val();
                     var medicine_name_pzn = jQuery('#medicine_name_pzn').val();
                     var medicine_amount = jQuery('#medicine_amount').val();
                     var status_prescription = jQuery('#status_prescription').val();
@@ -179,6 +180,7 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                         'prescription_date_by_doctor': prescription_date_by_doctor,
                         'medicine_name_pzn': medicine_name_pzn,
                         'medicine_amount': medicine_amount,
+                        'prescription_id': prescription_id,
                         'status_prescription': status_prescription,
                         'rezept_id': <?php echo $rezept_id; ?>,
                         'user_id': <?php echo $user_id; ?>
