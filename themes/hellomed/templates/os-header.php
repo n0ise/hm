@@ -28,8 +28,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 <script src="wp-content/themes/hellomed/assets/js/off-canvas.js"></script>
 
 <!-- if page is medikamente, load this  -->
-<?php if (is_page('medikamente')) { ?>
-<script src="wp-content/themes/hellomed/assets/js/medikamente.js"></script>
+<?php if (is_page('os-medikationsplan')) { ?>
+<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
 <?php } ?>
 
 <!-- UI CSS -->
