@@ -12,7 +12,7 @@ Template Name: OS Rezepte
 $user_id = get_current_user_id();
 
 // get all acf repeater rezepte_file for $user_id
-$rezepte_file = get_field('rezept_input', 'user_' . $user_id);
+$rezepte_file = get_field('rezept_input', 'user_' .$user_id);
 var_dump($rezepte_file);
 
 ?>
@@ -56,7 +56,7 @@ var_dump($rezepte_file);
                 }
                 ?>
                         </td>
-                        <td><span class="badge rounded-pill text-bg-success">Aktiv</span></td>
+                        <td><span class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription']; ?>"><?php echo $rezept['status_prescription']; ?></span></td>
                     </tr>
                     <?php
             }
