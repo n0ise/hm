@@ -418,18 +418,13 @@ if ( !empty( $_POST['insurance_number'] ) ) {
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
 	
-	// update doctor_name 
-	$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
 	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $rezept_input[0]['doctor_name'] ) {
 		// update doctor_name 
 		$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
 
-	// update prescription_date_by_doctor 
-	$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $rezept_input[0]['prescription_date_by_doctor'] ) {
-
 		$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
