@@ -1,5 +1,5 @@
-<div class="auth-wrap">
-  <div class="logo">
+<div class="hm-auth-wrap">
+  <div class="hm-logo">
     <a href="index.php">
 	<img src="https://hm.lndo.site/wp-content/uploads/2022/05/hel_logo-01.svg">
     </a>
@@ -7,21 +7,15 @@
 
 	<form id="signupform" action="<?php echo wp_registration_url(); ?>" method="post">
 		
-	<div class="auth-form my-4">
+	<div class="hm-auth-form my-4">
     <div class="row gy-3">
       <div class="col-12">
         <div class="h2 m-0">Registrierung</div>
       </div>
 	
-	  <?php if ( count( $attributes['errors'] ) > 0 ) : ?>
-		<?php foreach ( $attributes['errors'] as $error ) : ?>
-			<p>
-				<?php echo $error; ?>
-			</p>
-		<?php endforeach; ?>
-	<?php endif; ?>
+
 	
-		<div class="col-12">
+		<!-- <div class="col-12">
 				<div class="form-check form-check-inline">
 			<input class="form-check-input" type="radio" name="patientcaregiverid" value="patient" id="patientcaregiverid1" required="required" >
 			<label class="form-check-label" for="patientcaregiverid1">
@@ -34,7 +28,17 @@
 				Caregiver
 			</label>
 			</div>
-		</div>
+		</div> -->
+
+		<div class="col-12">
+        <div class="btn-group d-flex">
+          <input type="radio" class="btn-check" name="patientcaregiverid" value="patient"  id="patientcaregiverid1" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="patientcaregiverid1">Ich bin Patient</label>
+          <input type="radio" class="btn-check" name="patientcaregiverid"  value="caregiver" id="patientcaregiverid2" autocomplete="off">
+          <label class="btn btn-outline-primary" for="patientcaregiverid2">Ich bin Angehöriger</label>
+        </div>
+      </div>
+
 
 	  <div class="col-12">
         <div class="form-floating">
@@ -56,30 +60,34 @@
         <div class="form-floating">
 
 			<input class="form-control"  type="text" name="email" id="email" required="required" placeholder=" ">
-			<label for="email"><?php _e( 'Email', 'hellomed-custom-login' ); ?> </label>
+			<label for="email"><?php _e( 'E-mail', 'hellomed-custom-login' ); ?> </label>
 		</div>
       </div>
 
 
 	  <div class="col-12">
-				<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
-			<label class="form-check-label" for="flexCheckDefault">
-				Checkbox 1
-			</label>
-			</div>
-			<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" >
-			<label class="form-check-label" for="flexCheckChecked">
-			Checkbox 2
-			</label>
-			</div>
-			<div class="form-check">
-			<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" >
-			<label class="form-check-label" for="flexCheckChecked2">
-			Checkbox 3
-			</label>
-			</div>
+        <div class="form-check m-0">
+          <input class="form-check-input" type="checkbox" id="test3">
+          <label class="form-check-label" for="test3">
+            Ich habe die AGB und die Datenschutzerklärung zur Kenntnis genommen.
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check m-0">
+          <input class="form-check-input" type="checkbox" id="test4">
+          <label class="form-check-label" for="test4">
+            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung einer Erinnerungsmail zur Einreichung eines Folgerezepts verarbeitet werden.
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check m-0">
+          <input class="form-check-input" type="checkbox" id="test5">
+          <label class="form-check-label" for="test5">
+            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Produktempfehlungen per E-Mail verarbeitet werden.
+          </label>
+        </div>
       </div>
 
 		<!-- <p class="form-row">
@@ -93,6 +101,17 @@
 		<?php endif; ?>
 
 		<!-- <p></p> -->
+
+				<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
+				<?php foreach ( $attributes['errors'] as $error ) : ?>
+					<div class="col-12">
+				<div class="alert alert-danger m-0">
+				<i class="bi bi-exclamation-circle-fill me-2"></i>
+								<?php echo $error; ?>
+								</div>
+					</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
 
 		<div class="col-12">
 			<input id="hideInputLog"  type="submit" name="submit" class="register-button"

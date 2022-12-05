@@ -1,30 +1,19 @@
 
-<div class="auth-wrap">
-  <div class="logo">
+<div class="hm-auth-wrap">
+  <div class="hm-logo">
     <a href="index.php">
 	<img src="https://hm.lndo.site/wp-content/uploads/2022/05/hel_logo-01.svg">
     </a>
   </div>
   <form method="post" action="<?php echo wp_login_url(); ?>">
-  <div class="auth-form my-4">
+  <div class="hm-auth-form">
     <div class="row gy-3">
       <div class="col-12">
-        <div class="h2 m-0">Login</div>
+        <div class="h2 m-0">Anmeldung</div>
       </div>
 
 
 
-	<?php if ( $attributes['lost_password_sent'] ) : ?>
-		<p class="login-info">
-			<?php _e( 'Überprüfen Sie Ihre E-Mail auf einen Link zum Zurücksetzen Ihres Passworts.', 'hellomed-custom-login' ); ?>
-		</p>
-	<?php endif; ?>
-
-	<?php if ( $attributes['password_updated'] ) : ?>
-		<p class="login-info">
-			<?php _e( 'Ihr Passwort wurde geändert. Sie können sich jetzt anmelden.', 'hellomed-custom-login' ); ?>
-		</p>
-	<?php endif; ?>
 
       <div class="col-12">
         <div class="form-floating">
@@ -39,7 +28,18 @@
         </div>
       </div>
 
-	
+
+	<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
+		<?php foreach ( $attributes['errors'] as $error ) : ?>
+			<div class="col-12">
+        <div class="alert alert-danger m-0">
+          <i class="bi bi-exclamation-circle-fill me-2"></i>
+				<?php echo $error; ?>
+				</div>
+     		 </div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+
 
       <div class="col-12">
 	  <input id="hideInputLog" type="submit" value="<?php _e( 'Sign In', 'hellomed-custom-login' ); ?>">
@@ -48,13 +48,17 @@
 	 
     </div>
 
-	<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
-		<?php foreach ( $attributes['errors'] as $error ) : ?>
-			<p class="login-error">
-				<br>
-				<?php echo $error; ?>
-			</p>
-		<?php endforeach; ?>
+
+	<?php if ( $attributes['lost_password_sent'] ) : ?>
+		<p class="login-info">
+			<?php _e( 'Überprüfen Sie Ihre E-Mail auf einen Link zum Zurücksetzen Ihres Passworts.', 'hellomed-custom-login' ); ?>
+		</p>
+	<?php endif; ?>
+
+	<?php if ( $attributes['password_updated'] ) : ?>
+		<p class="login-info">
+			<?php _e( 'Ihr Passwort wurde geändert. Sie können sich jetzt anmelden.', 'hellomed-custom-login' ); ?>
+		</p>
 	<?php endif; ?>
 
 	<?php if ( $attributes['logged_out'] ) : ?>
@@ -81,7 +85,6 @@
 
   <div class="text-center">
   <a class="text-secondary" href="<?php echo wp_lostpassword_url(); ?>"> <?php _e( 'Password vergessen?', 'hellomed-custom-login' ); ?> </a>
-    <br><br>
     <a class="text-secondary" href="/registrieren"> <?php _e( 'Noch kein Mitglied? Jetzt registrieren!', 'hellomed-custom-login' ); ?> </a>
   </div>
 

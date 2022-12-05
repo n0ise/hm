@@ -10,13 +10,8 @@
 		<input type="hidden" id="user_login" name="rp_login" value="<?php echo esc_attr( $attributes['login'] ); ?>" autocomplete="off" />
 		<input type="hidden" name="rp_key" value="<?php echo esc_attr( $attributes['key'] ); ?>" />
 
-		
-
-
-
 	<div class="auth-form my-4">
     <div class="row gy-3">
-
 
 	<div class="col-12">
         <div class="h2 m-0 text-center">Neues Passwort festlegen</div>
@@ -41,19 +36,22 @@
 
 		<!-- <p class="description"><?php echo wp_get_password_hint(); ?></p> -->
 
-		<div class="col-12">
-			<input type="submit" name="submit" id="hideInputLog"
-			       class="button" value="<?php _e( 'Reset Password', 'hellomed-custom-login' ); ?>" />
-				   <label for="hideInputLog" class="btn btn-primary btn-lg">Passwort festlegen</label> 
-				</div>
-
-<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
+		<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
 			<?php foreach ( $attributes['errors'] as $error ) : ?>
 				<p>
 					<?php echo $error; ?>
 				</p>
 			<?php endforeach; ?>
 		<?php endif; ?>
+
+
+
+		<div class="col-12">
+			<input type="submit" name="submit" id="hideInputLog"
+			       class="button" value="<?php _e( 'Reset Password', 'hellomed-custom-login' ); ?>" />
+				   <label for="hideInputLog" class="btn btn-primary btn-lg">Passwort festlegen</label> 
+				</div>
+
 
 		
 		</div>
