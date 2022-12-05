@@ -38,9 +38,12 @@
 
 		<?php if ( count( $attributes['errors'] ) > 0 ) : ?>
 			<?php foreach ( $attributes['errors'] as $error ) : ?>
-				<p>
+				<div class="col-12">
+				<div class="alert alert-danger m-0">
+				<i class="bi bi-exclamation-circle-fill me-2"></i>
 					<?php echo $error; ?>
-				</p>
+					</div>
+					</div>
 			<?php endforeach; ?>
 		<?php endif; ?>
 
