@@ -2,7 +2,7 @@
 <div class="hm-auth-wrap">
   <div class="hm-logo">
     <a href="index.php">
-	<img src="https://hm.lndo.site/wp-content/uploads/2022/05/hel_logo-01.svg">
+	<img src="/wp-content/uploads/2022/05/hel_logo-01.svg">
     </a>
   </div>
   <form method="post" action="<?php echo wp_login_url(); ?>">
