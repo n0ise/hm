@@ -1,7 +1,7 @@
 <div class="hm-auth-wrap">
   <div class="hm-logo">
     <a href="index.php">
-	<img src="https://hm.lndo.site/wp-content/uploads/2022/05/hel_logo-01.svg">
+	<img src="/wp-content/uploads/2022/05/hel_logo-01.svg">
     </a>
   </div>
 
@@ -14,21 +14,6 @@
       </div>
 	
 
-	
-		<!-- <div class="col-12">
-				<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="patientcaregiverid" value="patient" id="patientcaregiverid1" required="required" >
-			<label class="form-check-label" for="patientcaregiverid1">
-				Patient
-			</label>
-			</div>
-			<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="patientcaregiverid" value="caregiver" id="patientcaregiverid2" required="required" >
-			<label class="form-check-label" for="patientcaregiverid2">
-				Caregiver
-			</label>
-			</div>
-		</div> -->
 
 		<div class="col-12">
         <div class="btn-group d-flex">
