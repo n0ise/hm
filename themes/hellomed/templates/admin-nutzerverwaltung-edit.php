@@ -165,6 +165,8 @@ $user = get_userdata($user_id);
                             <option selected><?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
                             <option>Aktiv</option>
                             <option>Wartend</option>
+                            <option>Inaktiv</option>
+                            <option>Gefähred</option>
                         </select>
                         <label>Status</label>
                     </div>

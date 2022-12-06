@@ -9,7 +9,7 @@
                                 // if user is logged in, show shortcode for funnel profile
                                 if ( is_user_logged_in() ) {
                                     echo "ok loggee in";
-                                    echo do_shortcode('[ninja_form id=23]');
+                                    echo do_shortcode('[ninja_form id=16]');
                                 } else {
                                     echo "ok NOTtt in";
                                     // if user is not logged in, show shortcode for login

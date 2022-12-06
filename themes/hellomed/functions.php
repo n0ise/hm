@@ -320,6 +320,12 @@ add_role(
     __( 'Hellomed Admin'  ) // Display name of the role.
 );
 
+add_action('after_setup_theme', 'remove_admin_bar');
+function remove_admin_bar() {
+  if (!current_user_can('administrator') && !is_admin()) {
+    show_admin_bar(false);
+  }
+}
 
 //prevent email from breaking
 add_filter( 'wp_mail_content_type','prevent_email_from_breaking' );
@@ -340,67 +346,67 @@ add_action('wp_ajax_edit_patient', function() {
 	// user_id
 	$user_id = $_POST['user_id'];
     // save field to user profile 
-if ( !empty( $first_name ) ) {
-		update_user_meta( $user_id, 'first_name', $first_name );
-}
+	if ( !empty( $first_name ) ) {
+			update_user_meta( $user_id, 'first_name', $first_name );
+	}
 
-if ( !empty( $_POST['last_name'] ) ) {
-	$last_name = $_POST['last_name'];
-	update_user_meta( $user_id, 'last_name', $last_name );
-}
-if ( !empty( $_POST['user_email'] ) ) {
-	$email = $_POST['user_email'];
-	update_user_meta( $user_id, 'user_email', $email );
-}
-if ( !empty( $_POST['telephone'] ) ) {
-	$phone = $_POST['telephone'];
-	update_user_meta( $user_id, 'telephone', $phone );
-}
-if ( !empty( $_POST['strasse'] ) ) {
-	$address = $_POST['strasse'];
-	update_user_meta( $user_id, 'strasse', $address );
-}
-if ( !empty( $_POST['stadt'] ) ) {
-	$city = $_POST['stadt'];
-	update_user_meta( $user_id, 'stadt', $city );
-}
-if ( !empty( $_POST['postcode'] ) ) {
-	$zip = $_POST['postcode'];
-	update_user_meta( $user_id, 'postcode', $zip );
-}
-if ( !empty( $_POST['geburt'] ) ) {
-	$birthday = $_POST['geburt'];
-	update_user_meta( $user_id, 'geburt', $birthday );
-}
-if ( !empty( $_POST['geschlecht'] ) ) {
-	$gender = $_POST['geschlecht'];
-	update_user_meta( $user_id, 'geschlecht', $gender );
-}
-if ( !empty( $_POST['status'] ) ) {
-	$status = $_POST['status'];
-	update_user_meta( $user_id, 'status', $status );
-}
-if ( !empty( $_POST['new_user_id'] ) ) {
-	$new_user_id = $_POST['new_user_id'];
-	update_user_meta( $user_id, 'new_user_id', $new_user_id );
-}
-if ( !empty( $_POST['allergies'] ) ) {
-	$allergies = $_POST['allergies'];
-	update_user_meta( $user_id, 'allergies', $allergies );
-}
+	if ( !empty( $_POST['last_name'] ) ) {
+		$last_name = $_POST['last_name'];
+		update_user_meta( $user_id, 'last_name', $last_name );
+	}
+	if ( !empty( $_POST['user_email'] ) ) {
+		$email = $_POST['user_email'];
+		update_user_meta( $user_id, 'user_email', $email );
+	}
+	if ( !empty( $_POST['telephone'] ) ) {
+		$phone = $_POST['telephone'];
+		update_user_meta( $user_id, 'telephone', $phone );
+	}
+	if ( !empty( $_POST['strasse'] ) ) {
+		$address = $_POST['strasse'];
+		update_user_meta( $user_id, 'strasse', $address );
+	}
+	if ( !empty( $_POST['stadt'] ) ) {
+		$city = $_POST['stadt'];
+		update_user_meta( $user_id, 'stadt', $city );
+	}
+	if ( !empty( $_POST['postcode'] ) ) {
+		$zip = $_POST['postcode'];
+		update_user_meta( $user_id, 'postcode', $zip );
+	}
+	if ( !empty( $_POST['geburt'] ) ) {
+		$birthday = $_POST['geburt'];
+		update_user_meta( $user_id, 'geburt', $birthday );
+	}
+	if ( !empty( $_POST['geschlecht'] ) ) {
+		$gender = $_POST['geschlecht'];
+		update_user_meta( $user_id, 'geschlecht', $gender );
+	}
+	if ( !empty( $_POST['status'] ) ) {
+		$status = $_POST['status'];
+		update_user_meta( $user_id, 'status', $status );
+	}
+	if ( !empty( $_POST['new_user_id'] ) ) {
+		$new_user_id = $_POST['new_user_id'];
+		update_user_meta( $user_id, 'new_user_id', $new_user_id );
+	}
+	if ( !empty( $_POST['allergies'] ) ) {
+		$allergies = $_POST['allergies'];
+		update_user_meta( $user_id, 'allergies', $allergies );
+	}
 
-if ( !empty( $_POST['start_date'] ) ) {
-	$start_date = $_POST['start_date'];
-	update_user_meta( $user_id, 'start_date', $start_date );
-}
-if ( !empty( $_POST['insurance_company'] ) ) {
-	$insurance_company = $_POST['insurance_company'];
-	update_user_meta( $user_id, 'insurance_company', $insurance_company );
-}
-if ( !empty( $_POST['insurance_number'] ) ) {
-	$insurance_number = $_POST['insurance_number'];
-	update_user_meta( $user_id, 'insurance_number', $insurance_number );
-}
+	if ( !empty( $_POST['start_date'] ) ) {
+		$start_date = $_POST['start_date'];
+		update_user_meta( $user_id, 'start_date', $start_date );
+	}
+	if ( !empty( $_POST['insurance_company'] ) ) {
+		$insurance_company = $_POST['insurance_company'];
+		update_user_meta( $user_id, 'insurance_company', $insurance_company );
+	}
+	if ( !empty( $_POST['insurance_number'] ) ) {
+		$insurance_number = $_POST['insurance_number'];
+		update_user_meta( $user_id, 'insurance_number', $insurance_number );
+	}
 
 	// update_user_meta( $user_id, 'medikamente', $_POST['medikamente'] );
 

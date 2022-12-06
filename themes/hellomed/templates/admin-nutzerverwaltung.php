@@ -66,7 +66,7 @@
         //   $users = get_users($args);
 // add 3 buttons to filter by status
 ?>
-<small>sort by</small>
+<small>Filter by</small>
 <a href="admin-nutzerverwaltung?status=Alle"> <button type="button" class="btn btn-primary">Alle</button></a>
 <a href="admin-nutzerverwaltung?status=Wartend"> <button type="button" class="btn btn-warning">Wartend</button>
 <a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button" class="btn btn-success">Aktiv</button>
