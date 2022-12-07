@@ -19,7 +19,15 @@
                <div class="progress-bar" style="width: 25%;">Schritt 1/4</div>
             </div>
          </div>
-         <div class="col-12" style="display: none">
+
+
+         <?php
+         $user = wp_get_current_user();
+		   $user_id = $user->ID;
+
+         if ( get_field('patient_caregiver', 'user_' .$user_id) == "caregiver"){ ?>
+
+         <div class="col-12">
             <div class="p-3 bg-light">
                <div class="text-secondary">
                   Sie haben sich im vorherigen Schritt als Angehöriger identifiziert. Bitte nennen
@@ -35,6 +43,9 @@
                </div>
             </div>
          </div>
+
+         <?php } ?>
+
          <div class="col-12">
 
             <select id="geschlecht" name="geschlecht" class="form-select" aria-label="Default select example">

@@ -28,7 +28,7 @@
 else { ?>
 <!-- or show the message and redirect if the user is ooout  -->
 
-<?php header("Refresh:10; url=/anmelden"); 
+  <?php header("Refresh:10; url=/anmelden"); 
 }
 
 // da footer 

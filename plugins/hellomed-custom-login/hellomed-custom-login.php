@@ -820,7 +820,7 @@ class Hellomed_Custom_Login_Plugin {
 			// 	$status = $_POST['status'];
 			// 	update_user_meta( $user_id, 'has_completed_onboarding', $status );
 			// }
-		
+			update_user_meta( $user_id, 'status', "pending" );
 			update_user_meta( $user_id, 'has_completed_onboarding', 1 );
 
 			wp_redirect( $redirect_url );
