@@ -333,6 +333,7 @@ function prevent_email_from_breaking() {
         return "text/html";
 }
 
+
 // here temporarily, might remove later
 // add_action('admin_enqueue_scripts', function() {
 // 	wp_enqueue_script('edit-script', get_stylesheet_directory_uri() . '/assets/js/edit-ajax.js', ['jquery'], '', true);
@@ -442,10 +443,10 @@ add_action('wp_ajax_edit_patient', function() {
 
 
 
-// debug stuff, might remove later 
-// echo 'success' .$first_name;
-	// return success message
-	// wp_send_json_success(); 
+//debug stuff, might remove later 
+		echo 'success' .$first_name;
+			//return success message
+			wp_send_json_success(); 
 	wp_die();
 });
 

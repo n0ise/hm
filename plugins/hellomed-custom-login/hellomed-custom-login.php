@@ -28,11 +28,19 @@ class Hellomed_Custom_Login_Plugin {
 		add_action( 'login_form_rp', array( $this, 'redirect_to_custom_password_reset' ) );
 		add_action( 'login_form_resetpass', array( $this, 'redirect_to_custom_password_reset' ) );
 
+		//add_action( 'login_form_onboarding', array( $this, 'redirect_to_custom_onboarding' ) );
+
 		// Handlers for form posting actions
 		add_action( 'login_form_register', array( $this, 'do_register_user' ) );
 		add_action( 'login_form_lostpassword', array( $this, 'do_password_lost' ) );
 		add_action( 'login_form_rp', array( $this, 'do_password_reset' ) );
 		add_action( 'login_form_resetpass', array( $this, 'do_password_reset' ) );
+
+
+
+		add_action( 'admin_post', array( $this, 'do_onboarding' ) );
+
+
 
 		// Other customizations
 		add_filter( 'retrieve_password_message', array( $this, 'replace_retrieve_password_message' ), 10, 4 );
@@ -50,6 +58,9 @@ class Hellomed_Custom_Login_Plugin {
 		add_shortcode( 'custom-register-form', array( $this, 'render_register_form' ) );
 		add_shortcode( 'custom-password-lost-form', array( $this, 'render_password_lost_form' ) );
 		add_shortcode( 'custom-password-reset-form', array( $this, 'render_password_reset_form' ) );
+
+		add_shortcode( 'custom-onboarding-form', array( $this, 'render_onboarding_form' ) );
+
 	}
 
 	/**
@@ -71,6 +82,10 @@ class Hellomed_Custom_Login_Plugin {
 			'registrieren' => array(
 				'title' => __( 'Registrieren', 'hellomed-custom-login' ),
 				'content' => '[custom-register-form]'
+			),
+			'onboarding' => array(
+				'title' => __( 'Onboarding', 'hellomed-custom-login' ),
+				'content' => '[custom-onboarding-form]'
 			),
 			'passwort-vergessen' => array(
 				'title' => __( 'Passwort vergessen?', 'hellomed-custom-login' ),
@@ -111,11 +126,12 @@ class Hellomed_Custom_Login_Plugin {
 	 */
 	public function redirect_to_custom_login() {
 		if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
+
+
 			if ( is_user_logged_in() ) {
 				$this->redirect_logged_in_user();
 				exit;
 			}
-
 			// The rest are redirected to the login page
 			$login_url = home_url( 'anmelden' );
 			if ( ! empty( $_REQUEST['redirect_to'] ) ) {
@@ -143,13 +159,14 @@ class Hellomed_Custom_Login_Plugin {
 	public function maybe_redirect_at_authenticate( $user, $username, $password ) {
 		// Check if the earlier authenticate filter (most likely,
 		// the default WordPress authentication) functions have found errors
+
+
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 			if ( is_wp_error( $user ) ) {
 				$error_codes = join( ',', $user->get_error_codes() );
 
 				$login_url = home_url( 'anmelden' );
 				$login_url = add_query_arg( 'login', $error_codes, $login_url );
-
 				wp_redirect( $login_url );
 				exit;
 			}
@@ -170,6 +187,8 @@ class Hellomed_Custom_Login_Plugin {
 	public function redirect_after_login( $redirect_to, $requested_redirect_to, $user ) {
 		$redirect_url = home_url();
 
+		$user_id = $user->ID;
+	
 		if ( ! isset( $user->ID ) ) {
 			return $redirect_url;
 		}
@@ -182,10 +201,24 @@ class Hellomed_Custom_Login_Plugin {
 				$redirect_url = $redirect_to;
 			}
 		} else {
-			// Non-admin users always go to their account page after login
-			$redirect_url = home_url( '/onboarding' );
+			
+			if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
+				$redirect_url = home_url( '/onboarding' );
+				
+			 }
+			else{
+				
+				if ( get_field('status', 'user_' .$user_id) == 'active'){
+					$redirect_url = home_url( '/os-medikationsplan' ) ;
+					
+				 }
+				 else{
+					$redirect_url = home_url( '/os-inaktiv' ) ;
+				 }
+			}
+		
 		}
-
+	
 		return wp_validate_redirect( $redirect_url, home_url() );
 	}
 
@@ -211,6 +244,18 @@ class Hellomed_Custom_Login_Plugin {
 			}
 			exit;
 		}
+	}
+
+
+	public function redirect_to_onboarding() {
+		// if ( 'GET' == $_SERVER['REQUEST_METHOD'] ) {
+		// 	if ( is_user_logged_in() ) {
+		// 		$this->redirect_logged_in_user();
+		// 	} else {
+		// 		wp_redirect( home_url( 'onboarding' ) );
+		// 	}
+		// 	exit;
+		// }
 	}
 
 	/**
@@ -272,9 +317,13 @@ class Hellomed_Custom_Login_Plugin {
 		// Parse shortcode attributes
 		$default_attributes = array( 'show_title' => false );
 		$attributes = shortcode_atts( $default_attributes, $attributes );
-
+	
 		if ( is_user_logged_in() ) {
-			return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
+
+	
+			$this->redirect_logged_in_user();
+			exit;
+			//return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
 		}
 
 		// Pass the redirect parameter to the WordPress login functionality: by default,
@@ -307,9 +356,10 @@ class Hellomed_Custom_Login_Plugin {
 
 		// Check if user just updated password
 		$attributes['password_updated'] = isset( $_REQUEST['password'] ) && $_REQUEST['password'] == 'changed';
-
+		
 		// Render the login form using an external template
 		return $this->get_template_html( 'login_form', $attributes );
+		
 	}
 
 	/**
@@ -326,7 +376,10 @@ class Hellomed_Custom_Login_Plugin {
 		$attributes = shortcode_atts( $default_attributes, $attributes );
 
 		if ( is_user_logged_in() ) {
-			return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
+			$this->redirect_logged_in_user();
+			exit;
+
+			//return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
 		} elseif ( ! get_option( 'users_can_register' ) ) {
 			return __( 'Die Registrierung neuer Nutzer ist derzeit nicht erlaubt.', 'hellomed-custom-login' );
 		} else {
@@ -347,6 +400,55 @@ class Hellomed_Custom_Login_Plugin {
 		}
 	}
 
+
+
+	/**
+	 * A shortcode for rendering the new user registration form.
+	 *
+	 * @param  array   $attributes  Shortcode attributes.
+	 * @param  string  $content     The text content for shortcode. Not used.
+	 *
+	 * @return string  The shortcode output
+	 */
+	public function render_onboarding_form( $attributes, $content = null ) {
+		// Parse shortcode attributes
+		$default_attributes = array( 'show_title' => false );
+		$attributes = shortcode_atts( $default_attributes, $attributes );
+
+		$user = wp_get_current_user();
+		$user_id = $user->ID;
+
+		if ( !is_user_logged_in() ) {
+			$this->redirect_to_custom_login();
+			exit;
+			//return __( 'Please log in', 'hellomed-custom-login' );
+		} else {
+
+			if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 1){
+				$this->redirect_logged_in_user();
+				exit;
+			 }
+
+			// Retrieve possible errors from request parameters
+			else{
+			$attributes['errors'] = array();
+			if ( isset( $_REQUEST['register-errors'] ) ) {
+				$error_codes = explode( ',', $_REQUEST['register-errors'] );
+
+				foreach ( $error_codes as $error_code ) {
+					$attributes['errors'] []= $this->get_error_message( $error_code );
+				}
+			}
+
+			return $this->get_template_html( 'onboarding_form', $attributes );
+			}
+
+
+		}
+	}
+
+
+
 	/**
 	 * A shortcode for rendering the form used to initiate the password reset.
 	 *
@@ -361,7 +463,10 @@ class Hellomed_Custom_Login_Plugin {
 		$attributes = shortcode_atts( $default_attributes, $attributes );
 
 		if ( is_user_logged_in() ) {
-			return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
+
+			$this->redirect_logged_in_user();
+			exit;
+			//return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
 		} else {
 			// Retrieve possible errors from request parameters
 			$attributes['errors'] = array();
@@ -391,7 +496,10 @@ class Hellomed_Custom_Login_Plugin {
 		$attributes = shortcode_atts( $default_attributes, $attributes );
 
 		if ( is_user_logged_in() ) {
-			return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
+
+			$this->redirect_logged_in_user();
+			exit;
+			//return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
 		} else {
 			if ( isset( $_REQUEST['login'] ) && isset( $_REQUEST['key'] ) ) {
 				$attributes['login'] = $_REQUEST['login'];
@@ -597,9 +705,7 @@ class Hellomed_Custom_Login_Plugin {
 					do_action( 'wp_login', $user->user_login );
 	
 				}
-
 				
-
 				// wp_redirect( home_url( 'anmelden?password=changed' ) );
 				wp_redirect( home_url('onboarding'));
 
@@ -611,6 +717,116 @@ class Hellomed_Custom_Login_Plugin {
 		}
 	}
 
+
+	public function do_onboarding() {
+
+		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
+			$user = wp_get_current_user();
+			$user_id = $user->ID;
+
+
+			$redirect_url = home_url( 'onboarding' );
+			// user_id
+		//	$user_id = $_POST['user_id'];
+
+			// save field to user profile 
+			if ( !empty( $patient_first_name ) ) {
+				$patient_first_name = $_POST['patient_last_name'];
+				update_user_meta( $user_id, 'patient_first_name', $patient_first_name );
+			}
+			if ( !empty( $_POST['patient_last_name'] ) ) {
+				$patient_last_name = $_POST['patient_last_name'];
+				update_user_meta( $user_id, 'patient_last_name', $patient_last_name );
+			}
+
+			if ( !empty( $_POST['geschlecht'] ) ) {
+				$gender = $_POST['geschlecht'];
+				update_user_meta( $user_id, 'geschlecht', $gender );
+			}
+			if ( !empty( $_POST['geburt'] ) ) {
+				$birthday = $_POST['geburt'];
+				update_user_meta( $user_id, 'geburt', $birthday );
+			}
+			if ( !empty( $_POST['krankheiten'] ) ) {
+				$krankheiten = $_POST['krankheiten'];
+				update_user_meta( $user_id, 'krankheiten', $krankheiten );
+			}
+			if ( !empty( $_POST['allergien'] ) ) {
+				$allergies = $_POST['allergien'];
+				update_user_meta( $user_id, 'allergies', $allergies );
+			}
+
+			if ( !empty( $_POST['strasse'] ) ) {
+				$address = $_POST['strasse'];
+				update_user_meta( $user_id, 'strasse', $address );
+			}
+
+			if ( !empty( $_POST['nrno'] ) ) {
+				$nrno = $_POST['nrno'];
+				update_user_meta( $user_id, 'nrno', $nrno );
+			}
+
+			if ( !empty( $_POST['postcode'] ) ) {
+				$zip = $_POST['postcode'];
+				update_user_meta( $user_id, 'postcode', $zip );
+			}
+			if ( !empty( $_POST['stadt'] ) ) {
+				$city = $_POST['stadt'];
+				update_user_meta( $user_id, 'stadt', $city );
+			}
+			if ( !empty( $_POST['zusatzinformationen'] ) ) {
+				$zusatzinformationen = $_POST['zusatzinformationen'];
+				update_user_meta( $user_id, 'zusatzinformationen', $zusatzinformationen );
+			}
+			if ( !empty( $_POST['telephone'] ) ) {
+				$phone = $_POST['telephone'];
+				update_user_meta( $user_id, 'telephone', $phone );
+			}
+		
+			if ( !empty( $_POST['start_date'] ) ) {
+				$start_date = $_POST['start_date'];
+				update_user_meta( $user_id, 'rezept_start', $start_date );
+			}
+
+			if ( !empty( $_POST['first_rezept_uploaded'] ) ) {
+				$first_rezept_uploaded = $_POST['first_rezept_uploaded'];
+				update_user_meta( $user_id, 'first_rezept_uploaded', $first_rezept_uploaded );
+			}
+
+				//TODO file upload
+
+				if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
+					$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
+					update_user_meta( $user_id, 'privat_or_gesetzlich', $privat_or_gesetzlich );
+				}
+
+			if ( !empty( $_POST['insurance_company'] ) ) {
+				$insurance_company = $_POST['insurance_company'];
+				update_user_meta( $user_id, 'insurance_company', $insurance_company );
+			}
+			if ( !empty( $_POST['insurance_number'] ) ) {
+				$insurance_number = $_POST['insurance_number'];
+				update_user_meta( $user_id, 'insurance_number', $insurance_number );
+			}
+		
+		//debug stuff, might remove later 
+				//echo 'success' .$first_name;
+					//return success message
+					//wp_send_json_success(); 
+			//wp_die();
+
+			// TODO completed onboarding
+			// if ( !empty( $_POST['status'] ) ) {
+			// 	$status = $_POST['status'];
+			// 	update_user_meta( $user_id, 'has_completed_onboarding', $status );
+			// }
+		
+			update_user_meta( $user_id, 'has_completed_onboarding', 1 );
+
+			wp_redirect( $redirect_url );
+			exit;
+		}
+	}
 
 	//
 	// OTHER CUSTOMIZATIONS
@@ -855,7 +1071,12 @@ class Hellomed_Custom_Login_Plugin {
 	 * @param string $redirect_to   An optional redirect_to URL for admin users
 	 */
 	private function redirect_logged_in_user( $redirect_to = null ) {
+
+
+	
+
 		$user = wp_get_current_user();
+		$user_id = $user->ID;
 		if ( user_can( $user, 'manage_options' ) ) {
 			if ( $redirect_to ) {
 				wp_safe_redirect( $redirect_to );
@@ -863,7 +1084,24 @@ class Hellomed_Custom_Login_Plugin {
 				wp_redirect( admin_url() );
 			}
 		} else {
-			wp_redirect( home_url( '/onboarding' ) );
+
+			
+			if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
+				$redirect_url = home_url( '/onboarding' );
+				
+			 }
+			else{
+				
+				if ( get_field('status', 'user_' .$user_id) == 'active'){
+					$redirect_url = home_url( '/os-medikationsplan' ) ;
+					
+				 }
+				 else{
+					$redirect_url = home_url( '/os-inaktiv' ) ;
+				 }
+			}
+			wp_redirect( $redirect_url );
+			exit;
 		}
 	}
 

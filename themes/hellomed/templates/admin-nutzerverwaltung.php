@@ -74,6 +74,9 @@
 <?php
           
           foreach ($users as $user) {
+        $user_confimed = get_field('confirmed_or_not', 'user_' . $user->ID);
+        if ($user_confimed == 1){
+
 // var_dump($user);
         $user_id = $user->new_user_id;
         $user_name = $user->display_name;
@@ -81,8 +84,9 @@
         $user_firstname = $user->first_name;
         $user_lastname = $user->last_name;
         $user_status = get_field('status', 'user_' . $user->ID);
-        $date = get_field('geburt', 'user_' . $user->ID); ?>
-
+        $date = get_field('geburt', 'user_' . $user->ID); 
+        
+        ?>
 
 
                     <tr>
@@ -100,7 +104,9 @@
                         <td><a href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i class="bi bi-pencil-fill"></i> Editieren</a>
                         </td>
                     </tr>
-                    <?php } } ?>
+                    <?php } }
+                
+                } ?>
                 </tbody>
             </table>
             <div class="row mt-5">

@@ -11,12 +11,12 @@
 	</div>
 	<# } #>
 
-	<# if(( data.formID == 23 ) || ( data.formID == 20 )) { #>	
+	<# if(( data.formID == 23 ) || ( data.formID == 16 )) { #>	
 			<!-- condition for funnel profile and register -->
 
 		<div class="row-of-buttons">
 	
-			<input id="nf-field-{{{ data.id }}} funnel1_summary" class=" {{{ data.renderClasses() }}} nf-element btn submitbutton" type="button" value="{{{ data.label }}}" {{{ ( data.disabled ) ? 'disabled' : '' }}}>
+		<input id="nf-field-{{{ data.id }}} funnel1_summary" class=" {{{ data.renderClasses() }}} nf-element btn submitbutton" type="button" value="{{{ data.label }}}" {{{ ( data.disabled ) ? 'disabled' : '' }}}>
 		</div>
 
 	<# } #>

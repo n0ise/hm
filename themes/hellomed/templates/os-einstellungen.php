@@ -160,7 +160,7 @@ $user = get_userdata($user_id);
             </div>
             <?php   
     }
-  edit_patient($user_id); ?>
+        edit_patient($user_id); ?>
             <!-- add a success div  -->
             <div id="successdown"></div>
         </div>
