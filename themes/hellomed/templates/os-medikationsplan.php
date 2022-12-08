@@ -6,19 +6,8 @@ Template Name: OS Medikationsplan
 <!-- include_once header.php from template  -->
 <?php include_once('os-header.php'); ?>
 
-
-
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in()) { ?>
-
-<!-- Lodash -->
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-
-
-  <!-- if page is medikamente, load this  -->
-<?php if (is_page('os-medikationsplan')) { ?>
-<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
-<?php } ?>
 
 <?php
 // current user id logged in 
@@ -46,19 +35,8 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
 </main>
 <?php
  } else { ?>
-<!-- or show the message and redirect if the user is ooout  -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-            </div>
-        </div>
-    </div>
-    <?php header("Refresh:10; url=/anmelden"); 
+
+    <?php header("url=/anmelden"); 
         }
 
 // da footer 
