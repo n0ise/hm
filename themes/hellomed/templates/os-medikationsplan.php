@@ -5,8 +5,21 @@ Template Name: OS Medikationsplan
 ?>
 <!-- include_once header.php from template  -->
 <?php include_once('os-header.php'); ?>
+
+
+
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in()) { ?>
+
+<!-- Lodash -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+
+  <!-- if page is medikamente, load this  -->
+<?php if (is_page('os-medikationsplan')) { ?>
+<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
+<?php } ?>
+
 <?php
 // current user id logged in 
 $user_id = get_current_user_id();
