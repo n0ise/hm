@@ -31,5 +31,5 @@
 
 <!-- if page is medikamente, load this  -->
 <?php if (is_page('os-medikationsplan')) { ?>
-<script src="wp-content/themes/hellomed/assets/js/medikamente.js"></script>
+<script src="wp-content/themes/hellomed/assets/js/medication.js"></script>
 <?php } ?>
