@@ -17,16 +17,9 @@
 include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 ?>
 
-
-<!-- UI CSS -->
-<link rel="stylesheet" href="https://ui.hellomed.com/css/index.css">
 <!-- local css, for lando  -->
 <!-- <link rel="stylesheet" href="/UI/css/index.css"> -->
 
- <!-- if page is medikamente, load this  -->
- <?php if (is_page('os-medikationsplan')) { ?>
-<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
-<?php } ?>
 
 <header class="hm-header">
     <div class="container">
