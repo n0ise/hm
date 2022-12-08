@@ -47,11 +47,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
             </div>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="os-hilfe">FAQ & Hilfe</a></li>
+                <!-- <li><a class="dropdown-item" href="os-hilfe">FAQ & Hilfe</a></li>
                 <li><a class="dropdown-item" href="os-einstellungen">Einstellungen</a></li>
                 <li>
                     <hr class="dropdown-divider">
-                </li>
+                </li> -->
                 <li><a class="dropdown-item" href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
             </ul>
         </div>
@@ -90,8 +90,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
       </div>
     </div>
     <ul>
-      <li><a href="os-hilfe">FAQ & Hilfe</a></li>
-      <li><a href="os-einstellungen">Einstellungen</a></li>
+      <!-- <li><a href="os-hilfe">FAQ & Hilfe</a></li>
+      <li><a href="os-einstellungen">Einstellungen</a></li> -->
       <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
     </ul>
   </div>

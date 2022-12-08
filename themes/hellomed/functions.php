@@ -343,14 +343,14 @@ function prevent_email_from_breaking() {
 // });
 
 add_action('wp_ajax_edit_patient', function() {
-	$first_name = $_POST['first_name'];
+	
 	// user_id
 	$user_id = $_POST['user_id'];
     // save field to user profile 
-	if ( !empty( $first_name ) ) {
-			update_user_meta( $user_id, 'first_name', $first_name );
+	if ( !empty( $_POST['first_name'] ) ) {
+		$first_name = $_POST['first_name'];
+		update_user_meta( $user_id, 'first_name', $first_name );
 	}
-
 	if ( !empty( $_POST['last_name'] ) ) {
 		$last_name = $_POST['last_name'];
 		update_user_meta( $user_id, 'last_name', $last_name );
@@ -395,7 +395,6 @@ add_action('wp_ajax_edit_patient', function() {
 		$allergies = $_POST['allergies'];
 		update_user_meta( $user_id, 'allergies', $allergies );
 	}
-
 	if ( !empty( $_POST['start_date'] ) ) {
 		$start_date = $_POST['start_date'];
 		update_user_meta( $user_id, 'start_date', $start_date );
@@ -408,15 +407,29 @@ add_action('wp_ajax_edit_patient', function() {
 		$insurance_number = $_POST['insurance_number'];
 		update_user_meta( $user_id, 'insurance_number', $insurance_number );
 	}
-
+	if ( !empty( $_POST['krankheiten'] ) ) {
+		$krankheiten = $_POST['krankheiten'];
+		update_user_meta( $user_id, 'krankheiten', $krankheiten );
+	}
+	if ( !empty( $_POST['nrno'] ) ) {
+		$nrno = $_POST['nrno'];
+		update_user_meta( $user_id, 'nrno', $nrno );
+	}
+	if ( !empty( $_POST['zusatz'] ) ) {
+		$zusatz = $_POST['zusatz'];
+		update_user_meta( $user_id, 'zusatzinformationen', $zusatz );
+	}
+	if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
+		$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
+		update_user_meta( $user_id, 'privat_or_gesetzlich', $privat_or_gesetzlich );
+	}
+	
 	// update_user_meta( $user_id, 'medikamente', $_POST['medikamente'] );
 
 	// update prescription_id 
 	$rezept_input = get_field('rezept_input', 'user_' . $user_id);
 	
-
 	// $rezept_input[0]['rezept_id'] = $_POST['rezept_id'];
-
 
 	// if is not empty and different value from before 
 	if ( !empty($_POST['prescription_id']) && $_POST['prescription_id'] != $rezept_input[0]['prescription_id'] ) {
@@ -424,13 +437,11 @@ add_action('wp_ajax_edit_patient', function() {
 		$rezept_input[0]['prescription_id'] = $_POST['prescription_id'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
-	
 	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $rezept_input[0]['doctor_name'] ) {
 		// update doctor_name 
 		$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
-
 	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $rezept_input[0]['prescription_date_by_doctor'] ) {
 		$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
@@ -440,8 +451,6 @@ add_action('wp_ajax_edit_patient', function() {
 		$rezept_input[0]['status_prescription'] = $_POST['status_prescription'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
-
-
 
 //debug stuff, might remove later 
 		echo 'success' .$first_name;
@@ -489,7 +498,6 @@ function column_register_wpse_101322( $columns )
 
   return $value;
 }
-
 
 // add a new input field, after field nf-field-588, in ninja form
 add_action( 'ninja_forms_after_fields', 'add_new_field' );

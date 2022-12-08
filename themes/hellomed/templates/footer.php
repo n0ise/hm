@@ -21,7 +21,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 
 <!-- include jquery, might remove later  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript"></script>
 
 <!-- Custom js -->
 <script src="https://ui.hellomed.com/js/ios-safari.js"></script>
@@ -31,3 +31,4 @@
 <?php if (is_page('os-medikationsplan')) { ?>
 <script src="wp-content/themes/hellomed/assets/js/medication.js"></script>
 <?php } ?>
+

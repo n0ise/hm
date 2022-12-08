@@ -30,7 +30,8 @@ $user_zip = get_field('postcode', 'user_' . $user_id);
 $user_strasse = get_field('strasse', 'user_' . $user_id);
 $insurance_company = get_field('insurance_company', 'user_' . $user_id);
 $insurance_number = get_field('insurance_number', 'user_' . $user_id);
-$sickness = get_field('sickness', 'user_' . $user_id); 
+
+
 $gender = get_field('geschlecht', 'user_' . $user_id);
 $medikamente= get_field('medikamente', 'user_' . $user_id);
 $start_date = get_field('start_date', 'user_' . $user_id);
