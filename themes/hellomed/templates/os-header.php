@@ -23,6 +23,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 <!-- local css, for lando  -->
 <!-- <link rel="stylesheet" href="/UI/css/index.css"> -->
 
+ <!-- if page is medikamente, load this  -->
+ <?php if (is_page('os-medikationsplan')) { ?>
+<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
+<?php } ?>
+
 <header class="hm-header">
     <div class="container">
         <div class="hm-logo">
@@ -35,7 +40,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
         <div class="d-none d-lg-block">
             <nav class="hm-nav">
                 <!-- check the page slug and make the correspondent <li> with class active -->
-                <a class="<?php if (is_page('os-medikationsplan.')) { echo 'active'; } ?>"
+                <a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
                     href="/os-medikationsplan.">Medikationsplan</a>
                 <a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>"
                     href="/os-rezepte">Rezepte</a>
@@ -83,7 +88,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
   <div class="hm-offcanvas-inner">
     <ul>
          <!-- check the page slug and make the correspondent <li> with class active -->
-         <li><a class="<?php if (is_page('os-medikationsplan.')) { echo 'active'; } ?>"
+         <li><a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
                     href="/os-medikationsplan.">Medikationsplan</a></li> 
                     <li><a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>"
                     href="/os-rezepte">Rezepte</a></li> 

@@ -89,7 +89,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     href="/admin-nutzerverwaltung?status=Alle">Nutzerverwaltung</a></li>
                     <li><a class="<?php if (is_page('admin-rezeptverwaltung')) { echo 'active'; } ?>"
                     href="/admin-rezeptverwaltung">Rezeptverwaltung</a></li>               
-    </ul>
+        </ul>
     <div class="hm-offcanvas-profile">
       <div class="hm-dropdown">
         <div class="hm-dropdown-photo">

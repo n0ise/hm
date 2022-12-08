@@ -15,10 +15,7 @@
   </div>
 </footer>
 
-  <!-- if page is medikamente, load this  -->
-<?php if (is_page('os-medikationsplan')) { ?>
-<script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
-<?php } ?>
+ 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
