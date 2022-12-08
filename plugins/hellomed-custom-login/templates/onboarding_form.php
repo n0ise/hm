@@ -34,12 +34,18 @@
                   Sie uns hier Ihren Namen damit wir Sie später unter diesem kontaktieren können.
                </div>
                <div class="mt-3">
-                  <label class="form-label"><b>Name des Angehörigen</b></label>
-                  <input id="patient_first_name" type="text" class="form-control py-2">
+               <div class="form-floating">
+               <input id="patient_first_name" name="patient_first_name" type="text" class="form-control py-2" placeholder=" ">
+                  <label for="patient_first_name" class="form-label">Name des Angehörigen</label>
+                
+                  </div>
                </div>
                <div class="mt-3">
-                  <label class="form-label"><b>Nachname des Angehörigen</b></label>
-                  <input id="patient_last_name"  type="text" class="form-control py-2">
+               <div class="form-floating">
+               <input id="patient_last_name" name="patient_last_name" type="text" class="form-control py-2" placeholder=" ">
+                  <label for="patient_last_name" class="form-label">Nachname des Angehörigen</label>
+                 
+               </div>
                </div>
             </div>
          </div>
@@ -47,18 +53,28 @@
          <?php } ?>
 
          <div class="col-12">
+            <div class="btn-group d-flex">
+               <input type="radio" class="btn-check" name="geschlecht" value="male"  id="radiomale" autocomplete="off">
+               <label class="btn btn-outline-primary" for="radiomale">Männlich</label>
+               <input type="radio" class="btn-check" name="geschlecht"  value="female" id="radiofemale" autocomplete="off">
+               <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
+               <input type="radio" class="btn-check" name="geschlecht"  value="divers" id="radiodivers" autocomplete="off">
+               <label class="btn btn-outline-primary" for="radiodivers">Taucher</label>
+            </div>
+         </div>
 
+         <!-- <div class="col-12">
             <select id="geschlecht" name="geschlecht" class="form-select" aria-label="Default select example">
                 <option selected>Geschlecht</option>
                 <option value="1">Male</option>
                 <option value="2">Female</option>
                 <option value="3">Divers</option>
             </select>
+         </div> -->
 
-         </div>
          <div class="col-12">
-         <div class="form-floating">
-            <input  id="geburtstag" name="geburt" type="date" class="form-control" placeholder=" ">
+            <div class="form-floating">
+                  <input  id="geburtstag" name="geburt" type="date" class="form-control" placeholder=" ">
                 <label for="geburtstag">Geburtstag</label>
             </div>
          </div>

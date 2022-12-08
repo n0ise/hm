@@ -1,6 +1,4 @@
-<nav class="hm-offcanvas">
-    <ul></ul>
-</nav>
+
 <footer class="hm-footer">
   <div class="container">
     <div>
@@ -15,8 +13,21 @@
       <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard-Copy-3.svg">
     </div>
   </div>
+</footer>
+
   <!-- if page is medikamente, load this  -->
 <?php if (is_page('os-medikationsplan')) { ?>
 <script src="wp-content/themes/hellomed/assets/js/os-medications.js"></script>
 <?php } ?>
-</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Lodash -->
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+<!-- include jquery, might remove later  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<!-- Custom js -->
+<script src="https://ui.hellomed.com/js/ios-safari.js"></script>
+<script src="https://ui.hellomed.com/js/off-canvas.js"></script>
