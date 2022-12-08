@@ -42,10 +42,10 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
             //    var_dump($rezept);
 ?>
                     <tr>
-                        <td><?php echo $rezept['rezept_file']['ID']; ?></td>
-                        <td><?php echo $rezept['doctor_name']; ?></td>
-                        <td><?php echo $rezept['prescription_date_by_doctor']; ?></td>
-                        <td>
+                        <td data-label="Rezept ID" ><?php echo $rezept['rezept_file']['ID']; ?></td>
+                        <td  data-label="Arzt" ><?php echo $rezept['doctor_name']; ?></td>
+                        <td  data-label="Verschreibungsdatum" ><?php echo $rezept['prescription_date_by_doctor']; ?></td>
+                        <td  data-label="Enthaltene Medikamente" >
                             <!-- show the medicine_section -->
                             <?php
                  if (!empty($rezept['medicine_section'])) {
@@ -56,7 +56,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
                 }
                 ?>
                         </td>
-                        <td><span class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription']; ?>"><?php echo $rezept['status_prescription']; ?></span></td>
+                        <td  data-label="Status" ><span class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription']; ?>"><?php echo $rezept['status_prescription']; ?></span></td>
                     </tr>
                     <?php
             }

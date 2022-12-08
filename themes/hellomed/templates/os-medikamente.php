@@ -44,16 +44,16 @@ if (!empty($rezept['medicine_section'])) {
       ?>
 
                     <tr>
-                        <td><?php echo $item; ?></td>
-                        <td><?php echo $rezept['rezept_file']['ID']; ?></td>
-                        <td><span class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription']; ?>">
+                        <td data-label="Name" ><?php echo $item; ?></td>
+                        <td data-label="ID" ><?php echo $rezept['rezept_file']['ID']; ?></td>
+                        <td data-label="Status" ><span class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription']; ?>">
                                 <?php echo $rezept['status_prescription']; ?></span></td>
                     </tr> 
                     <?php
-                                             }
-                                                     }
-                                        }
-                                             }
+                            }
+                         }
+                    }
+                }
                ?>
 
                 </tbody>

@@ -66,10 +66,12 @@
         //   $users = get_users($args);
 // add 3 buttons to filter by status
 ?>
-<small>Filter by</small>
+<small>Filter by &nbsp; </small>
 <a href="admin-nutzerverwaltung?status=Alle"> <button type="button" class="btn btn-primary">Alle</button></a>
-<a href="admin-nutzerverwaltung?status=Wartend"> <button type="button" class="btn btn-warning">Wartend</button>
 <a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button" class="btn btn-success">Aktiv</button>
+<a href="admin-nutzerverwaltung?status=Wartend"> <button type="button" class="btn btn-warning">Wartend</button>
+<a href="admin-nutzerverwaltung?status=Inaktiv"> <button type="button" class="btn btn-secondary" >Inaktiv</button>
+<a href="admin-nutzerverwaltung?status=Gefähred"> <button type="button" class="btn btn-danger">Gefähred</button>
 
 <?php
         foreach ($users as $user) {
@@ -104,7 +106,6 @@
                         </td>
                     </tr>
                     <?php } }
-                
                 } ?>
                 </tbody>
             </table>
