@@ -208,7 +208,7 @@ class Hellomed_Custom_Login_Plugin {
 			 }
 			else{
 				
-				if ( get_field('status', 'user_' .$user_id) == 'Active'){
+				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
 					$redirect_url = home_url( '/os-medikationsplan' ) ;
 					
 				 }
@@ -820,7 +820,7 @@ class Hellomed_Custom_Login_Plugin {
 			// 	$status = $_POST['status'];
 			// 	update_user_meta( $user_id, 'has_completed_onboarding', $status );
 			// }
-			update_user_meta( $user_id, 'status', "Pending" );
+			update_user_meta( $user_id, 'status', 'Wartend' );
 			update_user_meta( $user_id, 'has_completed_onboarding', 1 );
 
 			wp_redirect( $redirect_url );
@@ -1092,7 +1092,7 @@ class Hellomed_Custom_Login_Plugin {
 			 }
 			else{
 				
-				if ( get_field('status', 'user_' .$user_id) == 'Active'){
+				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
 					$redirect_url = home_url( '/os-medikationsplan' ) ;
 					
 				 }
