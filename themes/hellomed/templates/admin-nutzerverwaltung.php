@@ -49,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+            <?php 
       $status="All";
       if (isset($_GET['status'])) {
           $status = $_GET['status'];
@@ -72,11 +72,9 @@
 <a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button" class="btn btn-success">Aktiv</button>
 
 <?php
-          
-          foreach ($users as $user) {
+        foreach ($users as $user) {
         $user_confimed = get_field('confirmed_or_not', 'user_' . $user->ID);
         if ($user_confimed == 1){
-
 // var_dump($user);
         $user_id = $user->new_user_id;
         $user_name = $user->display_name;
@@ -85,23 +83,24 @@
         $user_lastname = $user->last_name;
         $user_status = get_field('status', 'user_' . $user->ID);
         $date = get_field('geburt', 'user_' . $user->ID); 
-        
         ?>
-
-
                     <tr>
-                        <td><?php echo $user_id; ?></td>
-                        <td><?php  if ($patient_caregiver == 'Caregiver') {
-            $user_firstname = $user->first_name;
-            $user_lastname = $user->last_name . "<br><span class=small>Caregiver: ".get_field('caregiver_nachname', 'user_' . $user->ID).' '. get_field('caregiver_vorname', 'user_' . $user->ID). "</span>"; }   echo $user->first_name. " ".$user->last_name; ?>
+                        <td data-label="User ID" ><?php echo $user_id; ?></td>
+                        <td data-label="Name" ><?php 
+                        if ($patient_caregiver == 'caregiver') {
+                     echo get_field('patient_first_name', 'user_' . $user->ID). " ". get_field('patient_last_name', 'user_' . $user->ID);
+                     echo "<br><span class=small>Caregiver: ".$user->first_name.' '.$user->last_name. "</span><br>"; 
+                    }  
+                    else{
+                     echo $user->first_name. " ".$user->last_name; 
+                        }?>
                         </td>
-                        <td><?php  echo $date; ?></td>
-                        <td><?php echo $user->user_email; ?></td>
-                        <td><?php echo $user->telephone; ?></td>
-                        <td><span
-                                class="badge rounded-pill text-bg-<?php echo  $user->status; ?>"><?php echo $user->status; ?></span>
+                        <td data-label="Geburtsdatum" ><?php  echo $date; ?></td>
+                        <td data-label="E-Mail" ><?php echo $user->user_email; ?></td>
+                        <td data-label="Telefon" ><?php echo $user->telephone; ?></td>
+                        <td  data-label="Status" ><span class="badge rounded-pill text-bg-<?php echo  $user->status; ?>"><?php echo $user->status; ?></span>
                         </td>
-                        <td><a href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i class="bi bi-pencil-fill"></i> Editieren</a>
+                        <td data-label="Aktionen"><a href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i class="bi bi-pencil-fill"></i> Editieren</a>
                         </td>
                     </tr>
                     <?php } }
@@ -111,7 +110,7 @@
             </table>
             <div class="row mt-5">
                 <div class="col-4 offset-4">
-                    <a class="btn btn-primary btn-lg" href="admin-nutzerverwaltung-edit.html">Neuen Nutzer anlegen</a>
+                    <a class="btn btn-primary btn-lg" href="admin-nutzerverwaltung-edit.php">Neuen Nutzer anlegen</a>
                 </div>
             </div>
 
@@ -122,27 +121,7 @@
 <?php } 
 else { ?>
 <!-- here if the user is not logged in, going raaaus  -->
-<main>
-    <div class="container">
-        <div class="hm-content">
-
-            <div class="h2 mb-5">NO.</div>
-            <div class="alert alert-danger" role="alert">
-                <!-- image centered  -->
-                <div class="text-center">
-                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
-                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
-                </div>
-
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-            </div>
-        </div>
-    </div>
-</main>
-<?php header("Refresh:10; url=/anmelden"); 
+<?php header("url=/anmelden"); 
 }
 
 // da footer 

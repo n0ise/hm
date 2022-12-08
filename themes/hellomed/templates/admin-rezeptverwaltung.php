@@ -6,7 +6,6 @@
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
 
-
 <?php
 
 // get all users with role client
@@ -22,7 +21,6 @@ $users = get_users($args);
 <main>
     <div class="container">
         <div class="hm-content">
-
             <div class="h2 mb-5">Rezeptverwaltung</div>
             <table class="table table-striped">
                 <thead>
@@ -53,15 +51,12 @@ $users = get_users($args);
                         //     foreach ($user_rezept as $rezept) {
                                 
                         //    var_dump($rezept);
-                        
-                    
                   ?>
                     <tr>
-                        <td>
-                            <?php echo $rezept['prescription_id']; ?></td>
-                        <td><?php echo $rezept['doctor_name']; ?></td>
-                        <td><?php echo$rezept['prescription_date_by_doctor']; ?></td>
-                        <td><?php 
+                        <td data-label="Rezept ID" ><?php echo $rezept['prescription_id']; ?></td>
+                        <td data-label="Arzt" ><?php echo $rezept['doctor_name']; ?></td>
+                        <td data-label="Verschreibungsdatum" ><?php echo $rezept['prescription_date_by_doctor']; ?></td>
+                        <td data-label="Medikamente" ><?php 
                         if (!empty($rezept['medicine_section'])) {
                             foreach ($rezept['medicine_section'] as $medicine) {
                                 //  the medicine fields show but removing the latest elements if it's the latest (fuck that was tricky)
@@ -70,10 +65,10 @@ $users = get_users($args);
                         }
                         ?>
                         </td>
-                        <td><span
+                        <td data-label="Status" ><span
                                 class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription'];?> "><?php echo $rezept['status_prescription']; ?></span>
                         </td>
-                        <td><a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>"><i
+                        <td data-label="Aktionen"><a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>"><i
                                     class="bi bi-pencil-fill"></i> Editieren</a></td>
                     </tr>
 
@@ -99,27 +94,7 @@ $users = get_users($args);
 <?php } 
 else { ?>
 <!-- here if the user is not logged in, going raaaus  -->
-<main>
-    <div class="container">
-        <div class="hm-content">
-
-            <div class="h2 mb-5">NO.</div>
-            <div class="alert alert-danger" role="alert">
-                <!-- image centered  -->
-                <div class="text-center">
-                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
-                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
-                </div>
-
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-            </div>
-        </div>
-    </div>
-</main>
-<?php header("Refresh:10; url=/anmelden"); 
+<?php header("url=/anmelden"); 
 }
 
 // da footer 

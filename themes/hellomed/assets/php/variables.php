@@ -37,10 +37,11 @@ $start_date = get_field('start_date', 'user_' . $user_id);
 $status = get_field('status', 'user_' . $user_id);
 $patient_caregiver = get_field('patient_caregiver', 'user_' . $user_id);
 // if status is disabled, make it red. this is a visual silly test
- if ($status == 'Aktive') {
-     $status = '<span style="color:green;">' . $status . '</span>';
- }
-else {  $status = '<span style="color:red;">' . $status . '</span>'; }
+//  if ($status == 'Aktiv') {
+//      $status = '<span style="color:green;">' . $status . '</span>';
+//  }
+// else {  $status = '<span style="color:red;">' . $status . '</span>'; }
+
 $rezept_end = get_field('rezept_end', 'user_' . $user_id);
 // show how many days left in human readable format
  $days_left = human_time_diff( strtotime($rezept_end), current_time('timestamp') );

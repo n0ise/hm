@@ -27,8 +27,6 @@
 <script src="https://ui.hellomed.com/js/ios-safari.js"></script>
 <script src="https://ui.hellomed.com/js/off-canvas.js"></script>
 
-
-
 <!-- if page is medikamente, load this  -->
 <?php if (is_page('os-medikationsplan')) { ?>
 <script src="wp-content/themes/hellomed/assets/js/medication.js"></script>
