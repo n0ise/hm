@@ -45,11 +45,16 @@ $user = get_userdata($user_id);
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <select id="geschlecht" class="form-select">
-                            <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected>
-                            <?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
-                            <option value="Männlich">Männlich</option>
-                            <option value="Weiblich">Weiblich</option>
-                            <option value="Divers">Divers</option>
+                            <option selected><?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
+                                <?php 
+                                $geschlecht = array('Männlich', 'Weiblich', 'Divers');
+                                $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
+                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
+                                unset($geschlecht[$keygeschlecht]);
+                                    foreach ($geschlecht as $valuegeschlecht) {
+                                    echo '<option>' . $valuegeschlecht . '</option>';
+                                    } 
+                                ?>
                             </option>
                         </select>
                         <label>Geschlecht</label>
@@ -157,10 +162,15 @@ $user = get_userdata($user_id);
                     <div class="form-floating">
                         <select id="status" class="form-select">
                             <option selected><?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
-                            <option>Aktiv</option>
-                            <option>Wartend</option>
-                            <option>Inaktiv</option>
-                            <option>Gefähred</option>
+                                <?php 
+                                $status = array('Aktiv', 'Wartend', 'Inaktiv', 'Gefährdet');
+                                $selectedstatus = get_user_meta($_GET['user_id'], 'status', true);
+                                $keystatus = array_search($selectedstatus, $status);
+                             unset($status[$keystatus]);
+                                    foreach ($status as $valuestatus) {
+                                    echo '<option>' . $valuestatus . '</option>';
+                                    } 
+                                ?>
                         </select>
                         <label>Status</label>
                     </div>
@@ -171,9 +181,9 @@ $user = get_userdata($user_id);
                     <button id="save" type="button" class="btn btn-primary btn-lg">Speichern</button>
                 </div>
 
-                 <!-- success div, will show the changed fields  --> 
-         
-             <div id="successdown" role="alert"></div>
+                <!-- success div, will show the changed fields  -->
+
+                <div id="successdown" role="alert"></div>
             </div>
             <?php   
     }
@@ -181,7 +191,7 @@ $user = get_userdata($user_id);
             ?>
 
         </div>
-            
+
     </div>
 
 
@@ -275,12 +285,12 @@ jQuery(document).ready(function($) {
         $.post(ajaxurl, data, function(response) {
             // if there is at least a field changed (is not empty), show the success div (disappears after 5 seconds)
             if (response != '') {
-            $('#successdown').addClass('alert alert-success'); 
-            $('#successdown').html(response.toString());
-            $('#successdown').fadeIn(1000);
-            setTimeout(function() {
-                $('#successdown').fadeOut(1000);
-            }, 5000);
+                $('#successdown').addClass('alert alert-success');
+                $('#successdown').html(response.toString());
+                $('#successdown').fadeIn(1000);
+                setTimeout(function() {
+                    $('#successdown').fadeOut(1000);
+                }, 5000);
             }
             // update the input fields with the new data
             $('#first_name').val(first_name);
