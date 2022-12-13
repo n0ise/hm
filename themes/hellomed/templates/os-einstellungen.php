@@ -37,9 +37,15 @@ $user_id = get_current_user_id();
                         <select id="geschlecht" class="form-select">
                             <option value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" selected>
                                 <?php echo get_user_meta($user_id, 'geschlecht', true); ?></option>
-                            <option value="Männlich">Männlich</option>
-                            <option value="Weiblich">Weiblich</option>
-                            <option value="Divers">Divers</option>
+                                <?php 
+                                $geschlecht = array('Männlich', 'Weiblich', 'Divers');
+                                $selectedgeschlecht = get_user_meta($user_id, 'geschlecht', true);
+                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
+                                unset($geschlecht[$keygeschlecht]);
+                                    foreach ($geschlecht as $valuegeschlecht) {
+                                    echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
+                                    } 
+                                ?>
                         </select>
                         <label>Geschlecht</label>
                     </div>
