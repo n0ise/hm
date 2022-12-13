@@ -53,10 +53,10 @@ $users = get_users($args);
                         //    var_dump($rezept);
                   ?>
                     <tr>
-                        <td data-label="Rezept ID" ><?php echo $rezept['prescription_id']; ?></td>
-                        <td data-label="Arzt" ><?php echo $rezept['doctor_name']; ?></td>
-                        <td data-label="Verschreibungsdatum" ><?php echo $rezept['prescription_date_by_doctor']; ?></td>
-                        <td data-label="Medikamente" ><?php 
+                        <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
+                        <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
+                        <td data-label="Verschreibungsdatum"><?php echo $rezept['prescription_date_by_doctor']; ?></td>
+                        <td data-label="Medikamente"><?php 
                         if (!empty($rezept['medicine_section'])) {
                             foreach ($rezept['medicine_section'] as $medicine) {
                                 //  the medicine fields show but removing the latest elements if it's the latest (fuck that was tricky)
@@ -65,11 +65,12 @@ $users = get_users($args);
                         }
                         ?>
                         </td>
-                        <td data-label="Status" ><span
-                                class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription'];?> "><?php echo $rezept['status_prescription']; ?></span>
+                        <td data-label="Status">
+                            <span class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']);?> "><?php echo $rezept['status_prescription']; ?></span>
                         </td>
-                        <td data-label="Aktionen"><a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>"><i
-                                    class="bi bi-pencil-fill"></i> Editieren</a></td>
+                        <td data-label="Aktionen">
+                            <a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
+                            <i class="bi bi-pencil-fill"></i> Editieren</a></td>
                     </tr>
 
                     <?php           
