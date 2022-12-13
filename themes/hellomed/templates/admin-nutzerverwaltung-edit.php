@@ -45,14 +45,14 @@ $user = get_userdata($user_id);
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <select id="geschlecht" class="form-select">
-                            <option selected><?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
+                            <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected><?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
                                 <?php 
                                 $geschlecht = array('Männlich', 'Weiblich', 'Divers');
                                 $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
                                 $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
                                 unset($geschlecht[$keygeschlecht]);
                                     foreach ($geschlecht as $valuegeschlecht) {
-                                    echo '<option>' . $valuegeschlecht . '</option>';
+                                    echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
                                     } 
                                 ?>
                             </option>
@@ -161,14 +161,14 @@ $user = get_userdata($user_id);
                 <div class="col-12">
                     <div class="form-floating">
                         <select id="status" class="form-select">
-                            <option selected><?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
+                            <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected><?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
                                 <?php 
                                 $status = array('Aktiv', 'Wartend', 'Inaktiv', 'Gefährdet');
                                 $selectedstatus = get_user_meta($_GET['user_id'], 'status', true);
                                 $keystatus = array_search($selectedstatus, $status);
                              unset($status[$keystatus]);
                                     foreach ($status as $valuestatus) {
-                                    echo '<option>' . $valuestatus . '</option>';
+                                    echo '<option value="' . $valuestatus . '">' . $valuestatus . '</option>';
                                     } 
                                 ?>
                         </select>
