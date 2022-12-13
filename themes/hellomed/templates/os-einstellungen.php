@@ -19,22 +19,22 @@ $user_id = get_current_user_id();
             ?>
             <div class="row gy-4">
                 <div class="col-12 col-md-6">
-                    <div class="form-floating">
+                <div class="form-floating">
                         <input id="first_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'first_name', true); ?>">
-                        <label>Name</label>
+                            value="<?php echo get_user_meta($user_id, 'patient_first_name', true); ?>">
+                        <label>Vorname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'last_name', true); ?>">
+                            value="<?php echo get_user_meta($user_id, 'patient_last_name', true); ?>">
                         <label>Nachname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
-                    <select id="geschlecht" class="form-select">
+                        <select id="geschlecht" class="form-select">
                             <option value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" selected>
                                 <?php echo get_user_meta($user_id, 'geschlecht', true); ?></option>
                             <option value="Männlich">Männlich</option>
@@ -54,7 +54,7 @@ $user_id = get_current_user_id();
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="krankheiten" type="text" class="form-control" placeholder=" "
-                        value="<?php echo get_user_meta($user_id, 'krankheiten', true); ?>">
+                            value="<?php echo get_user_meta($user_id, 'krankheiten', true); ?>">
                         <label>Krankheiten</label>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ $user_id = get_current_user_id();
                 <div class="col-4">
                     <div class="form-floating">
                         <input id="nrno" type="text" class="form-control" placeholder=" "
-                        value="<?php echo get_user_meta($user_id, 'nrno', true); ?>">
+                            value="<?php echo get_user_meta($user_id, 'nrno', true); ?>">
                         <label>Nr</label>
                     </div>
                 </div>
@@ -96,7 +96,7 @@ $user_id = get_current_user_id();
                 <div class="col-6">
                     <div class="form-floating">
                         <input id="zusatz" type="text" class="form-control" placeholder=" "
-                        value="<?php echo get_user_meta($user_id, 'zusatzinformationen', true); ?>">
+                            value="<?php echo get_user_meta($user_id, 'zusatzinformationen', true); ?>">
                         <label>Zusatzinformationen</label>
                     </div>
                 </div>
@@ -116,14 +116,15 @@ $user_id = get_current_user_id();
                 </div>
                 <div class="col-12 col-md-4 offset-md-4">
                     <div class="btn-group d-flex">
-                        <input id="privat_gesetzlich" type="radio" value="Privat" class="btn-check" name="privat_or_gesetzlich" autocomplete="off" <?php 
+                        <input id="privat_gesetzlich" type="radio" value="Privat" class="btn-check"
+                            name="privat_or_gesetzlich" autocomplete="off" <?php 
                             if ( get_user_meta($user_id, 'privat_or_gesetzlich', true) =='Privat' ){
-                                echo 'checked';} ?> >
+                                echo 'checked';} ?>>
                         <label class="btn btn-outline-primary" for="privat_gesetzlich">Privat versichert</label>
-                        <input id="gesetzlich_versichert" type="radio" value="Gesetzlich" class="btn-check"  name="privat_or_gesetzlich" autocomplete="off"
-                        <?php 
+                        <input id="gesetzlich_versichert" type="radio" value="Gesetzlich" class="btn-check"
+                            name="privat_or_gesetzlich" autocomplete="off" <?php 
                             if ( get_user_meta($user_id, 'privat_or_gesetzlich', true) =='Gesetzlich' ){
-                                echo 'checked';} ?> >
+                                echo 'checked';} ?>>
                         <label class="btn btn-outline-primary" for="gesetzlich_versichert">Gesetzlich versichert</label>
                     </div>
                 </div>
@@ -145,12 +146,13 @@ $user_id = get_current_user_id();
                 <div class="col-12">
                     <button id="save" type="button" class="btn btn-primary btn-lg">Speichern</button>
                 </div>
+                <!-- add a success div  -->
+                <div id="successdown"></div>
             </div>
             <?php   
     }
         edit_patient($user_id); ?>
-            <!-- add a success div  -->
-            <div id="successdown"></div>
+
         </div>
     </div>
 
@@ -195,13 +197,13 @@ include_once('footer.php');
             var nrno = $('#nrno').val();
             var postcode = $('#postcode').val();
             var stadt = $('#stadt').val();
-            var zusatz  = $('#zusatz').val();
+            var zusatz = $('#zusatz').val();
             var telephone = $('#telephone').val();
             var privat_or_gesetzlich = $('input[name="privat_or_gesetzlich"]:checked').val();
             var start_date = $('#start_date').val();
             var insurance_company = $('#insurance_company').val();
             var insurance_number = $('#insurance_number').val();
-           
+
             // For admin edit template
             // var status = $('#status').val();
             // var email = $('#email').val();
@@ -227,8 +229,8 @@ include_once('footer.php');
                 'start_date': start_date,
                 'insurance_company': insurance_company,
                 'insurance_number': insurance_number
-            
-                
+
+
                 // For admin edit template
                 // 'status': status,
                 // 'email': email,
@@ -236,10 +238,14 @@ include_once('footer.php');
             };
             $.post(ajaxurl, data, function(response) {
 
-                $('#success').addClass('alert alert-success');
-                $('#success').html('Profile updated');
-                $('#successdown').addClass('alert alert-success');
-                $('#successdown').html('Profile updated');
+                if (response != '') {
+                    $('#successdown').addClass('alert alert-success');
+                    $('#successdown').html(response.toString());
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
+                }
                 // show updated fields  in the success message 
                 // show new data in their fields after saving
                 $('#first_name').val(first_name);
