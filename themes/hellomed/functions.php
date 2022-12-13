@@ -474,7 +474,6 @@ add_action('wp_ajax_edit_patient', function() {
 		echo "<li> Versicherter auf „".$privat_or_gesetzlich."“ gestellt  </li> ";
 	}
 
-   	// TODO following are for the repeater, which saving is not working yet, blister_section to follow
 	 
 	$rezept_input = get_field('rezept_input', 'user_' . $user_id);
 
@@ -484,24 +483,29 @@ add_action('wp_ajax_edit_patient', function() {
 	if ( !empty($_POST['prescription_id']) && $_POST['prescription_id'] != $rezept_input[0]['prescription_id'] ) {
 		$rezept_input[0]['prescription_id'] = $_POST['prescription_id'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Prescription ID aktualisiert </li>";
 	}
 
 	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $rezept_input[0]['doctor_name'] ) {
 		$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Arzt aktualisiert </li>";
 	}
 
 	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $rezept_input[0]['prescription_date_by_doctor'] ) {
 		$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
-	}
-	
-	if ( !empty($_POST['prescription_status']) && $_POST['prescription_status'] != $rezept_input[0]['prescription_status'] ) {
-		$rezept_input[0]['prescription_status'] = $_POST['prescription_status'];
-		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Verschreibungstdatum aktualisiert </li>";
 	}
 
-	// TODO ends here 
+	// TODO blister_section and medikament_section missing here
+
+	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $rezept_input[0]['status_prescription'] ) {
+		$rezept_input[0]['status_prescription'] = $_POST['status_prescription'];
+		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Prescription Status auf ".$rezept_input[0]['status_prescription']." gesetzt  </li> ";
+	}
+
 
 		//debug stuff, might remove later 
 		// var_dump($changed_fields);
