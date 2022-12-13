@@ -346,116 +346,167 @@ add_action('wp_ajax_edit_patient', function() {
 	
 	// user_id
 	$user_id = $_POST['user_id'];
-    // save field to user profile 
-	if ( !empty( $_POST['first_name'] ) ) {
+
+	// array with all changed data inside (diff approach, might remove later)
+	// $changed_fields = array();
+
+    // save fields to user profile 
+	if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'first_name', true )) {
 		$first_name = $_POST['first_name'];
-		update_user_meta( $user_id, 'first_name', $first_name );
+		update_user_meta( $user_id, 'patient_first_name', $first_name );
+		echo "<li> Vorname aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['last_name'] ) ) {
+
+	if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'last_name', true )) {
 		$last_name = $_POST['last_name'];
-		update_user_meta( $user_id, 'last_name', $last_name );
+		update_user_meta( $user_id, 'patient_last_name', $last_name );
+		echo "<li> Nachname aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['user_email'] ) ) {
+
+	// email might be not needed in the forms
+	if ( !empty($_POST['user_email']) && $_POST['user_email'] != get_user_meta( $user_id, 'user_email', true )) {
 		$email = $_POST['user_email'];
 		update_user_meta( $user_id, 'user_email', $email );
+		echo "<li> E-mail aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['telephone'] ) ) {
+
+	if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
 		$phone = $_POST['telephone'];
 		update_user_meta( $user_id, 'telephone', $phone );
+		echo "<li> Telefon aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['strasse'] ) ) {
+
+	if ( !empty($_POST['strasse']) && $_POST['strasse'] != get_user_meta( $user_id, 'strasse', true )) {
 		$address = $_POST['strasse'];
 		update_user_meta( $user_id, 'strasse', $address );
+		echo "<li> Straße aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['stadt'] ) ) {
+
+	if ( !empty($_POST['stadt']) && $_POST['stadt'] != get_user_meta( $user_id, 'stadt', true )) {
 		$city = $_POST['stadt'];
 		update_user_meta( $user_id, 'stadt', $city );
+		echo "<li> Ort aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['postcode'] ) ) {
+
+	if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
 		$zip = $_POST['postcode'];
 		update_user_meta( $user_id, 'postcode', $zip );
+		echo "<li> PLZ aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['geburt'] ) ) {
+
+	if ( !empty($_POST['geburt']) && $_POST['geburt'] != get_user_meta( $user_id, 'geburt', true )) {
 		$birthday = $_POST['geburt'];
 		update_user_meta( $user_id, 'geburt', $birthday );
+		echo "<li> Geburtstag aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['geschlecht'] ) ) {
+
+	if ( !empty($_POST['geschlecht']) && $_POST['geschlecht'] != get_user_meta( $user_id, 'geschlecht', true )) {
 		$gender = $_POST['geschlecht'];
 		update_user_meta( $user_id, 'geschlecht', $gender );
-	}
-	if ( !empty( $_POST['status'] ) ) {
+		echo "<li> Geschlecht aktualisiert </li> ";
+	}	
+
+	if ( !empty($_POST['status']) && $_POST['status'] != get_user_meta( $user_id, 'status', true )) {
 		$status = $_POST['status'];
 		update_user_meta( $user_id, 'status', $status );
+		// $changed_fields['status'] = $status;
+		echo "<li> Status auf ".$status." gesetzt  </li> ";
+	// } else {
+	// 	$changed_fields['status'] = '';
 	}
-	if ( !empty( $_POST['new_user_id'] ) ) {
+
+	if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
 		$new_user_id = $_POST['new_user_id'];
 		update_user_meta( $user_id, 'new_user_id', $new_user_id );
+		echo "<li> User ID aktualisiert </li> ";
+		// $changed_fields['new_user_id'] = $new_user_id;
 	}
-	if ( !empty( $_POST['allergies'] ) ) {
+
+	if ( !empty($_POST['allergies']) && $_POST['allergies'] != get_user_meta( $user_id, 'allergies', true )) {
 		$allergies = $_POST['allergies'];
 		update_user_meta( $user_id, 'allergies', $allergies );
+		// $changed_fields['allergies'] = $allergies;
+		echo "<li> Allergien aktualisiert </li> ";
+		// else empty allergies from the array changed_fields
+	// } else {
+	// 	$changed_fields['allergies'] = '';
 	}
-	if ( !empty( $_POST['start_date'] ) ) {
+
+	if ( !empty($_POST['start_date']) && $_POST['start_date'] != get_user_meta( $user_id, 'start_date', true )) {
 		$start_date = $_POST['start_date'];
 		update_user_meta( $user_id, 'start_date', $start_date );
+		echo "<li> Hellomed Startdatum aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['insurance_company'] ) ) {
+
+	if ( !empty($_POST['insurance_company']) && $_POST['insurance_company'] != get_user_meta( $user_id, 'insurance_company', true )) {
 		$insurance_company = $_POST['insurance_company'];
 		update_user_meta( $user_id, 'insurance_company', $insurance_company );
+		echo "<li> Name der Krankenversicherung aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['insurance_number'] ) ) {
+
+	if ( !empty($_POST['insurance_number']) && $_POST['insurance_number'] != get_user_meta( $user_id, 'insurance_number', true )) {
 		$insurance_number = $_POST['insurance_number'];
 		update_user_meta( $user_id, 'insurance_number', $insurance_number );
+		echo "<li> Versicherungsnummer aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['krankheiten'] ) ) {
+
+	if ( !empty($_POST['krankheiten']) && $_POST['krankheiten'] != get_user_meta( $user_id, 'krankheiten', true )) {
 		$krankheiten = $_POST['krankheiten'];
 		update_user_meta( $user_id, 'krankheiten', $krankheiten );
+		echo "<li> Krankheiten aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['nrno'] ) ) {
+
+	if ( !empty($_POST['nrno']) && $_POST['nrno'] != get_user_meta( $user_id, 'nrno', true )) {
 		$nrno = $_POST['nrno'];
 		update_user_meta( $user_id, 'nrno', $nrno );
+		echo "<li> Hausnummer aktualisiert </li> ";
 	}
-	if ( !empty( $_POST['zusatz'] ) ) {
+
+	if ( !empty($_POST['zusatz']) && $_POST['zusatz'] != get_user_meta( $user_id, 'zusatzinformationen', true )) {
 		$zusatz = $_POST['zusatz'];
 		update_user_meta( $user_id, 'zusatzinformationen', $zusatz );
+		echo "<li> Zusatzinformationen aktualisiert </li>";
 	}
-	if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
+
+	if ( !empty($_POST['privat_or_gesetzlich']) && $_POST['privat_or_gesetzlich'] != get_user_meta( $user_id, 'privat_or_gesetzlich', true )) {
 		$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
 		update_user_meta( $user_id, 'privat_or_gesetzlich', $privat_or_gesetzlich );
+		echo "<li> Versicherter auf „".$privat_or_gesetzlich."“ gestellt  </li> ";
 	}
-	
-	// update_user_meta( $user_id, 'medikamente', $_POST['medikamente'] );
 
-	// update prescription_id 
+   	// TODO following are for the repeater, which saving is not working yet, blister_section to follow
+	 
 	$rezept_input = get_field('rezept_input', 'user_' . $user_id);
-	
-	// $rezept_input[0]['rezept_id'] = $_POST['rezept_id'];
 
-	// if is not empty and different value from before 
+	   // debug
+	   // $rezept_input[0]['rezept_id'] = $_POST['rezept_id'];
+
 	if ( !empty($_POST['prescription_id']) && $_POST['prescription_id'] != $rezept_input[0]['prescription_id'] ) {
-		// update prescription_id 
 		$rezept_input[0]['prescription_id'] = $_POST['prescription_id'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
+
 	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $rezept_input[0]['doctor_name'] ) {
-		// update doctor_name 
 		$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
+
 	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $rezept_input[0]['prescription_date_by_doctor'] ) {
 		$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
-	// update status_prescription
-	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $rezept_input[0]['status_prescription'] ) {
-		$rezept_input[0]['status_prescription'] = $_POST['status_prescription'];
+	
+	if ( !empty($_POST['prescription_status']) && $_POST['prescription_status'] != $rezept_input[0]['prescription_status'] ) {
+		$rezept_input[0]['prescription_status'] = $_POST['prescription_status'];
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 	}
 
-//debug stuff, might remove later 
-		echo 'success' .$first_name;
-			//return success message
-			wp_send_json_success(); 
+	// TODO ends here 
+
+		//debug stuff, might remove later 
+		// var_dump($changed_fields);
+		// echo json_encode($changed_fields);
+
 	wp_die();
 });
 
