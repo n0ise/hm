@@ -38,17 +38,18 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
 if (!empty($rezept['medicine_section'])) {
     foreach ($rezept['medicine_section'] as $medicine) {
         //  explode the medicines  and stack them one item per row 🤯
-// var_dump($rezept);
+        // var_dump($rezept);
         $medicine_name_pzn = explode(',', $medicine['medicine_name_pzn']);
         foreach ($medicine_name_pzn as $item) {
       ?>
 
                     <tr>
-                        <td data-label="Name" ><?php echo $item; ?></td>
-                        <td data-label="ID" ><?php echo $rezept['rezept_file']['ID']; ?></td>
-                        <td data-label="Status" ><span class="badge rounded-pill text-bg-<?php echo $rezept['status_prescription']; ?>">
+                        <td data-label="Name"><?php echo $item; ?></td>
+                        <td data-label="ID"><?php echo $rezept['rezept_file']['ID']; ?></td>
+                        <td data-label="Status"><span
+                                class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']); ?>">
                                 <?php echo $rezept['status_prescription']; ?></span></td>
-                    </tr> 
+                    </tr>
                     <?php
                             }
                          }
