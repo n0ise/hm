@@ -68,13 +68,44 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
             </table>
             <div class="row mt-5">
                 <div class="col-12 col-md-4 offset-md-4">
-                    <!--// TODO here putting data from user TBD -->
-                    <a class="btn btn-primary btn-lg"
-                        href="mailto:patient@hellomed.com?subject=Neues Folgerezept - Folgerezept für meine Blister&amp;body=Sehr geehrte Damen und Herren, im Anhang dieser E-Mail finden Sie mein Folgerezept mit Bitte um Bearbeitung. Beste Grüße">Folgerezept
-                        einreichen</a>
+                    <div class="btn btn-primary btn-lg modalopen">Rezept
+                        herunterladen</div>
+
+                    <!-- //TODO modal section  WIP-->
+                    <div class="modal fade bd-rezept-modal-lg" tabindex="-1" role="dialog" aria-labelledby="RezeptModal"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-12 col md-6">
+                                            <div class="mb-3">
+                                                <label for="startdatum_neues_rezept" class="form-label">Startdatum neues
+                                                    Rezept</label>
+                                                <input type="text" class="form-control" id="startdatum_neues_rezept"
+                                                    placeholder="">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="rezept_hochladen" class="form-label">Rezept
+                                                    hochladen</label>
+                                                <input type="file" class="form-control" id="rezept_hochladen"
+                                                    placeholder="Arzt">
+                                            </div>
+
+                                            <div class="btn btn-primary btn-lg modalopen">Folgerezept einreichen</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end modal -->
                 </div>
             </div>
-
         </div>
     </div>
 </main>
@@ -98,3 +129,11 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
 // da footer 
 include_once('footer.php');
 ?>
+<!-- modal click to open -->
+    <script>
+    jQuery(document).ready(function($) {
+        $('.modalopen').click(function() {
+            $('.bd-rezept-modal-lg').modal('show');
+        });
+    });
+    </script>
