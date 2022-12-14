@@ -91,3 +91,35 @@
     return valid;
   }
   
+    // DATE PICKER
+
+  $(function(){
+    $('#birthdaypicker').datepicker({
+        format: 'dd.mm.yyyy',
+        weekStart: 1,
+        autoclose: true,
+        startDate: '01.01.1900',
+        endDate: '0',
+        maxViewMode: 'century',
+        startView: 'century',
+        language: 'de-DE',
+        defaultViewDate:'01.01.1900',
+        assumeNearbyYear: true,
+        toggleActive: true
+    });
+    });
+
+    $(function(){
+      $('#startdatumpicker').datepicker({
+          format: 'dd.mm.yyyy',
+          weekStart: 1,
+          autoclose: true,
+          startDate: '+5d',
+          endDate: '+1y',
+          maxViewMode: 'year',
+      
+          language: 'de-DE',
+          assumeNearbyYear: true,
+          toggleActive: true
+      });
+      });

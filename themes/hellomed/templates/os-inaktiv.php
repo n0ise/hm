@@ -18,11 +18,9 @@
         Ihr Account wird zur Zeit von einem unserer Servicepartner eingerichtet und
         wird in Kürze freigeschaltet. Bitte schauen Sie später noch einmal vorbei.
       </p>
-
     </div>
   </div>
 </main>
-
 
 <?php } 
 else { ?>
