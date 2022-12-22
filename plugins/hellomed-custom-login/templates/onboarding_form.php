@@ -199,9 +199,7 @@
 
 
                     <div id="drag-drop-area"></div>
-
-            
-
+                        <div id="video-container"> Overlay biatch</div>
                  
                         <!-- <div class="dropzone" id="mydropzone">
 
@@ -312,7 +310,7 @@
                         var uppy = new Uppy()
                             .use(Dashboard, {
                                 inline: true,
-                            height: 470,
+                            height: 500,
                             proudlyDisplayPoweredByUppy:false,
                             inline: true,
                             target: '#drag-drop-area'
@@ -325,7 +323,7 @@
                                 modes: [
                                     'picture',
                                 ],
-                                mirror: true,
+                                // mirror: true,
                                 showVideoSourceDropdown: false,
                                 /** @deprecated Use `videoConstraints.facingMode` instead. */
                                 facingMode: 'environment',
@@ -338,7 +336,6 @@
                                 mobileNativeCamera: false,
                                 locale: {},
 
-                         
                             })
                        
                                 .use(Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
@@ -352,43 +349,41 @@
    
 
 
-    //   var myDropzone = new Dropzone("div#mydropzone", {
-    //     paramName: 'file',
-    //     url: "https://hm.lndo.site/wp-content/themes/hellomed/assets/php/upload.php",
- 
-    //   addRemoveLinks: true,
-    //   dictRemoveFile : "x",
-    //   autoProcessQueue: true,
-    //   maxFilesize: 4, // MB
-    // uploadMultiple:true,
-    // paramName:"file",
-    // parallelUploads: 2,
-    // maxFiles: 10,
-    // headers: {
-    //     // remove Cache-Control and X-Requested-With
-    //     // to be sent along with the request
-    //     'Cache-Control': null,
-    //     'X-Requested-With': null
-    // }
-
-
-
-
-
-    // //   init: function() {
-    // //         this.on("complete", function(file) {
-    // //             $(".dz-remove").html('<img src="/wp-content/themes/hellomed/assets/img/icons/basic/close.svg" />');
-    // //         });
-    // //     }
-      
-    //   });
-
-
-
 
  </script>
 
+<style>
 
+            .Webcam-overlay{
+                content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png);
+                    position: absolute;
+                    /* top: 2px; */
+                    /* right: 2px; */
+                    z-index: 100;
+                    width: 100%;
+                    height: 100%;
+                    /* padding: 5px; */
+                    object-fit: contain;
+                    opacity: 0.3;
+            }
+
+            #webcam-overlay1{
+            content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png);
+            }
+
+            #webcam-overlay2{
+        content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay2.png);
+
+            }
+
+            #webcam-overlay3{
+        content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png);
+            }
+    
+
+    </style>
+
+  
 
 <script>
 
@@ -406,20 +401,32 @@ function idonthaverezept(){
       $('#medplan').prop('checked', false);
 }
 
+
+
+// const container = document.getElementsByClassName('uppy-Webcam-video');
+
+
+
+
 function ihaveRezeptfoto(){
   document.getElementById('rezepthochladen').style.display ='block';
+    document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
 
-   document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
+    $('.uppy-Webcam-videoContainer').append('<div class="Webcam-overlay" id="webcam-overlay1"></div>');
   
 }
 function ihaveeRezept(){
   document.getElementById('rezepthochladen').style.display ='block';
   document.getElementById('rezeptlabel').innerHTML = 'e-Rezept hochladen';
+
+  $('.uppy-Webcam-videoContainer').append('<div class="Webcam-overlay" id="webcam-overlay2"></div>');
   
 }
 function ihaveMedplan(){
   document.getElementById('rezepthochladen').style.display ='block';
   document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
+
+  $('.uppy-Webcam-videoContainer').append('<div class="Webcam-overlay" id="webcam-overlay3"></div>');
   
 }
                      
