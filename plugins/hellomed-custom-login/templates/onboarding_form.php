@@ -312,7 +312,7 @@
                         var uppy = new Uppy()
                             .use(Dashboard, {
                                 inline: true,
-                            height: 270,
+                            height: 470,
                             proudlyDisplayPoweredByUppy:false,
                             inline: true,
                             target: '#drag-drop-area'
@@ -328,9 +328,9 @@
                                 mirror: true,
                                 showVideoSourceDropdown: false,
                                 /** @deprecated Use `videoConstraints.facingMode` instead. */
-                                facingMode: 'user',
+                                facingMode: 'environment',
                                 videoConstraints: {
-                                    facingMode: 'user',
+                                    facingMode: 'environment',
                                 },
                                 preferredImageMimeType: null,
                                 preferredVideoMimeType: null,
