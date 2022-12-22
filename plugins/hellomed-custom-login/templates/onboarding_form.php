@@ -322,7 +322,7 @@
                                 modes: [
                                     'picture',
                                 ],
-                                 mirror: true,
+                                mirror: false,
                                 showVideoSourceDropdown: false,
                                 /** @deprecated Use `videoConstraints.facingMode` instead. */
                                 facingMode: 'environment',
