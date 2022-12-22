@@ -199,8 +199,7 @@
 
 
                     <div id="drag-drop-area"></div>
-                        <div id="video-container"> Overlay biatch</div>
-                 
+
                         <!-- <div class="dropzone" id="mydropzone">
 
                            <div class="dz-message d-flex flex-column" style="width:100%">
