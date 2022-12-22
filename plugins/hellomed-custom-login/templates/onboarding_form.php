@@ -358,14 +358,16 @@
                     /* top: 2px; 
                      right: 2px; */
                     z-index: 100;
-                    max-width: 100%;
-                    max-height: 100%;
+                    max-width: 95%;
+                    max-height: 95%;
                     /* padding: 5px; */
                     object-fit: contain;
                     opacity: 0.3;
+                    left: 0;
+                    right: 0;
                     top: 0;
                     bottom: 0;
-                    margin: auto 0;
+                    margin: auto;
             }
 
 
