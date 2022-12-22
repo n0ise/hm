@@ -353,8 +353,7 @@
 
 <style>
 
-            .Webcam-overlay{
-                content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png);
+            #Webcam-overlay{
                     position: absolute;
                     /* top: 2px; */
                     /* right: 2px; */
@@ -405,28 +404,50 @@ function idonthaverezept(){
 // const container = document.getElementsByClassName('uppy-Webcam-video');
 
 
+                    $(document).ready(function() {
+                    $('button[data-cy="Webcam"]').click(function(){
+                    runAfterElementExists(".uppy-Webcam-videoContainer", function() {
+                        $('.uppy-Webcam-videoContainer').append('<div id="Webcam-overlay"></div>');
+                        if($('#rezeptfoto').is(':checked'))
+                            {
+                                ihaveRezeptfoto();
+                            }else if($('#eRezept').is(':checked'))
+                            {
+                            ihaveeRezept();
+                            }
+                            else
+                            {
+                            ihaveMedplan();
+                            }
+                        });
+                    });
+                    })
 
+
+function runAfterElementExists(jquery_selector,callback){
+    var checker = window.setInterval(function() {
+     if ($(jquery_selector).length) {
+        clearInterval(checker);
+        callback();
+        }}, 200); 
+}
 
 function ihaveRezeptfoto(){
   document.getElementById('rezepthochladen').style.display ='block';
     document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
+    $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png)");
 
-    $('.uppy-Webcam-videoContainer').append('<div class="Webcam-overlay" id="webcam-overlay1"></div>');
-  
 }
 function ihaveeRezept(){
   document.getElementById('rezepthochladen').style.display ='block';
   document.getElementById('rezeptlabel').innerHTML = 'e-Rezept hochladen';
-
-  $('.uppy-Webcam-videoContainer').append('<div class="Webcam-overlay" id="webcam-overlay2"></div>');
+    $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay2.png)");
   
 }
 function ihaveMedplan(){
   document.getElementById('rezepthochladen').style.display ='block';
   document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
-
-  $('.uppy-Webcam-videoContainer').append('<div class="Webcam-overlay" id="webcam-overlay3"></div>');
-  
+    $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
 }
                      
 
