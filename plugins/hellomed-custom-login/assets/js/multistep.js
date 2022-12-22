@@ -117,7 +117,6 @@
           startDate: '+5d',
           endDate: '+1y',
           maxViewMode: 'year',
-      
           language: 'de-DE',
           assumeNearbyYear: true,
           toggleActive: true

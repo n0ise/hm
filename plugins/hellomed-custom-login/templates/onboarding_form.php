@@ -1,7 +1,9 @@
+
 <?php if(is_user_logged_in()) { ?>
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+ <link href="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.css" rel="stylesheet">
 
    <div class="hm-auth-wrap">
     <div class="hm-logo">
@@ -10,7 +12,9 @@
         </a>
     </div>
 
-    <form id="onboardingForm" enctype="multipart/form-data" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
+
+
+     <form id="onboardingForm" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post" enctype="multipart/form-data">
         <div class="hm-auth-form step">
             <div class="row gy-3">
                 <div class="col-12">
@@ -177,20 +181,29 @@
 
                 <div class="col-12" id="haveFile" style="display: none;">
                     <label class="form-label">Liegen Rezepte oder Medikationsplan vor?</label>
-                    <div class="btn-group d-flex" onclick="ihavefile();">
-                        <input type="radio" class="btn-check" name="rezept_type" value="rezeptfoto" id="rezeptfoto" autocomplete="off" />
+                    <div class="btn-group d-flex">
+                        <input type="radio" class="btn-check" name="rezept_type" value="rezeptfoto" id="rezeptfoto" autocomplete="off" onclick="ihaveRezeptfoto();"/>
                         <label class="btn btn-outline-primary" for="rezeptfoto">Rezeptfoto</label>
-                        <input type="radio" class="btn-check" name="rezept_type" value="eRezept" id="eRezept" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="rezept_type" value="eRezept" id="eRezept" autocomplete="off" onclick="ihaveeRezept();" />
                         <label class="btn btn-outline-primary" for="eRezept">E-Rezept</label>
-                        <input type="radio" class="btn-check" name="rezept_type" value="medplan" id="medplan" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="rezept_type" value="medplan" id="medplan" autocomplete="off" onclick="ihaveMedplan();" />
                         <label class="btn btn-outline-primary" for="medplan">Medplan</label>
                     </div>
                 </div>
 
                 <div class="col-12" id="rezepthochladen"  style="display: none;">
-                    <label class="form-label">Rezept hochladen</label>
+                    <label id="rezeptlabel"class="form-label">Rezept hochladen</label>
+
+
+
+
+
+                    <div id="drag-drop-area"></div>
+
+            
+
                  
-                        <div class="dropzone" id="mydropzone">
+                        <!-- <div class="dropzone" id="mydropzone">
 
                            <div class="dz-message d-flex flex-column" style="width:100%">
                            
@@ -209,11 +222,11 @@
                                 </span>
                                 <span class="upload-area-title">Wählen Sie eine Datei aus oder ziehen Sie hierher</span>
                            </div>
-                        </div> 
+                        </div>  -->
                 </div>
 
                 <div class="col-12">
-                    <button type="button" class="action next btn btn-primary btn-lg">Weiter</button>
+                    <button type="button" id="submit-dropzone" class="action next btn btn-primary btn-lg">Weiter</button>
                 </div>
             </div>
         </div>
@@ -257,9 +270,7 @@
                 </div>
 
                 <div class="col-12">
-                    <!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
-                    <!-- <button id="save" type="submit" name="submit" class="action submit btn btn-primary btn-lg" style="display: none">Submit</button> -->
-
+                  
                     <input id="hideInputLog" type="submit" name="submit" class="register-button" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
                     <label for="hideInputLog" class="btn btn-primary btn-lg">Anmeldung abschließen</label>
                 </div>
@@ -267,14 +278,9 @@
         </div>
     </form>
 
-    <!-- <div class="card-footer">
-      <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button> -->
-    <!-- <button class="action next btn  btn-primary btn-lg float-end">Next</button>
-     <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button> -->
-    <!-- </div> -->
+
+
 </div>
-
-
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -286,27 +292,97 @@
 
 
 
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/my-dropzone.js"></script>
 
+<!-- <script src="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.js"></script> -->
+
+
+
+<!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
+<!-- <button id="save" type="submit" name="submit" class="action submit btn btn-primary btn-lg" style="display: none">Submit</button> -->
+
+
+  <!-- <div class="card-footer">
+      <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button> -->
+    <!-- <button class="action next btn  btn-primary btn-lg float-end">Next</button>
+     <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button> -->
+    <!-- </div> -->
+    <script type="module">
+                        import {Uppy, Dashboard, Tus, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+                        var uppy = new Uppy()
+                            .use(Dashboard, {
+                                inline: true,
+                            height: 270,
+                            proudlyDisplayPoweredByUppy:false,
+                            inline: true,
+                            target: '#drag-drop-area'
+                            })
+                        
+                            .use(Webcam, { 
+                                target: Dashboard,
+                                onBeforeSnapshot: () => Promise.resolve(),
+                                countdown: false,
+                                modes: [
+                                    'picture',
+                                ],
+                                mirror: true,
+                                showVideoSourceDropdown: false,
+                                /** @deprecated Use `videoConstraints.facingMode` instead. */
+                                facingMode: 'user',
+                                videoConstraints: {
+                                    facingMode: 'user',
+                                },
+                                preferredImageMimeType: null,
+                                preferredVideoMimeType: null,
+                                showRecordingLength: false,
+                                mobileNativeCamera: false,
+                                locale: {},
+
+                         
+                            })
+                       
+                                .use(Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
+                       
+                            uppy.on('complete', (result) => {
+                            console.log('Upload complete! We’ve uploaded these files:', result.successful)
+                        })
+                        </script>
 
 <script>
-    Dropzone.autoDiscover = false;
+   
 
-$(document).ready(function () {
+
+    //   var myDropzone = new Dropzone("div#mydropzone", {
+    //     paramName: 'file',
+    //     url: "https://hm.lndo.site/wp-content/themes/hellomed/assets/php/upload.php",
  
-      var myDropzone = new Dropzone("div#mydropzone", {
-      url: "wp-content/themes/hellomed/assets/php/upload.php",
-      addRemoveLinks: true,
-      dictRemoveFile : "x"
+    //   addRemoveLinks: true,
+    //   dictRemoveFile : "x",
+    //   autoProcessQueue: true,
+    //   maxFilesize: 4, // MB
+    // uploadMultiple:true,
+    // paramName:"file",
+    // parallelUploads: 2,
+    // maxFiles: 10,
+    // headers: {
+    //     // remove Cache-Control and X-Requested-With
+    //     // to be sent along with the request
+    //     'Cache-Control': null,
+    //     'X-Requested-With': null
+    // }
 
-    //   init: function() {
-    //         this.on("complete", function(file) {
-    //             $(".dz-remove").html('<img src="/wp-content/themes/hellomed/assets/img/icons/basic/close.svg" />');
-    //         });
-    //     }
+
+
+
+
+    // //   init: function() {
+    // //         this.on("complete", function(file) {
+    // //             $(".dz-remove").html('<img src="/wp-content/themes/hellomed/assets/img/icons/basic/close.svg" />');
+    // //         });
+    // //     }
       
-      });
- });
+    //   });
+
 
 
 
@@ -315,6 +391,9 @@ $(document).ready(function () {
 
 
 <script>
+
+
+
    function ihaverezept(){
   document.getElementById('haveFile').style.display ='block';
 }
@@ -322,19 +401,29 @@ $(document).ready(function () {
 function idonthaverezept(){
   document.getElementById('haveFile').style.display = 'none';
   document.getElementById('rezepthochladen').style.display = 'none';
-
       $('#rezeptfoto').prop('checked', false);
       $('#eRezept').prop('checked', false);
       $('#medplan').prop('checked', false);
-   
 }
 
-
-
-   function ihavefile(){
+function ihaveRezeptfoto(){
   document.getElementById('rezepthochladen').style.display ='block';
+
+   document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
   
 }
+function ihaveeRezept(){
+  document.getElementById('rezepthochladen').style.display ='block';
+  document.getElementById('rezeptlabel').innerHTML = 'e-Rezept hochladen';
+  
+}
+function ihaveMedplan(){
+  document.getElementById('rezepthochladen').style.display ='block';
+  document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
+  
+}
+                     
+
 
 // function idonthaverezept(){
 // }
