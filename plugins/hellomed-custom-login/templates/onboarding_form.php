@@ -355,29 +355,19 @@
 
             #Webcam-overlay{
                     position: absolute;
-                    /* top: 2px; */
-                    /* right: 2px; */
+                    /* top: 2px; 
+                     right: 2px; */
                     z-index: 100;
-                    width: 100%;
-                    height: 100%;
+                    max-width: 100%;
+                    max-height: 100%;
                     /* padding: 5px; */
                     object-fit: contain;
                     opacity: 0.3;
+                    top: 0;
+                    bottom: 0;
+                    margin: auto 0;
             }
 
-            #webcam-overlay1{
-            content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png);
-            }
-
-            #webcam-overlay2{
-        content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay2.png);
-
-            }
-
-            #webcam-overlay3{
-        content: url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png);
-            }
-    
 
     </style>
 
@@ -399,15 +389,21 @@ function idonthaverezept(){
       $('#medplan').prop('checked', false);
 }
 
-
-
-// const container = document.getElementsByClassName('uppy-Webcam-video');
-
-
                     $(document).ready(function() {
-                    $('button[data-cy="Webcam"]').click(function(){
+                    $(document.body).on('click', 'button[data-cy="Webcam"]' ,function(){
+                    // $('button[data-cy="Webcam"]').on("click", function () {
                     runAfterElementExists(".uppy-Webcam-videoContainer", function() {
                         $('.uppy-Webcam-videoContainer').append('<div id="Webcam-overlay"></div>');
+
+
+                        runAfterElementExists(".uppy-Webcam-video", function() {
+                                    var video = $(".uppy-Webcam-video" ); //JQuery selector 
+        
+                                    $("#Webcam-overlay").css("aspect-ratio", video[0].videoWidth+ '/' +video[0].videoHeight);
+                                    // $("#Webcam-overlay").css("height",video[0].videoHeight+'px');
+                                    // $("#Webcam-overlay").css("width",video[0].videoWidth+'px');
+                        })
+
                         if($('#rezeptfoto').is(':checked'))
                             {
                                 ihaveRezeptfoto();
@@ -424,6 +420,7 @@ function idonthaverezept(){
                     })
 
 
+
 function runAfterElementExists(jquery_selector,callback){
     var checker = window.setInterval(function() {
      if ($(jquery_selector).length) {
@@ -435,7 +432,9 @@ function runAfterElementExists(jquery_selector,callback){
 function ihaveRezeptfoto(){
   document.getElementById('rezepthochladen').style.display ='block';
     document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
-    $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png)");
+     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png)");
+
+
 
 }
 function ihaveeRezept(){
