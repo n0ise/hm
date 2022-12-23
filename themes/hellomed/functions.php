@@ -351,13 +351,13 @@ add_action('wp_ajax_edit_patient', function() {
 	// $changed_fields = array();
 
     // save fields to user profile 
-	if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'first_name', true )) {
+	if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'patient_first_name', true )) {
 		$first_name = $_POST['first_name'];
 		update_user_meta( $user_id, 'patient_first_name', $first_name );
 		echo "<li> Vorname aktualisiert </li> ";
 	}
 
-	if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'last_name', true )) {
+	if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
 		$last_name = $_POST['last_name'];
 		update_user_meta( $user_id, 'patient_last_name', $last_name );
 		echo "<li> Nachname aktualisiert </li> ";
@@ -474,38 +474,65 @@ add_action('wp_ajax_edit_patient', function() {
 		echo "<li> Versicherter auf „".$privat_or_gesetzlich."“ gestellt  </li> ";
 	}
 
-	 
-	$rezept_input = get_field('rezept_input', 'user_' . $user_id);
 
 	   // debug
-	   // $rezept_input[0]['rezept_id'] = $_POST['rezept_id'];
+	   // $rezept_input[0]['rezept_id'] = $_POST['rez
+	/// remove all elements 
 
-	if ( !empty($_POST['prescription_id']) && $_POST['prescription_id'] != $rezept_input[0]['prescription_id'] ) {
-		$rezept_input[0]['prescription_id'] = $_POST['prescription_id'];
-		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+	// Blister job and medikament in the Rezeptverwaltung-edit, those are nested and culprit of many sleepless night.
+
+	$rezept_input = get_field('rezept_input', 'user_'.$user_id);
+	$prescription_id = $_POST['rezept_id'];
+
+	// basically checking if the prescription_id is inside a repeater field, and then taking the $post as array and update the correspondent field.
+
+foreach ($rezept_input as &$record) {
+  if ($record['prescription_id'] == $prescription_id) {
+	if ( !empty($_POST['prescription_id']) && $_POST['prescription_id'] != $record['prescription_id'] ) {
+		$record['prescription_id'] = $_POST['prescription_id'];
+		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 		echo "<li> Prescription ID aktualisiert </li>";
 	}
 
-	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $rezept_input[0]['doctor_name'] ) {
-		$rezept_input[0]['doctor_name'] = $_POST['doctor_name'];
-		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $record['doctor_name'] ) {
+		$record['doctor_name'] = $_POST['doctor_name'];
+		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 		echo "<li> Arzt aktualisiert </li>";
 	}
 
-	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $rezept_input[0]['prescription_date_by_doctor'] ) {
-		$rezept_input[0]['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
-		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $record['prescription_date_by_doctor'] ) {
+		$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
+		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 		echo "<li> Verschreibungstdatum aktualisiert </li>";
 	}
 
-	// TODO blister_section and medikament_section missing here
-
-	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $rezept_input[0]['status_prescription'] ) {
-		$rezept_input[0]['status_prescription'] = $_POST['status_prescription'];
-		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
-		echo "<li> Prescription Status auf ".$rezept_input[0]['status_prescription']." gesetzt  </li> ";
+	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $record['status_prescription'] ) {
+		$record['status_prescription'] = $_POST['status_prescription'];
+		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Prescription Status auf ".$record['status_prescription']." gesetzt  </li> ";
 	}
 
+	if ( !empty($_POST['blister_jobs']) && $_POST['blister_jobs'] != $record['blister_jobs'] ) {
+    	$record['blister_job'] = $_POST['blister_jobs'];
+		echo "<li> Blister aktualisiert </li> ";
+	}
+
+	if ( !empty($_POST['medikament']) && $_POST['medikament'] != $record['medikament'] ) {
+		$record['medicine_section'] = $_POST['medikament'];
+		echo "<li> Medikament aktualisiert </li> ";
+	}
+
+    break; // exit loop
+  }
+}
+
+update_field('rezept_input', $rezept_input, 'user_'.$user_id);
+
+// var_dump($record);
+	
+// var_dump($rezept_input);
+
+// $_POST['blister_jobs'\] - array of data that taken from inputs
 
 		//debug stuff, might remove later 
 		// var_dump($changed_fields);
