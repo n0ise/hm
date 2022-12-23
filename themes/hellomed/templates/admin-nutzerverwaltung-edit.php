@@ -6,8 +6,9 @@
 <?php $user_id=$_GET['user_id']; ?>
 <?php if(is_user_logged_in() && current_user_can('administrator')) { 
    // var_dump($user_id);
+   
     ?>
-
+ 
 <main>
     <div class="container">
         <div class="hm-content">
@@ -16,10 +17,10 @@
 
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {
-// var_dump($user_id);
-// get user data
-$user = get_userdata($user_id);
-?>
+                // var_dump($user_id);
+                // get user data
+                $user = get_userdata($user_id);
+            ?>
             <div class="row gy-4">
                 <div class="col-12">
                     <div class="form-floating">
@@ -31,22 +32,23 @@ $user = get_userdata($user_id);
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="first_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'first_name', true); ?>">
-                        <label>Name</label>
+                            value="<?php echo get_user_meta($_GET['user_id'], 'patient_first_name', true); ?>">
+                        <label>Vorname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'last_name', true); ?>">
+                            value="<?php echo get_user_meta($_GET['user_id'], 'patient_last_name', true); ?>">
                         <label>Nachname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <select id="geschlecht" class="form-select">
-                            <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected><?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
-                                <?php 
+                            <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected>
+                                <?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
+                            <?php 
                                 $geschlecht = array('Männlich', 'Weiblich', 'Divers');
                                 $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
                                 $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
@@ -146,11 +148,14 @@ $user = get_userdata($user_id);
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
-                        <input id="insurance_company" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'insurance_company', true); ?>">
+                        <input id="insurance_company" type="text" class="form-control insurance_company" placeholder=" "
+                            value="<?php echo get_user_meta($_GET['user_id'], 'insurance_company', true); ?>"
+                            list="insurance-options">
                         <label>Name der Krankenversicherung</label>
                     </div>
+                    <datalist id="insurance-options"></datalist>
                 </div>
+
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="insurance_number" type="text" class="form-control" placeholder=" "
@@ -161,8 +166,9 @@ $user = get_userdata($user_id);
                 <div class="col-12">
                     <div class="form-floating">
                         <select id="status" class="form-select">
-                            <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected><?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
-                                <?php 
+                            <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected>
+                                <?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
+                            <?php 
                                 $status = array('Aktiv', 'Wartend', 'Inaktiv', 'Gefährdet');
                                 $selectedstatus = get_user_meta($_GET['user_id'], 'status', true);
                                 $keystatus = array_search($selectedstatus, $status);
@@ -317,4 +323,43 @@ jQuery(document).ready(function($) {
         });
     });
 });
+</script>
+
+<script>
+let data;
+
+function fetchData() {
+    fetch('../assets/json/insurances.json')
+        .then(response => response.json())
+        .then(responseData => {
+            data = responseData;
+            console.log(data);
+        });
+}
+
+function search() {
+    console.log('search called');
+    const searchTerm = this.value;
+
+    // Reset the search results if the search term is empty
+    if (searchTerm === '') {
+        document.querySelector('#insurance-options').innerHTML = '';
+        return;
+    }
+
+    // Show all results that include the search term
+    const searchResults = data.filter(company => company.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    document.querySelector('#insurance-options').innerHTML = '';
+    searchResults.forEach(result => {
+        const option = document.createElement('option');
+        option.value = result.name;
+        document.querySelector('#insurance-options').appendChild(option);
+    });
+}
+
+
+
+window.addEventListener('load', fetchData);
+document.querySelector('.insurance_company').addEventListener('input', search);
 </script>
