@@ -136,11 +136,14 @@ $user_id = get_current_user_id();
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
-                        <input id="insurance_company" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'insurance_company', true); ?>">
+                        <input id="insurance_company" type="text" class="form-control insurance_company" placeholder=" "
+                            value="<?php echo get_user_meta($_GET['user_id'], 'insurance_company', true); ?>"
+                            list="insurance-options">
                         <label>Name der Krankenversicherung</label>
                     </div>
+                    <datalist id="insurance-options"></datalist>
                 </div>
+
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="insurance_number" type="text" class="form-control" placeholder=" "
@@ -281,3 +284,41 @@ include_once('footer.php');
         });
     });
     </script>
+    <script>
+let data;
+
+function fetchData() {
+    fetch('wp-content/themes/hellomed/assets/json/insurances.json')
+        .then(response => response.json())
+        .then(responseData => {
+            data = responseData;
+            // console.log(data);
+        });
+}
+
+function search() {
+    console.log('search called');
+    const searchTerm = this.value;
+
+    // Reset the search results if the search term is empty
+    if (searchTerm === '') {
+        document.querySelector('#insurance-options').innerHTML = '';
+        return;
+    }
+
+    // Show all results that include the search term
+    const searchResults = data.filter(company => company.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    document.querySelector('#insurance-options').innerHTML = '';
+    searchResults.forEach(result => {
+        const option = document.createElement('option');
+        option.value = result.name;
+        document.querySelector('#insurance-options').appendChild(option);
+    });
+}
+
+
+
+window.addEventListener('load', fetchData);
+document.querySelector('.insurance_company').addEventListener('input', search);
+</script>
