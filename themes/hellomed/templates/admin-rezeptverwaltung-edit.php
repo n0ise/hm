@@ -78,13 +78,13 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         </div>
                     </div>
 
-                    <?php  } ?>
-
+                    <?php  } 
+                      }
+                    ?>
                     <!-- div where will be added new blister jobs on click  -->
-                    
+
                     <div class="blister_ph"></div>
-                    
-                    <?php  }
+                     <?php
                 }
                      ?>
 
