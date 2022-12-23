@@ -42,7 +42,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
             //    var_dump($rezept);
 ?>
                     <tr>
-                        <td data-label="Rezept ID"><?php echo $rezept['rezept_file']['ID']; ?></td>
+                        <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
                         <td data-label="Verschreibungsdatum"><?php echo $rezept['prescription_date_by_doctor']; ?></td>
                         <td data-label="Enthaltene Medikamente">

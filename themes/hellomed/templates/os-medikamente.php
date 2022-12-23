@@ -45,7 +45,7 @@ if (!empty($rezept['medicine_section'])) {
 
                     <tr>
                         <td data-label="Name"><?php echo $item; ?></td>
-                        <td data-label="ID"><?php echo $rezept['rezept_file']['ID']; ?></td>
+                        <td data-label="ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Status"><span
                                 class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']); ?>">
                                 <?php echo $rezept['status_prescription']; ?></span></td>
