@@ -3,6 +3,8 @@
 <?php include_once('header.php'); ?>
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <!-- and sidebar  -->
 <div class="content">
@@ -11,12 +13,21 @@
 
     <?php
 // taking values from parameters in the url
-$user_id=$_GET['user_id']; 
-$rezept_id=$_GET['rezept']; 
+
+
+
+$rezept_id = $_GET['rezept'];
+$user_id = $_GET['user_id']; 
+$rezept_input = get_field('rezept_input', 'user_'.$user_id);
+
+$filtered_rezept_input = array_filter($rezept_input, function ($record) use ($rezept_id, $user_id) {
+  return $record['prescription_id'] == $rezept_id;
+  var_dump ($record);
+});
+var_dump ($rezept_input);
 
 
 // take data pls
-$rezept_input = get_field('rezept_input', 'user_'.$user_id);
 
 // var_dump($rezept_input);
 
@@ -24,6 +35,7 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
     <main>
         <div class="container">
             <div class="hm-content">
+                <?php  foreach ($filtered_rezept_input as $record) { ?>
 
                 <div class="h2 mb-5">Rezept hinzufügen/editieren</div>
                 <div class="row gy-4">
@@ -33,48 +45,50 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                             <label>User ID</label>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="form-floating">
-                            <input id="prescription_id" type="text" class="form-control"
-                                value="<?php echo $rezept_input[0]['prescription_id']; ?>">
+                            <input id="prescription_id_no" type="text" class="form-control"
+                                value="<?php echo $record['prescription_id']; ?>">
                             <label>Prescription ID</label>
                         </div>
-                    </div>
+                    </div> -->
                     <?php 
-    //  if it is not empty the rezept_input
-    if(!empty($rezept_input[0]['blister_job'])) {
-        foreach($rezept_input[0]['blister_job'] as $blister_job) {
-          
+    if (!empty($record['blister_job'])) {
+      foreach ($record['blister_job'] as $blister_job) {
+
   ?>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input id="blister_job_id" type="text" class="form-control"
+                            <input id="blister_job_id" type="text" class="blister_job_id form-control"
                                 value="<?php echo $blister_job['blister_job_id'] ?>">
-                            <label>Blisterjob ID <small> (data not saving for the moment)</small></label>
+                            <label>Blisterjob ID</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="form-floating">
-                            <input id="blister_start_date" type="text" class="form-control"
+                            <input id="blister_start_date" type="date" class=" blister_start_date form-control"
                                 value="<?php echo $blister_job['blister_start_date'] ?>">
-                            <label>Start <small> (data not saving for the moment)</small></label>
+                            <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-3">
-                        <div class="form-floating" id="blister_end_date">
-                            <input id="blister_end_date" type="text" class="form-control"
+                        <div class="form-floating">
+                            <input id="blister_end_date" type="text" class="blister_end_date form-control"
                                 value="<?php echo $blister_job['blister_end_date'] ?>">
-                            <label>Ende <small> (data not saving for the moment)</small></label>
+                            <label>Ende</label>
                         </div>
                     </div>
 
- <?php               }
-?>
-<!-- //TODO still work in progress  -->
-                    <p id="here"> </p>
-                    <?php  }
+                    <?php  } ?>
 
-   ?>
+                    <!-- div where will be added new blister jobs on click  -->
+                    
+                    <div class="blister_ph"></div>
+                    
+                    <?php  }
+                }
+                     ?>
+
                     <div class="col-12 d-flex justify-content-center">
                         <button type="button" class="btn btn-light btn-sm" id="add_blister_job">
                             <i class="bi bi-plus-circle-fill me-2"></i>
@@ -84,39 +98,45 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
 
                     <div class="col-12 col-md-9">
                         <div class="form-floating">
-                            <input id="doctor_name" type="text" class="form-control"  value="<?php echo $rezept_input[0]['doctor_name']; ?>">
+                            <input id="doctor_name" type="text" class="form-control"
+                                value="<?php echo $record['doctor_name']; ?>">
+                            <?php var_dump ($filtered_rezept_input); ?>
                             <label>Arzt</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="form-floating">
-                            <input id="prescription_date_by_doctor"  type="date" class="form-control"  value="<?php echo $rezept_input[0]['prescription_date_by_doctor']; ?>">
+                            <input id="prescription_date_by_doctor" type="date" class="form-control"
+                                value="<?php echo $record['prescription_date_by_doctor']; ?>">
                             <label>Verschreibungsdatum</label>
                         </div>
                     </div>
-                    
+
                     <?php
-                if(!empty($rezept_input[0]['medicine_section'])) {
-                    foreach($rezept_input[0]['medicine_section'] as $medicine) { ?>
+                if (!empty($record['medicine_section'])) {
+                    foreach ($record['medicine_section'] as $medicine) {?>
                     <div class="col-12 col-md-9">
                         <div class="form-floating">
-                            <input id="medikamente" type="text" class="form-control"
-                                value="<?php echo $medicine['medicine_name_pzn']; ?>">
-                            <label>Medikament <small> (data not saving for the moment)</small></label>
+                            <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
+                                value="<?php echo $medicine['medicine_name_pzn']; ?>" list="medicine-options">
+                            <label>Medikament</label>
                         </div>
                     </div>
+
                     <div class="col-12 col-md-3">
                         <div class="form-floating">
-                            <input id="amount" type="text" class="form-control"
-                                value="<?php echo $medicine['medicine_amount']; ?> ">
-                            <label>Menge <small> (data not saving for the moment)</small></label>
+                            <input id="medicine_amount" type="number" class="form-control medicine_amount"
+                                value="<?php echo $medicine['medicine_amount']; ?>" step="1" min="0">
+                            <label>Menge</label>
                         </div>
+
                     </div>
                     <?php
                     }
-                 ?> <div id="there"></div> <?php
                 }
                 ?>
+                    <div class="medikament_ph"></div>
+                    <datalist id="medicine-options"></datalist>
 
                     <div class="col-12 d-flex justify-content-center">
                         <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
@@ -124,11 +144,11 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                             Medikament
                         </button>
                     </div>
-                  
+
                     <div class="col-12">
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
-                                <option selected><?php echo $rezept_input[0]['status_prescription'] ?> </option>
+                                <option selected><?php echo $record['status_prescription'] ?> </option>
                                 <?php 
                                 $status_prescription = array('Aktiv', 'Inaktiv', 'Wartend','Gefährdet');
                                 $selected_status_prescription = get_user_meta($_GET['user_id'], 'status_prescription', true);
@@ -147,103 +167,129 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
                     </div>
                     <div id="successdown"></div>
                 </div>
-        
+
             </div>
         </div>
     </main>
     <?php } 
 else { ?>
-<!-- here if the user is not logged in, going raaaus  -->
-<main>
-    <div class="container">
-        <div class="hm-content">
+    <!-- here if the user is not logged in, going raaaus  -->
+    <main>
+        <div class="container">
+            <div class="hm-content">
 
-            <div class="h2 mb-5">NO.</div>
-            <div class="alert alert-danger" role="alert">
-                <!-- image centered  -->
-                <div class="text-center">
-                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
-                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
+                <div class="h2 mb-5">NO.</div>
+                <div class="alert alert-danger" role="alert">
+                    <!-- image centered  -->
+                    <div class="text-center">
+                        <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
+                            src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
+                    </div>
+
+                    <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
+                    <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
+                    <hr>
+                    <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
                 </div>
-
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
             </div>
         </div>
-    </div>
-</main>
-<?php header("Refresh:10; url=/anmelden"); 
+    </main>
+    <?php header("Refresh:10; url=/anmelden"); 
 }
 
 // da footer 
 include_once('footer.php');
 ?>
 
-<!-- new div on click for Medikament & Blisterjob -->
-<script>
+    <script>
     jQuery(document).ready(function($) {
-         $('#add_medicine_div').click(function() {
-             $('#there').append(
-                '<div class="col-12 col-md-9"><div class="form-floating"><input type="text" class="form-control" value=""><label>Medikamente </label></div></div><div class="col-12 col-md-3"><div class="form-floating"><input type="text" class="form-control" value=""><label>Menge</label></div></div>'
-                );
-             });
-    });
-</script>
-
-<script>
-    jQuery(document).ready(function() {
         $('#add_blister_job').click(function() {
-            $('#here').append(
-                '<div class="col-12 col-md-6"><div class="form-floating"><input type="text" class="form-control" value=""><label>Blisterjob ID</label></div></div><div class="col-12 col-md-3"><div class="form-floating"><input type="text" class="form-control" value=""><label>Start</label></div></div><div class="col-12 col-md-3"><div class="form-floating" id="blister_end_date"><input type="text" class="form-control" value=""><label>Ende</label></div></div>'
-                 );
-            });
+            let blisterDivHTML =
+                `<div class="col-12 col-md-6 blister_jobs_form"><div class="form-floating "><input type="text" id="blister_job_id" class="form-control blister_job_id" value=""><label>Blisterjob ID</label></div></div><div class="col-12 col-md-3"><div class="form-floating"><input type="date" id="blister_start_date" class="form-control blister_start_date" value=""><label>Start</label></div></div><div class="col-12 col-md-3"><div class="form-floating" ><input type="text"  id="blister_end_date" class="form-control blister_end_date" value=""><label>Ende</label></div></div>`;
+            document.querySelector('.blister_ph').insertAdjacentHTML('afterend', blisterDivHTML);
+
+        });
     });
-</script>
+    </script>
 
-<script>
-jQuery(document).ready(function($) {
- $('#save_blister_job').click(function() {
-    var blister_job_id = $('#blister_job_id').val();
-    var blister_start_date = $('#blister_start_date').val();
-    var blister_end_date = $('#blister_end_date').val();
-    var prescription_id = $('#prescription_id').val();
-    var doctor_name = $('#doctor_name').val();
-    var prescription_date_by_doctor = $('#prescription_date_by_doctor').val();
-    var prescription_id = $('#prescription_id').val();
-    var medicine_name_pzn = $('#medicine_name_pzn').val();
-    var medicine_amount = $('#medicine_amount').val();
-    var status_prescription = $('#status_prescription').val();
-    var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
-    var data = {
-     'action': 'edit_patient',
-     'blister_job_id': blister_job_id,
-     'blister_start_date': blister_start_date,
-     'blister_end_date': blister_end_date,
-     'prescription_id': prescription_id,
-     'doctor_name': doctor_name,
-     'prescription_date_by_doctor': prescription_date_by_doctor,
-     'medicine_name_pzn': medicine_name_pzn,
-     'medicine_amount': medicine_amount,
-     'prescription_id': prescription_id,
-     'status_prescription': status_prescription,
-     'rezept_id': <?php echo $rezept_id; ?>,
-     'user_id': <?php echo $user_id; ?>
-    }
- console.log(data);
+    <script>
+    jQuery(document).ready(function($) {
+        $('#save_blister_job').click(function() {
 
- $.post(ajaxurl, data, function(response) {
-    console.log(response);
-    if (response != '') {
-                $('#successdown').addClass('alert alert-success');
-                $('#successdown').html(response.toString());
-                $('#successdown').fadeIn(1000);
-                setTimeout(function() {
-                    $('#successdown').fadeOut(1000);
-                }, 5000);
+            var blister_job_id = $('#blister_job_id').val();
+            var blister_start_date = $('#blister_start_date').val();
+            var blister_end_date = $('#blister_end_date').val();
+            var prescription_id = $('#prescription_id').val();
+            var doctor_name = $('#doctor_name').val();
+            var prescription_date_by_doctor = $('#prescription_date_by_doctor').val();
+            var medicine_name_pzn = $('#medicine_name_pzn').val();
+            var medicine_amount = $('#medicine_amount').val();
+            var status_prescription = $('#status_prescription').val();
+
+            // for each value in blister_jobs, get the values and put it in an array
+s
+            var blister_jobs = {};
+            $('.blister_job_id').each(function(index) {
+                blister_job_id = $('.blister_job_id')[index].value;
+                blister_start_date = $('.blister_start_date')[index].value;
+                blister_end_date = $('.blister_end_date')[index].value;
+
+                blister_jobs[index] = {
+                    blister_job_id: blister_job_id,
+                    blister_start_date: blister_start_date,
+                    blister_end_date: blister_end_date,
+
+                };
+            });
+
+            // same as blister_jobs but for medicine
+            var medikament = {};
+            $('.medicine_name_pzn').each(function(index) {
+                medicine_name_pzn = $('.medicine_name_pzn')[index].value;
+                medicine_amount = $('.medicine_amount')[index].value;
+
+                medikament[index] = {
+                    medicine_name_pzn: medicine_name_pzn,
+                    medicine_amount: medicine_amount,
+                };
+            });
+
+
+            var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+            var data = {
+                'action': 'edit_patient',
+                'blister_job_id': blister_job_id,
+                'blister_start_date': blister_start_date,
+                'blister_end_date': blister_end_date,
+                'prescription_id': prescription_id,
+                'doctor_name': doctor_name,
+                'prescription_date_by_doctor': prescription_date_by_doctor,
+                'medicine_name_pzn': medicine_name_pzn,
+                'medicine_amount': medicine_amount,
+                'prescription_id': prescription_id,
+                'status_prescription': status_prescription,
+                'blister_jobs': blister_jobs,
+                'medikament': medikament,
+
+                'rezept_id': <?php echo $rezept_id; ?>,
+                'user_id': <?php echo $user_id; ?>
             }
-    });                   
- });
-});
-</script>
+            console.log(data);
+            // count blister_jobs, debug
+            var count = Object.keys(blister_jobs).length;
+            console.log(count);
+            $.post(ajaxurl, data, function(response) {
+                // console.log(response);
+
+                if (response != '') {
+                    $('#successdown').addClass('alert alert-success');
+                    $('#successdown').html(response.toString());
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
+                }
+            });
+        });
+    });
+    </script>
