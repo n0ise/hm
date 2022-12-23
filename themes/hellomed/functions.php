@@ -511,16 +511,16 @@ foreach ($rezept_input as &$record) {
 		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 		echo "<li> Prescription Status auf ".$record['status_prescription']." gesetzt  </li> ";
 	}
-
-	if ( !empty($_POST['blister_jobs']) && $_POST['blister_jobs'] != $record['blister_jobs'] ) {
+	// TODO the following two validaiton blocks, need to be don differntly, as it is array . saving is working fine, TODO is just for the confirmation message on frontend
+	// if ( !empty($_POST['blister_jobs']) && $_POST['blister_jobs'] != $record['blister_jobs'] ) {
     	$record['blister_job'] = $_POST['blister_jobs'];
-		echo "<li> Blister aktualisiert </li> ";
-	}
+		// echo "<li> Blister aktualisiert </li> ";
+	// }
 
-	if ( !empty($_POST['medikament']) && $_POST['medikament'] != $record['medikament'] ) {
+	// if ( !empty($_POST['medikament']) && $_POST['medikament'] != $record['medikament'] ) {
 		$record['medicine_section'] = $_POST['medikament'];
-		echo "<li> Medikament aktualisiert </li> ";
-	}
+		// echo "<li> Medikament aktualisiert </li> ";
+	// }
 
     break; // exit loop
   }
