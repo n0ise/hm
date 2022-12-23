@@ -12,6 +12,10 @@
 <!-- include css.css from olly UI-->
 <link rel="stylesheet" href="https://ui.hellomed.com/css/index.css">
 
+<!-- jQuery  -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript"></script>
+
+
 <!-- include variables with all fields from acf/wp -->
 <?php 
 include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
@@ -34,7 +38,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <nav class="hm-nav">
                 <!-- check the page slug and make the correspondent <li> with class active -->
                 <a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
-                    href="/os-medikationsplan.">Medikationsplan</a>
+                    href="/os-medikationsplan">Medikationsplan</a>
                 <a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>"
                     href="/os-rezepte">Rezepte</a>
                 <a class="<?php if (is_page('os-medikamente')) { echo 'active'; } ?>"
@@ -82,7 +86,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
     <ul>
          <!-- check the page slug and make the correspondent <li> with class active -->
          <li><a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
-                    href="/os-medikationsplan.">Medikationsplan</a></li> 
+                    href="/os-medikationsplan">Medikationsplan</a></li> 
                     <li><a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>"
                     href="/os-rezepte">Rezepte</a></li> 
                     <li><a class="<?php if (is_page('os-medikamente')) { echo 'active'; } ?>"
