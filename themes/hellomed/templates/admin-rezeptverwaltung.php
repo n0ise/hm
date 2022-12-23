@@ -9,13 +9,11 @@
 <?php
 
 // get all users with role client
-$args = array(
-    'role' => 'client',
-    'orderby' => 'user_status',
-    'order' => 'ASC'
-);
-$users = get_users($args);
-// var_dump($users);
+$users = get_users( array( 'role' => 'client' ) );
+
+//  var_dump ($);
+// }
+
 ?>
 
 <main>
@@ -36,20 +34,17 @@ $users = get_users($args);
                 <tbody>
                     <?php
                       foreach ($users as $user) {
-                        $user_id = $user->new_user_id;
+                        $user_id =  get_field( 'new_user_id', 'user_' . $user->ID );
                         $user_name = $user->display_name;
                         $user_status = get_field('status', 'user_' . $user->ID);
                         $user_rezept = get_field('rezept_input', 'user_' . $user->ID);
                         $prescription_date_by_doctor = get_field('prescription_doctor_by_name', 'user_' . $user->ID);
                         $prescription_status = get_field('prescription_status', 'user_' . $user->ID);
-                        // var_dump($user_rezept['0']['rezept_file']);
+                        // var_dump($user_rezept);
                     
-                        // if user_rezept is not false (better validation)
-                        if ($user_rezept['0']['rezept_file']) {
+                        
                             foreach ($user_rezept as $rezept) {
-                        // if (!empty($user_rezept)) {
-                        //     foreach ($user_rezept as $rezept) {
-                                
+                       
                         //    var_dump($rezept);
                   ?>
                     <tr>
@@ -74,7 +69,7 @@ $users = get_users($args);
                     </tr>
 
                     <?php           
-                     }
+                    //  }
                         }
                     }
             ?>
