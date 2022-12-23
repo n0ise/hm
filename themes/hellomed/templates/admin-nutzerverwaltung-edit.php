@@ -329,7 +329,7 @@ jQuery(document).ready(function($) {
 let data;
 
 function fetchData() {
-    fetch('../assets/json/insurances.json')
+    fetch('wp-content/themes/hellomed/assets/json/insurances.json')
         .then(response => response.json())
         .then(responseData => {
             data = responseData;
