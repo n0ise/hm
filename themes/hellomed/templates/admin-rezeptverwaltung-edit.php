@@ -21,9 +21,9 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
 
 $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($rezept_id, $user_id) {
   return $record['prescription_id'] == $rezept_id;
-  var_dump ($record);
+//   var_dump ($record);
 });
-var_dump ($rezept_input);
+// var_dump ($rezept_input);
 
 
 // take data pls
@@ -99,7 +99,6 @@ var_dump ($rezept_input);
                         <div class="form-floating">
                             <input id="doctor_name" type="text" class="form-control"
                                 value="<?php echo $record['doctor_name']; ?>">
-                            <?php var_dump ($filtered_rezept_input); ?>
                             <label>Arzt</label>
                         </div>
                     </div>
@@ -205,7 +204,7 @@ include_once('footer.php');
     let data;
 
     function fetchData() {
-        fetch('../assets/json/drugs.json')
+        fetch('wp-content/themes/hellomed/assets/json/drugs.json')
             .then(response => response.json())
             .then(responseData => {
                 data = responseData;
@@ -292,7 +291,7 @@ include_once('footer.php');
             var status_prescription = $('#status_prescription').val();
 
             // for each value in blister_jobs, get the values and put it in an array
-s
+
             var blister_jobs = {};
             $('.blister_job_id').each(function(index) {
                 blister_job_id = $('.blister_job_id')[index].value;

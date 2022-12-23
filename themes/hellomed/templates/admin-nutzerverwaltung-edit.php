@@ -333,7 +333,7 @@ function fetchData() {
         .then(response => response.json())
         .then(responseData => {
             data = responseData;
-            console.log(data);
+            // console.log(data);
         });
 }
 
