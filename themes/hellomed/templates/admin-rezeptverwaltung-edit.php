@@ -3,8 +3,7 @@
 <?php include_once('header.php'); ?>
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
 
 <!-- and sidebar  -->
 <div class="content">
@@ -200,6 +199,72 @@ else { ?>
 // da footer 
 include_once('footer.php');
 ?>
+
+<!-- that is taking the json file -->
+    <script>
+    let data;
+
+    function fetchData() {
+        fetch('../assets/json/drugs.json')
+            .then(response => response.json())
+            .then(responseData => {
+                data = responseData;
+                // Attach the event listeners to the input elements
+                document.querySelectorAll('.medicine_name_pzn').forEach(element => {
+                    element.addEventListener('input', search);
+                });
+            });
+    }
+
+    function search() {
+        // console.log('search called');
+        const searchTerm = this.value;
+
+        if (searchTerm.length < 3) {
+            return;
+        }
+        const searchResults = data.slice(0, 10);
+
+        document.querySelector('#medicine-options').innerHTML = '';
+        searchResults.forEach(result => {
+            const option = document.createElement('option');
+            option.value = result.Artikelbezeichnung;
+            option.label = result.PZN;
+            document.querySelector('#medicine-options').appendChild(option);
+        });
+    }
+
+    jQuery(document).ready(function($) {
+        $('#add_medicine_div').click(function() {
+            fetchData();
+
+            // Create a string of HTML that represents the new div element and its contents
+            let newDivHTML =
+                `<div class="col-12 col-md-9">
+              <div class="form-floating">
+                  <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
+                      value="" list="medicine-options">
+                  <label>Medikament</label>
+              </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+              <div class="form-floating">
+                  <input id="medicine_amount" type="number" class="form-control medicine_amount"
+                      value="" step="1" min="0">
+                  <label>Menge</label>
+              </div>
+
+          </div>`;
+
+            // Insert the HTML string representation of the new div element after the div element with the medikament_ph class
+            document.querySelector('.medikament_ph').insertAdjacentHTML('afterend', newDivHTML);
+
+            // Attach the event listeners to the input element
+            document.querySelector('.medicine_name_pzn').addEventListener('input', search);
+        });
+    });
+    </script>
 
     <script>
     jQuery(document).ready(function($) {
