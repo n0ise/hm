@@ -3,7 +3,7 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 
- <link href="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.css" rel="stylesheet">
+ <link href="wp-content/themes/hellomed/assets/css/uppy.min.css" rel="stylesheet">
 
    <div class="hm-auth-wrap">
     <div class="hm-logo">
@@ -17,12 +17,19 @@
      <form id="onboardingForm" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post" enctype="multipart/form-data">
         <div class="hm-auth-form step">
             <div class="row gy-3">
-                <div class="col-12">
-                    <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/about_me.svg" />
-                </div>
-                <div class="col-12">
-                    <div class="h2 m-0">Patienteninformationen</div>
-                </div>
+        
+            <div class="col-12">
+                <div class="h3 mb-3">
+            <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/about_me.svg">
+            Patienteninformationen
+            <i class="bi bi-info-circle"
+                data-bs-toggle="tooltip" data-placement="top"
+                title="Wir benötigen nur noch wenige patient:innenrelevante Informationen von dir,
+    damit dich unsere Apotheker:innen beim Start mit hellomed bestmöglichst beraten können.">  </i>
+            </div>
+        </div>
+
+
                 <div class="col-12">
                     <div class="progress">
                         <div class="progress-bar" style="width: 25%;">Schritt 1/4</div>
@@ -61,28 +68,27 @@
                         <label class="btn btn-outline-primary" for="radiomale">Männlich</label>
                         <input type="radio" class="btn-check" name="geschlecht" value="female" id="radiofemale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
-                        <input type="radio" class="btn-check" name="geschlecht" value="divers" id="radiodivers" autocomplete="off" />
-                        <label class="btn btn-outline-primary" for="radiodivers">Divers</label>
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="birthdaypicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="birthdaySelectedBlur();" onfocus="birthdaySelected();" />
-                        <label id="birthdaylabel" for="birthdaypicker">Geburtstag</label>
+                        <label id="birthdaylabel" for="birthdaypicker">Was ist Ihr Geburtsdatum?</label>
                     </div>
                 </div>
+
 
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="krankheiten" name="krankheiten" type="text" class="form-control" placeholder=" " />
-                        <label for="krankheiten">Welche Haupterkrankung haben Sie?</label>
+                        <label for="krankheiten">Welche Haupterkrankungen haben Sie?</label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="allergien" name="allergien" type="text" class="form-control" placeholder=" " />
-                        <label for="allergien">Haben Sie Allergien?</label>
+                        <label for="allergien">Haben Sie Allergien oder Unverträglichkeiten?</label>
                     </div>
                 </div>
                 <div class="col-12">
@@ -93,12 +99,15 @@
 
         <div id="userinfo" class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
+
                 <div class="col-12">
-                    <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/shipping_adress.svg" />
+                    <div class="h3 mb-3">
+                    <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/shipping_adress.svg">
+                    Anschrift & Lieferadresse
+                    </div>
                 </div>
-                <div class="col-12">
-                    <div class="h2 m-0">Lieferadresse</div>
-                </div>
+
+
                 <div class="col-12">
                     <div class="progress">
                         <div class="progress-bar" style="width: 50%;">Schritt 2/4</div>
@@ -110,13 +119,13 @@
                         <label for="strase">Straße</label>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 ps-0">
                     <div class="form-floating">
                         <input id="strasenr" name="nrno" type="text" class="form-control" placeholder=" " />
                         <label for="strasenr">Nr</label>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 pe-0">
                     <div class="form-floating">
                         <input id="plz" name="postcode" type="text" class="form-control" placeholder=" " />
                         <label for="plz">Postleitzahl</label>
@@ -131,13 +140,13 @@
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="zusatzinformationen" name="zusatzinformationen" type="text" class="form-control" placeholder=" " />
-                        <label for="zusatzinformationen">Zusätzliche Lieferinformation</label>
+                        <label for="zusatzinformationen">Haben Sie zusätzliche Lieferhinweise?</label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="telefon" name="telephone" type="text" class="form-control" placeholder=" " />
-                        <label for="telefon">Telefonnummer</label>
+                        <label for="telefon">Was ist Ihre Telefonnummer?</label>
                     </div>
                 </div>
 
@@ -149,13 +158,14 @@
 
         <div class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
+
                 <div class="col-12">
-                    <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription2.svg" />
-                  
-                </div>
-                <div class="col-12">
-                    <div class="h2 m-0">Rezeptinformationen</div>
-                </div>
+        <div class="h3 mb-3">
+          <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription2.svg">
+          Rezeptinformationen
+        </div>
+      </div>
+
                 <div class="col-12">
                     <div class="progress">
                         <div class="progress-bar" style="width: 75%;">Schritt 3/4</div>
@@ -165,16 +175,16 @@
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="startdatumpicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
-                        <label id="startdatumlabel" for="startdatumpicker">Gewünschtes Startdatum</label>
+                        <label id="startdatumlabel" for="startdatumpicker">Was ist Ihr Wunsch-Startdatum?</label>
                     </div>
                 </div>
 
                 <div class="col-12">
-                    <label class="form-label">Liegen Ihre Rezepte vor?</label>
+                    <label class="form-label">Liegen Ihre Rezepte bereits vor?</label>
                     <div class="btn-group d-flex">
                         <input type="radio" class="btn-check" name="first_rezept_uploaded" value="1" id="flexRadioDefault1" autocomplete="off" onclick="ihaverezept();" />
-                        <label class="btn btn-outline-primary" for="flexRadioDefault1">Ja, ich habe sie vor mir</label>
-                        <input type="radio" class="btn-check" name="first_rezept_uploaded" value="0" id="flexRadioDefault2" autocomplete="off" onclick="idonthaverezept();" />
+                        <label class="btn btn-outline-primary" for="flexRadioDefault1">Ja, liegen vor</label>
+                        <input type="radio" class="btn-check" name="first_rezept_uploaded" value="0" id="flexRadioDefault2" autocomplete="off" checked onclick="idonthaverezept();" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault2">Nein, noch nicht</label>
                     </div>
                 </div>
@@ -182,12 +192,12 @@
                 <div class="col-12" id="haveFile" style="display: none;">
                     <label class="form-label">Liegen Rezepte oder Medikationsplan vor?</label>
                     <div class="btn-group d-flex">
-                        <input type="radio" class="btn-check" name="rezept_type" value="rezeptfoto" id="rezeptfoto" autocomplete="off" onclick="ihaveRezeptfoto();"/>
+                        <input type="radio" class="btn-check" name="rezept_type" value="rezeptfoto" id="rezeptfoto" autocomplete="off" checked onclick="ihaveRezeptfoto();"/>
                         <label class="btn btn-outline-primary" for="rezeptfoto">Rezeptfoto</label>
                         <input type="radio" class="btn-check" name="rezept_type" value="eRezept" id="eRezept" autocomplete="off" onclick="ihaveeRezept();" />
                         <label class="btn btn-outline-primary" for="eRezept">E-Rezept</label>
                         <input type="radio" class="btn-check" name="rezept_type" value="medplan" id="medplan" autocomplete="off" onclick="ihaveMedplan();" />
-                        <label class="btn btn-outline-primary" for="medplan">Medplan</label>
+                        <label class="btn btn-outline-primary" for="medplan">Medikationsplan</label>
                     </div>
                 </div>
 
@@ -195,10 +205,7 @@
                     <label id="rezeptlabel"class="form-label">Rezept hochladen</label>
 
 
-
-
-
-                    <div id="drag-drop-area"></div>
+                    <div id="drag-drop-area"></div> 
 
                         <!-- <div class="dropzone" id="mydropzone">
 
@@ -230,11 +237,12 @@
 
         <div class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
+
                 <div class="col-12">
-                    <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription1.svg" />
-                </div>
-                <div class="col-12">
-                    <div class="h2 m-0">Versicherungsinformation</div>
+                    <div class="h3 mb-3">
+                    <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription1.svg">
+                    Versicherungsinformation
+                    </div>
                 </div>
                 <div class="col-12">
                     <div class="progress">
@@ -247,7 +255,7 @@
                     <div class="btn-group d-flex">
                         <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="privat" id="flexRadioDefault11" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault11">Privat</label>
-                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="gesetzlich" id="flexRadioDefault22" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="gesetzlich" checked id="flexRadioDefault22" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault22">Gesetzlich</label>
                     </div>
                 </div>
@@ -255,16 +263,16 @@
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="krankenversicherung" name="insurance_company" type="text" class="form-control" placeholder=" " />
-                        <label for="krankenversicherung">Name der Krankenversicherung</label>
+                        <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
                     </div>
                 </div>
 
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="form-floating">
                         <input id="versicherungsnummer" name="insurance_number" type="text" class="form-control" placeholder=" " />
                         <label for="versicherungsnummer">Versicherungsnummer (optional)</label>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-12">
                   
@@ -294,7 +302,6 @@
 <!-- <script src="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.js"></script> -->
 
 
-
 <!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
 <!-- <button id="save" type="submit" name="submit" class="action submit btn btn-primary btn-lg" style="display: none">Submit</button> -->
 
@@ -307,12 +314,14 @@
     <script type="module">
                         import {Uppy, Dashboard, Tus, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
                         var uppy = new Uppy()
+                      
                             .use(Dashboard, {
                                 inline: true,
-                            height: 500,
-                            proudlyDisplayPoweredByUppy:false,
-                            inline: true,
-                            target: '#drag-drop-area'
+                                height: 500,
+                       
+                                proudlyDisplayPoweredByUppy:false,
+                          
+                                target: '#drag-drop-area'
                             })
                         
                             .use(Webcam, { 
@@ -337,16 +346,18 @@
 
                             })
                        
-                                .use(Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
+                            .use(Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
                        
                             uppy.on('complete', (result) => {
                             console.log('Upload complete! We’ve uploaded these files:', result.successful)
-                        })
+                            })
+
+
+
                         </script>
 
 <script>
    
-
 
 
  </script>
@@ -381,6 +392,11 @@
 
    function ihaverezept(){
   document.getElementById('haveFile').style.display ='block';
+  document.getElementById('rezepthochladen').style.display ='block';
+    document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
+     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png)");
+     $('#rezeptfoto').prop('checked', true);
+
 }
 
 function idonthaverezept(){
@@ -460,29 +476,39 @@ function birthdaySelected(){
   document.getElementById('birthdaylabel').innerHTML = 'tt.mm.jjjj';
 }
 function birthdaySelectedBlur(){
-  document.getElementById('birthdaylabel').innerHTML = 'Geburtstag';
+  document.getElementById('birthdaylabel').innerHTML = 'Was ist Ihr Geburtsdatum?';
 }
 function startdatumSelected(){
   document.getElementById('startdatumlabel').innerHTML = 'tt.mm.jjjj';
 }
 function startdatumSelectedBlur(){
-  document.getElementById('startdatumlabel').innerHTML = 'Gewünschtes Startdatum';
+  document.getElementById('startdatumlabel').innerHTML = 'Was ist Ihr Wunsch-Startdatum?';
 }
 
 
 </script>
 
+<script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+</script>
+
 <style>
 
 
-.dropzone {
-	border: none;
-	background-color: transparent;
-	width: 100%;
+
+
+
+.uppy-Root {
+	/* border: none; */
+	/* background-color: transparent;
+
 	display: flex;
 	flex-wrap: wrap;
    justify-content: center;
-   align-content: center;
+   align-content: center; */
    border: 2px dashed #40404652;
    border-radius: 0.375rem;
  
@@ -492,33 +518,18 @@ function startdatumSelectedBlur(){
     margin: 0;
 }
 
-.dropzone:hover, .dropzone:focus {
+.uppy-Root:hover, .uppy-Root:focus {
    border: 2px dashed var(--color-hellomed);
    
 }
 
-.dz-details{
-   display:none;
-}
 
-.dropzone .dz-preview .dz-remove {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    z-index: 100;
-    width:35px;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 50%;
-    content: url(/wp-content/themes/hellomed/assets/img/icons/basic/close.svg);
-    border: 2px solid #40404652;
 
-    background: #fff;
-}
-.dropzone .dz-preview .dz-remove:hover{
-    border: 2px solid var(--color-hellomed) !important;
-    content: url(/wp-content/themes/hellomed/assets/img/icons/basic/close_blue.svg);
-}
+
+
+
+
+
 
 .upload-area-icon {
 	display: block;
@@ -536,6 +547,26 @@ function startdatumSelectedBlur(){
 	margin-top: 1rem;
 	display: block;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*Bootstrap Calendar*/
 .datepicker {
@@ -566,7 +597,6 @@ function startdatumSelectedBlur(){
 }
 
 .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > th {
-
     color: #fff;
 }
 
@@ -626,7 +656,6 @@ function startdatumSelectedBlur(){
 .datepicker-dropdown.datepicker-orient-top:before {
     border-top: 7px solid rgba(0,0,0,.1);
 }
-
 </style>
 
 <?php } 

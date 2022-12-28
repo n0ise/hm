@@ -16,11 +16,12 @@
 
 
 		<div class="col-12">
+       <label class="form-label">Sind Sie Patient oder Angehöriger?</label>
         <div class="btn-group d-flex">
           <input type="radio" class="btn-check" name="patientcaregiverid" value="patient"  id="patientcaregiverid1" autocomplete="off" checked>
-          <label class="btn btn-outline-primary" for="patientcaregiverid1">Ich bin Patient</label>
+          <label class="btn btn-outline-primary" for="patientcaregiverid1">Patient</label>
           <input type="radio" class="btn-check" name="patientcaregiverid"  value="caregiver" id="patientcaregiverid2" autocomplete="off">
-          <label class="btn btn-outline-primary" for="patientcaregiverid2">Ich bin Angehöriger</label>
+          <label class="btn btn-outline-primary" for="patientcaregiverid2">Angehöriger</label>
         </div>
       </div>
 
@@ -45,7 +46,7 @@
         <div class="form-floating">
 
 			<input class="form-control"  type="text" name="email" id="email" required="required" placeholder=" ">
-			<label for="email"><?php _e( 'E-mail', 'hellomed-custom-login' ); ?> </label>
+			<label for="email"><?php _e( 'Was ist Ihre E-Mail Adresse?', 'hellomed-custom-login' ); ?> </label>
 		</div>
       </div>
 
@@ -108,7 +109,7 @@
 	</form>
 
 	<div class="text-center">
-    <a class="text-secondary" href="anmelden">Bereits Mitglied? Jetz anmelden!</a>
+    <a class="text-secondary" href="anmelden">Bereits Registriert? Jetzt anmelden!</a>
 
   </div>	
 	
