@@ -72,6 +72,18 @@
                 </div>
 
                 <div class="col-12">
+                <label class="form-label">Keeping this one here for fast testing</label>
+                    <div class="form-floating">
+                        <input id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
+                        <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
+                    </div>
+                    <div id="filter-records"></div>
+                
+                </div>
+
+   
+
+                <div class="col-12">
                     <div class="form-floating">
                         <input id="birthdaypicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="birthdaySelectedBlur();" onfocus="birthdaySelected();" />
                         <label id="birthdaylabel" for="birthdaypicker">Was ist Ihr Geburtsdatum?</label>
@@ -291,11 +303,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/multistep.js"></script>
-
+<script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/search-function.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-
-
 
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/my-dropzone.js"></script>
 
@@ -556,7 +566,9 @@ function startdatumSelectedBlur(){
 
 
 
-
+.img-search{
+        max-width:100%;
+}
 
 
 

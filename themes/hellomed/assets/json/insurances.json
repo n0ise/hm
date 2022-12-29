@@ -1,77 +1,887 @@
 [
   {
-  "name": "AOK"
+    "name": "BKK DürkoppAdler",
+    "type": "public",
+    "logo": "2022_BKK_DurkoppAdler_Logo_Claim.svg"
   },
   {
-  "name": "BARMER"
+    "name": "HALLESCHE Krankenversicherung",
+    "type": "private",
+    "logo": "ALH_Hallesche.svg"
   },
   {
-  "name": "TK"
+    "name": "Allianz Private Krankenversicherung",
+    "type": "private",
+    "logo": "Allianz.svg"
   },
   {
-  "name": "DAK-Gesundheit"
+    "name": "Alte Oldenburger Krankenversicherung",
+    "type": "private",
+    "logo": "Alte_Oldenburger_Logo.svg"
   },
   {
-  "name": "KKH Kaufmännische Krankenkasse"
+    "name": "ARAG Krankenversicherung",
+    "type": "private",
+    "logo": "arag_logo.jpeg"
   },
   {
-  "name": "IKK classic"
+    "name": "Audi BKK",
+    "type": "public",
+    "logo": "AUDIBKK-Logo.svg"
   },
   {
-  "name": "AOK Plus"
+    "name": "AXA Krankenversicherung",
+    "type": "private",
+    "logo": "axa_logo.png"
   },
   {
-  "name": "Allianz"
+    "name": "BAHN-BKK",
+    "type": "public",
+    "logo": "BAHN-BKK_RGB.SVG"
   },
   {
-  "name": "BKK VBU"
+    "name": "Barmenia Krankenversicherung",
+    "type": "private",
+    "logo": "barmenia_logo.png"
   },
   {
-  "name": "BKK Mobil Oil"
+    "name": "BARMER",
+    "type": "public",
+    "logo": "barmer-logo.svg"
   },
   {
-  "name": "BKK Gesundheit"
+    "name": "BERGISCHE Krankenkasse",
+    "type": "public",
+    "logo": "Bergische_Logo_n.svg"
   },
   {
-  "name": "BKK Landesverband Bayern"
+    "name": "Bertelsmann BKK",
+    "type": "public",
+    "logo": "bertelsmann_bkk_logo.svg"
   },
   {
-  "name": "BKK ZF Friedrichshafen"
+    "name": "BIG direkt gesund",
+    "type": "public",
+    "logo": "big-direkt-logo.svg"
   },
   {
-  "name": "BKK Daimler"
+    "name": "BKK Akzo Nobel Bayern",
+    "type": "public",
+    "logo": "bkk_akzo_nobel_logo.svg"
   },
   {
-  "name": "BKK Linde"
+    "name": "BKK Diakonie",
+    "type": "public",
+    "logo": "BKK_Diakonie_Logo.svg"
   },
   {
-  "name": "Techniker Krankenkasse (TK)"
+    "name": "BKK EUREGIO",
+    "type": "public",
+    "logo": "BKK_EUREGIO_Logo.svg"
   },
   {
-  "name": "GEK Gesundheitskasse"
+    "name": "BKK exklusiv",
+    "type": "public",
+    "logo": "bkk_exklusiv_logo.jpg"
   },
   {
-  "name": "CBAS Central Krankenversicherung"
+    "name": "BKK Faber-Castell &amp; Partner",
+    "type": "public",
+    "logo": "BKK_Faber-Castell-Partner_Logo.svg"
   },
   {
-  "name": "BEK Brandenburger Ersatzkasse"
+    "name": "BKK firmus",
+    "type": "public",
+    "logo": "BKK_firmus_logo.svg"
   },
   {
-  "name": "Hallesche Krankenversicherung"
+    "name": "BKK Groz-Beckert",
+    "type": "public",
+    "logo": "bkk_gb_logo.svg"
   },
   {
-  "name": "KKH Allianz"
+    "name": "BKK GILDEMEISTER SEIDENSTICKER",
+    "type": "public",
+    "logo": "BKK_GildemeisterSeidensticker_Logo.svg"
   },
   {
-  "name": "BKK für Heilberufe"
+    "name": "BKK Linde",
+    "type": "public",
+    "logo": "BKK_Linde_Logo_n.svg"
   },
   {
-  "name": "SBK - Die Krankenversicherung"
+    "name": "BKK MAHLE",
+    "type": "public",
+    "logo": "BKK_Mahle_Logo.svg"
   },
   {
-  "name": "Central Krankenversicherung"
+    "name": "bkk melitta hmr",
+    "type": "public",
+    "logo": "bkk_melitta_hmr.svg"
   },
   {
-  "name": "BKK ExxonMobil"
+    "name": "BKK Public",
+    "type": "public",
+    "logo": "bkk_public_logo.jpg"
+  },
+  {
+    "name": "BKK Rieker.Ricosta.Weisser",
+    "type": "public",
+    "logo": "BKK_Rieker__RICOSTA__Weisser_Logo.svg"
+  },
+  {
+    "name": "BKK Salzgitter",
+    "type": "public",
+    "logo": "bkk_salzgitter_logo.jpg"
+  },
+  {
+    "name": "BKK Textilgruppe Hof",
+    "type": "public",
+    "logo": "bkk_textilgruppe_hof_logo.jpeg"
+  },
+  {
+    "name": "BKK Werra-Meissner",
+    "type": "public",
+    "logo": "BKK_Werra_Meissner_Logo_n.svg"
+  },
+  {
+    "name": "BKK ZF &amp; Partner",
+    "type": "public",
+    "logo": "bkk_zf_partner_logo.svg"
+  },
+  {
+    "name": "BKK Deutsche Bank AG",
+    "type": "public",
+    "logo": "BKK-Deutsche-Bank.jpg"
+  },
+  {
+    "name": "BKK Freudenberg",
+    "type": "public",
+    "logo": "BKK-Freudenberg-Logo.svg"
+  },
+  {
+    "name": "BKK HERKULES",
+    "type": "public",
+    "logo": "BKK-Herkules-Logo.svg"
+  },
+  {
+    "name": "BKK MTU",
+    "type": "public",
+    "logo": "BKK-MTU_Logo.svg"
+  },
+  {
+    "name": "BKK PFAFF",
+    "type": "public",
+    "logo": "BKK-PFAFF_Logo.svg"
+  },
+  {
+    "name": "BKK ProVita",
+    "type": "public",
+    "logo": "bkk-provita-logo.svg"
+  },
+  {
+    "name": "BKK SBH",
+    "type": "public",
+    "logo": "BKK-SBH.svg"
+  },
+  {
+    "name": "BKK Scheufelen",
+    "type": "public",
+    "logo": "bkk-scheufelen-logo.svg"
+  },
+  {
+    "name": "BKK Technoform",
+    "type": "public",
+    "logo": "BKK-Technoform_Logo.svg"
+  },
+  {
+    "name": "BKK VBU",
+    "type": "public",
+    "logo": "BKK-VBU_Logo.svg"
+  },
+  {
+    "name": "BKK VDN",
+    "type": "public",
+    "logo": "BKK-VDNLogo.svg"
+  },
+  {
+    "name": "BKK Voralb HELLER*INDEX*LEUZE",
+    "type": "public",
+    "logo": "bkk-voralb-logo.jpg"
+  },
+  {
+    "name": "BKK Würth",
+    "type": "public",
+    "logo": "bkk-wuerth-logo.jpg"
+  },
+  {
+    "name": "BKK24",
+    "type": "public",
+    "logo": "BKK24_Logo.svg"
+  },
+  {
+    "name": "BMW BKK",
+    "type": "public",
+    "logo": "BMWBKK_Logo_2020_Grey_4C.svg"
+  },
+  {
+    "name": "Bosch BKK",
+    "type": "public",
+    "logo": "Bosch_BKKLogo.svg"
+  },
+  {
+    "name": "BKK B. Braun Aesculap",
+    "type": "public",
+    "logo": "Braun_Aesculap_Logo_n.svg"
+  },
+  {
+    "name": "Concordia Krankenversicherung",
+    "type": "private",
+    "logo": "concordia-logo.svg"
+  },
+  {
+    "name": "Continentale Krankenversicherung",
+    "type": "private",
+    "logo": "continentale_logo.png"
+  },
+  {
+    "name": "Mercedes-Benz BKK",
+    "type": "public",
+    "logo": "DaimlerBKK_3_1.svg"
+  },
+  {
+    "name": "DAK Gesundheit",
+    "type": "public",
+    "logo": "DAK_Ges_Logo_4c.svg"
+  },
+  {
+    "name": "Debeka BKK",
+    "type": "public",
+    "logo": "debeka-bkk-logo.svg"
+  },
+  {
+    "name": "DEVK Krankenversicherung",
+    "type": "private",
+    "logo": "devk_logo.jpg"
+  },
+  {
+    "name": "die Bayerische",
+    "type": "private",
+    "logo": "die_bayrische_logo.jpeg"
+  },
+  {
+    "name": "DKV - Deutsche Krankenversicherung",
+    "type": "private",
+    "logo": "dkv-logo.svg"
+  },
+  {
+    "name": "energie-BKK",
+    "type": "public",
+    "logo": "energie-bkk_logo.svg"
+  },
+  {
+    "name": "Ernst &amp; Young BKK",
+    "type": "public",
+    "logo": "enrst-young-logo.jpg"
+  },
+  {
+    "name": "ERGO Krankenversicherung",
+    "type": "private",
+    "logo": "ergo_logo.png"
+  },
+  {
+    "name": "BKK evm",
+    "type": "public",
+    "logo": "evm-betriebskrankenkasse-logo.svg"
+  },
+  {
+    "name": "Generali Krankenversicherung",
+    "type": "private",
+    "logo": "Generali_logo.jpg"
+  },
+  {
+    "name": "Gothaer Krankenversicherung",
+    "type": "private",
+    "logo": "gothaer_logo.png"
+  },
+  {
+    "name": "HanseMerkur Krankenversicherung",
+    "type": "private",
+    "logo": "hansemerkur_logo.jpeg"
+  },
+  {
+    "name": "Heimat Krankenkasse",
+    "type": "public",
+    "logo": "heimat_logo.svg"
+  },
+  {
+    "name": "HEK - Hanseatische Krankenkasse",
+    "type": "public",
+    "logo": "HEK-Logo-2020_4c.svg"
+  },
+  {
+    "name": "hkk Krankenkasse",
+    "type": "public",
+    "logo": "hkk.svg"
+  },
+  {
+    "name": "IKK - Die Innovationskasse",
+    "type": "public",
+    "logo": "ik-Innovationskasse_Logo_2.svg"
+  },
+  {
+    "name": "IKK gesund plus",
+    "type": "public",
+    "logo": "ikk_gesund_plus_logo.svg"
+  },
+  {
+    "name": "IKK Brandenburg und Berlin",
+    "type": "public",
+    "logo": "IKKBB_Logo.svg"
+  },
+  {
+    "name": "IKK classic",
+    "type": "public",
+    "logo": "IKKclassicLogo.svg"
+  },
+  {
+    "name": "Inter Krankenversicherung",
+    "type": "private",
+    "logo": "inter_logo.png"
+  },
+  {
+    "name": "BKK KARL MAYER",
+    "type": "public",
+    "logo": "karl-meyer-bkk.jpg"
+  },
+  {
+    "name": "KKH Kaufmännische Krankenkasse",
+    "type": "public",
+    "logo": "KKH_Fahne_solo_RGB.svg"
+  },
+  {
+    "name": "KNAPPSCHAFT",
+    "type": "public",
+    "logo": "Knappschaft_Logo.svg"
+  },
+  {
+    "name": "Koenig &amp; Bauer BKK",
+    "type": "public",
+    "logo": "KoenigBauerBKK.svg"
+  },
+  {
+    "name": "Krones BKK",
+    "type": "public",
+    "logo": "krones-bkk.jpg"
+  },
+  {
+    "name": "LVM Krankenversicherung",
+    "type": "private",
+    "logo": "lmv_logo.png"
+  },
+  {
+    "name": "BKK Pfalz",
+    "type": "public",
+    "logo": "Logo_BKK_Pfalz.jpg"
+  },
+  {
+    "name": "BKK EWE",
+    "type": "public",
+    "logo": "Logo_BKK-EWE_POSITIV.svg"
+  },
+  {
+    "name": "IKK Südwest",
+    "type": "public",
+    "logo": "Logo_IKK_SW.SVG"
+  },
+  {
+    "name": "TUI BKK",
+    "type": "public",
+    "logo": "logo_tui_bkk.jpg"
+  },
+  {
+    "name": "BKK BPW Bergische Achsen KG",
+    "type": "public",
+    "logo": "Logo-BKK-BPW.jpg"
+  },
+  {
+    "name": "Continentale BKK",
+    "type": "public",
+    "logo": "Logo-Continentale_BKK-blau-RGB.svg"
+  },
+  {
+    "name": "Landwirtschaftliche Krankenkasse - LKK",
+    "type": "public",
+    "logo": "Logo-SVLFG.jpg"
+  },
+  {
+    "name": "BKK Merck",
+    "type": "public",
+    "logo": "MerckBKK.jpg"
+  },
+  {
+    "name": "mhplus Krankenkasse",
+    "type": "public",
+    "logo": "mhplus-logo.svg"
+  },
+  {
+    "name": "BKK Miele",
+    "type": "public",
+    "logo": "Miele_Logo_BKK_CMYK.svg"
+  },
+  {
+    "name": "Mobil Krankenkasse",
+    "type": "public",
+    "logo": "MOB_Logo_Ueberarbeitung_RGB.svg"
+  },
+  {
+    "name": "Münchener Verein Krankenversicherung",
+    "type": "private",
+    "logo": "muenchner_verein_logo.jpeg"
+  },
+  {
+    "name": "Novitas BKK",
+    "type": "public",
+    "logo": "NovitasBKK_Logo.svg"
+  },
+  {
+    "name": "Nürnberger Krankenversicherung",
+    "type": "private",
+    "logo": "nuernberger_logo.jpg"
+  },
+  {
+    "name": "Pronova BKK",
+    "type": "public",
+    "logo": "pronovabkk_logo.svg"
+  },
+  {
+    "name": "BKK PwC",
+    "type": "public",
+    "logo": "pwc_betriebskrankenkasse_logo.svg"
+  },
+  {
+    "name": "R+V Krankenversicherung",
+    "type": "private",
+    "logo": "ruv_logo.svg"
+  },
+  {
+    "name": "R+V Betriebskrankenkasse",
+    "type": "public",
+    "logo": "RuV-BKK-Logo.svg"
+  },
+  {
+    "name": "Salus BKK",
+    "type": "public",
+    "logo": "Salus_BKK_Logo.svg"
+  },
+  {
+    "name": "SBK",
+    "type": "public",
+    "logo": "sbk-logo.svg"
+  },
+  {
+    "name": "Süddeutsche Krankenversicherung",
+    "type": "private",
+    "logo": "sdk_logo.jpg"
+  },
+  {
+    "name": "SECURVITA Krankenkasse",
+    "type": "public",
+    "logo": "SECURVITA_KK_Logo.svg"
+  },
+  {
+    "name": "Signal Iduna Krankenversicherung",
+    "type": "private",
+    "logo": "signal-iduna-logo.svg"
+  },
+  {
+    "name": "SKD BKK",
+    "type": "public",
+    "logo": "skd-bkk_logo.svg"
+  },
+  {
+    "name": "Südzucker-BKK",
+    "type": "public",
+    "logo": "Suedzucker_logo.svg"
+  },
+  {
+    "name": "Techniker Krankenkasse (TK)",
+    "type": "public",
+    "logo": "TK_logo.svg"
+  },
+  {
+    "name": "UKV Union Krankenversicherung",
+    "type": "private",
+    "logo": "ukv_logo.jpeg"
+  },
+  {
+    "name": "Universa Krankenversicherung",
+    "type": "private",
+    "logo": "universa_logo.svg"
+  },
+  {
+    "name": "BKK VerbundPlus",
+    "type": "public",
+    "logo": "VerbundPlus_Logo.svg"
+  },
+  {
+    "name": "VIACTIV Krankenkasse",
+    "type": "public",
+    "logo": "viactiv-krankenkasse.svg"
+  },
+  {
+    "name": "vivida bkk",
+    "type": "public",
+    "logo": "vivida_BKK_LOGO.svg"
+  },
+  {
+    "name": "WMF BKK",
+    "type": "public",
+    "logo": "WMF_BetriebsKK-Logo.SVG"
+  },
+  {
+    "name": "Württembergische Krankenversicherung",
+    "type": "private",
+    "logo": "wuerttembergische-logo.svg"
+  },
+  {
+    "name": "BKK WIRTSCHAFT &amp; FINANZEN",
+    "type": "public",
+    "logo": "WuF-Logo4C_1_oR.svg"
+  },
+  {
+    "name": "actimonda krankenkasse - jetzt: BIG direkt gesund",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Baden-Württemberg",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Bayern",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Bremen/Bremerhaven",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Hessen",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Niedersachsen",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Nordost",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Nordwest",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK PLUS",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Rheinland-Pfalz/Saarland",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Rheinland/Hamburg",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "AOK Sachsen-Anhalt",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "atlas BKK ahlmann - jetzt: vivida bkk",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Achenbach Buschhütten - jetzt: VIACTIV",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK advita - jetzt: BKK24",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Aesculap",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK AXEL SPRINGER - jetzt: DAK Gesundheit",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Basell - jetzt: BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Beiersdorf AG - jetzt: DAK Gesundheit",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK BJB - jetzt: BKK Gildemeister Seidensticker",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Braun-Gillette - jetzt: pronova BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Demag Krauss-Maffei - jetzt: BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK ESSANELLE - jetzt: BARMER",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK family - jetzt: BKK ProVita",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK futur - jetzt BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Gesundheit - jetzt: DAK Gesundheit",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK GRILLO-WERKE AG",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Heimbach - jetzt: actimonda",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Henschel plus - jetzt: Continentale BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Kassana - jetzt: BKK VerbundPlus",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK MAN und MTU - jetzt: Audi  BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK MEDICUS - jetzt: BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Melitta Plus - jetzt: BKK Melitta HMR",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK MEM - jetzt Metzinger BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK PHOENIX - jetzt: Novitas BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK RWE - jetzt: energie BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK S-H - jetzt: BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Schwesternschaft v. BRK - jetzt: BKK ProVita",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Stadt Augsburg - jetzt: Audi BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "BKK Vital - jetzt: BKK Pfalz",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Brandenburgische BKK - jetzt: BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "DBV Deutsche Beamtenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "Debeka Krankenversicherungsverein",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "DEUTSCHE BKK - jetzt: BARMER",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Deutscher Ring Krankenversicherungsverein",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "E.ON Betriebskrankenkasse - jetzt: energie-BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Envivas Krankenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "ESSO BKK - jetzt: Novitas BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "HEAG BKK - jetzt: Linde BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "HUK-Coburg Krankenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "Hypovereinsbank BKK - jetzt: BKK Mobil Oil",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "LKH Landeskrankenhilfe",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "Mecklenburgische Krankenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "Metzinger BKK - jetzt: mhplus",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "ottonova Krankenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "SAINT-GOBAIN BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Schwenniger Krankenkasse - jetzt: vivida bkk",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Shell BKK/LIFE - jetzt: DAK Gesundheit",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "SIEMAG BKK - jetzt: Novitas BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "TBK (Thüringer Betriebskrankenkasse)",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Vaillant BKK - jetzt: pronova BKK",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Vereinigte BKK - jetzt: BKK VBU",
+    "type": "public",
+    "logo": null
+  },
+  {
+    "name": "Versicherungskammer Bayern",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "VGH Krankenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "vigo Krankenversicherung",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "VRK Krankenversicherung AG",
+    "type": "private",
+    "logo": null
+  },
+  {
+    "name": "Wieland BKK - jetzt: BKK Verbund Plus",
+    "type": "public",
+    "logo": null
   }
-  ]
+ ]
