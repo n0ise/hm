@@ -71,15 +71,6 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                <label class="form-label">Keeping this one here for fast testing</label>
-                    <div class="form-floating">
-                        <input id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
-                        <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
-                    </div>
-                    <div id="filter-records"></div>
-                
-                </div>
 
    
 
@@ -272,12 +263,22 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <div class="form-floating">
                         <input id="krankenversicherung" name="insurance_company" type="text" class="form-control" placeholder=" " />
                         <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
                     </div>
+                </div> -->
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
+                        <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
+                    </div>
+                    <div id="filter-records"></div>
+                
                 </div>
+
 
                 <!-- <div class="col-12">
                     <div class="form-floating">
@@ -295,8 +296,6 @@
         </div>
     </form>
 
-
-
 </div>
 
 
@@ -305,9 +304,9 @@
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/multistep.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/search-function.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.de.min.js" integrity="sha512-3V4cUR2MLZNeqi+4bPuXnotN7VESQC2ynlNH/fUljXZiQk1BGowTqO5O2gElABNMIXzzpYg5d8DxNoXKlM210w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/my-dropzone.js"></script>
 
 <!-- <script src="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.js"></script> -->
 
@@ -322,15 +321,13 @@
      <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button> -->
     <!-- </div> -->
     <script type="module">
-                        import {Uppy, Dashboard, Tus, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+                        import {Uppy, Dashboard, XHRUpload, Tus, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
                         var uppy = new Uppy()
                       
                             .use(Dashboard, {
                                 inline: true,
                                 height: 500,
-                       
                                 proudlyDisplayPoweredByUppy:false,
-                          
                                 target: '#drag-drop-area'
                             })
                         
@@ -356,13 +353,13 @@
 
                             })
                        
-                            .use(Tus, {endpoint: 'https://tusd.tusdemo.net/files/'})
+                            .use(Tus, {endpoint: '/wp-content/themes/hellomed/uploads'})
+                        
+                            // .use(XHRUpload, {endpoint: '/wp-content/uploads/rezepte'})
                        
                             uppy.on('complete', (result) => {
                             console.log('Upload complete! We’ve uploaded these files:', result.successful)
                             })
-
-
 
                         </script>
 
