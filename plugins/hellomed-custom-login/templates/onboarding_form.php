@@ -353,7 +353,7 @@
 
                             })
                        
-                            .use(Tus, {endpoint: '/wp-content/themes/hellomed/uploads'})
+                            .use(Tus, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
                         
                             // .use(XHRUpload, {endpoint: '/wp-content/uploads/rezepte'})
                        
