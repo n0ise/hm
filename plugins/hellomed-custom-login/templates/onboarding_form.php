@@ -353,9 +353,9 @@
 
                             })
                        
-                            .use(Tus, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
+                            // .use(Tus, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
                         
-                            // .use(XHRUpload, {endpoint: '/wp-content/uploads/rezepte'})
+                            .use(XHRUpload, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
                        
                             uppy.on('complete', (result) => {
                             console.log('Upload complete! We’ve uploaded these files:', result.successful)
