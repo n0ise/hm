@@ -3,7 +3,7 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 
- <link href="wp-content/themes/hellomed/assets/css/uppy.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://ui.hellomed.com/css/uppy.3.3.1.min.css" >
 
    <div class="hm-auth-wrap">
     <div class="hm-logo">
@@ -320,13 +320,26 @@
     <!-- <button class="action next btn  btn-primary btn-lg float-end">Next</button>
      <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button> -->
     <!-- </div> -->
+
+
+
+
+
     <script type="module">
-                        import {Uppy, Dashboard, XHRUpload, Tus, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+
+                            if (screen && screen.width / screen.height > 1) {
+                                    var heightview = 425;
+                            }
+                            else {
+                                var heightview = 650;
+                            }
+                     
+                        import {Uppy, Dashboard, XHRUpload, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
                         var uppy = new Uppy()
                       
                             .use(Dashboard, {
                                 inline: true,
-                                height: 500,
+                                height: heightview,
                                 proudlyDisplayPoweredByUppy:false,
                                 target: '#drag-drop-area'
                             })
@@ -354,8 +367,12 @@
                             })
                        
                             // .use(Tus, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
-                        
-                            .use(XHRUpload, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
+            
+
+                            .use(XHRUpload, {
+                                endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
+                                fieldName: 'my_file',
+                            })
                        
                             uppy.on('complete', (result) => {
                             console.log('Upload complete! We’ve uploaded these files:', result.successful)

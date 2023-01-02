@@ -284,6 +284,8 @@ include_once('footer.php');
         });
     });
     </script>
+
+
     <script>
 let data;
 
@@ -317,8 +319,7 @@ function search() {
     });
 }
 
-
-
 window.addEventListener('load', fetchData);
 document.querySelector('.insurance_company').addEventListener('input', search);
+
 </script>
