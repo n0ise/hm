@@ -72,7 +72,7 @@
                 </div>
 
 
-   
+                <div id="drag-drop-area"></div> 
 
                 <div class="col-12">
                     <div class="form-floating">
@@ -208,7 +208,7 @@
                     <label id="rezeptlabel"class="form-label">Rezept hochladen</label>
 
 
-                    <div id="drag-drop-area"></div> 
+                    <!-- <div id="drag-drop-area"></div>  -->
 
                         <!-- <div class="dropzone" id="mydropzone">
 
@@ -334,16 +334,25 @@
                                 var heightview = 650;
                             }
                      
-                        import {Uppy, Dashboard, XHRUpload, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
-                        var uppy = new Uppy()
+                        import {Uppy, Dashboard, XHRUpload, ProgressBar, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+                        var uppy = new Uppy(
+                            {
+                                autoProceed: true,
+                            }
+                        )
                       
+
                             .use(Dashboard, {
                                 inline: true,
                                 height: heightview,
                                 proudlyDisplayPoweredByUppy:false,
-                                target: '#drag-drop-area'
+                                target: '#drag-drop-area',
+
+                                    doneButtonHandler: null,
                             })
                         
+                         
+
                             .use(Webcam, { 
                                 target: Dashboard,
                                 onBeforeSnapshot: () => Promise.resolve(),
@@ -368,13 +377,21 @@
                        
                             // .use(Tus, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
             
-
+                    
                             .use(XHRUpload, {
                                 endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
                                 fieldName: 'my_file',
+
                             })
+
+                         
                        
                             uppy.on('complete', (result) => {
+                                
+                                        
+
+
+
                             console.log('Upload complete! We’ve uploaded these files:', result.successful)
                             })
 

@@ -1,42 +1,21 @@
 <?php
-    $currentDirectory = getcwd();
-    $uploadDirectory = "/uploads/";
 
-    $errors = []; // Store errors here
+// global $current_user;
+// get_currentuserinfo();
+// $logged_in_user = $current_user->ID;
 
-    $fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed 
+// $uploaddir = './' .$user_id. '/'; 
 
-    $fileName = $_FILES['my_file']['name'];
-    $fileSize = $_FILES['my_file']['size'];
-    $fileTmpName  = $_FILES['my_file']['tmp_name'];
-    $fileType = $_FILES['my_file']['type'];
-    $fileExtension = strtolower(end(explode('.',$fileName)));
+$user = wp_get_current_user();
 
-    $uploadPath = $currentDirectory . $uploadDirectory . basename($fileName); 
+var_dump($user);
 
-    if (isset($_POST['submit'])) {
+// if (!file_exists($uploaddir)) {
+//     mkdir($uploaddir);
+// }
 
-      if (! in_array($fileExtension,$fileExtensionsAllowed)) {
-        $errors[] = "This file extension is not allowed. Please upload a JPEG or PNG file";
-      }
+$my_file = $_FILES['my_file'];
+$file_path = $my_file['tmp_name']; // temporary upload path of the file
+$file_name = $_POST['name']; // desired name of the file
+move_uploaded_file($file_path, './mah/' . basename($file_name)); 
 
-      if ($fileSize > 4000000) {
-        $errors[] = "File exceeds maximum size (4MB)";
-      }
-
-      if (empty($errors)) {
-        $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
-
-        if ($didUpload) {
-          echo "The file " . basename($fileName) . " has been uploaded";
-        } else {
-          echo "An error occurred. Please contact the administrator.";
-        }
-      } else {
-        foreach ($errors as $error) {
-          echo $error . "These are the errors" . "\n";
-        }
-      }
-
-    }
-?>
