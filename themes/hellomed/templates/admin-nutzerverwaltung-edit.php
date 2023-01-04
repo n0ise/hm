@@ -8,7 +8,7 @@
    // var_dump($user_id);
    
     ?>
- 
+
 <main>
     <div class="container">
         <div class="hm-content">
@@ -21,13 +21,19 @@
                 // get user data
                 $user = get_userdata($user_id);
             ?>
-            <div class="row gy-4">
+            <div class="row gy-4 hm-settings-grid">
+                <div class="col-12">
+                    <div class="h3 m-0">ID</div>
+                </div>
                 <div class="col-12">
                     <div class="form-floating">
                         <input id="new_user_id" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($_GET['user_id'], 'new_user_id', true); ?>">
                         <label>User ID</label>
                     </div>
+                </div>
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Stammdaten</div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
@@ -69,6 +75,9 @@
                         <label>Geburtstag</label>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Krankheiten</div>
+                </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="krankheiten" type="text" class="form-control" placeholder=" "
@@ -83,6 +92,9 @@
                         <label>Allergien</label>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Adressdaten</div>
+                </div>
                 <div class="col-8">
                     <div class="form-floating">
                         <input id="strasse" type="text" class="form-control" placeholder=" "
@@ -90,14 +102,14 @@
                         <label>Straße</label>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 ps-0">
                     <div class="form-floating">
                         <input id="nrno" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($_GET['user_id'], 'nrno', true); ?>">
                         <label>Nr</label>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 pe-0">
                     <div class="form-floating">
                         <input id="postcode" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($_GET['user_id'], 'postcode', true); ?>">
@@ -126,13 +138,19 @@
                     </div>
                 </div>
                 <div class="col-12">
+                    <div class="h3 m-0 mt-5">Verblisterung</div>
+                </div>
+                <div class="col-12">
                     <div class="form-floating">
                         <input id="start_date" type="date" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($_GET['user_id'], 'start_date', true); ?>">
-                        <label>Hellomed Startdatum</label>
+                        <label>hellomed Startdatum</label>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 offset-md-4">
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Krankenkasse</div>
+                </div>
+                <div class="col-12">
                     <div class="btn-group d-flex">
                         <input id="privat_gesetzlich" type="radio" value="Privat" class="btn-check"
                             name="privat_or_gesetzlich" autocomplete="off" <?php 
@@ -162,6 +180,9 @@
                             value="<?php echo get_user_meta($_GET['user_id'], 'insurance_number', true); ?>">
                         <label>Versicherungsnummer</label>
                     </div>
+                </div>
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Status</div>
                 </div>
                 <div class="col-12">
                     <div class="form-floating">

@@ -10,16 +10,40 @@ $user_id = get_current_user_id();
     <div class="container">
         <div class="hm-content">
 
-            <div class="h2 mb-5">Einstellungen</div>
+            <div class="h2 mb-5">Einstellungen
+                <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/about_me.svg">
+            </div>
+
             <div id="success"></div>
 
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {
             $user = get_userdata($user_id);
             ?>
-            <div class="row gy-4">
+            <div class="row gy-4 hm-settings-grid">
+                <div class="col-12">
+                    <div class="h3 m-0">Stammdaten</div>
+                </div>
+                <div class="col-12 ">
+                    <div class="form-floating">
+                        <select id="geschlecht" class="form-select">
+                            <option value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" selected>
+                                <?php echo get_user_meta($user_id, 'geschlecht', true); ?></option>
+                            <?php 
+                                $geschlecht = array('Männlich', 'Weiblich');
+                                $selectedgeschlecht = get_user_meta($user_id, 'geschlecht', true);
+                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
+                                unset($geschlecht[$keygeschlecht]);
+                                    foreach ($geschlecht as $valuegeschlecht) {
+                                    echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
+                                    } 
+                                ?>
+                        </select>
+                        <label>Geschlecht</label>
+                    </div>
+                </div>
                 <div class="col-12 col-md-6">
-                <div class="form-floating">
+                    <div class="form-floating">
                         <input id="first_name" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'patient_first_name', true); ?>">
                         <label>Vorname</label>
@@ -34,20 +58,9 @@ $user_id = get_current_user_id();
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
-                        <select id="geschlecht" class="form-select">
-                            <option value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" selected>
-                                <?php echo get_user_meta($user_id, 'geschlecht', true); ?></option>
-                                <?php 
-                                $geschlecht = array('Männlich', 'Weiblich', 'Divers');
-                                $selectedgeschlecht = get_user_meta($user_id, 'geschlecht', true);
-                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
-                                unset($geschlecht[$keygeschlecht]);
-                                    foreach ($geschlecht as $valuegeschlecht) {
-                                    echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
-                                    } 
-                                ?>
-                        </select>
-                        <label>Geschlecht</label>
+                        <input id="last_name" type="text" class="form-control" placeholder=" "
+                            value="not editable, placeholder" disabled>
+                        <label>E-Mail</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -56,6 +69,9 @@ $user_id = get_current_user_id();
                             value="<?php echo get_user_meta($user_id, 'geburt', true); ?>">
                         <label>Geburtstag</label>
                     </div>
+                </div>
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Krankheiten</div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
@@ -71,6 +87,9 @@ $user_id = get_current_user_id();
                         <label>Allergien</label>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Adressdaten</div>
+                </div>
                 <div class="col-8">
                     <div class="form-floating">
                         <input id="strasse" type="text" class="form-control" placeholder=" "
@@ -78,14 +97,14 @@ $user_id = get_current_user_id();
                         <label>Straße</label>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 ps-0">
                     <div class="form-floating">
                         <input id="nrno" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'nrno', true); ?>">
                         <label>Nr</label>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-4 pe-0">
                     <div class="form-floating">
                         <input id="postcode" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'postcode', true); ?>">
@@ -114,13 +133,19 @@ $user_id = get_current_user_id();
                     </div>
                 </div>
                 <div class="col-12">
+                    <div class="h3 m-0 mt-5">Verblisterung</div>
+                </div>
+                <div class="col-12">
                     <div class="form-floating">
                         <input id="start_date" type="date" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'start_date', true); ?>">
                         <label>hellomed Startdatum</label>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 offset-md-4">
+                <div class="col-12">
+                    <div class="h3 m-0 mt-5">Krankenkasse</div>
+                </div>
+                <div class="col-12">
                     <div class="btn-group d-flex">
                         <input id="privat_gesetzlich" type="radio" value="Privat" class="btn-check"
                             name="privat_or_gesetzlich" autocomplete="off" <?php 
@@ -286,7 +311,7 @@ include_once('footer.php');
     </script>
 
 
-    <script>
+<script>
 let data;
 
 function fetchData() {
@@ -319,7 +344,8 @@ function search() {
     });
 }
 
+
+
 window.addEventListener('load', fetchData);
 document.querySelector('.insurance_company').addEventListener('input', search);
-
 </script>
