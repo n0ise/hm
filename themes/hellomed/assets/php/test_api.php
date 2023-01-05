@@ -23,8 +23,13 @@ $token_result = curl_exec($token_ch);
 $token_result = json_decode($token_result, true);
 $token = $token_result['access_token'];
 
+// today date
+$today= date("Y-m-d");
+// $id_new= "351384";
+// taking id from POST request in /os-medikationsplan.php, so it will grab API based on the user 
+$id_new= $_POST['id'];
 
-$patient_url = "https://api.blisterwuerfel.de/ext-api/patient/338962/2022-12-14";
+$patient_url = "https://api.blisterwuerfel.de/ext-api/patient/".$id_new."/".$today;
 $patient_headers = array(
     'Authorization: Bearer ' . $token,
     'Content-Type: application/json'
@@ -36,9 +41,9 @@ curl_setopt($patient_ch, CURLOPT_HTTPHEADER, $patient_headers);
 $patient_result = curl_exec($patient_ch);
 
 
-// wrap result into json object 
-$patient_result = json_decode($patient_result, true);
-// make it available via POST request
-echo json_encode($patient_result);
 
+$patient_result = json_decode($patient_result, true);
+
+// this is going down a level, in the output, 
+echo json_encode($patient_result['medications']);
 ?>

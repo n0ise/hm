@@ -1,12 +1,23 @@
-var url = '/wp-content/themes/hellomed/assets/php/test_api.php';
-fetch(url, {
-  method: 'GET'
-})
-.then((res) => res.json())
-.then((data) => {
-  console.log(data);
+/*******************************************************************************
+ * this was the original code, working but trying a new approach
+ *
+ */
+ 
+// var url = '/wp-content/themes/hellomed/assets/php/test_api.php';
+// fetch(url, {
+//   method: 'GET'
+// })
+// .then((res) => res.json())
+// .then((data) => {
+//   console.log(data);
+    
+/******* NEW APPROACH *******/
 
-// sapmle output from json 
+// taking the variable from the php file and using it in the js file
+    const response = JSON.parse(apiResponse);
+    console.log(response);
+
+// sample output from json 
 //   [
 //     {
 //         "pzn": "766759",
@@ -34,52 +45,17 @@ fetch(url, {
 //                 "timeHint": "abends",
 //                 "amount": "1",
 //                 "hint": ""
-//             },
-//             {
-//                 "date": "2022-12-24",
-//                 "time": "19:00",
-//                 "timeHint": "abends",
-//                 "amount": "1",
-//                 "hint": ""
-//             },
-//             {
-//                 "date": "2022-12-25",
-//                 "time": "19:00",
-//                 "timeHint": "abends",
-//                 "amount": "1",
-//                 "hint": ""
-//             }
+//             }, etc........
 //]
 
   // Create an array to store the grouped and sorted data
-  const response = data;
-
-  // Loop through all medications and dosages
-  // for (let i = 0; i < data.medications.length; i++) {
-  //   const medication = data.medications[i];
-  //   for (let j = 0; j < medication.dosages.length; j++) {
-  //     const dosage = medication.dosages[j];
-
-  //     // Push an object containing the relevant information to the response array
-  //     response.push({
-  //       newDate: dosage.date,
-  //       newMeds: [{
-  //         newTime: dosage.time,
-  //         newName: [{
-  //           name: medication.medication,
-  //           amount: dosage.amount
-  //         }]
-  //       }]
-  //     });
-  //   }
-  // ]
-
+  
 /*******************************************************************************
  * First, we create a new object structure that is easier to merge
  */
 
-const rewriteResponse = (object) => {
-  const apiArray = object.medications
+  const rewriteResponse = (object) => {
+  const apiArray = object
   const newArray = []
 
   apiArray.forEach((med) => {
@@ -201,5 +177,3 @@ tabs.forEach((cur, i) => {
 })
 
 tabs[0].click()
-
-})

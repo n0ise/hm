@@ -25,7 +25,8 @@
 <script src="https://ui.hellomed.com/js/off-canvas.js"></script>
 
 <!-- if page is medikamente, load this  -->
-<?php if (is_page('os-medikationsplan')) { ?>
-<script src="wp-content/themes/hellomed/assets/js/medication.js"></script>
-<?php } ?>
+<!-- for the moment is OUT, because im including the js in the page itself with ajax, after sending the id -->
+<?php //if (is_page('os-medikationsplan')) { ?>
+<!-- <script src="wp-content/themes/hellomed/assets/js/medication.js"></script> -->
+<?php // } ?>
 
