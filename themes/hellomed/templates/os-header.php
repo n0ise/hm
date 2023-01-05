@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>hellomed STAGE</title>
+
     <link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
@@ -55,13 +57,13 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     }
                     ?>
         <div class="hm-preheader <?php echo $class; ?>">
-            <div class="container">
                 <i class="bi bi-exclamation-circle-fill"></i>
+                <div>
                 Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum <b><?php echo $prescription_end_date; ?></b> aus.
-      Bitte senden Sie Ihr Folgerezept spätestens bis zum <b>(15 days before or the 15th of the month?)</b> postalisch oder per
+      Bitte senden Sie Ihr Folgerezept spätestens bis zum <b>(DD/MM/YYY)</b> postalisch oder per
       Rezept-Upload an uns.
-            </div>
-            <i class="bi bi-x-circle"></i>
+                </div>
+                <i class="bi bi-x-circle"></i>
         </div>
         <?php  
                 }        
