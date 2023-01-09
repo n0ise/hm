@@ -1,7 +1,7 @@
 <?php /* Template Name: Os Hilfe */ ?>
 
 <!-- include_once header.php from template  -->
-<?php include_once('header.php'); ?>
+<?php include_once('os-header.php'); ?>
 
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in()) { ?>
