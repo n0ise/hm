@@ -36,8 +36,11 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
             <div class="hm-content">
                 <?php  foreach ($filtered_rezept_input as $record) { ?>
 
-                <div class="h2 mb-5">Rezept hinzufügen/editieren</div>
-                <div class="row gy-4">
+                <div class="h2 mb-5">Rezept bearbeiten</div>
+                <div class="row gy-4 hm-settings-grid">
+                    <div class="col-12">
+                        <div class="h3 m-0">User</div>
+                    </div>
                     <div class="col-12">
                         <div class="form-floating">
                             <input type="text" class="form-control" value="<?php echo $user_id; ?>">
@@ -51,104 +54,132 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                             <label>Prescription ID</label>
                         </div>
                     </div> -->
-                    <?php 
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Blisterjob</div>
+                     </div>
+                        <?php 
     if (!empty($record['blister_job'])) {
       foreach ($record['blister_job'] as $blister_job) {
 
   ?>
-                    <div class="col-12 col-md-6">
-                        <div class="form-floating">
-                            <input id="blister_job_id" type="text" class="blister_job_id form-control"
-                                value="<?php echo $blister_job['blister_job_id'] ?>">
-                            <label>Blisterjob ID</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-floating">
-                            <input id="blister_start_date" type="date" class=" blister_start_date form-control"
-                                value="<?php echo $blister_job['blister_start_date'] ?>">
-                            <label>Start</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-floating">
-                            <input id="blister_end_date" type="text" class="blister_end_date form-control"
-                                value="<?php echo $blister_job['blister_end_date'] ?>">
-                            <label>Ende</label>
-                        </div>
-                    </div>
 
-                    <?php  } 
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <input id="blister_job_id" type="text" class="blister_job_id form-control"
+                                    value="<?php echo $blister_job['blister_job_id'] ?>">
+                                <label>Blisterjob ID</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <input id="blister_start_date" type="date" class=" blister_start_date form-control"
+                                    value="<?php echo $blister_job['blister_start_date'] ?>">
+                                <label>Start</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <input id="blister_end_date" type="text" class="blister_end_date form-control"
+                                    value="<?php echo $blister_job['blister_end_date'] ?>">
+                                <label>Ende</label>
+                            </div>
+                        </div>
+
+                        <?php  } 
                       }
                     ?>
-                    <!-- div where will be added new blister jobs on click  -->
+                        <!-- div where will be added new blister jobs on click  -->
 
-                    <div class="blister_ph"></div>
-                     <?php
+                        <div class="blister_ph"></div>
+                        <?php
                 }
                      ?>
 
-                    <div class="col-12 d-flex justify-content-center">
-                        <button type="button" class="btn btn-light btn-sm" id="add_blister_job">
-                            <i class="bi bi-plus-circle-fill me-2"></i>
-                            Blisterjob
-                        </button>
-                    </div>
-
-                    <div class="col-12 col-md-9">
-                        <div class="form-floating">
-                            <input id="doctor_name" type="text" class="form-control"
-                                value="<?php echo $record['doctor_name']; ?>">
-                            <label>Arzt</label>
+                        <div class="col-12 d-flex justify-content-center">
+                            <button type="button" class="btn btn-light btn-sm" id="add_blister_job">
+                                <i class="bi bi-plus-circle-fill me-2"></i>
+                                Blisterjob
+                            </button>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="form-floating">
-                            <input id="prescription_date_by_doctor" type="date" class="form-control"
-                                value="<?php echo $record['prescription_date_by_doctor']; ?>">
-                            <label>Verschreibungsdatum</label>
-                        </div>
-                    </div>
 
-                    <?php
+                        <div class="col-12">
+                            <div class="h3 m-0 mt-5">Arzt</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input id="doctor_name" type="text" class="form-control"
+                                    value="<?php echo $record['doctor_name']; ?>">
+                                <label>Arzt</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="h3 m-0 mt-5">Rezept</div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <input id="prescription_date_by_doctor" type="date" class="form-control"
+                                    value="<?php echo $record['prescription_date_by_doctor']; ?>">
+                                <label>Verschreibungsdatum</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <input id="prescription_start_date" type="date" class="form-control" placeholder=" "
+                                    value="<?php echo $record['prescription_start_date']; ?>">
+                                <label>Start</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <input id="prescription_end_date" type="date" class="form-control" placeholder=" "
+                                    value="<?php echo $record['prescription_end_date']; ?>">
+                                <label>Ende</label>
+                            </div>
+                        </div>
+                        <?php
                 if (!empty($record['medicine_section'])) {
                     foreach ($record['medicine_section'] as $medicine) {?>
-                    <div class="col-12 col-md-9">
-                        <div class="form-floating">
-                            <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
-                                value="<?php echo $medicine['medicine_name_pzn']; ?>" list="medicine-options">
-                            <label>Medikament</label>
+                        <div class="col-12">
+                            <div class="h3 m-0 mt-5">Inhalt</div>
                         </div>
-                    </div>
-
-                    <div class="col-12 col-md-3">
-                        <div class="form-floating">
-                            <input id="medicine_amount" type="number" class="form-control medicine_amount"
-                                value="<?php echo $medicine['medicine_amount']; ?>" step="1" min="0">
-                            <label>Menge</label>
+                        <div class="col-12 col-md-9">
+                            <div class="form-floating">
+                                <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
+                                    value="<?php echo $medicine['medicine_name_pzn']; ?>" list="medicine-options">
+                                <label>Medikament</label>
+                            </div>
                         </div>
 
-                    </div>
-                    <?php
+                        <div class="col-12 col-md-3">
+                            <div class="form-floating">
+                                <input id="medicine_amount" type="number" class="form-control medicine_amount"
+                                    value="<?php echo $medicine['medicine_amount']; ?>" step="1" min="0">
+                                <label>Menge</label>
+                            </div>
+
+                        </div>
+                        <?php
                     }
                 }
                 ?>
-                    <div class="medikament_ph"></div>
-                    <datalist id="medicine-options"></datalist>
+                        <div class="medikament_ph"></div>
+                        <datalist id="medicine-options"></datalist>
 
-                    <div class="col-12 d-flex justify-content-center">
-                        <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
-                            <i class="bi bi-plus-circle-fill me-2"></i>
-                            Medikament
-                        </button>
-                    </div>
-
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <select id="status_prescription" class="form-select">
-                                <option selected><?php echo $record['status_prescription'] ?> </option>
-                                <?php 
-                                $status_prescription = array('Aktiv', 'Inaktiv', 'Wartend','Gefährdet');
+                        <div class="col-12 d-flex justify-content-center">
+                            <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
+                                <i class="bi bi-plus-circle-fill me-2"></i>
+                                Medikament
+                            </button>
+                        </div>
+                        <div class="col-12">
+                            <div class="h3 m-0 mt-5">Status</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <select id="status_prescription" class="form-select">
+                                    <option selected><?php echo $record['status_prescription'] ?> </option>
+                                    <?php 
+                                $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
                                 $selected_status_prescription = get_user_meta($_GET['user_id'], 'status_prescription', true);
                                 $key_status_prescription = array_search($selected_status_prescription, $status_prescription);
                                 unset($status_prescription[$key_status_prescription]);
@@ -156,18 +187,19 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                                     echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
                                     } 
                                 ?>
-                            </select>
-                            <label>Status</label>
+                                </select>
+                                <label>Status</label>
+                            </div>
                         </div>
+                        <div class="col-12">
+                            <button id="save_blister_job" type="button"
+                                class="btn btn-primary btn-lg">Speichern</button>
+                        </div>
+                        <div id="successdown"></div>
                     </div>
-                    <div class="col-12">
-                        <button id="save_blister_job" type="button" class="btn btn-primary btn-lg">Speichern</button>
-                    </div>
-                    <div id="successdown"></div>
-                </div>
 
+                </div>
             </div>
-        </div>
     </main>
     <?php } 
 else { ?>
@@ -199,7 +231,7 @@ else { ?>
 include_once('footer.php');
 ?>
 
-<!-- that is taking the json file -->
+    <!-- that is taking the json file -->
     <script>
     let data;
 
@@ -269,7 +301,7 @@ include_once('footer.php');
     jQuery(document).ready(function($) {
         $('#add_blister_job').click(function() {
             let blisterDivHTML =
-                `<div class="col-12 col-md-6 blister_jobs_form"><div class="form-floating "><input type="text" id="blister_job_id" class="form-control blister_job_id" value=""><label>Blisterjob ID</label></div></div><div class="col-12 col-md-3"><div class="form-floating"><input type="date" id="blister_start_date" class="form-control blister_start_date" value=""><label>Start</label></div></div><div class="col-12 col-md-3"><div class="form-floating" ><input type="text"  id="blister_end_date" class="form-control blister_end_date" value=""><label>Ende</label></div></div>`;
+                `<div class="col-12 col-md-4 blister_jobs_form"><div class="form-floating "><input type="text" id="blister_job_id" class="form-control blister_job_id" value=""><label>Blisterjob ID</label></div></div><div class="col-12 col-md-4"><div class="form-floating"><input type="date" id="blister_start_date" class="form-control blister_start_date" value=""><label>Start</label></div></div><div class="col-12 col-md-4"><div class="form-floating" ><input type="text"  id="blister_end_date" class="form-control blister_end_date" value=""><label>Ende</label></div></div>`;
             document.querySelector('.blister_ph').insertAdjacentHTML('afterend', blisterDivHTML);
 
         });
@@ -286,6 +318,8 @@ include_once('footer.php');
             var prescription_id = $('#prescription_id').val();
             var doctor_name = $('#doctor_name').val();
             var prescription_date_by_doctor = $('#prescription_date_by_doctor').val();
+            var prescription_start_date = $('#prescription_start_date').val();
+            var prescription_end_date = $('#prescription_end_date').val();
             var medicine_name_pzn = $('#medicine_name_pzn').val();
             var medicine_amount = $('#medicine_amount').val();
             var status_prescription = $('#status_prescription').val();
@@ -328,6 +362,8 @@ include_once('footer.php');
                 'prescription_id': prescription_id,
                 'doctor_name': doctor_name,
                 'prescription_date_by_doctor': prescription_date_by_doctor,
+                'prescription_start_date': prescription_start_date,
+                'prescription_end_date': prescription_end_date,
                 'medicine_name_pzn': medicine_name_pzn,
                 'medicine_amount': medicine_amount,
                 'prescription_id': prescription_id,

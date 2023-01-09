@@ -506,6 +506,18 @@ foreach ($rezept_input as &$record) {
 		echo "<li> Verschreibungstdatum aktualisiert </li>";
 	}
 
+	if ( !empty($_POST['prescription_start_date']) && $_POST['prescription_start_date'] != $record['prescription_start_date'] ) {
+		$record['prescription_start_date'] = $_POST['prescription_start_date'];
+		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Rezept Start aktualisiert </li>";
+	}
+
+	if ( !empty($_POST['prescription_end_date']) && $_POST['prescription_end_date'] != $record['prescription_start_date'] ) {
+		$record['prescription_end_date'] = $_POST['prescription_end_date'];
+		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		echo "<li> Rezept Ende aktualisiert </li>";
+	}
+
 	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $record['status_prescription'] ) {
 		$record['status_prescription'] = $_POST['status_prescription'];
 		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
