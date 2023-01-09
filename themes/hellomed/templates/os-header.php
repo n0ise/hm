@@ -29,7 +29,10 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 
 
     <header class="hm-header">
-        <?php  
+    <?php  
+        // if page is os-rezepte 
+    if (is_page('os-rezepte')) { 
+            
         // checking current user, and the if the patient have prescriptions 
         $current_user_id = get_current_user_id();
         $rezept_input = get_field('rezept_input', 'user_' . $current_user_id);
@@ -40,11 +43,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     $prescription_status = $row['status_prescription'];
                     $prescription_id = $row['prescription_id'];
                     $prescription_end_date = $row['prescription_end_date'];
-                    $prescription_end_datetime = DateTime::createFromFormat('d/m/Y', $prescription_end_date);
+                    $prescription_end_datetime = DateTime::createFromFormat('d.m.Y', $prescription_end_date);
                     $prescription_end_timestamp = $prescription_end_datetime->getTimestamp();
                     $prescription_end_date_formatted = $prescription_end_datetime->format('d.m.Y');
-                    
-                    // adding a dynamic class based on the time left for the prescription to expire
+                    // two weeks before the expiry date 
+                    $two_weeks_before = $prescription_end_datetime->modify('-14 days');
                     if ($prescription_end_timestamp >= $current_timestamp + 4 * 7 * 24 * 60 * 60) {
                         // More than 4 weeks away
                         $class = 'theme-green';
@@ -57,18 +60,21 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     }
                     ?>
         <div class="hm-preheader <?php echo $class; ?>">
-                <i class="bi bi-exclamation-circle-fill"></i>
-                <div>
-                Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum <b><?php echo $prescription_end_date; ?></b> aus.
-      Bitte senden Sie Ihr Folgerezept spätestens bis zum <b>(DD/MM/YYY)</b> postalisch oder per
-      Rezept-Upload an uns.
-                </div>
-                <i class="bi bi-x-circle"></i>
+            <i class="bi bi-exclamation-circle-fill"></i>
+            <div>
+                Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum
+                <b><?php echo $prescription_end_date; ?></b> aus.
+                Bitte senden Sie Ihr Folgerezept spätestens bis zum
+                <b><?php echo $two_weeks_before->format('d.m.Y'); ?></b> postalisch oder per
+                Rezept-Upload an uns.
+            </div>
+            <i class="bi bi-x-circle"></i>
         </div>
         <?php  
                 }        
         }
-        ?>
+    }
+    ?>
 
         <div class="container">
             <div class="hm-logo">
