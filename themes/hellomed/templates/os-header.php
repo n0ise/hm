@@ -29,7 +29,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 
 
     <header class="hm-header">
-    <?php  
+        <?php  
         // if page is os-rezepte 
     if (is_page('os-rezepte')) { 
             
@@ -70,6 +70,14 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             </div>
             <i class="bi bi-x-circle"></i>
         </div>
+        
+        <!-- close div when clicking the x circle  -->
+        <script>
+        $('.bi-x-circle').click(function() {
+            $(this).parent().hide();
+        });
+        </script>
+
         <?php  
                 }        
         }
