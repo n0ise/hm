@@ -70,12 +70,21 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             </div>
             <i class="bi bi-x-circle"></i>
         </div>
-        
+
         <!-- close div when clicking the x circle  -->
         <script>
         $('.bi-x-circle').click(function() {
             $(this).parent().hide();
+            sessionStorage.setItem("div_closed", "true");
         });
+        // window.onbeforeunload = function() {
+        // sessionStorage.clear();
+        // };
+        if (sessionStorage.getItem("div_closed")) {
+            $('.hm-preheader').hide();
+            console.log('hide');
+        }
+        console.log(sessionStorage.getItem("div_closed"));
         </script>
 
         <?php  
