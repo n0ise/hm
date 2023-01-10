@@ -106,43 +106,47 @@ console.log(desiredResponse)
 * Third, we render the new object to the DOM
 */
 
+// declaring the month, formatting it & render
+const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date());
+document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
+
+// first 7 days to show at once 
 desiredResponse.slice(0, 7).forEach((entry) => {
   const html = `
-    <div class="hm-medplan-tab">
-      <div class="hm-medplan-tab-day">
+    <div class="hm-medplan-calendar-days-day">
+      <div class="hm-medplan-calendar-days-day-name">
         ${new Intl.DateTimeFormat('de-DE', { weekday: 'short' }).format(new Date(entry.day))}
       </div>
-      <div class="hm-medplan-tab-date">
-        ${new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit' }).format(new Date(entry.day))}
+      <div class="hm-medplan-calendar-days-day-number">
+        ${new Intl.DateTimeFormat('de-DE', { day: '2-digit' }).format(new Date(entry.day))}
       </div>
     </div>
   `
 
-  document.querySelector('.hm-medplan-tabs').insertAdjacentHTML('beforeend', html)
+  document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html)
 })
-
 
 desiredResponse.forEach((entry) => {
   let html = `<div class="hm-medplan-day">`
 
-  html += `<h2><i class="bi bi-calendar-event"></i> ${new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit' }).format(new Date(entry.day))}</h2>`
-
-  entry.med.forEach((cur, i) => {
-    if (i === 0) html += `<div class="hm-medplan-daytime"><i class="bi bi-clock"></i> ${cur.time}</div>`
-    if (i === 1) html += `<div class="hm-medplan-daytime"><i class="bi bi-clock"></i> ${cur.time}</div>`
-    if (i === 2) html += `<div class="hm-medplan-daytime"><i class="bi bi-clock"></i> ${cur.time}</div>`
-
-    html += `<div class="hm-medplan-pills">`
+  entry.med.forEach((cur) => {
+    html += `<div class="hm-medplan-time">`
+    html += `<div class="hm-medplan-daytime"><i class="bi bi-alarm"></i> ${cur.time}</div>`
 
     cur.names.forEach((cur) => {
+      const arr = cur.name.split(/(\s+\s+)/) // Split string after two spaces into three parts
+
       html += `
-        <div class="hm-medplan-pills-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="hm-medplan-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <div>
-            <i class="bi bi-capsule-pill"></i>
+            <span>${arr[2]}</span>
+            ${arr[0]}
           </div>
           <div>
-            ${cur.amount} × ${cur.name}
+            <span>Menge</span>
+            ${cur.amount}
           </div>
+          <i class="bi bi-arrow-right"></i>
         </div>
       `
     })
@@ -152,7 +156,7 @@ desiredResponse.forEach((entry) => {
 
   html += `</div>`
 
-  document.querySelector('.hm-content').insertAdjacentHTML('beforeend', html)
+  document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
 })
 
 
@@ -163,7 +167,7 @@ desiredResponse.forEach((entry) => {
 * Fourth, we give the tabs some functionallity
 */
 
-const tabs = document.querySelectorAll('.hm-medplan-tab')
+const tabs = document.querySelectorAll('.hm-medplan-calendar-days-day')
 const days = document.querySelectorAll('.hm-medplan-day')
 
 tabs.forEach((cur, i) => {
