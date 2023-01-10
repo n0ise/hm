@@ -123,7 +123,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     </div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="os-hilfe">FAQ & Hilfe</a></li>
+                    <li><a class="dropdown-item" href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
                     <li><a class="dropdown-item" href="os-berechtigungen">Berechtigungen</a></li>
                     <li><a class="dropdown-item" href="os-einstellungen">Einstellungen</a></li>
                     <li>
