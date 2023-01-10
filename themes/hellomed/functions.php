@@ -415,12 +415,25 @@ add_action('wp_ajax_edit_patient', function() {
 	// 	$changed_fields['status'] = '';
 	}
 
+	// checking if user id exists before saving 
 	if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
-		$new_user_id = $_POST['new_user_id'];
-		update_user_meta( $user_id, 'new_user_id', $new_user_id );
-		echo "<li> User ID aktualisiert </li> ";
-		// $changed_fields['new_user_id'] = $new_user_id;
+
+		$args = array(
+			  'meta_key'     => 'new_user_id',
+			  'meta_value'   => $_POST['new_user_id'],
+			  'meta_compare' => '=',
+			  'fields'       => 'ID'
+		);
+	
+		$existingUsers = get_users($args);
+		if (!empty($existingUsers)) {
+			echo "Fehler: Benutzer-ID existiert bereits, wählen Sie eine andere.";
+		} else {
+			update_user_meta( $user_id, 'new_user_id', $new_user_id );
+			echo "<li> Benutzer-ID aktualisiert </li> ";
+		}
 	}
+	
 
 	if ( !empty($_POST['allergies']) && $_POST['allergies'] != get_user_meta( $user_id, 'allergies', true )) {
 		$allergies = $_POST['allergies'];
@@ -488,11 +501,17 @@ add_action('wp_ajax_edit_patient', function() {
 
 foreach ($rezept_input as &$record) {
   if ($record['prescription_id'] == $prescription_id) {
-	if ( !empty($_POST['prescription_id']) && $_POST['prescription_id'] != $record['prescription_id'] ) {
-		$record['prescription_id'] = $_POST['prescription_id'];
-		// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
-		echo "<li> Prescription ID aktualisiert </li>";
+	if (!empty($_POST['prescription_id']) && $_POST['prescription_id'] != $record['prescription_id']) {
+		// check if the value already exists in the array
+		if (array_search($_POST['prescription_id'], array_column($rezept_input, 'prescription_id')) === false) {
+			$record['prescription_id'] = $_POST['prescription_id'];
+			// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+			echo "<li> Prescription ID aktualisiert </li>";
+		} else {
+			echo "<li> Prescription ID already exists </li>";
+		}
 	}
+	
 
 	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $record['doctor_name'] ) {
 		$record['doctor_name'] = $_POST['doctor_name'];
