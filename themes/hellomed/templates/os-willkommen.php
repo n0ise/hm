@@ -10,19 +10,27 @@
   <div class="container max-600">
     <div class="hm-content">
 
-    <div class="text-center">
-    <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/get_started.svg">
+      <div class="text-center">
+      <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/get_started.svg">
         <div class="h2 my-4">Willkommen bei hellomed!</div>
       </div>
       <p>
-        Ihr Account wird zur Zeit von einem unserer Servicepartner eingerichtet und
-        wird in Kürze freigeschaltet. Bitte schauen Sie später noch einmal vorbei.
+        So geht es jetzt weiter:
+      </p>
+      <ol>
+        <li>Bitte senden Sie uns Ihre Originalrezepte so nicht bereits ein<br>E-Rezept hochgeladen wurde.</li>
+        <li>Unser Apotheker:innen Team meldet sich bei Ihnen innerhalb von 24 Stunden mit Rückfragen zur Medikationsplanung.</li>
+        <li>Nach erfolgreicher Planung, Produktion und Versand Ihrer Blister-Box aktivieren wir Ihren Nutzeraccount.</li>
+      </ol>
+      <p>
+        Bei Fragen rund um Ihre Account-Aktivierung melden Sie sich per<br>E-Mail an
+        patient@hellomed.com oder telefonisch unter 030&nbsp;6941&nbsp;132.
       </p>
       <p>
-        In der Zwischenzeit können Sie auf unserer
+        In der Zwischenzeit können Sie auf Ihrer
         <a href="os-berechtigungen">Berechtigungsseite</a> vorbei schauen.
-        Sie haben dort die Möglichkeit, sich für unser automatisiertes
-        Folgerezeptprogramm anzumelden. Weitere Informationen finden Sie dort
+        Sie haben dort die Möglichkeit sich für unseren automatisierten
+        Folgerezept-Service anzumelden. Weitere Informationen finden Sie dort
         beschrieben.
       </p>
       <p>Das hellomed-Team</p>
