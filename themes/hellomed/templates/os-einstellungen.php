@@ -162,7 +162,7 @@ $user_id = get_current_user_id();
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="insurance_company" type="text" class="form-control insurance_company" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'insurance_company', true); ?>"
+                            value="<?php echo get_user_meta($user_id, 'insurance_company', true); ?>"
                             list="insurance-options">
                         <label>Name der Krankenversicherung</label>
                     </div>
