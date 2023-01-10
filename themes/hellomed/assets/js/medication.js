@@ -110,8 +110,60 @@ console.log(desiredResponse)
 const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date());
 document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
 
-// first 7 days to show at once 
-desiredResponse.slice(0, 7).forEach((entry) => {
+let currentStart = 0;
+const daysPerPage = 7;
+
+const nextButton = document.querySelector('.hm-medplan-calendar-weeks-next');
+nextButton.addEventListener('click', () => {
+    currentStart += daysPerPage;
+    if(currentStart >= desiredResponse.length){
+        currentStart = 0;
+    }
+    if(currentStart > 0) {
+        prevButton.classList.remove('is-inactive');
+    }
+    if(currentStart === 0) {
+        nextButton.classList.add('is-inactive');
+    }else{
+        nextButton.classList.remove('is-inactive');
+    }
+    if(currentStart+daysPerPage >= desiredResponse.length){
+        nextButton.classList.add('is-inactive');
+    }else{
+        nextButton.classList.remove('is-inactive');
+    }
+    const end = currentStart + daysPerPage;
+    const desiredResponseSlice = desiredResponse.slice(currentStart, end);
+    updateCalendar(desiredResponseSlice);
+});
+
+const prevButton = document.querySelector('.hm-medplan-calendar-weeks-prev');
+prevButton.addEventListener('click', () => {
+    currentStart -= daysPerPage;
+    if(currentStart < 0) {
+        currentStart = 0;
+    }
+    if(currentStart === 0){
+        prevButton.classList.add('is-inactive');
+        nextButton.classList.remove('is-inactive');
+    }else{
+        prevButton.classList.remove('is-inactive');
+    }
+    if(currentStart+daysPerPage >= desiredResponse.length){
+        nextButton.classList.add('is-inactive');
+    }else{
+        nextButton.classList.remove('is-inactive');
+    }
+    const end = currentStart + daysPerPage;
+    const desiredResponseSlice = desiredResponse.slice(currentStart, end);
+    updateCalendar(desiredResponseSlice);
+});
+
+
+function updateCalendar(desiredResponseSlice){
+    const daysContainer = document.querySelector('.hm-medplan-calendar-days');
+    daysContainer.innerHTML = ""; // Clear any existing days
+    desiredResponseSlice.forEach((entry) => {
   const html = `
     <div class="hm-medplan-calendar-days-day">
       <div class="hm-medplan-calendar-days-day-name">
@@ -125,7 +177,6 @@ desiredResponse.slice(0, 7).forEach((entry) => {
 
   document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html)
 })
-
 desiredResponse.forEach((entry) => {
   let html = `<div class="hm-medplan-day">`
 
@@ -157,8 +208,7 @@ desiredResponse.forEach((entry) => {
   html += `</div>`
 
   document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
-})
-
+});
 
 
 
@@ -179,5 +229,7 @@ tabs.forEach((cur, i) => {
     next.forEach((el) => el.classList.add('active'))
   })
 })
-
 tabs[0].click()
+}
+updateCalendar(desiredResponse.slice(0,daysPerPage));
+

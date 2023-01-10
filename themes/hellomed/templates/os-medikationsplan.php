@@ -58,7 +58,7 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
             <div class="hm-medplan-wrapper">
                 <div class="hm-medplan-calendar">
                     <div class="hm-medplan-calendar-weeks">
-                        <div class="hm-medplan-calendar-weeks-prev is-inactive">
+                        <div class="hm-medplan-calendar-weeks-prev">
                             <i class="bi bi-chevron-left"></i>
                             <span>Vorherige</span>
                         </div>
