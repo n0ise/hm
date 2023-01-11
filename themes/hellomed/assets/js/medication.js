@@ -198,6 +198,8 @@ desiredResponse.forEach((entry) => {
             ${cur.amount}
 
           </div>
+          <i class="bi bi-question text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="${cur.timeHint}"></i>
+
           <i class="bi bi-arrow-right"></i>
         </div>
       `
@@ -210,7 +212,12 @@ desiredResponse.forEach((entry) => {
 
   document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
 
-
+  // initiate tooltip 
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+ 
 
   const pills = document.querySelectorAll('.hm-medplan-pill');
     pills.forEach(pill => {
