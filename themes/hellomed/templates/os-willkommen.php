@@ -1,7 +1,7 @@
 <?php /* Template Name: OS Willkommen */ ?>
 
 <!-- include_once header.php from template  -->
-<?php include_once('os-header.php'); ?>
+<?php include_once('os-header-inaktiv.php'); ?>
 
 <!-- show the content if the user is logged in   -->
 <?php if(is_user_logged_in()) { ?>

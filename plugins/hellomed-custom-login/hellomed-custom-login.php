@@ -213,7 +213,7 @@ class Hellomed_Custom_Login_Plugin {
 					
 			// 	 }
 			// 	 else{
-			// 		$redirect_url = home_url( '/os-inaktiv' ) ;
+			// 		$redirect_url = home_url( '/os-willkommen' ) ;
 			// 	 }
 			// }
 		
@@ -1116,7 +1116,7 @@ class Hellomed_Custom_Login_Plugin {
 					
 				 }
 				 else{
-					$redirect_url = home_url( '/os-inaktiv' ) ;
+					$redirect_url = home_url( '/os-willkommen' ) ;
 				 }
 			}
 			wp_redirect( $redirect_url );
