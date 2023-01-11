@@ -63,7 +63,7 @@
       newDate: dosage.date,
       newMeds: [{
         newTime: dosage.time,
-        newName: [ { name: med.medication, amount: dosage.amount } ]
+        newName: [ { name: med.medication, image: med.image, amount: dosage.amount, timeHint: dosage.timeHint } ]
       }]
     }))
   })
@@ -96,6 +96,7 @@ const desiredResponse = _(newResponse).groupBy('newDate').map((items, date) => {
   }
 }).value().sort((d1, d2) => new Date(d1.day) - new Date(d2.day))
 
+console.log('desiredResponse')
 console.log(desiredResponse)
 
 
@@ -178,17 +179,16 @@ function updateCalendar(desiredResponseSlice){
   document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html)
 })
 desiredResponse.forEach((entry) => {
+
   let html = `<div class="hm-medplan-day">`
 
   entry.med.forEach((cur) => {
     html += `<div class="hm-medplan-time">`
     html += `<div class="hm-medplan-daytime"><i class="bi bi-alarm"></i> ${cur.time}</div>`
-
     cur.names.forEach((cur) => {
       const arr = cur.name.split(/(\s+\s+)/) // Split string after two spaces into three parts
-
       html += `
-        <div class="hm-medplan-pill" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="hm-medplan-pill" data-bs-toggle="modal" data-bs-target="#exampleModal" data-time-hint="${cur.timeHint}" data-image="${cur.image}" data-amount="${cur.amount}" data-name="${arr[0]}">
           <div>
             <span>${arr[2]}</span>
             ${arr[0]}
@@ -196,6 +196,7 @@ desiredResponse.forEach((entry) => {
           <div>
             <span>Menge</span>
             ${cur.amount}
+
           </div>
           <i class="bi bi-arrow-right"></i>
         </div>
@@ -208,8 +209,34 @@ desiredResponse.forEach((entry) => {
   html += `</div>`
 
   document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
-});
 
+
+
+  const pills = document.querySelectorAll('.hm-medplan-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', event => {
+        const timeHint = event.target.closest('.hm-medplan-pill').dataset.timeHint;
+        const name = event.target.closest('.hm-medplan-pill').dataset.name;
+        const amount = event.target.closest('.hm-medplan-pill').dataset.amount;
+        const image = event.target.closest('.hm-medplan-pill').dataset.image;
+        const img = document.querySelector('.modal-img img');
+          if(!image || image === "" || image === "timages/") {
+          // placeholder in case there is no image, empty or it is just the prefix timages/ with no filename 
+            img.src = `https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80`;
+          }
+          else{
+            // complete url to image https://deutsche-blister.de/intern/timages/900005618.jpg
+            // image from api is timages/900005618.jpg
+            img.src = `https://deutsche-blister.de/intern/` + image;
+          }
+    
+        document.querySelector('.modal-time-hint').textContent = timeHint;
+        document.querySelector('.modal-title').textContent = name;
+        document.querySelector('.modal-amount').textContent = amount;
+      });
+    });
+
+});
 
 
 
