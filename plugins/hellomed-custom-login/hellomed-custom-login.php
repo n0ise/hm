@@ -202,20 +202,20 @@ class Hellomed_Custom_Login_Plugin {
 			}
 		} else {
 			
-			if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
+			// if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
 				$redirect_url = home_url( '/onboarding' );
 				
-			 }
-			else{
+			//  }
+			// else{
 				
-				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
-					$redirect_url = home_url( '/os-medikationsplan' ) ;
+			// 	if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
+			// 		$redirect_url = home_url( '/os-medikationsplan' ) ;
 					
-				 }
-				 else{
-					$redirect_url = home_url( '/os-inaktiv' ) ;
-				 }
-			}
+			// 	 }
+			// 	 else{
+			// 		$redirect_url = home_url( '/os-inaktiv' ) ;
+			// 	 }
+			// }
 		
 		}
 	
@@ -717,7 +717,6 @@ class Hellomed_Custom_Login_Plugin {
 		}
 	}
 
-
 	public function do_onboarding() {
 
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
@@ -793,7 +792,29 @@ class Hellomed_Custom_Login_Plugin {
 				update_user_meta( $user_id, 'first_rezept_uploaded', $first_rezept_uploaded );
 			}
 
-				//TODO file upload
+	//TODO file upload
+
+
+				$rezept_type = $_POST['rezept_type'];
+
+					if ( !empty( $_POST['listfilenames'] ) ) {
+						$listfilenames = $_POST['listfilenames'];
+
+						$listfilenamesarray = array();
+						foreach($listfilenames as $key => $value) {
+
+								$listfilenamesarray['rezept_file'][$key]['rezept_filename'] = $value;
+								$listfilenamesarray['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
+								$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
+								$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
+								$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
+							
+						}
+						add_row('rezept_input', $listfilenamesarray, 'user_'.$user_id);
+						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						// die;
+					}
+					
 
 				if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
 					$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
@@ -809,19 +830,17 @@ class Hellomed_Custom_Login_Plugin {
 				update_user_meta( $user_id, 'insurance_number', $insurance_number );
 			}
 		
-		//debug stuff, might remove later 
-				//echo 'success' .$first_name;
-					//return success message
-					//wp_send_json_success(); 
-			//wp_die();
-
 			// TODO completed onboarding
 			// if ( !empty( $_POST['status'] ) ) {
 			// 	$status = $_POST['status'];
 			// 	update_user_meta( $user_id, 'has_completed_onboarding', $status );
 			// }
+
 			update_user_meta( $user_id, 'status', 'Wartend' );
-			update_user_meta( $user_id, 'has_completed_onboarding', 1 );
+
+			// TODO // TODO // TODO // TODO // TODO 
+			//remmber to revert
+			update_user_meta( $user_id, 'has_completed_onboarding', 0 );
 
 			wp_redirect( $redirect_url );
 			exit;

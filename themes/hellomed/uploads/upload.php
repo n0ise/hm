@@ -1,21 +1,19 @@
 <?php
 
-// global $current_user;
-// get_currentuserinfo();
-// $logged_in_user = $current_user->ID;
+require_once('../../../../wp-load.php');
 
-// $uploaddir = './' .$user_id. '/'; 
+global $current_user;
+get_currentuserinfo();
+$logged_in_user = $current_user->ID;
 
-$user = wp_get_current_user();
+$uploaddir = './' .$logged_in_user. '/'; 
 
-var_dump($user);
-
-// if (!file_exists($uploaddir)) {
-//     mkdir($uploaddir);
-// }
+if (!file_exists($uploaddir)) {
+    mkdir($uploaddir);
+}
 
 $my_file = $_FILES['my_file'];
 $file_path = $my_file['tmp_name']; // temporary upload path of the file
 $file_name = $_POST['name']; // desired name of the file
-move_uploaded_file($file_path, './mah/' . basename($file_name)); 
+move_uploaded_file($file_path, $uploaddir . basename($file_name)); 
 

@@ -1,7 +1,9 @@
 
 <?php if(is_user_logged_in()) { ?>
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+   <link rel="stylesheet" href="https://ui.hellomed.com/css/bootstrap.datepicker.1.9.0.css">
+
+   <link rel="stylesheet" href="https://ui.hellomed.com/css/bootstrap.datepicker.1.9.0.custom.css">
 
     <link rel="stylesheet" href="https://ui.hellomed.com/css/uppy.3.3.1.min.css" >
 
@@ -70,9 +72,6 @@
                         <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
                     </div>
                 </div>
-
-
-                <div id="drag-drop-area"></div> 
 
                 <div class="col-12">
                     <div class="form-floating">
@@ -208,6 +207,30 @@
                     <label id="rezeptlabel"class="form-label">Rezept hochladen</label>
 
 
+                            <div id="drag-drop-area"></div> 
+                        <!-- Uploaded files list -->
+
+
+                        <div class="uploaded-files" style="display:none;">
+                            <ol></ol>
+                        </div>
+        <!-- 
+                        <h1>Hidden values</h1>
+                        <ol name="test">
+                            <li><input type="hidden" value="testvalue">Cofee</li>
+                            <li><input type="hidden" value="testvalue1">Tea</li>
+                        </ol>
+                        <input type='hidden' id='test' name='test' /> -->
+
+                        
+                        <div class="col-12" style="display: block;">
+                        <!-- <div class="form-floating">
+                                <input id="filelisthidden" name="filelisthidden" type="list" class="form-control" placeholder=" " />
+                            </div> -->
+                        </div>
+
+
+
                     <!-- <div id="drag-drop-area"></div>  -->
 
                         <!-- <div class="dropzone" id="mydropzone">
@@ -232,6 +255,7 @@
                         </div>  -->
                 </div>
 
+           
                 <div class="col-12">
                     <button type="button" id="submit-dropzone" class="action next btn btn-primary btn-lg">Weiter</button>
                 </div>
@@ -279,6 +303,7 @@
                 
                 </div>
 
+                
 
                 <!-- <div class="col-12">
                     <div class="form-floating">
@@ -308,7 +333,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.de.min.js" integrity="sha512-3V4cUR2MLZNeqi+4bPuXnotN7VESQC2ynlNH/fUljXZiQk1BGowTqO5O2gElABNMIXzzpYg5d8DxNoXKlM210w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-<!-- <script src="https://releases.transloadit.com/uppy/v3.3.1/uppy.min.js"></script> -->
 
 
 <!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
@@ -334,25 +358,225 @@
                                 var heightview = 650;
                             }
                      
-                        import {Uppy, Dashboard, XHRUpload, ProgressBar, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+                        import {Uppy, Dashboard, XHRUpload, Compressor, Webcam} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+                       
                         var uppy = new Uppy(
                             {
-                                autoProceed: true,
+                               
+                                restrictions: {
+                                allowedFileTypes: ['image/*', '.pdf'],
+                                },
+                            
+
+                                onBeforeFileAdded: (file) => {
+                                const name = Date.now() + '_' + file.name
+                                Object.defineProperty(file.data, 'name', {
+                                writable: true,
+                                value: name
+                                });
+                                return { ...file, name, meta: { ...file.meta, name } }
+                                },
+                             
+                            autoProceed: true,
+                            locale: {
+                            strings: {
+                                addBulkFilesFailed: {
+    '0': 'Das Hinzufügen einer Datei ist aufgrund eines internen Fehlers fehlgeschlagen',
+    '1': 'Das Hinzufügen von %{smart_count} Dateien ist aufgrund eines internen Fehlers fehlgeschlagen',
+  },
+  addingMoreFiles: 'Dateien hinzufügen',
+  addMore: 'Mehr hinzufügen',
+  addMoreFiles: 'Dateien hinzufügen',
+  allFilesFromFolderNamed: 'Alle Dateien vom Ordner %{name}',
+  allowAccessDescription: 'Um Bilder oder Videos mit Ihrer Kamera aufzunehmen, erlauben Sie dieser Website bitte den Zugriff auf Ihre Kamera.',
+  allowAccessTitle: 'Bitte erlauben Sie Zugriff auf Ihre Kamera',
+  aspectRatioLandscape: 'Zuschneiden auf Querformat (16:9)',
+  aspectRatioPortrait: 'Zuschneiden auf Hochformat (9:16)',
+  aspectRatioSquare: 'Zuschneiden auf Quadrat',
+  authenticateWith: 'Mit %{pluginName} verbinden',
+  authenticateWithTitle: 'Bitte authentifizieren Sie sich mit %{pluginName}, um Dateien auszuwählen',
+  back: 'Zurück',
+  backToSearch: 'Zurück zur Suche',
+  browse: 'durchsuchen',
+  browseFiles: 'Dateien durchsuchen',
+  browseFolders: 'Ordner durchsuchen',
+  cancel: 'Abbrechen',
+  cancelUpload: 'Hochladen abbrechen',
+  chooseFiles: 'Dateien auswählen',
+  closeModal: 'Fenster schließen',
+  companionError: 'Verbindung zu Companion fehlgeschlagen',
+  companionUnauthorizeHint: 'Um die Autorisierung für Ihr %{provider} Konto aufzuheben, gehen Sie bitte zu %{url}',
+  complete: 'Fertig',
+  connectedToInternet: 'Mit dem Internet verbunden',
+  copyLink: 'Link kopieren',
+  copyLinkToClipboardFallback: 'Untenstehende URL kopieren',
+  copyLinkToClipboardSuccess: 'Link in die Zwischenablage kopiert',
+  creatingAssembly: 'Das Hochladen wird vorbereiten...',
+  creatingAssemblyFailed: 'Transloadit: Assembly konnte nicht erstellt werden',
+  dashboardTitle: 'Hochladen von Dateien',
+  dashboardWindowTitle: 'Hochladen von Dateien (ESC drücken zum Schließen)',
+  dataUploadedOfTotal: '%{complete} von %{total}',
+  discardRecordedFile: 'Aufgenommene Datei verwerfen',
+  done: 'Abgeschlossen',
+  dropHereOr: 'Dateien hier ablegen oder %{browse}',
+  dropHint: 'Dateien hier ablegen',
+  dropPasteBoth: 'Dateien hier ablegen/einfügen, %{browseFiles} oder %{browseFolders}',
+  dropPasteFiles: 'Dateien hier ablegen/einfügen oder %{browseFiles}',
+  dropPasteFolders: 'Dateien hier ablegen/einfügen oder %{browseFolders}',
+  dropPasteImportBoth: 'Dateien hier ablegen/einfügen, %{browse} oder von folgenden Quellen importieren:',
+  dropPasteImportFiles: 'Dateien hier ablegen/einfügen, %{browseFiles} oder von folgenden Quellen importieren:',
+  dropPasteImportFolders: 'Dateien hier ablegen/einfügen, %{browseFolders} oder von folgenden Quellen importieren:',
+  editFile: 'Datei bearbeiten',
+  editFileWithFilename: 'Datei %{file} bearbeiten',
+  editing: '%{file} bearbeiten',
+  emptyFolderAdded: 'Keine Dateien hinzugefügt, da der Ordner leer war',
+  encoding: 'Kodieren...',
+  enterCorrectUrl: 'Falsche URL: Bitte stellen Sie sicher, dass Sie einen direkten Link zu einer Datei eingeben',
+  enterTextToSearch: 'Text zum Suchen von Bildern eingeben',
+  enterUrlToImport: 'URL zum Importieren einer Datei eingeben',
+  exceedsSize: 'Datei %{file} ist größer als die maximal erlaubte Dateigröße von %{size}',
+  failedToFetch: 'Companion konnte diese URL nicht verarbeiten - stellen Sie bitte sicher, dass sie korrekt ist',
+  failedToUpload: 'Fehler beim Hochladen der Datei %{file}',
+  filesUploadedOfTotal: {
+    '0': '%{complete} von %{smart_count} Datei hochgeladen',
+    '1': '%{complete} von %{smart_count} Dateien hochgeladen',
+  },
+  filter: 'Filter',
+  finishEditingFile: 'Bearbeitung beenden',
+  flipHorizontal: 'Horizontal spiegeln',
+  folderAdded: {
+    '0': 'Eine Datei von %{folder} hinzugefügt',
+    '1': '%{smart_count} Dateien von %{folder} hinzugefügt',
+  },
+  folderAlreadyAdded: 'Der Ordner "%{folder}" wurde bereits hinzugefügt',
+  generatingThumbnails: 'Erstellen von Miniaturansichten...',
+  import: 'Importieren',
+  importFiles: 'Importiere Dateien von:',
+  importFrom: 'Importieren von %{name}',
+  inferiorSize: 'Diese Datei ist kleiner als die minimal erlaubte Dateigröße von %{size}',
+  loading: 'Laden...',
+  logOut: 'Abmelden',
+  micDisabled: 'Zugriff auf Mikrofon von Benutzer abgelehnt',
+  missingRequiredMetaField: 'Fehlende erforderliche Meta-Felder',
+  missingRequiredMetaFieldOnFile: 'Fehlende erforderliche Meta-Felder in %{fileName}',
+  myDevice: 'Mein Gerät',
+  noCameraDescription: 'Bitte Kamera anschließen, um Bilder oder Videos aufzunehmen',
+  noCameraTitle: 'Kamera nicht verfügbar',
+  noDuplicates: 'Datei \'%{fileName}\' existiert bereits und kann nicht erneut hinzugefügt werden',
+  noFilesFound: 'Sie haben hier keine Dateien oder Ordner',
+  noInternetConnection: 'Keine Internetverbindung',
+  noMoreFilesAllowed: 'Während der Upload läuft, können keine weiteren Dateien hinzugefügt werden',
+  openFolderNamed: 'Ordner %{name} öffnen',
+  pause: 'Pausieren',
+  paused: 'Pausiert',
+  pauseUpload: 'Hochladen pausieren',
+  pluginNameBox: 'Box',
+  pluginNameCamera: 'Kamera',
+  pluginNameDropbox: 'Dropbox',
+  pluginNameFacebook: 'Facebook',
+  pluginNameGoogleDrive: 'Google Drive',
+  pluginNameInstagram: 'Instagram',
+  pluginNameOneDrive: 'OneDrive',
+  pluginNameZoom: 'Zoom',
+  poweredBy: 'Powered by %{uppy}',
+  processingXFiles: {
+    '0': 'Eine Datei verarbeiten',
+    '1': '%{smart_count} Dateien verarbeiten',
+  },
+  recording: 'Aufnahme',
+  recordingLength: 'Aufnahmedauer %{recording_length}',
+  recordingStoppedMaxSize: 'Die Aufnahme wurde gestoppt, weil die Dateigröße das Limit überschritten hat',
+  recoveredAllFiles: 'Wir haben alle Dateien wiederhergestellt. Sie können mit dem Hochladen fortfahren.',
+  recoveredXFiles: {
+    '0': 'Wir konnten eine Datei nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
+    '1': 'Wir konnten %{smart_count} Dateien nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
+  },
+  removeFile: 'Datei entfernen',
+  reSelect: 'Erneut auswählen',
+  resetFilter: 'Filter zurücksetzen',
+  resume: 'Fortsetzen',
+  resumeUpload: 'Hochladen fortsetzen',
+  retry: 'Erneut versuchen',
+  retryUpload: 'Hochladen erneut versuchen',
+  revert: 'Rückgängig machen',
+  rotate: 'Drehen',
+  save: 'Speichern',
+  saveChanges: 'Änderungen speichern',
+  searchImages: 'Suche nach Bildern',
+  selectX: {
+    '0': 'Wählen Sie %{smart_count}',
+    '1': 'Wählen Sie %{smart_count}',
+  },
+  sessionRestored: '',
+  smile: 'Bitte lächeln!',
+  startCapturing: 'Bildschirmaufnahme starten',
+  startRecording: 'Videoaufnahme starten',
+  stopCapturing: 'Bildschirmaufnahme stoppen',
+  stopRecording: 'Videoaufnahme stoppen',
+  streamActive: 'Stream aktiv',
+  streamPassive: 'Stream passiv',
+  submitRecordedFile: 'Aufgezeichnete Datei verwenden',
+  takePicture: 'Ein Foto machen',
+  timedOut: 'Upload für %{seconds} Sekunden stehen geblieben, breche ab.',
+  upload: 'Hochladen',
+  uploadComplete: 'Hochladen abgeschlossen',
+  uploadFailed: 'Hochladen fehlgeschlagen',
+  uploading: 'Wird hochgeladen',
+  uploadingXFiles: {
+    '0': 'Eine Datei wird hochgeladen',
+    '1': '%{smart_count} Dateien werden hochgeladen',
+  },
+  uploadPaused: 'Hochladen pausiert',
+  uploadXFiles: {
+    '0': 'Eine Datei hochladen',
+    '1': '%{smart_count} Dateien hochladen',
+  },
+  uploadXNewFiles: {
+    '0': '+%{smart_count} Datei hochladen',
+    '1': '+%{smart_count} Dateien hochladen',
+  },
+  xFilesSelected: {
+    '0': 'Eine Datei ausgewählt',
+    '1': '%{smart_count} Dateien ausgewählt',
+  },
+  xMoreFilesAdded: {
+    '0': 'Eine weitere Datei hinzugefügt',
+    '1': '%{smart_count} weitere Dateien hinzugefügt',
+  },
+  xTimeLeft: '%{time} verbleibend',
+  youCanOnlyUploadFileTypes: 'Sie können nur folgende Dateitypen hochladen: %{types}',
+  youCanOnlyUploadX: {
+    '0': 'Sie können nur eine Datei hochladen',
+    '1': 'Sie können nur %{smart_count} Dateien hochladen',
+  },
+  youHaveToAtLeastSelectX: {
+    '0': 'Sie müssen mindestens eine Datei auswählen',
+    '1': 'Sie müssen mindestens %{smart_count} Dateien auswählen',
+  },
+  zoomIn: 'Vergrößern',
+  zoomOut: 'Verkleinern',  
                             }
-                        )
-                      
+                             }
+                            //     onBeforeFileAdded: (currentFile, files) => {
+                            //      const modifiedFile = {
+                            //     ...currentFile,
+                            //     name:  'yourfilename' + Date.now()
+                            //     }
+                            // return modifiedFile
+                            // }
+
+
+                            })
 
                             .use(Dashboard, {
                                 inline: true,
                                 height: heightview,
                                 proudlyDisplayPoweredByUppy:false,
                                 target: '#drag-drop-area',
-
-                                    doneButtonHandler: null,
+                                doneButtonHandler: null,
+                                showRemoveButtonAfterComplete: true,
                             })
                         
-                         
-
                             .use(Webcam, { 
                                 target: Dashboard,
                                 onBeforeSnapshot: () => Promise.resolve(),
@@ -372,36 +596,41 @@
                                 showRecordingLength: false,
                                 mobileNativeCamera: false,
                                 locale: {},
-
                             })
-                       
-                            // .use(Tus, {endpoint: 'https://stage.hellomed.com/wp-content/themes/hellomed/uploads'})
-            
+
+                            // .use(Compressor, {
+                            //     quality: 0.6,
+                            // })
                     
                             .use(XHRUpload, {
                                 endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
                                 fieldName: 'my_file',
-
                             })
 
-                         
-                       
-                            uppy.on('complete', (result) => {
-                                
-                                        
+
+                            // uppy.on('complete', (result) => {
+                            // console.log('Upload complete! We’ve uploaded these files:', result.successful)
+                            // })
 
 
+                            uppy.on('upload-success', (file, response) => {
+                                // console.log(file.name);
+                                const url = response.uploadURL
+                                    const fileName = file.name
+                                    const li = document.createElement('li')
+                                    const input = document.createElement('input')
+                                    input.type = 'hidden'
+                                    input.value = fileName
+                                    input.name = 'listfilenames[]'
+                                    input.appendChild(document.createTextNode(fileName))
+                                    li.appendChild(input)
+                                    document.querySelector('.uploaded-files ol').appendChild(li)
+                            });
 
-                            console.log('Upload complete! We’ve uploaded these files:', result.successful)
-                            })
 
                         </script>
 
-<script>
-   
-
-
- </script>
+                
 
 <style>
 
@@ -492,9 +721,6 @@ function ihaveRezeptfoto(){
   document.getElementById('rezepthochladen').style.display ='block';
     document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
      $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png)");
-
-
-
 }
 function ihaveeRezept(){
   document.getElementById('rezepthochladen').style.display ='block';
@@ -508,6 +734,7 @@ function ihaveMedplan(){
     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
 }
                      
+
 
 
 // function idonthaverezept(){
@@ -541,7 +768,6 @@ function startdatumSelectedBlur(){
 
 
 
-
 .uppy-Root {
 	/* border: none; */
 	/* background-color: transparent;
@@ -566,12 +792,6 @@ function startdatumSelectedBlur(){
 
 
 
-
-
-
-
-
-
 .upload-area-icon {
 	display: block;
 	width: 2.25rem;
@@ -590,116 +810,6 @@ function startdatumSelectedBlur(){
 }
 
 
-
-
-
-
-
-
-
-.img-search{
-        max-width:100%;
-}
-
-
-
-
-
-
-
-
-
-
-
-/*Bootstrap Calendar*/
-.datepicker {
-    border-radius: 0;
-    padding: 0;
-}
-.datepicker-days table thead, .datepicker-days table tbody, .datepicker-days table tfoot {
-    padding: 10px;
-    display: list-item;
-}
-.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
-    background: var(--color-hellomed);
-    color: #ffffff;
-    border-radius: 0;
-}
-.datepicker-days table thead tr:nth-child(2n+0) td, .datepicker-days table thead tr:nth-child(2n+0) th {
-    border-radius: 3px;
-}
-.datepicker-days table thead tr:nth-child(3n+0) {
-    text-transform: uppercase;
-    font-weight: 300 !important;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-}
-.table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
-    padding: 11px 13px;
-
-}
-
-.table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > th {
-    color: #fff;
-}
-
-.datepicker table tr td.active.active {
-    background-color: var(--color-hellomed);
-}
-
-.datepicker-months table thead td, .datepicker-months table thead th, .datepicker-years table thead td, .datepicker-years table thead th, .datepicker-decades table thead td, .datepicker-decades table thead th, .datepicker-centuries table thead td, .datepicker-centuries table thead th {
-    border-radius: 0;
-}
-
-.datepicker td, .datepicker th {
-    border-radius: 50%;
-    padding: 0 12px;
-}
-.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
-    background: var(--color-hellomed);
-    color: #ffffff;
-    border-radius: 0;
-}
-.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
-    background-image: none;
-}
-.datepicker .prev, .datepicker .next {
-    color: rgba(255, 255, 255, 0.5);
-    transition: 0.3s;
-    width: 37px;
-    height: 37px;
-}
-.datepicker .prev:hover, .datepicker .next:hover {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.99);
-    font-size: 21px;
-}
-.datepicker .datepicker-switch {
-    font-size: 24px;
-    font-weight: 400;
-    transition: 0.3s;
-}
-.datepicker .datepicker-switch:hover {
-    color: rgba(255, 255, 255, 0.7);
-    background: transparent;
-}
-.datepicker table tr td span {
-    border-radius: 2px;
-    margin: 3%;
-    width: 27%;
-}
-.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
-  background-color: var(--color-hellomed);
-  background-image: none;
-}
-.dropdown-menu {
-    border: 1px solid rgba(0,0,0,.1);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-.datepicker-dropdown.datepicker-orient-top:before {
-    border-top: 7px solid rgba(0,0,0,.1);
-}
-</style>
 
 <?php } 
 else { ?>

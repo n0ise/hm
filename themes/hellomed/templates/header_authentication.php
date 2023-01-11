@@ -9,8 +9,8 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-<!-- include css.css from olly UI-->
-<link rel="stylesheet" href="https://ui.hellomed.com/css/index.css">
+<!--  include css.css from olly UI-->
+<link rel="stylesheet" href="https://ui.hellomed.com/css/index.css"> 
 
 <title><?php echo get_the_title(); ?> | hellomed</title>
 
