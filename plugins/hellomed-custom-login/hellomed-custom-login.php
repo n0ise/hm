@@ -808,7 +808,7 @@ class Hellomed_Custom_Login_Plugin {
 								$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
 								$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
 								$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
-							
+
 						}
 						add_row('rezept_input', $listfilenamesarray, 'user_'.$user_id);
 						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
