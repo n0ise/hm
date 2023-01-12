@@ -166,7 +166,9 @@ $user_id = get_current_user_id();
                             list="insurance-options">
                         <label>Name der Krankenversicherung</label>
                     </div>
-                    <datalist id="insurance-options"></datalist>
+                    <div id="insurance-options">
+                        <ul></ul>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6">
@@ -311,41 +313,52 @@ include_once('footer.php');
     </script>
 
 
-<script>
-let data;
+    <script>
+    let data;
 
-function fetchData() {
-    fetch('wp-content/themes/hellomed/assets/json/insurances.json')
-        .then(response => response.json())
-        .then(responseData => {
-            data = responseData;
-            // console.log(data);
-        });
-}
-
-function search() {
-    console.log('search called');
-    const searchTerm = this.value;
-
-    // Reset the search results if the search term is empty
-    if (searchTerm === '') {
-        document.querySelector('#insurance-options').innerHTML = '';
-        return;
+    function fetchData() {
+        fetch('wp-content/themes/hellomed/assets/json/insurances.json')
+            .then(response => response.json())
+            .then(responseData => {
+                data = responseData;
+                // console.log(data);
+            });
     }
 
-    // Show all results that include the search term
-    const searchResults = data.filter(company => company.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    function search() {
+        console.log('search called');
+        const searchTerm = this.value;
 
-    document.querySelector('#insurance-options').innerHTML = '';
-    searchResults.forEach(result => {
-        const option = document.createElement('option');
-        option.value = result.name;
-        document.querySelector('#insurance-options').appendChild(option);
-    });
-}
+        // Reset the search results if the search term is empty
+        if (searchTerm === '') {
+            document.querySelector('#insurance-options').innerHTML = '';
+            return;
+        }
+
+        // Show all results that include the search term
+        const searchResults = data.filter(company => company.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        document.querySelector('#insurance-options').innerHTML =
+        '<ul id="filter-records" class="hm-autocomplete"></ul>';
+
+        searchResults.forEach(result => {
+            const option = document.createElement('li');
+            option.classList.add('hm-autocomplete-item');
+            option.innerHTML = `
+    <div class="hm-autocomplete-img">
+    <img src="${result.logo ? '/wp-content/themes/hellomed/assets/img/icons/insurance/'+result.logo : '#' }">
+    </div>
+    <div class="hm-autocomplete-name">${result.name}</div>
+    `;
+            document.querySelector('#insurance-options ul').appendChild(option);
+            option.addEventListener('click', function() {
+                document.querySelector('#insurance_company').value = result.name;
+                document.querySelector('#insurance-options').innerHTML = '';
+            });
+        });
+    }
 
 
 
-window.addEventListener('load', fetchData);
-document.querySelector('.insurance_company').addEventListener('input', search);
-</script>
+    window.addEventListener('load', fetchData);
+    document.querySelector('.insurance_company').addEventListener('input', search);
+    </script>

@@ -171,7 +171,9 @@
                             list="insurance-options">
                         <label>Name der Krankenversicherung</label>
                     </div>
-                    <datalist id="insurance-options"></datalist>
+                    <div id="insurance-options">
+                        <ul></ul>
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-6">
@@ -370,12 +372,23 @@ function search() {
 
     // Show all results that include the search term
     const searchResults = data.filter(company => company.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    document.querySelector('#insurance-options').innerHTML =
+        '<ul id="filter-records" class="hm-autocomplete"></ul>';
 
-    document.querySelector('#insurance-options').innerHTML = '';
     searchResults.forEach(result => {
-        const option = document.createElement('option');
-        option.value = result.name;
-        document.querySelector('#insurance-options').appendChild(option);
+        const option = document.createElement('li');
+        option.classList.add('hm-autocomplete-item');
+        option.innerHTML = `
+<div class="hm-autocomplete-img">
+<img src="${result.logo ? '/wp-content/themes/hellomed/assets/img/icons/insurance/'+result.logo : '#' }">
+</div>
+<div class="hm-autocomplete-name">${result.name}</div>
+`;
+        document.querySelector('#insurance-options ul').appendChild(option);
+        option.addEventListener('click', function() {
+            document.querySelector('#insurance_company').value = result.name;
+            document.querySelector('#insurance-options').innerHTML = '';
+        });
     });
 }
 
