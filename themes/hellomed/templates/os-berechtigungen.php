@@ -20,19 +20,15 @@
                     sowie Kontaktmöglichkeiten, stimmen Sie bitte den folgeden Themen zu:
                 </div>
                 <div class="col-12">
-                    <div class="form-check m-0">
-                        <input class="form-check-input" type="checkbox" id="test1">
-                        <label class="form-check-label" for="test1">
-                            Einbindung Schweigepflicht
-                        </label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" checked>
+                        <label class="form-check-label">Einbindung hellomed Group GmbH Schweigepflicht</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-check m-0">
-                        <input class="form-check-input" type="checkbox" id="test2">
-                        <label class="form-check-label" for="test2">
-                            Zustimmung hellomed Group GmbH Datenschutz und AGB
-                        </label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch">
+                        <label class="form-check-label">Zustimmung hellomed Group GmbH Datenschutz und AGB</label>
                     </div>
                 </div>
                 <div class="col-12">
