@@ -18,10 +18,12 @@
 $rezept_id = $_GET['rezept'];
 $user_id = $_GET['user_id']; 
 $rezept_input = get_field('rezept_input', 'user_'.$user_id);
+// show new_user_id , which is the user that matches blisterwuerfel
+$new_user_id = get_field('new_user_id', 'user_'.$user_id);
+// echo $new_user_id;
 
 $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($rezept_id, $user_id) {
   return $record['prescription_id'] == $rezept_id;
-//   var_dump ($record);
 });
 // var_dump ($rezept_input);
 
@@ -35,7 +37,6 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
         <div class="container">
             <div class="hm-content">
                 <?php  foreach ($filtered_rezept_input as $record) { ?>
-
                 <div class="h2 mb-5">Rezept bearbeiten</div>
                 <div class="row gy-4 hm-settings-grid">
                     <div class="col-12">
@@ -43,7 +44,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" value="<?php echo $user_id; ?>">
+                            <input id="new_user_id" type="text" class="new_user_id form-control" value="<?php echo $new_user_id; ?>">
                             <label>User ID</label>
                         </div>
                     </div>
@@ -323,6 +324,7 @@ include_once('footer.php');
             var medicine_name_pzn = $('#medicine_name_pzn').val();
             var medicine_amount = $('#medicine_amount').val();
             var status_prescription = $('#status_prescription').val();
+            var new_user_id = $('#new_user_id').val();
 
             // for each value in blister_jobs, get the values and put it in an array
 
@@ -370,7 +372,7 @@ include_once('footer.php');
                 'status_prescription': status_prescription,
                 'blister_jobs': blister_jobs,
                 'medikament': medikament,
-
+                'new_user_id': new_user_id,
                 'rezept_id': <?php echo $rezept_id; ?>,
                 'user_id': <?php echo $user_id; ?>
             }
