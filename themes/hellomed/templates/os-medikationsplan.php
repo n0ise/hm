@@ -91,9 +91,10 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
                         <img
                             src="https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80">
                     </div>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quas, tenetur veritatis architecto
-                    quia ea impedit voluptas nisi eos, neque minus accusamus nobis odio obcaecati voluptatum porro
-                    dolorum soluta iure.
+                    <span class="modal-amount">Amount</span> x 
+                    <span class="modal-time-hint">TimeHint</span>
+
+                
                 </div>
             </div>
         </div>

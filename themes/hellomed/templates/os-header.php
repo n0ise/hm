@@ -46,7 +46,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     $prescription_end_datetime = DateTime::createFromFormat('d.m.Y', $prescription_end_date);
                     $prescription_end_timestamp = $prescription_end_datetime->getTimestamp();
                     $prescription_end_date_formatted = $prescription_end_datetime->format('d.m.Y');
-                    // two weeks before the expiry date 
+                        // two weeks before the expiry date 
                     $two_weeks_before = $prescription_end_datetime->modify('-14 days');
                     if ($prescription_end_timestamp >= $current_timestamp + 4 * 7 * 24 * 60 * 60) {
                         // More than 4 weeks away
@@ -59,7 +59,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                         $class = 'theme-red';
                     }
                     ?>
-        <div class="hm-preheader <?php echo $class; ?>">
+        <div class="hm-preheader <?php echo $class; ?>" id="prescription-<?php echo $prescription_id; ?>">
             <i class="bi bi-exclamation-circle-fill"></i>
             <div>
                 Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum
@@ -70,22 +70,24 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             </div>
             <i class="bi bi-x-circle"></i>
         </div>
-
-        <!-- close div when clicking the x circle  -->
         <script>
         $('.bi-x-circle').click(function() {
+            var id = $(this).parent().attr('id');
             $(this).parent().hide();
-            sessionStorage.setItem("div_closed", "true");
+            sessionStorage.setItem("div_closed_" + id, "true");
         });
-        // window.onbeforeunload = function() {
-        // sessionStorage.clear();
-        // };
-        if (sessionStorage.getItem("div_closed")) {
-            $('.hm-preheader').hide();
-            console.log('hide');
-        }
-        console.log(sessionStorage.getItem("div_closed"));
+        $(document).ready(function() {
+            $('.hm-preheader').each(function() {
+                var id = $(this).attr('id');
+                if (sessionStorage.getItem("div_closed_" + id) === "true") {
+                    $("#" + id).hide();
+                }
+            });
+        });
         </script>
+
+
+
 
         <?php  
                 }        
