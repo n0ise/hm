@@ -417,7 +417,7 @@ add_action('wp_ajax_edit_patient', function() {
 
 	// checking if user id exists before saving 
 	if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
-
+		$new_user_id=$_POST['new_user_id'];
 		$args = array(
 			  'meta_key'     => 'new_user_id',
 			  'meta_value'   => $_POST['new_user_id'],
