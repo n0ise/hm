@@ -80,7 +80,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-floating">
-                                <input id="blister_end_date" type="text" class="blister_end_date form-control"
+                                <input id="blister_end_date" type="date" class="blister_end_date form-control"
                                     value="<?php echo $blister_job['blister_end_date'] ?>">
                                 <label>Ende</label>
                             </div>
@@ -287,10 +287,11 @@ include_once('footer.php');
                   <label>Menge</label>
               </div>
 
-          </div>`;
+          </div>
+          <div class="medikament_ph"></div>`;
 
             // Insert the HTML string representation of the new div element after the div element with the medikament_ph class
-            document.querySelector('.medikament_ph').insertAdjacentHTML('afterend', newDivHTML);
+            document.querySelectorAll('.medikament_ph')[document.querySelectorAll('.medikament_ph').length - 1].insertAdjacentHTML('afterend', newDivHTML);
 
             // Attach the event listeners to the input element
             document.querySelector('.medicine_name_pzn').addEventListener('input', search);
@@ -302,8 +303,29 @@ include_once('footer.php');
     jQuery(document).ready(function($) {
         $('#add_blister_job').click(function() {
             let blisterDivHTML =
-                `<div class="col-12 col-md-4 blister_jobs_form"><div class="form-floating "><input type="text" id="blister_job_id" class="form-control blister_job_id" value=""><label>Blisterjob ID</label></div></div><div class="col-12 col-md-4"><div class="form-floating"><input type="date" id="blister_start_date" class="form-control blister_start_date" value=""><label>Start</label></div></div><div class="col-12 col-md-4"><div class="form-floating" ><input type="text"  id="blister_end_date" class="form-control blister_end_date" value=""><label>Ende</label></div></div>`;
-            document.querySelector('.blister_ph').insertAdjacentHTML('afterend', blisterDivHTML);
+                `<div class="col-12 col-md-4 blister_jobs_form">
+                    <div class="form-floating ">
+                        <input type="text" id="blister_job_id" class="form-control blister_job_id" value="">
+                        <label>Blisterjob ID</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-floating">
+                        <input type="date" id="blister_start_date" class="form-control blister_start_date" value="">
+                        <label>Start</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-floating">
+                        <input type="text"  id="blister_end_date" class="form-control blister_end_date" value="">
+                        <label>Ende</label>
+                    </div>
+                </div>
+                    <div class="blister_ph"></div>`;
+
+// Insert the HTML string representation of the new div element after the div element with the medikament_ph class
+document.querySelectorAll('.blister_ph')[document.querySelectorAll('.blister_ph').length - 1].insertAdjacentHTML('afterend', blisterDivHTML);
+// document.querySelector('.blister_ph').insertAdjacentHTML('afterend', blisterDivHTML);
 
         });
     });
