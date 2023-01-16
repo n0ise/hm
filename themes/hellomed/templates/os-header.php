@@ -73,14 +73,15 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
         <script>
         $('.bi-x-circle').click(function() {
             var id = $(this).parent().attr('id');
-            $(this).parent().hide();
+            // $(this).parent().hide();
+            $(this).parent().remove();
             sessionStorage.setItem("div_closed_" + id, "true");
         });
         $(document).ready(function() {
             $('.hm-preheader').each(function() {
                 var id = $(this).attr('id');
                 if (sessionStorage.getItem("div_closed_" + id) === "true") {
-                    $("#" + id).hide();
+                    $("#" + id).remove();
                 }
             });
         });
