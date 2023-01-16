@@ -426,7 +426,7 @@
                                     dropPasteFiles: 'Dateien hier ablegen/einfügen oder %{browseFiles}',
                                     dropPasteFolders: 'Dateien hier ablegen/einfügen oder %{browseFolders}',
                                     dropPasteImportBoth: 'Dateien hier ablegen/einfügen, %{browse} oder von folgenden Quellen importieren:',
-                                    dropPasteImportFiles: 'Dateien hier ablegen/einfügen, %{browseFiles} oder von folgenden Quellen importieren:',
+                                    dropPasteImportFiles: 'Dateien hier ablegen, %{browseFiles} oder importieren von:',
                                     dropPasteImportFolders: 'Dateien hier ablegen/einfügen, %{browseFolders} oder von folgenden Quellen importieren:',
                                     editFile: 'Datei bearbeiten',
                                     editFileWithFilename: 'Datei %{file} bearbeiten',
@@ -692,6 +692,34 @@
                     bottom: 0;
                     margin: auto;
             }
+
+            /* .uppy-Dashboard-Item-fileInfoAndButtons{
+                display: none;
+            } */
+
+             .uppy-Dashboard-Item-fileName{
+                display: none;
+            }
+
+            .uppy-Dashboard-Item-status{
+                display: none;
+            }
+
+            .uppy-size--height-md .uppy-Dashboard-Item {
+          
+                height: auto; 
+           
+            
+            }
+
+            [data-uppy-drag-drop-supported="true"] .uppy-Dashboard-AddFiles {
+                border: 0px; 
+                border-radius: 0px; 
+            height: 100%; 
+                margin: 0px;
+            }
+
+
 
 
     </style>
