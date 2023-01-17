@@ -115,7 +115,11 @@ console.log(desiredResponse)
 */
 
 // declaring the month, formatting it & render
-const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date());
+// const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date());
+// document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date(currentYear, currentMonth));
 document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
 
 let currentStart = 0;
@@ -125,7 +129,13 @@ const nextButton = document.querySelector('.hm-medplan-calendar-weeks-next');
 nextButton.addEventListener('click', () => {
     currentStart += daysPerPage;
     if(currentStart >= desiredResponse.length){
-        currentStart = 0;
+      currentStart = 0;
+      currentMonth = new Date().getMonth();
+      currentYear = new Date().getFullYear();
+    }else{
+      let currentDate = new Date(currentYear, currentMonth, currentStart+1);
+      currentMonth = currentDate.getMonth();
+      currentYear = currentDate.getFullYear();
     }
     if(currentStart > 0) {
         prevButton.classList.remove('is-inactive');
@@ -149,7 +159,13 @@ const prevButton = document.querySelector('.hm-medplan-calendar-weeks-prev');
 prevButton.addEventListener('click', () => {
     currentStart -= daysPerPage;
     if(currentStart < 0) {
-        currentStart = 0;
+      currentStart = 0;
+      currentMonth = new Date().getMonth();
+      currentYear = new Date().getFullYear();
+    }else{
+      let currentDate = new Date(currentYear, currentMonth, currentStart+1);
+      currentMonth = currentDate.getMonth();
+      currentYear = currentDate.getFullYear();
     }
     if(currentStart === 0){
         prevButton.classList.add('is-inactive');
@@ -184,9 +200,19 @@ function updateCalendar(desiredResponseSlice){
     </div>
   `
 
-  document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html)
-})
-desiredResponse.forEach((entry) => {
+  document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html);
+  let dayElements = document.getElementsByClassName("hm-medplan-calendar-days-day");
+  let dayElement = dayElements[dayElements.length-1];
+  dayElement.addEventListener('click', () => {
+      let clickedDate = new Date(entry.day);
+      currentMonth = clickedDate.getMonth();
+      currentYear = clickedDate.getFullYear();
+      const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(clickedDate);
+      document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
+    });
+  })
+  
+  desiredResponse.forEach((entry) => {
 
   let html = `<div class="hm-medplan-day">`
 
