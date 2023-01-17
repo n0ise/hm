@@ -49,13 +49,16 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
 <main>
     <div class="container">
         <div class="hm-content">
-
-
             <div class="h2 mb-5">
                 Medikationsplan
                 <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/packaging.svg">
             </div>
-            <div class="hm-medplan-wrapper">
+            <!-- loading image  -->
+            <div class="loading-logo">
+                <img src="/wp-content/themes/hellomed/assets/img/logo.svg" alt="Loading logo">
+            </div>
+            <div class="hm-medplan-wrapper" style="display:none">
+
                 <div class="hm-medplan-calendar">
                     <div class="hm-medplan-calendar-weeks">
                         <div class="hm-medplan-calendar-weeks-prev">
@@ -91,10 +94,10 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
                         <img
                             src="https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80">
                     </div>
-                    <span class="modal-amount">Amount</span> x 
+                    <span class="modal-amount">Amount</span> x
                     <span class="modal-time-hint">TimeHint</span>
 
-                
+
                 </div>
             </div>
         </div>

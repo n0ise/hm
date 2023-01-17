@@ -11,11 +11,18 @@
 // .then((data) => {
 //   console.log(data);
     
+// Declaring variables for the loader and the container in os-medikationsplan
+const loader = document.querySelector('.loading-logo');
+const container = document.querySelector('.hm-medplan-wrapper');
+container.style.display = "none";
+loader.style.display = "block";
+
+
 /******* NEW APPROACH *******/
 
 // taking the variable from the php file and using it in the js file
-    const response = JSON.parse(apiResponse);
-    console.log(response);
+const response = JSON.parse(apiResponse);
+console.log(response);
 
 // sample output from json 
 //   [
@@ -161,6 +168,7 @@ prevButton.addEventListener('click', () => {
 });
 
 
+
 function updateCalendar(desiredResponseSlice){
     const daysContainer = document.querySelector('.hm-medplan-calendar-days');
     daysContainer.innerHTML = ""; // Clear any existing days
@@ -207,7 +215,10 @@ desiredResponse.forEach((entry) => {
 
     html += `</div>`
   })
-
+  // hiding loader after rendering, and showing the container
+  loader.style.display = "none";
+  container.style.display = "block";
+  //
   html += `</div>`
 
   document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
