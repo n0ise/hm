@@ -229,6 +229,16 @@ desiredResponse.forEach((entry) => {
     return new bootstrap.Tooltip(tooltipTriggerEl)
   })
  
+  function checkCacheSize() {
+    // number to be defined 
+    if (localStorage.length > 500) {
+        let keys = Object.keys(localStorage);
+        for (let i = 0; i < keys.length / 2; i++) {
+            localStorage.removeItem(keys[i]);
+        }
+    }
+}
+
 
   const pills = document.querySelectorAll('.hm-medplan-pill');
     pills.forEach(pill => {
@@ -256,6 +266,7 @@ desiredResponse.forEach((entry) => {
             }
         }
         
+        checkCacheSize();
         document.querySelector('.modal-time-hint').textContent = timeHint;
         document.querySelector('.modal-title').textContent = name;
         document.querySelector('.modal-amount').textContent = amount;
