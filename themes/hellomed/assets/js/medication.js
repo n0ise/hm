@@ -238,16 +238,24 @@ desiredResponse.forEach((entry) => {
         const amount = event.target.closest('.hm-medplan-pill').dataset.amount;
         const image = event.target.closest('.hm-medplan-pill').dataset.image;
         const img = document.querySelector('.modal-img img');
-          if(!image || image === "" || image === "timages/") {
-          // placeholder in case there is no image, empty or it is just the prefix timages/ with no filename 
-            img.src = `https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80`;
-          }
-          else{
-            // complete url to image https://deutsche-blister.de/intern/timages/900005618.jpg
-            // image from api is timages/900005618.jpg
-            img.src = `https://deutsche-blister.de/intern/` + image;
-          }
-    
+        
+        // check if image is already in localStorage
+        const cachedImage = localStorage.getItem(image);
+        if(cachedImage) {
+            img.src = cachedImage;
+        } else {
+            if(!image || image === "" || image === "timages/") {
+                // placeholder in case there is no image, empty or it is just the prefix timages/ with no filename 
+                img.src = `https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80`;
+            } else {
+                // complete url to image https://deutsche-blister.de/intern/timages/900005618.jpg
+                // image from api is timages/900005618.jpg
+                img.src = `https://deutsche-blister.de/intern/` + image;
+                // cache the image in localStorage
+                localStorage.setItem(image, img.src);
+            }
+        }
+        
         document.querySelector('.modal-time-hint').textContent = timeHint;
         document.querySelector('.modal-title').textContent = name;
         document.querySelector('.modal-amount').textContent = amount;
