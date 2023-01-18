@@ -5,18 +5,17 @@
   $(".next").on("click", function () {
     var nextstep = false;
   
-    // if (step == 1) {
+    if (step == 1) {
 
-    //   nextstep = checkForm("step1");
-    // } 
+      nextstep = checkForm("step1");
+    } 
     
-    // else if (step == 2) {
+    else if (step == 2) {
    
-    //   nextstep = checkForm("step2");
-    // } 
+      nextstep = checkForm("step2");
+    } 
     
-    // else 
-    if (step == 3) {
+    else if (step == 3) {
       nextstep = checkForm("step3");
     } 
     
@@ -98,20 +97,20 @@
       }
     });
 
-    $("#" + val + " input[name='first_rezept_uploaded']").each(function () {
+  //   $("#" + val + " input[name='first_rezept_uploaded']").each(function () {
 
-        console.log(isEmpty(".uploaded-files ol"));
+  //       console.log(isEmpty(".uploaded-files ol"));
 
-      if ($("input#flexRadioDefault2").is(':checked') && $("#uploaded-files ol li").length == 0 ) {
-        console.log("checked");
-       $("#rezeptlabel").removeClass("is-invalid");
-     } else {
-      console.log("not valid");
-       $("#rezeptlabel").addClass("is-invalid");
-       valid = false;
-     }
+  //     if ($("input#flexRadioDefault2").is(':checked') && $("#uploaded-files ol li").length == 0 ) {
+  //       console.log("checked");
+  //      $("#rezeptlabel").removeClass("is-invalid");
+  //    } else {
+  //     console.log("not valid");
+  //      $("#rezeptlabel").addClass("is-invalid");
+  //      valid = false;
+  //    }
 
-   });
+  //  });
 
 
 
