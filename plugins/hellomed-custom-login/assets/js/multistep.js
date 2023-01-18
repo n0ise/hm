@@ -4,11 +4,30 @@
   
   $(".next").on("click", function () {
     var nextstep = false;
-    if (step == 2) {
-      nextstep = checkForm("userinfo");
-    } else {
+  
+    // if (step == 1) {
+
+    //   nextstep = checkForm("step1");
+    // } 
+    
+    // else if (step == 2) {
+   
+    //   nextstep = checkForm("step2");
+    // } 
+    
+    // else 
+    if (step == 3) {
+      nextstep = checkForm("step3");
+    } 
+    
+    else if (step == 4) {
+      nextstep = checkForm("step4");
+    } 
+  
+    else {
       nextstep = true;
     }
+  
     if (nextstep == true) {
       if (step < $(".step").length) {
         $(".step").show();
@@ -17,10 +36,10 @@
           .hide();
         stepProgress(step);
       }
-      hideButtons(step);
+      // hideButtons(step);
     }
   });
-  
+
   // ON CLICK BACK BUTTON
 //   $(".back").on("click", function () {
 //     console.log(step);
@@ -40,42 +59,23 @@
       .html("Schritt " + step + "/" + $(".step").length);
   };
   
+
   // DISPLAY AND HIDE "NEXT", "BACK" AND "SUMBIT" BUTTONS
-  hideButtons = function (step) {
-    var limit = parseInt($(".step").length);
-    $(".action").hide();
-    if (step < limit) {
-      $(".next").show();
-    }
-    if (step > 1) {
-      $(".back").show();
-    }
-    if (step == limit) {
-      $(".next").hide();
-      $(".submit").show();
-    }
-  };
-  
-  function setFormFields(id) {
-    if (id != false) {
-      // FILL STEP 2 FORM FIELDS
-      d = data.find(x => x.id === id);
-      $('#fname').val(d.fname);
-      $('#lname').val(d.lname);
-      $('#team').val(d.team);
-      $('#address').val(d.address);
-      $('#tel').val(d.tel);
-    } else {
-      // EMPTY USER SEARCH INPUT
-      $("#txt-search").val('');
-      // EMPTY STEP 2 FORM FIELDS
-      $('#fname').val('');
-      $('#lname').val('');
-      $('#team').val('');
-      $('#address').val('');
-      $('#tel').val('');
-    }
-  }
+  // hideButtons = function (step) {
+  //   var limit = parseInt($(".step").length);
+  //   $(".action").hide();
+  //   if (step < limit) {
+  //     $(".next").show();
+  //   }
+  //   if (step > 1) {
+  //     $(".back").show();
+  //   }
+  //   if (step == limit) {
+  //     $(".next").hide();
+  //     $(".submit").show();
+  //   }
+  // };
+
   
   function checkForm(val) {
     // CHECK IF ALL "REQUIRED" FIELD ALL FILLED IN
@@ -88,7 +88,46 @@
         $(this).removeClass("is-invalid");
       }
     });
+
+    $("#" + val + " input[type='radio']:required").each(function () {
+       if ($("input[name=" + $(this)[0].name + "]").is(':checked')) {
+        $("#validbuttongroup").removeClass("is-invalid");
+      } else {
+        $("#validbuttongroup").addClass("is-invalid");
+        valid = false;
+      }
+    });
+
+    $("#" + val + " input[name='first_rezept_uploaded']").each(function () {
+
+        console.log(isEmpty(".uploaded-files ol"));
+
+      if ($("input#flexRadioDefault2").is(':checked') && $("#uploaded-files ol li").length == 0 ) {
+        console.log("checked");
+       $("#rezeptlabel").removeClass("is-invalid");
+     } else {
+      console.log("not valid");
+       $("#rezeptlabel").addClass("is-invalid");
+       valid = false;
+     }
+
+   });
+
+
+
+
+
+
+
+
+
+
     return valid;
+  }
+  
+
+  function isEmpty(tag) {
+    return document.querySelector(tag).innerHTML.trim() == ""
   }
   
     // DATE PICKER
@@ -122,3 +161,5 @@
           toggleActive: true
       });
       });
+
+

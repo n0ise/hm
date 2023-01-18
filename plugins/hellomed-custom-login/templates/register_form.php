@@ -18,7 +18,7 @@
 		<div class="col-12">
        <label class="form-label">Sind Sie Patient oder Angehöriger?</label>
         <div class="btn-group d-flex">
-          <input type="radio" class="btn-check" name="patientcaregiverid" value="patient"  id="patientcaregiverid1" autocomplete="off" checked>
+          <input required type="radio" class="btn-check" name="patientcaregiverid" value="patient"  id="patientcaregiverid1" autocomplete="off" checked>
           <label class="btn btn-outline-primary" for="patientcaregiverid1">Patient</label>
           <input type="radio" class="btn-check" name="patientcaregiverid"  value="caregiver" id="patientcaregiverid2" autocomplete="off">
           <label class="btn btn-outline-primary" for="patientcaregiverid2">Angehöriger</label>
@@ -29,7 +29,7 @@
 	  <div class="col-12">
         <div class="form-floating">
 			
-			<input  class="form-control" type="text" name="first_name" id="first-name" required="required" placeholder=" ">
+			<input required  class="form-control" type="text" name="first_name" id="first-name" required="required" placeholder=" ">
 			<label for="first_name"><?php _e( 'Name', 'hellomed-custom-login' ); ?></label>
 		</div>
       </div>
@@ -37,7 +37,7 @@
 	  <div class="col-12">
         <div class="form-floating">
 			
-			<input  class="form-control" type="text" name="last_name" id="last-name" required="required" placeholder=" ">
+			<input required class="form-control" type="text" name="last_name" id="last-name" required="required" placeholder=" ">
 			<label for="last_name"><?php _e( 'Nachname', 'hellomed-custom-login' ); ?></label>
 		</div>
       </div>
@@ -45,7 +45,7 @@
 	  <div class="col-12">
         <div class="form-floating">
 
-			<input class="form-control"  type="text" name="email" id="email" required="required" placeholder=" ">
+			<input required class="form-control"  type="text" name="email" id="email" required="required" placeholder=" ">
 			<label for="email"><?php _e( 'Was ist Ihre E-Mail Adresse?', 'hellomed-custom-login' ); ?> </label>
 		</div>
       </div>
@@ -53,7 +53,7 @@
 
 	  <div class="col-12">
         <div class="form-check m-0">
-          <input class="form-check-input" type="checkbox" id="test3">
+          <input required class="form-check-input" type="checkbox" id="test3">
           <label class="form-check-label" for="test3">
             Ich habe die AGB und die Datenschutzerklärung zur Kenntnis genommen.
           </label>
@@ -61,7 +61,7 @@
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input class="form-check-input" type="checkbox" id="test4">
+          <input required class="form-check-input" type="checkbox" id="test4">
           <label class="form-check-label" for="test4">
             Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung einer Erinnerungsmail zur Einreichung eines Folgerezepts verarbeitet werden.
           </label>
@@ -69,7 +69,7 @@
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input class="form-check-input" type="checkbox" id="test5">
+          <input required class="form-check-input" type="checkbox" id="test5">
           <label class="form-check-label" for="test5">
             Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Produktempfehlungen per E-Mail verarbeitet werden.
           </label>

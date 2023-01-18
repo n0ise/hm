@@ -17,7 +17,7 @@
 
 
      <form id="onboardingForm" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post" enctype="multipart/form-data">
-        <div class="hm-auth-form step">
+        <div id="step1" class="hm-auth-form step">
             <div class="row gy-3">
         
             <div class="col-12">
@@ -26,8 +26,7 @@
             Patienteninformationen
             <i class="bi bi-info-circle"
                 data-bs-toggle="tooltip" data-placement="top"
-                title="Wir benötigen nur noch wenige patient:innenrelevante Informationen von dir,
-    damit dich unsere Apotheker:innen beim Start mit hellomed bestmöglichst beraten können.">  </i>
+                title="Wir benötigen nur noch wenige patient:innenrelevante Informationen von dir, damit dich unsere Apotheker:innen beim Start mit hellomed bestmöglichst beraten können.">  </i>
             </div>
         </div>
 
@@ -49,14 +48,16 @@
                         </div>
                         <div class="mt-3">
                             <div class="form-floating">
-                                <input id="patient_first_name" name="patient_first_name" type="text" class="form-control" placeholder=" " />
+                                <input required id="patient_first_name" name="patient_first_name" type="text" class="form-control" placeholder=" " />
                                 <label for="patient_first_name">Name des Angehörigen</label>
+                                <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                             </div>
                         </div>
                         <div class="mt-3">
                             <div class="form-floating">
-                                <input id="patient_last_name" name="patient_last_name" type="text" class="form-control" placeholder=" " />
+                                <input required id="patient_last_name" name="patient_last_name" type="text" class="form-control" placeholder=" " />
                                 <label for="patient_last_name">Nachname des Angehörigen</label>
+                                <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                             </div>
                         </div>
                     </div>
@@ -65,26 +66,28 @@
                 <?php } ?>
 
                 <div class="col-12">
-                    <div class="btn-group d-flex">
-                        <input type="radio" class="btn-check" name="geschlecht" value="male" id="radiomale" autocomplete="off" />
+                    <div id="validbuttongroup" class="btn-group d-flex">
+                        <input required type="radio" class="btn-check" name="geschlecht" value="male" id="radiomale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiomale">Männlich</label>
                         <input type="radio" class="btn-check" name="geschlecht" value="female" id="radiofemale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
                     </div>
+                    <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input id="birthdaypicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="birthdaySelectedBlur();" onfocus="birthdaySelected();" />
+                        <input required id="birthdaypicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="birthdaySelectedBlur();" onfocus="birthdaySelected();" />
                         <label id="birthdaylabel" for="birthdaypicker">Was ist Ihr Geburtsdatum?</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
 
-
                 <div class="col-12">
                     <div class="form-floating">
-                        <input id="krankheiten" name="krankheiten" type="text" class="form-control" placeholder=" " />
+                        <input id="krankheiten" name="krankheiten" type="text" class="form-control" placeholder=" "  />
                         <label for="krankheiten">Welche Haupterkrankungen haben Sie?</label>
+               
                     </div>
                 </div>
                 <div class="col-12">
@@ -99,7 +102,7 @@
             </div>
         </div>
 
-        <div id="userinfo" class="hm-auth-form step" style="display: none;">
+        <div id="step2" class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
 
                 <div class="col-12">
@@ -117,26 +120,30 @@
                 </div>
                 <div class="col-8">
                     <div class="form-floating">
-                        <input id="strase" name="strasse" type="text" class="form-control" placeholder=" " />
+                        <input required id="strase" name="strasse" type="text" class="form-control" placeholder=" " />
                         <label for="strase">Straße</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-4 ps-0">
                     <div class="form-floating">
-                        <input id="strasenr" name="nrno" type="text" class="form-control" placeholder=" " />
+                        <input required id="strasenr" name="nrno" type="text" class="form-control" placeholder=" " />
                         <label for="strasenr">Nr</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-4 pe-0">
                     <div class="form-floating">
-                        <input id="plz" name="postcode" type="text" class="form-control" placeholder=" " />
+                        <input required id="plz" name="postcode" type="text" class="form-control" placeholder=" " />
                         <label for="plz">Postleitzahl</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="form-floating">
-                        <input id="Ort" name="stadt" type="text" class="form-control" placeholder=" " />
+                        <input required id="Ort" name="stadt" type="text" class="form-control" placeholder=" " />
                         <label for="Ort">Wohnort</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -147,8 +154,9 @@
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
-                        <input id="telefon" name="telephone" type="text" class="form-control" placeholder=" " />
+                        <input required id="telefon" name="telephone" type="text" class="form-control" placeholder=" " />
                         <label for="telefon">Was ist Ihre Telefonnummer?</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
 
@@ -158,15 +166,15 @@
             </div>
         </div>
 
-        <div class="hm-auth-form step" style="display: none;">
+        <div id="step3" class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
 
                 <div class="col-12">
-        <div class="h3 mb-3">
+            <div class="h3 mb-3">
           <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription2.svg">
           Rezeptinformationen
         </div>
-      </div>
+         </div>
 
                 <div class="col-12">
                     <div class="progress">
@@ -176,8 +184,9 @@
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input id="startdatumpicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
+                        <input required id="startdatumpicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
                         <label id="startdatumlabel" for="startdatumpicker">Was ist Ihr Wunsch-Startdatum?</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                 </div>
 
@@ -204,13 +213,13 @@
                 </div>
 
                 <div class="col-12" id="rezepthochladen"  style="display: none;">
-                    <label id="rezeptlabel"class="form-label">Rezept hochladen</label>
+                    <label id="rezeptlabel" class="form-label">Rezept hochladen</label>
 
 
                             <div id="drag-drop-area"></div> 
                         <!-- Uploaded files list -->
 
-
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                         <div class="uploaded-files" style="display:none;">
                             <ol></ol>
                         </div>
@@ -262,7 +271,7 @@
             </div>
         </div>
 
-        <div class="hm-auth-form step" style="display: none;">
+        <div id="step4" class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
 
                 <div class="col-12">
@@ -279,12 +288,13 @@
 
                 <div class="col-12">
                     <label class="form-label">Wie sind sie versichert?</label>
-                    <div class="btn-group d-flex">
+                    <div id="validbuttongroup" class="btn-group d-flex">
                         <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="privat" id="flexRadioDefault11" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault11">Privat</label>
                         <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="gesetzlich" checked id="flexRadioDefault22" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault22">Gesetzlich</label>
                     </div>
+                    <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                 </div>
 
                 <!-- <div class="col-12">
@@ -296,14 +306,12 @@
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
+                        <input required id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
                         <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
+                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
                     <div id="filter-records"></div>
-                
                 </div>
-
-                
 
                 <!-- <div class="col-12">
                     <div class="form-floating">
@@ -315,7 +323,7 @@
                 <div class="col-12">
 
                 <div id="progressbarcustom" class="for-ProgressBar" style="display: none;"></div>
-                    <input id="hideInputLog" type="submit" name="submit" class="register-button" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
+                    <input id="hideInputLog" type="submit" name="submit" class="register-button next" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
                     <label for="hideInputLog" id="labelsubmit" class="btn btn-primary btn-lg">Anmeldung abschließen</label>
                 </div>
             </div>
@@ -631,8 +639,6 @@
                                     document.querySelector('.uploaded-files ol').appendChild(li)
                             });
 
-
-
                             $('#submit-dropzone').click(() => {
                                 uppy.upload();
                             });
@@ -706,10 +712,7 @@
             }
 
             .uppy-size--height-md .uppy-Dashboard-Item {
-          
                 height: auto; 
-           
-            
             }
 
             [data-uppy-drag-drop-supported="true"] .uppy-Dashboard-AddFiles {
@@ -719,16 +722,11 @@
                 margin: 0px;
             }
 
-
-
-
     </style>
 
   
 
 <script>
-
-
 
    function ihaverezept(){
   document.getElementById('haveFile').style.display ='block';

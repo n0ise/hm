@@ -42,7 +42,6 @@ $('#krankenversicherung').keyup(function(){
 
 $(document).on("click", ".li-search", function () {
     $("#krankenversicherung").val($(this).text());
-    setFormFields($(this).attr("id"));
     $("#filter-records").html("");
     // $(".next").prop("disabled", false);
   });
