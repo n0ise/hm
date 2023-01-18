@@ -107,11 +107,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <div class="d-none d-lg-block">
                 <nav class="hm-nav">
                     <!-- check the page slug and make the correspondent <li> with class active -->
-                    <a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
-                        href="/os-medikationsplan">Medikationsplan</a>
-                    <a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>" href="/os-rezepte">Rezepte</a>
-                    <a class="<?php if (is_page('os-medikamente')) { echo 'active'; } ?>"
-                        href="/os-medikamente">Medikamente</a>
+                    <a class="<?php if (is_page('medikationsplan')) { echo 'active'; } ?>"
+                        href="/medikationsplan">Medikationsplan</a>
+                    <a class="<?php if (is_page('rezepte')) { echo 'active'; } ?>" href="/rezepte">Rezepte</a>
+                    <a class="<?php if (is_page('medikamente')) { echo 'active'; } ?>"
+                        href="/medikamente">Medikamente</a>
                 </nav>
             </div>
             <div class="d-none d-lg-block">
@@ -127,8 +127,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
-                    <li><a class="dropdown-item" href="os-berechtigungen">Berechtigungen</a></li>
-                    <li><a class="dropdown-item" href="os-einstellungen">Einstellungen</a></li>
+                    <li><a class="dropdown-item" href="berechtigungen">Berechtigungen</a></li>
+                    <li><a class="dropdown-item" href="einstellungen">Einstellungen</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
