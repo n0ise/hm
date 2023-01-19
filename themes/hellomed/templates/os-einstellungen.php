@@ -59,7 +59,7 @@ $user_id = get_current_user_id();
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
-                            value="not editable, placeholder" disabled>
+                            value="<?php echo $user->user_email; ?>" disabled>
                         <label>E-Mail</label>
                     </div>
                 </div>
