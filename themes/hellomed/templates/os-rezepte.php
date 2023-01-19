@@ -96,7 +96,9 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
                                                     placeholder="Arzt">
                                             </div>
 
-                                            <div class="btn btn-primary btn-lg modalopen">Folgerezept einreichen</div>
+                                            <a class="btn btn-primary btn-lg"
+                                                href="mailto:patient@hellomed.com?subject=Neues Folgerezept - Folgerezept für meine Blister&amp;body=Sehr geehrte Damen und Herren, im Anhang dieser E-Mail finden Sie mein Folgerezept mit Bitte um Bearbeitung. Beste Grüße">Folgerezept
+                                                einreichen</a>
                                         </div>
                                     </div>
                                 </div>
@@ -129,11 +131,11 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
 // da footer 
 include_once('footer.php');
 ?>
-<!-- modal click to open -->
-    <script>
+    <!-- modal click to open, added in Iteration 2 -->
+    <!-- <script>
     jQuery(document).ready(function($) {
         $('.modalopen').click(function() {
             $('.bd-rezept-modal-lg').modal('show');
         });
     });
-    </script>
+    </script> -->
