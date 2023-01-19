@@ -192,7 +192,7 @@
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected>
                                 <?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
                             <?php 
-                                $status = array('Aktiv', 'Wartend', 'Inaktiv', 'Gefährdet');
+                                $status = array('Aktiv', 'Inaktiv', 'Wartend');
                                 $selectedstatus = get_user_meta($_GET['user_id'], 'status', true);
                                 $keystatus = array_search($selectedstatus, $status);
                              unset($status[$keystatus]);
@@ -391,8 +391,6 @@ function search() {
         });
     });
 }
-
-
 
 window.addEventListener('load', fetchData);
 document.querySelector('.insurance_company').addEventListener('input', search);
