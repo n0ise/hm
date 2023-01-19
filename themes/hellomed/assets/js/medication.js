@@ -232,8 +232,6 @@ function updateCalendar(desiredResponseSlice){
             ${cur.amount}
 
           </div>
-          <i class="bi bi-question text-muted" data-bs-toggle="tooltip" data-bs-placement="top" title="${cur.timeHint}"></i>
-
           <i class="bi bi-arrow-right"></i>
         </div>
       `
@@ -249,11 +247,11 @@ function updateCalendar(desiredResponseSlice){
 
   document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
 
-  // initiate tooltip 
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  })
+  // initiate tooltip - Update: not needed anymore, maybe later
+  // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  //   return new bootstrap.Tooltip(tooltipTriggerEl)
+  // })
  
   function checkCacheSize() {
     // number to be defined 
