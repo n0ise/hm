@@ -693,6 +693,10 @@ if (($updates_made) && (!$hasError)) {
         'message' => 'Änderungen erfolgreich gespeichert'
     );
 } else {
+	// if response message is empty, then no error message was set, so we set a default one :)
+	if (empty($errorMessages)) {
+		$errorMessages[] = "successdown: Es gab keine neuen Felder zum Speichern.";
+	} 
     $response = array(
         'status' => 'error',
         'message' => $errorMessages
