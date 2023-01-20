@@ -354,19 +354,28 @@ add_action('wp_ajax_edit_patient', function() {
 	$hasError = false;
 	$updates_made = false;
 	$errorMessages = array();
+	$updates_needed = array();
 	
     // save fields to user profile 
 	if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'patient_first_name', true )) {
 		$first_name = $_POST['first_name'];
-		update_user_meta( $user_id, 'patient_first_name', $first_name );
+		// update_user_meta( $user_id, 'patient_first_name', $first_name );
 		// echo "<li> Vorname aktualisiert </li> ";
+		$updates_needed[] = array(
+			'meta_key' => 'patient_first_name',
+			'meta_value' => $first_name
+		);
 		$updates_made = true;
 	}
 
 	if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
 		$last_name = $_POST['last_name'];
-		update_user_meta( $user_id, 'patient_last_name', $last_name );
+		// update_user_meta( $user_id, 'patient_last_name', $last_name );
 		// echo "<li> Nachname aktualisiert </li> ";
+		$updates_needed[] = array(
+			'meta_key' => 'patient_last_name',
+			'meta_value' => $last_name
+		);
 		$updates_made = true;
 	}
 
@@ -378,39 +387,84 @@ add_action('wp_ajax_edit_patient', function() {
 	// 	$updates_made = true;
 	// }
 
-	if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
-		$phone = $_POST['telephone'];
-		update_user_meta( $user_id, 'telephone', $phone );
-		// echo "<li> Telefon aktualisiert </li> ";
-		$updates_made = true;
+if (isset($_POST['telephone']) && (empty($_POST['telephone']))) {
+	$hasError = true;
+	$errorMessages[] = "telephone: Fehler: Bitte geben Sie Ihre Telefonnummer ein.";
+	} else {
+		if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
+			$phone = $_POST['telephone'];
+			// update_user_meta( $user_id, 'telephone', $phone );
+			// echo "<li> Telefon aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'telephone',
+				'meta_value' => $phone
+			);
+			$updates_made = true;
+		}
 	}
 
-	if ( !empty($_POST['strasse']) && $_POST['strasse'] != get_user_meta( $user_id, 'strasse', true )) {
-		$address = $_POST['strasse'];
-		update_user_meta( $user_id, 'strasse', $address );
-		// echo "<li> Straße aktualisiert </li> ";
-		$updates_made = true;
+if (isset($_POST['strasse']) && (empty($_POST['strasse']))) {
+	$hasError = true;
+	$errorMessages[] = "strasse: Fehler: Bitte geben Sie eine Strasse ein.";
+	} else {
+		if ( !empty($_POST['strasse']) && $_POST['strasse'] != get_user_meta( $user_id, 'strasse', true )) {
+			$address = $_POST['strasse'];
+			// update_user_meta( $user_id, 'strasse', $address );
+			// echo "<li> Straße aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'strasse',
+				'meta_value' => $address
+			);
+			$updates_made = true;	
+		}
 	}
 
-	if ( !empty($_POST['stadt']) && $_POST['stadt'] != get_user_meta( $user_id, 'stadt', true )) {
-		$city = $_POST['stadt'];
-		update_user_meta( $user_id, 'stadt', $city );
-		// echo "<li> Ort aktualisiert </li> ";
-		$updates_made = true;
+if (isset($_POST['stadt']) && (empty($_POST['stadt']))) {
+	$hasError = true;
+	$errorMessages[] = "stadt: Fehler: Bitte geben Sie eine Stadt ein.";
+	} else {
+		if ( !empty($_POST['stadt']) && $_POST['stadt'] != get_user_meta( $user_id, 'stadt', true )) {
+			$city = $_POST['stadt'];
+			// update_user_meta( $user_id, 'stadt', $city );
+			// echo "<li> Ort aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'stadt',
+				'meta_value' => $city
+			);
+			$updates_made = true;	
+		}	
 	}
 
-	if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
-		$zip = $_POST['postcode'];
-		update_user_meta( $user_id, 'postcode', $zip );
-		// echo "<li> PLZ aktualisiert </li> ";
-		$updates_made = true;
+if (isset($_POST['postcode']) && (empty($_POST['postcode']))) {
+	$hasError = true;
+	$errorMessages[] = "postcode: Fehler: Bitte geben Sie eine PZL ein.";
+	} else {
+		if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
+			$zip = $_POST['postcode'];
+			update_user_meta( $user_id, 'postcode', $zip );
+			// echo "<li> PLZ aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'stadt',
+				'meta_value' => $city
+			);
+			$updates_made = true;
+		}
 	}
 
-	if ( !empty($_POST['geburt']) && $_POST['geburt'] != get_user_meta( $user_id, 'geburt', true )) {
-		$birthday = $_POST['geburt'];
-		update_user_meta( $user_id, 'geburt', $birthday );
-		// echo "<li> Geburtstag aktualisiert </li> ";
-		$updates_made = true;
+if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
+		$hasError = true;
+		$errorMessages[] = "geburt: Fehler: Bitte geben Sie Ihren Geburtstag ein.";
+	} else {
+		if ( !empty($_POST['geburt']) && $_POST['geburt'] != get_user_meta( $user_id, 'geburt', true )) {
+			$birthday = $_POST['geburt'];
+			update_user_meta( $user_id, 'geburt', $birthday );
+			// echo "<li> Geburtstag aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'geburt',
+				'meta_value' => $birthday
+			);
+			$updates_made = true;	
+		}
 	}
 
 	if ( !empty($_POST['geschlecht']) && $_POST['geschlecht'] != get_user_meta( $user_id, 'geschlecht', true )) {
@@ -427,8 +481,9 @@ add_action('wp_ajax_edit_patient', function() {
 		$updates_made = true;
 	}
 
-	// checking if user id exists before saving 
-if (empty($_POST['new_user_id'])) {
+	// checking if user is set and id exists before saving 
+if (isset($_POST['new_user_id']) && (empty($_POST['new_user_id']))) {
+	$hasError = true;
 	$errorMessages[] = "new_user_id: Fehler: Bitte geben Sie eine Benutzer-ID ein.";
 	} else {
 	if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
@@ -446,10 +501,13 @@ if (empty($_POST['new_user_id'])) {
 			$errorMessages[] = "new_user_id: Fehler: Benutzer-ID existiert bereits, wählen Sie eine andere.";
 			// echo "Fehler: Benutzer-ID existiert bereits, wählen Sie eine andere.";
 		} else {
-			update_user_meta( $user_id, 'new_user_id', $new_user_id );
+			// update_user_meta( $user_id, 'new_user_id', $new_user_id );
 			//echo "<li> Benutzer-ID aktualisiert </li> ";
-			$updates_made = true;
-		}
+			$updates_needed[] = array(
+				'meta_key' => 'new_user_id',
+				'meta_value' => $new_user_id
+			);
+			$updates_made = true;		}
 	}
 }	
 
@@ -488,11 +546,16 @@ if (empty($_POST['new_user_id'])) {
 		$updates_made = true;
 	}
 
-	if ( !empty($_POST['nrno']) && $_POST['nrno'] != get_user_meta( $user_id, 'nrno', true )) {
-		$nrno = $_POST['nrno'];
-		update_user_meta( $user_id, 'nrno', $nrno );
-		// echo "<li> Hausnummer aktualisiert </li> ";
-		$updates_made = true;
+if (isset($_POST['nrno']) && (empty($_POST['nrno']))) {
+	$hasError = true;
+	$errorMessages[] = "nrno: Fehler: Bitte geben Sie Ihre Hausnummer ein";
+	} else {
+		if ( !empty($_POST['nrno']) && $_POST['nrno'] != get_user_meta( $user_id, 'nrno', true )) {
+			$nrno = $_POST['nrno'];
+			update_user_meta( $user_id, 'nrno', $nrno );
+			// echo "<li> Hausnummer aktualisiert </li> ";
+			$updates_made = true;
+		}
 	}
 
 	if ( !empty($_POST['zusatz']) && $_POST['zusatz'] != get_user_meta( $user_id, 'zusatzinformationen', true )) {
@@ -529,7 +592,11 @@ foreach ($rezept_input as &$record) {
 			$record['prescription_id'] = $_POST['prescription_id'];
 			// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 			// echo "<li> Prescription ID aktualisiert </li>";
-			$updates_made = true;
+			$updates_needed[] = array(
+				'meta_key' => 'prescription_id',
+				'meta_value' => $record['prescription_id']
+			);
+			$updates_made = true;		
 		} else {
 			$hasError = true;
 			$errorMessages[]= "prescription_id: Fehler: Rezept-ID existiert bereits, wählen Sie eine andere.";
@@ -541,7 +608,6 @@ foreach ($rezept_input as &$record) {
 		$record['doctor_name'] = $_POST['doctor_name'];
 		// echo "<li> Arzt aktualisiert </li>";
 		$updates_made = true;
-
 	}
 
 	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $record['prescription_date_by_doctor'] ) {
@@ -549,7 +615,11 @@ foreach ($rezept_input as &$record) {
 		$_POST['prescription_date_by_doctor'] = date('d.m.Y', strtotime($_POST['prescription_date_by_doctor']));
 		$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 		// echo "<li> Verschreibungstdatum aktualisiert </li>";
-		$updates_made = true;
+		$updates_needed[] = array(
+			'meta_key' => 'prescription_date_by_doctor',
+			'meta_value' => $record['prescription_date_by_doctor']
+		);
+		$updates_made = true;	
 	}
 
 	if ( !empty($_POST['prescription_start_date']) && $_POST['prescription_start_date'] != $record['prescription_start_date'] ) {
@@ -557,8 +627,11 @@ foreach ($rezept_input as &$record) {
 		$_POST['prescription_start_date'] = date('d.m.Y', strtotime($_POST['prescription_start_date']));
 		$record['prescription_start_date'] = $_POST['prescription_start_date'];
 		// echo "<li> Rezept Start aktualisiert </li>";
-		$updates_made = true;
-	} else {
+		$updates_needed[] = array(
+			'meta_key' => 'prescription_start_date',
+			'meta_value' => $record['prescription_start_date']
+		);
+		$updates_made = true;	} else {
 			$hasError = true;
 			$errorMessages[]= "prescription_start_date: Fehler: Rezept Start muss vor Rezept Ende liegen.";
 		}
@@ -568,8 +641,11 @@ foreach ($rezept_input as &$record) {
 		$_POST['prescription_end_date'] = date('d.m.Y', strtotime($_POST['prescription_end_date']));
 		$record['prescription_end_date'] = $_POST['prescription_end_date'];
 		// echo "<li> Rezept Ende aktualisiert </li>";
-		$updates_made = true;
-	} else {
+		$updates_needed[] = array(
+			'meta_key' => 'prescription_end_date',
+			'meta_value' => $record['prescription_end_date']
+		);
+		$updates_made = true;	} else {
 			$hasError = true;
 			$errorMessages[]= "prescription_end_date: Fehler: Rezept Ende muss nach Rezept Start liegen.";
 		}
@@ -597,7 +673,12 @@ foreach ($rezept_input as &$record) {
 
 
 update_field('rezept_input', $rezept_input, 'user_'.$user_id);
+
+
 if (($updates_made) && (!$hasError)) {
+    foreach ($updates_needed as $update) {
+        update_user_meta( $user_id, $update['meta_key'], $update['meta_value'] );
+    }
     $response = array(
         'status' => 'success',
         'message' => 'Änderungen erfolgreich gespeichert'
@@ -608,6 +689,7 @@ if (($updates_made) && (!$hasError)) {
         'message' => $errorMessages
     );
 }
+
 
 echo json_encode($response);
 
