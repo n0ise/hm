@@ -356,27 +356,36 @@ add_action('wp_ajax_edit_patient', function() {
 	$errorMessages = array();
 	$updates_needed = array();
 	
-    // save fields to user profile 
-	if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'patient_first_name', true )) {
-		$first_name = $_POST['first_name'];
-		// update_user_meta( $user_id, 'patient_first_name', $first_name );
-		// echo "<li> Vorname aktualisiert </li> ";
-		$updates_needed[] = array(
-			'meta_key' => 'patient_first_name',
-			'meta_value' => $first_name
-		);
-		$updates_made = true;
+	if (isset($_POST['first_name']) && (empty($_POST['first_name']))) {
+		$hasError = true;
+		$errorMessages[] = "first_name: Fehler: Bitte geben Sie Ihren Vornamen ein.";
+		} else {	
+			if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'patient_first_name', true )) {
+			$first_name = $_POST['first_name'];
+			// update_user_meta( $user_id, 'patient_first_name', $first_name );
+			// echo "<li> Vorname aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'patient_first_name',
+				'meta_value' => $first_name
+			);
+			$updates_made = true;
+		}
 	}
-
-	if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
-		$last_name = $_POST['last_name'];
-		// update_user_meta( $user_id, 'patient_last_name', $last_name );
-		// echo "<li> Nachname aktualisiert </li> ";
-		$updates_needed[] = array(
-			'meta_key' => 'patient_last_name',
-			'meta_value' => $last_name
-		);
-		$updates_made = true;
+	
+if (isset($_POST['last_name']) && (empty($_POST['last_name']))) {
+		$hasError = true;
+		$errorMessages[] = "last_name: Fehler: Bitte geben Sie Ihren Nachnamen ein.";
+		} else {
+		if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
+			$last_name = $_POST['last_name'];
+			// update_user_meta( $user_id, 'patient_last_name', $last_name );
+			// echo "<li> Nachname aktualisiert </li> ";
+			$updates_needed[] = array(
+				'meta_key' => 'patient_last_name',
+				'meta_value' => $last_name
+			);
+			$updates_made = true;
+		}
 	}
 
 	// email might be not needed in the forms
