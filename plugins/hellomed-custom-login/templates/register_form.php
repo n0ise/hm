@@ -54,26 +54,37 @@
 	  <div class="col-12">
         <div class="form-check m-0">
           <input required class="form-check-input" type="checkbox" id="test3">
-          <label class="form-check-label" for="test3">
-            Ich habe die AGB und die Datenschutzerklärung zur Kenntnis genommen.
+          <label class="form-check-label text-justify" for="test3">
+          <small>
+              Ich habe die <a href>AGB</a> und die <a href>Datenschutzerklärung</a> zur Kenntnis genommen. *
+            </small>
           </label>
         </div>
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input required class="form-check-input" type="checkbox" id="test4">
-          <label class="form-check-label" for="test4">
-            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung einer Erinnerungsmail zur Einreichung eines Folgerezepts verarbeitet werden.
-          </label>
+          <input  class="form-check-input" type="checkbox" id="test4">
+          <label class="form-check-label text-justify" for="test4">
+          <small>
+              Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Produktempfehlungen per E-Mail, Errinerungsmails zur Einreichung eines Folgerezeptes verarbeitet werden.
+            </small>
+      </label>  
         </div>
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input required class="form-check-input" type="checkbox" id="test5">
-          <label class="form-check-label" for="test5">
-            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Produktempfehlungen per E-Mail verarbeitet werden.
+          <input  class="form-check-input" type="checkbox" id="test5">
+          <label class="form-check-label text-justify"  for="test5">
+          <small>
+              Ja ich möchte weitere Informationen zu Neuigkeiten und Angebote, sowie Kommunikation betreffend der Nutzung von hellomedOs per E-Mail oder Telefon von der hellomed Group GmbH erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht. 
+            </small>
           </label>
         </div>
+      </div>
+      <div class="col-12">
+        <small class="d-block pt-3 text-justify border-top">
+          Ich kann meine Einwilligungen und die Schweigepflichtentbindungserklärung jederzeit mit Wirkung für die Zukunft in meinem hellomedOs Kundenkonto widerrufen.
+        </small>
       </div>
 
 		<!-- <p class="form-row">
