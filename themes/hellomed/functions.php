@@ -629,6 +629,9 @@ foreach ($rezept_input as &$record) {
 			'meta_value' => $record['prescription_date_by_doctor']
 		);
 		$updates_made = true;	
+	} else {
+		$hasError = true;
+		$errorMessages[]= "prescription_date_by_doctor: Fehler: Rezept Start muss vor Rezept Ende liegen.";
 	}
 
 	if ( !empty($_POST['prescription_start_date']) && $_POST['prescription_start_date'] != $record['prescription_start_date'] ) {
@@ -640,12 +643,13 @@ foreach ($rezept_input as &$record) {
 			'meta_key' => 'prescription_start_date',
 			'meta_value' => $record['prescription_start_date']
 		);
-		$updates_made = true;	} else {
+		$updates_made = true;	
+	} else {
 			$hasError = true;
 			$errorMessages[]= "prescription_start_date: Fehler: Rezept Start muss vor Rezept Ende liegen.";
 		}
 
-	if ( !empty($_POST['prescription_end_date']) && $_POST['prescription_end_date'] != $record['prescription_start_date'] ) {
+	if ( !empty($_POST['prescription_end_date']) && $_POST['prescription_end_date'] != $record['prescription_end_date'] ) {
 		// converting to d.m.y (from yyyy/mm/dd)
 		$_POST['prescription_end_date'] = date('d.m.Y', strtotime($_POST['prescription_end_date']));
 		$record['prescription_end_date'] = $_POST['prescription_end_date'];
@@ -654,7 +658,8 @@ foreach ($rezept_input as &$record) {
 			'meta_key' => 'prescription_end_date',
 			'meta_value' => $record['prescription_end_date']
 		);
-		$updates_made = true;	} else {
+		$updates_made = true;	
+	} else {
 			$hasError = true;
 			$errorMessages[]= "prescription_end_date: Fehler: Rezept Ende muss nach Rezept Start liegen.";
 		}
@@ -666,13 +671,32 @@ foreach ($rezept_input as &$record) {
 	}
 
 	// TODO the following two validaiton blocks, need to be don differntly, as it is array . saving is working fine, TODO is just for the confirmation message on frontend
-	// if ( !empty($_POST['blister_jobs']) && $_POST['blister_jobs'] != $record['blister_jobs'] ) {
-    	$record['blister_job'] = $_POST['blister_jobs'];
-		// echo "<li> Blister aktualisiert </li> ";
-	// }
-
+	foreach ($_POST['blister_jobs'] as $item) {
+		if (empty($item['blister_job_id']) || empty($item['blister_start_date']) || empty($item['blister_end_date'])) {
+			$errorMessages[] = "Fehler: Bitte füllen Sie alle Felder für den Blister-Job aus.";
+			$hasError = true;
+		} else {
+			$record['blister_job'] = $_POST['blister_jobs'];
+			$updates_made = true;
+			// update the values here
+			// update_user_meta( $user_id, 'blister_job_id', $item['blister_job_id'] );
+			// update_user_meta( $user_id, 'blister_start_date', $item['blister_start_date'] );
+			// update_user_meta( $user_id, 'blister_end_date', $item['blister_end_date'] );
+		}
+	}
+	
+	foreach ($_POST['medikament'] as $item) {
+		if (empty($item['medicine_name_pzn']) || empty($item['medicine_amount'])) {
+			$errorMessages[] = "Fehler: Bitte füllen Sie alle Felder für den Medikamente aus.";
+			$hasError = true;
+		} else {
+			$record['medicine_section'] = $_POST['medikament'];
+			$updates_made = true;
+		}
+	}
+	
 	// if ( !empty($_POST['medikament']) && $_POST['medikament'] != $record['medikament'] ) {
-		$record['medicine_section'] = $_POST['medikament'];
+		// $record['medicine_section'] = $_POST['medikament'];
 		// echo "<li> Medikament aktualisiert </li> ";
 	// }
 

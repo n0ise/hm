@@ -138,12 +138,12 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                             <label>Ende</label>
                         </div>
                     </div>
-                    <?php
-                if (!empty($record['medicine_section'])) {
-                    foreach ($record['medicine_section'] as $medicine) {?>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Inhalt</div>
                     </div>
+                    <?php
+                if (!empty($record['medicine_section'])) {
+                    foreach ($record['medicine_section'] as $medicine) {?>
                     <div class="col-12 col-md-9">
                         <div class="form-floating">
                             <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
