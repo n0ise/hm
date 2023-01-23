@@ -2,7 +2,7 @@
  * this was the original code, working but trying a new approach
  *
  */
- 
+
 // var url = '/wp-content/themes/hellomed/assets/php/test_api.php';
 // fetch(url, {
 //   method: 'GET'
@@ -10,7 +10,7 @@
 // .then((res) => res.json())
 // .then((data) => {
 //   console.log(data);
-    
+
 // Declaring variables for the loader and the container in os-medikationsplan
 const loader = document.querySelector('.loading-logo');
 const container = document.querySelector('.hm-medplan-wrapper');
@@ -55,13 +55,13 @@ console.log(response);
 //             }, etc........
 //]
 
-  // Create an array to store the grouped and sorted data
-  
+// Create an array to store the grouped and sorted data
+
 /*******************************************************************************
  * First, we create a new object structure that is easier to merge
  */
 
-  const rewriteResponse = (object) => {
+const rewriteResponse = (object) => {
   const apiArray = object
   const newArray = []
 
@@ -70,7 +70,12 @@ console.log(response);
       newDate: dosage.date,
       newMeds: [{
         newTime: dosage.time,
-        newName: [ { name: med.medication, image: med.image, amount: dosage.amount, timeHint: dosage.timeHint } ]
+        newName: [{
+          name: med.medication,
+          image: med.image,
+          amount: dosage.amount,
+          timeHint: dosage.timeHint
+        }]
       }]
     }))
   })
@@ -87,9 +92,9 @@ console.log(newResponse)
 
 
 /*******************************************************************************
-* Second, we use lodash to merge all matching dates and times together
-* https://stackoverflow.com/questions/42081375/lodash-group-and-populate-arrays
-*/
+ * Second, we use lodash to merge all matching dates and times together
+ * https://stackoverflow.com/questions/42081375/lodash-group-and-populate-arrays
+ */
 
 const desiredResponse = _(newResponse).groupBy('newDate').map((items, date) => {
   return {
@@ -111,15 +116,18 @@ console.log(desiredResponse)
 
 
 /*******************************************************************************
-* Third, we render the new object to the DOM
-*/
+ * Third, we render the new object to the DOM
+ */
 
 // declaring the month, formatting it & render
 // const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date());
 // document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
-const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(new Date(currentYear, currentMonth));
+const monthYear = new Intl.DateTimeFormat('de-DE', {
+  month: 'long',
+  year: 'numeric'
+}).format(new Date(currentYear, currentMonth));
 document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
 
 let currentStart = 0;
@@ -127,69 +135,69 @@ const daysPerPage = 7;
 
 const nextButton = document.querySelector('.hm-medplan-calendar-weeks-next');
 nextButton.addEventListener('click', () => {
-    currentStart += daysPerPage;
-    if(currentStart >= desiredResponse.length){
-      currentStart = 0;
-      currentMonth = new Date().getMonth();
-      currentYear = new Date().getFullYear();
-    }else{
-      let currentDate = new Date(currentYear, currentMonth, currentStart+1);
-      currentMonth = currentDate.getMonth();
-      currentYear = currentDate.getFullYear();
-    }
-    if(currentStart > 0) {
-        prevButton.classList.remove('is-inactive');
-    }
-    if(currentStart === 0) {
-        nextButton.classList.add('is-inactive');
-    }else{
-        nextButton.classList.remove('is-inactive');
-    }
-    if(currentStart+daysPerPage >= desiredResponse.length){
-        nextButton.classList.add('is-inactive');
-    }else{
-        nextButton.classList.remove('is-inactive');
-    }
-    const end = currentStart + daysPerPage;
-    const desiredResponseSlice = desiredResponse.slice(currentStart, end);
-    updateCalendar(desiredResponseSlice);
+  currentStart += daysPerPage;
+  if (currentStart >= desiredResponse.length) {
+    currentStart = 0;
+    currentMonth = new Date().getMonth();
+    currentYear = new Date().getFullYear();
+  } else {
+    let currentDate = new Date(currentYear, currentMonth, currentStart + 1);
+    currentMonth = currentDate.getMonth();
+    currentYear = currentDate.getFullYear();
+  }
+  if (currentStart > 0) {
+    prevButton.classList.remove('is-inactive');
+  }
+  if (currentStart === 0) {
+    nextButton.classList.add('is-inactive');
+  } else {
+    nextButton.classList.remove('is-inactive');
+  }
+  if (currentStart + daysPerPage >= desiredResponse.length) {
+    nextButton.classList.add('is-inactive');
+  } else {
+    nextButton.classList.remove('is-inactive');
+  }
+  const end = currentStart + daysPerPage;
+  const desiredResponseSlice = desiredResponse.slice(currentStart, end);
+  updateCalendar(desiredResponseSlice);
 });
 
 const prevButton = document.querySelector('.hm-medplan-calendar-weeks-prev');
 prevButton.addEventListener('click', () => {
-    currentStart -= daysPerPage;
-    if(currentStart < 0) {
-      currentStart = 0;
-      currentMonth = new Date().getMonth();
-      currentYear = new Date().getFullYear();
-    }else{
-      let currentDate = new Date(currentYear, currentMonth, currentStart+1);
-      currentMonth = currentDate.getMonth();
-      currentYear = currentDate.getFullYear();
-    }
-    if(currentStart === 0){
-        prevButton.classList.add('is-inactive');
-        nextButton.classList.remove('is-inactive');
-    }else{
-        prevButton.classList.remove('is-inactive');
-    }
-    if(currentStart+daysPerPage >= desiredResponse.length){
-        nextButton.classList.add('is-inactive');
-    }else{
-        nextButton.classList.remove('is-inactive');
-    }
-    const end = currentStart + daysPerPage;
-    const desiredResponseSlice = desiredResponse.slice(currentStart, end);
-    updateCalendar(desiredResponseSlice);
+  currentStart -= daysPerPage;
+  if (currentStart < 0) {
+    currentStart = 0;
+    currentMonth = new Date().getMonth();
+    currentYear = new Date().getFullYear();
+  } else {
+    let currentDate = new Date(currentYear, currentMonth, currentStart + 1);
+    currentMonth = currentDate.getMonth();
+    currentYear = currentDate.getFullYear();
+  }
+  if (currentStart === 0) {
+    prevButton.classList.add('is-inactive');
+    nextButton.classList.remove('is-inactive');
+  } else {
+    prevButton.classList.remove('is-inactive');
+  }
+  if (currentStart + daysPerPage >= desiredResponse.length) {
+    nextButton.classList.add('is-inactive');
+  } else {
+    nextButton.classList.remove('is-inactive');
+  }
+  const end = currentStart + daysPerPage;
+  const desiredResponseSlice = desiredResponse.slice(currentStart, end);
+  updateCalendar(desiredResponseSlice);
 });
 
 
 
-function updateCalendar(desiredResponseSlice){
-    const daysContainer = document.querySelector('.hm-medplan-calendar-days');
-    daysContainer.innerHTML = ""; // Clear any existing days
-    desiredResponseSlice.forEach((entry) => {
-  const html = `
+function updateCalendar(desiredResponseSlice) {
+  const daysContainer = document.querySelector('.hm-medplan-calendar-days');
+  daysContainer.innerHTML = ""; // Clear any existing days
+  desiredResponseSlice.forEach((entry) => {
+    const html = `
     <div class="hm-medplan-calendar-days-day">
       <div class="hm-medplan-calendar-days-day-name">
         ${new Intl.DateTimeFormat('de-DE', { weekday: 'short' }).format(new Date(entry.day))}
@@ -200,28 +208,31 @@ function updateCalendar(desiredResponseSlice){
     </div>
   `
 
-  document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html);
-  let dayElements = document.getElementsByClassName("hm-medplan-calendar-days-day");
-  let dayElement = dayElements[dayElements.length-1];
-  dayElement.addEventListener('click', () => {
+    document.querySelector('.hm-medplan-calendar-days').insertAdjacentHTML('beforeend', html);
+    let dayElements = document.getElementsByClassName("hm-medplan-calendar-days-day");
+    let dayElement = dayElements[dayElements.length - 1];
+    dayElement.addEventListener('click', () => {
       let clickedDate = new Date(entry.day);
       currentMonth = clickedDate.getMonth();
       currentYear = clickedDate.getFullYear();
-      const monthYear = new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric' }).format(clickedDate);
+      const monthYear = new Intl.DateTimeFormat('de-DE', {
+        month: 'long',
+        year: 'numeric'
+      }).format(clickedDate);
       document.querySelector('.hm-medplan-calendar-weeks > div:nth-child(2)').textContent = monthYear;
     });
   })
-  
+
   desiredResponse.forEach((entry) => {
 
-  let html = `<div class="hm-medplan-day">`
+    let html = `<div class="hm-medplan-day">`
 
-  entry.med.forEach((cur) => {
-    html += `<div class="hm-medplan-time">`
-    html += `<div class="hm-medplan-daytime"><i class="bi bi-alarm"></i> ${cur.time}</div>`
-    cur.names.forEach((cur) => {
-      const arr = cur.name.split(/(\s+\s+)/) // Split string after two spaces into three parts
-      html += `
+    entry.med.forEach((cur) => {
+      html += `<div class="hm-medplan-time">`
+      html += `<div class="hm-medplan-daytime"><i class="bi bi-alarm"></i> ${cur.time}</div>`
+      cur.names.forEach((cur) => {
+        const arr = cur.name.split(/(\s+\s+)/) // Split string after two spaces into three parts
+        html += `
         <div class="hm-medplan-pill" data-bs-toggle="modal" data-bs-target="#exampleModal" data-time-hint="${cur.timeHint}" data-image="${cur.image}" data-amount="${cur.amount}" data-name="${arr[0]}">
           <div>
             <span>${arr[2]}</span>
@@ -235,36 +246,36 @@ function updateCalendar(desiredResponseSlice){
           <i class="bi bi-arrow-right"></i>
         </div>
       `
+      })
+
+      html += `</div>`
     })
-
+    // hiding loader after rendering, and showing the container
+    loader.style.display = "none";
+    container.style.display = "block";
+    //
     html += `</div>`
-  })
-  // hiding loader after rendering, and showing the container
-  loader.style.display = "none";
-  container.style.display = "block";
-  //
-  html += `</div>`
 
-  document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
+    document.querySelector('.hm-medplan-wrapper').insertAdjacentHTML('beforeend', html)
 
-  // initiate tooltip - Update: not needed anymore, maybe later
-  // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  //   return new bootstrap.Tooltip(tooltipTriggerEl)
-  // })
- 
-  function checkCacheSize() {
-    // number to be defined 
-    if (localStorage.length > 500) {
+    // initiate tooltip - Update: not needed anymore, maybe later
+    // var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    //   return new bootstrap.Tooltip(tooltipTriggerEl)
+    // })
+
+    function checkCacheSize() {
+      // number to be defined 
+      if (localStorage.length > 500) {
         let keys = Object.keys(localStorage);
         for (let i = 0; i < keys.length / 2; i++) {
-            localStorage.removeItem(keys[i]);
+          localStorage.removeItem(keys[i]);
         }
+      }
     }
-}
 
 
-  const pills = document.querySelectorAll('.hm-medplan-pill');
+    const pills = document.querySelectorAll('.hm-medplan-pill');
     pills.forEach(pill => {
       pill.addEventListener('click', event => {
         const timeHint = event.target.closest('.hm-medplan-pill').dataset.timeHint;
@@ -272,24 +283,24 @@ function updateCalendar(desiredResponseSlice){
         const amount = event.target.closest('.hm-medplan-pill').dataset.amount;
         const image = event.target.closest('.hm-medplan-pill').dataset.image;
         const img = document.querySelector('.modal-img img');
-        
+
         // check if image is already in localStorage
         const cachedImage = localStorage.getItem(image);
-        if(cachedImage) {
-            img.src = cachedImage;
+        if (cachedImage) {
+          img.src = cachedImage;
         } else {
-            if(!image || image === "" || image === "timages/") {
-                // placeholder in case there is no image, empty or it is just the prefix timages/ with no filename 
-                img.src = `https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80`;
-            } else {
-                // complete url to image https://deutsche-blister.de/intern/timages/900005618.jpg
-                // image from api is timages/900005618.jpg
-                img.src = `https://deutsche-blister.de/intern/` + image;
-                // cache the image in localStorage
-                localStorage.setItem(image, img.src);
-            }
+          if (!image || image === "" || image === "timages/") {
+            // placeholder in case there is no image, empty or it is just the prefix timages/ with no filename 
+            img.src = `https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80`;
+          } else {
+            // complete url to image https://deutsche-blister.de/intern/timages/900005618.jpg
+            // image from api is timages/900005618.jpg
+            img.src = `https://deutsche-blister.de/intern/` + image;
+            // cache the image in localStorage
+            localStorage.setItem(image, img.src);
+          }
         }
-        
+
         checkCacheSize();
         document.querySelector('.modal-time-hint').textContent = timeHint;
         document.querySelector('.modal-title').textContent = name;
@@ -297,27 +308,43 @@ function updateCalendar(desiredResponseSlice){
       });
     });
 
-});
+  });
 
 
 
-/*******************************************************************************
-* Fourth, we give the tabs some functionallity
-*/
+  /*******************************************************************************
+   * Fourth, we give the tabs some functionallity
+   */
 
-const tabs = document.querySelectorAll('.hm-medplan-calendar-days-day')
-const days = document.querySelectorAll('.hm-medplan-day')
+  const tabs = document.querySelectorAll('.hm-medplan-calendar-days-day')
+  const days = document.querySelectorAll('.hm-medplan-day')
 
-tabs.forEach((cur, i) => {
-  cur.addEventListener('click', () => {
-    const prev = [...tabs, ...days]
-    const next = [cur, days[i]]
+  // we are comparing the current day (without time) as unix time and when it finds the current day
+  // in the Array, it makes it active and be clicked automatically
+  const currentDay = new Date();
+  currentDay.setHours(0, 0, 0, 0);
 
-    prev.forEach((el) => el.classList.remove('active'))
-    next.forEach((el) => el.classList.add('active'))
-  })
-})
-tabs[0].click()
+  tabs.forEach((tab, i) => {
+    const tabDate = `${currentYear}-${currentMonth}-${tab.querySelector('.hm-medplan-calendar-days-day-number').textContent}`;
+    tabDay = new Date(currentYear, currentMonth, tab.querySelector('.hm-medplan-calendar-days-day-number').textContent);
+    tabDay.setHours(0, 0, 0, 0);
+    // console.log(currentDay.getTime());
+    // console.log(tabDay.getTime());
+
+    if (tabDay.getTime() === currentDay.getTime()) {
+      tab.classList.add("active");
+      days[i].classList.add("active");
+    }
+
+    tab.addEventListener('click', () => {
+      tabs.forEach((tab, i) => tab.classList.remove('active'));
+      days.forEach((day, i) => day.classList.remove('active'));
+      tab.classList.add("active");
+      days[i].classList.add("active");
+    });
+  });
+
+
+  // tabs[0].click()
 }
-updateCalendar(desiredResponse.slice(0,daysPerPage));
-
+updateCalendar(desiredResponse.slice(0, daysPerPage));
