@@ -97,10 +97,15 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button type="button" class="action next btn btn-primary btn-lg">Weiter</button>
+                    <button type="button" class="action next btn btn-primary btn-lg next1">Weiter</button>
                 </div>
+
+            
             </div>
         </div>
+
+
+
 
         <div id="step2" class="hm-auth-form step" style="display: none;">
             <div class="row gy-3">
@@ -161,7 +166,13 @@
                 </div>
 
                 <div class="col-12">
-                    <button type="button" class="action next btn btn-primary btn-lg">Weiter</button>
+                    <button type="button" class="action next btn btn-primary btn-lg next2">Weiter</button>
+                </div>
+                <div class="col-12">
+
+                    <!-- <a href class="d-block text-center back btn">Zurück</a>   -->
+
+                    <button type="button" class="action back btn btn-sm btn-outline-warning">Zurück</button>
                 </div>
             </div>
         </div>
@@ -266,7 +277,10 @@
 
            
                 <div class="col-12">
-                    <button type="button" id="submit-dropzone" class="action next btn btn-primary btn-lg">Weiter</button>
+                    <button type="button" id="submit-dropzone" class="next btn btn-primary btn-lg next3">Weiter</button>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="action back btn btn-sm btn-outline-warning">Zurück</button>
                 </div>
             </div>
         </div>
@@ -323,8 +337,11 @@
                 <div class="col-12">
 
                 <div id="progressbarcustom" class="for-ProgressBar" style="display: none;"></div>
-                    <input id="hideInputLog" type="submit" name="submit" class="register-button next" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
+                    <input id="hideInputLog" type="submit" name="submit" class="register-button" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
                     <label for="hideInputLog" id="labelsubmit" class="btn btn-primary btn-lg">Anmeldung abschließen</label>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="action back btn btn-sm btn-outline-warning">Zurück</button>
                 </div>
             </div>
         </div>
@@ -659,6 +676,24 @@
 <style>
 
 
+    .back{    
+    margin: 0 auto;
+    display: block;
+    background: none!important;
+  border: none;
+  padding: 0!important;
+  color: var(--color-hellomed);
+  cursor: pointer;
+  line-height: 1;
+    font-size: 16px;
+    font-weight: 200; 
+}
+
+.back:hover {
+    color: #5c76c7;
+}
+
+
            .for-ProgressBar {
                 padding-bottom: 5px;
             }
@@ -691,7 +726,7 @@
                     max-height: 95%;
                     /* padding: 5px; */
                     object-fit: contain;
-                    opacity: 0.3;
+                    opacity: 0.6;
                     left: 0;
                     right: 0;
                     top: 0;
@@ -720,6 +755,11 @@
                 border-radius: 0px; 
             height: 100%; 
                 margin: 0px;
+            }
+
+
+            .uppy-DashboardContent-bar {
+                z-index: 4;
             }
 
     </style>

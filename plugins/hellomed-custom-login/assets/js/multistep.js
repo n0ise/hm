@@ -3,6 +3,8 @@
   $(document).ready(function () { stepProgress(step); });
   
   $(".next").on("click", function () {
+
+  
     var nextstep = false;
   
     if (step == 1) {
@@ -25,7 +27,7 @@
   
     else {
       nextstep = true;
-    }
+     }
   
     if (nextstep == true) {
       if (step < $(".step").length) {
@@ -35,19 +37,39 @@
           .hide();
         stepProgress(step);
       }
-      // hideButtons(step);
+     //hideButtons(step);
     }
   });
 
   // ON CLICK BACK BUTTON
-//   $(".back").on("click", function () {
-//     console.log(step);
-//     if (step > 1) {
-//       step = step - 2;
-//       $(".next").trigger("click");
-//     }
-//     hideButtons(step);
-//   });
+$(".back").on("click", function () {
+  if (step == 2) {
+    step = step - 2;
+    $(".next1").trigger("click");
+  }
+  else if(step == 3) {
+    step = step - 2;
+    $(".next2").trigger("click");
+  }
+  else{
+    step = step - 2;
+    $(".next3").trigger("click");
+  }
+   //hideButtons(step);
+});
+
+
+ // ON CLICK BACK BUTTON
+  // $(".back").on("click", function () {
+  //   console.log(step);
+  //   if (step > 0) {
+  //     console.log("hyri");
+  //     step = step - 2;
+  //     console.log(step);
+  //     $(".next").trigger("click");
+  //   }
+  //   // hideButtons(step);
+  // });
   
   // CALCULATE PROGRESS BAR
   stepProgress = function (currstep) {
@@ -59,8 +81,9 @@
   };
   
 
-  // DISPLAY AND HIDE "NEXT", "BACK" AND "SUMBIT" BUTTONS
+  //DISPLAY AND HIDE "NEXT", "BACK" AND "SUMBIT" BUTTONS
   // hideButtons = function (step) {
+  
   //   var limit = parseInt($(".step").length);
   //   $(".action").hide();
   //   if (step < limit) {
@@ -97,28 +120,20 @@
       }
     });
 
-  //   $("#" + val + " input[name='first_rezept_uploaded']").each(function () {
+    $("#" + val + " input[name='first_rezept_uploaded']").each(function () {
 
-  //       console.log(isEmpty(".uploaded-files ol"));
+        console.log(isEmpty(".uploaded-files ol"));
 
-  //     if ($("input#flexRadioDefault2").is(':checked') && $("#uploaded-files ol li").length == 0 ) {
-  //       console.log("checked");
-  //      $("#rezeptlabel").removeClass("is-invalid");
-  //    } else {
-  //     console.log("not valid");
-  //      $("#rezeptlabel").addClass("is-invalid");
-  //      valid = false;
-  //    }
+      if ($("input#flexRadioDefault2").is(':checked') && $("#uploaded-files ol li").length == 0 ) {
+        console.log("checked");
+       $("#rezeptlabel").removeClass("is-invalid");
+     } else {
+      console.log("not valid");
+       $("#rezeptlabel").addClass("is-invalid");
+       valid = false;
+     }
 
-  //  });
-
-
-
-
-
-
-
-
+   });
 
 
     return valid;
@@ -152,12 +167,20 @@
           format: 'dd.mm.yyyy',
           weekStart: 1,
           autoclose: true,
-          startDate: '+5d',
+          startDate: '+7d',
+          defaultViewDate:'+7d',
           endDate: '+1y',
           maxViewMode: 'year',
           language: 'de-DE',
           assumeNearbyYear: true,
-          toggleActive: true
+          toggleActive: true,
+
+          beforeShowDay: function(d){
+            if( d.getDate() === 1 || d.getDate() === 15){
+              return true;
+            }
+            return false;
+          },
       });
       });
 
