@@ -621,7 +621,7 @@ foreach ($rezept_input as &$record) {
 
 	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $record['prescription_date_by_doctor'] ) {
 		// converting to d.m.y (from yyyy/mm/dd)
-		$_POST['prescription_date_by_doctor'] = date('d.m.Y', strtotime($_POST['prescription_date_by_doctor']));
+		// $_POST['prescription_date_by_doctor'] = date('yyyy-MM-dd', strtotime($_POST['prescription_date_by_doctor']));
 		$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
 		// echo "<li> Verschreibungstdatum aktualisiert </li>";
 		$updates_needed[] = array(
@@ -636,7 +636,7 @@ foreach ($rezept_input as &$record) {
 
 	if ( !empty($_POST['prescription_start_date']) && $_POST['prescription_start_date'] != $record['prescription_start_date'] ) {
 		// converting to d.m.y (from yyyy/mm/dd)
-		$_POST['prescription_start_date'] = date('d.m.Y', strtotime($_POST['prescription_start_date']));
+		// $_POST['prescription_start_date'] = date('yyyy-MM-dd', strtotime($_POST['prescription_start_date']));
 		$record['prescription_start_date'] = $_POST['prescription_start_date'];
 		// echo "<li> Rezept Start aktualisiert </li>";
 		$updates_needed[] = array(
@@ -651,7 +651,7 @@ foreach ($rezept_input as &$record) {
 
 	if ( !empty($_POST['prescription_end_date']) && $_POST['prescription_end_date'] != $record['prescription_end_date'] ) {
 		// converting to d.m.y (from yyyy/mm/dd)
-		$_POST['prescription_end_date'] = date('d.m.Y', strtotime($_POST['prescription_end_date']));
+		// $_POST['prescription_end_date'] = date('yyyy-MM-dd', strtotime($_POST['prescription_end_date']));
 		$record['prescription_end_date'] = $_POST['prescription_end_date'];
 		// echo "<li> Rezept Ende aktualisiert </li>";
 		$updates_needed[] = array(
@@ -670,7 +670,6 @@ foreach ($rezept_input as &$record) {
 		$updates_made = true;
 	}
 
-	// TODO the following two validaiton blocks, need to be don differntly, as it is array . saving is working fine, TODO is just for the confirmation message on frontend
 	foreach ($_POST['blister_jobs'] as $item) {
 		if (empty($item['blister_job_id']) || empty($item['blister_start_date']) || empty($item['blister_end_date'])) {
 			$errorMessages[] = "Fehler: Bitte füllen Sie alle Felder für den Blister-Job aus.";
@@ -678,10 +677,6 @@ foreach ($rezept_input as &$record) {
 		} else {
 			$record['blister_job'] = $_POST['blister_jobs'];
 			$updates_made = true;
-			// update the values here
-			// update_user_meta( $user_id, 'blister_job_id', $item['blister_job_id'] );
-			// update_user_meta( $user_id, 'blister_start_date', $item['blister_start_date'] );
-			// update_user_meta( $user_id, 'blister_end_date', $item['blister_end_date'] );
 		}
 	}
 	
@@ -727,21 +722,134 @@ if (($updates_made) && (!$hasError)) {
     );
 }
 
-
 echo json_encode($response);
 
-
-// var_dump($record);
-	
-// var_dump($rezept_input);
-
-// $_POST['blister_jobs'\] - array of data that taken from inputs
-
-		//debug stuff, might remove later 
-		// var_dump($changed_fields);
-		// echo json_encode($changed_fields);
-
 	wp_die();
+});
+
+///////////////////////////////////////
+// Function for /admin-new-rezepverwaltung
+///////////////////////////////////////
+
+add_action('wp_ajax_new_prescription', function() {
+	$hasError = false;
+	$updates_made = false;
+	$errorMessages = array();
+	$updates_needed = array();
+	$user_id =  $_POST['user_id'];
+	$rezept_input = get_field('rezept_input', 'user_'.$user_id);
+ 	// deutsche blister ID 
+	$new_user_id = 	$_POST['patient_select'];
+
+	$new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
+	
+	if ( !empty($_POST['patient_select'])) {
+		$new_row['new_user_id'] = $_POST['patient_select'];
+		$updated_made=true;
+	} else {
+		$hasError = true;
+		$errorMessages[]= "patient_select: Fehler: Bitte wählen Sie einen Patienten aus der Liste aus.";
+	}
+	
+	if ( !empty($_POST['doctor_name'])) {
+		$new_row['doctor_name'] = $_POST['doctor_name'];
+		$updates_made = true;
+	} else {
+		$errorMessages[]= "doctor_name: Fehler: Bitte schreiben Sie einen Arzt.";
+
+	}
+	
+	if ( !empty($_POST['prescription_date_by_doctor'])) {
+		$new_row['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
+		$updates_made = true;
+	} else {
+		$hasError = true;
+		$errorMessages[]= "prescription_date_by_doctor: Fehler: Bitte geben Sie ein Datum ein.";
+	}
+	
+	if ( !empty($_POST['prescription_start_date'])) {
+		// $_POST['prescription_start_date'] = date('yyyy-MM-dd', strtotime($_POST['prescription_start_date']));
+		$new_row['prescription_start_date'] = $_POST['prescription_start_date'];
+		$updates_made = true;
+	} else {
+		$hasError = true;
+		$errorMessages[]= "prescription_start_date: Fehler: Bitte geben Sie ein Startdatum ein.";
+	}
+
+	if ( !empty($_POST['prescription_end_date'])) {
+	// $_POST['prescription_end_date'] = date('yyyy-MM-dd', strtotime($_POST['prescription_end_date']));
+	$new_row['prescription_end_date'] = $_POST['prescription_end_date'];
+	$updates_made = true;
+	} else {
+	$hasError = true;
+	$errorMessages[]= "prescription_end_date: Fehler: Bitte geben Sie ein Enddatum ein.";
+	}
+	
+	if ( !empty($_POST['status_prescription'])) {
+	$new_row['status_prescription'] = $_POST['status_prescription'];
+	$updates_made = true;
+	}
+	
+	foreach ($_POST['medikament'] as $item) {
+		if (empty($item['medicine_name_pzn']) || empty($item['medicine_amount'])) {
+		$errorMessages[] = "Fehler: Bitte füllen Sie alle Felder für den Medikamente aus.";
+		$hasError = true;
+		} 
+		else
+		{
+			$new_row['medicine_section'][] = array('medicine_name_pzn' => $item['medicine_name_pzn'], 'medicine_amount' => $item['medicine_amount']);
+			$updates_made = true;	
+		}
+	}
+
+	foreach ($_POST['blister_jobs'] as $item) {
+    	if (empty($item['blister_job_id']) || empty($item['blister_start_date']) || empty($item['blister_end_date'])) {
+       		$errorMessages[] = "Fehler: Bitte füllen Sie alle Felder für den Blister-Job aus.";
+       		$hasError = true;
+    	} 
+		else 
+		{
+        	$new_row['blister_job'][] = array('blister_job_id' => $item['blister_job_id'], 'blister_start_date' => $item['blister_start_date'], 'blister_end_date' => $item['blister_end_date']);
+        	$updates_made = true;
+    	}
+	}
+
+	// cleaning later, debug 
+	// update_field('rezept_input', array('blister_job' => $blister_job), 'user_'.$user_id);
+
+	
+	// update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+
+	// $response = array(
+	// 	'status' => 'success',
+	// 	'message' => 'Änderungen erfolgreich gespeichert'
+	// );
+
+
+
+	if (($updates_made) && (!$hasError)) {
+	// 	foreach ($updates_needed as $update) {
+			$rezept_input[] = $new_row;
+	// 	}
+		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+		$response = array(
+			'status' => 'success',
+			'message' => 'Änderungen erfolgreich gespeichert'
+		);
+	} else {
+	//  if response message is empty, then no error message was set, so we set a default one :)
+		if (empty($errorMessages)) {
+			$errorMessages[] = "successdown: Es gab keine neuen Felder zum Speichern.";
+		} 
+		$response = array(
+			'status' => 'error',
+			'message' => $errorMessages
+		);
+	}
+	
+echo json_encode($response);
+
+wp_die();
 });
 
 
