@@ -44,7 +44,8 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <input id="new_user_id" type="text" class="new_user_id form-control" value="<?php echo $new_user_id; ?>">
+                            <input id="new_user_id" type="text" class="new_user_id form-control"
+                                value="<?php echo $new_user_id; ?>">
                             <label>User ID</label>
                         </div>
                     </div>
@@ -57,129 +58,129 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div> -->
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Blisterjob</div>
-                     </div>
-                        <?php 
+                    </div>
+                    <?php 
     if (!empty($record['blister_job'])) {
       foreach ($record['blister_job'] as $blister_job) {
 
   ?>
 
-                        <div class="col-12 col-md-4">
-                            <div class="form-floating">
-                                <input id="blister_job_id" type="text" class="blister_job_id form-control"
-                                    value="<?php echo $blister_job['blister_job_id'] ?>">
-                                <label>Blisterjob ID</label>
-                            </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating">
+                            <input id="blister_job_id" type="text" class="blister_job_id form-control"
+                                value="<?php echo $blister_job['blister_job_id'] ?>">
+                            <label>Blisterjob ID</label>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-floating">
-                                <input id="blister_start_date" type="date" class=" blister_start_date form-control"
-                                    value="<?php echo $blister_job['blister_start_date'] ?>">
-                                <label>Start</label>
-                            </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating">
+                            <input id="blister_start_date" type="date" class=" blister_start_date form-control"
+                                value="<?php echo $blister_job['blister_start_date'] ?>">
+                            <label>Start</label>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-floating">
-                                <input id="blister_end_date" type="date" class="blister_end_date form-control"
-                                    value="<?php echo $blister_job['blister_end_date'] ?>">
-                                <label>Ende</label>
-                            </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating">
+                            <input id="blister_end_date" type="date" class="blister_end_date form-control"
+                                value="<?php echo $blister_job['blister_end_date'] ?>">
+                            <label>Ende</label>
                         </div>
+                    </div>
 
-                        <?php  } 
+                    <?php  } 
                       }
                     ?>
-                        <!-- div where will be added new blister jobs on click  -->
+                    <!-- div where will be added new blister jobs on click  -->
 
-                        <div class="blister_ph"></div>
-                        <?php
+                    <div class="blister_ph"></div>
+                    <?php
                 }
                      ?>
 
-                        <div class="col-12 d-flex justify-content-center">
-                            <button type="button" class="btn btn-light btn-sm" id="add_blister_job">
-                                <i class="bi bi-plus-circle-fill me-2"></i>
-                                Blisterjob
-                            </button>
-                        </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="button" class="btn btn-light btn-sm" id="add_blister_job">
+                            <i class="bi bi-plus-circle-fill me-2"></i>
+                            Blisterjob
+                        </button>
+                    </div>
 
-                        <div class="col-12">
-                            <div class="h3 m-0 mt-5">Arzt</div>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Arzt</div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input id="doctor_name" type="text" class="form-control"
+                                value="<?php echo $record['doctor_name']; ?>">
+                            <label>Arzt</label>
                         </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input id="doctor_name" type="text" class="form-control"
-                                    value="<?php echo $record['doctor_name']; ?>">
-                                <label>Arzt</label>
-                            </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Rezept</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating">
+                            <input id="prescription_date_by_doctor" type="date" class="form-control"
+                                value="<?php echo $record['prescription_date_by_doctor']; ?>">
+                            <label>Verschreibungsdatum</label>
                         </div>
-                        <div class="col-12">
-                            <div class="h3 m-0 mt-5">Rezept</div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating">
+                            <input id="prescription_start_date" type="date" class="form-control" placeholder=" "
+                                value="<?php echo $record['prescription_start_date']; ?>">
+                            <label>Start</label>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-floating">
-                                <input id="prescription_date_by_doctor" type="date" class="form-control"
-                                    value="<?php echo $record['prescription_date_by_doctor']; ?>">
-                                <label>Verschreibungsdatum</label>
-                            </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating">
+                            <input id="prescription_end_date" type="date" class="form-control" placeholder=" "
+                                value="<?php echo $record['prescription_end_date']; ?>">
+                            <label>Ende</label>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-floating">
-                                <input id="prescription_start_date" type="date" class="form-control" placeholder=" "
-                                    value="<?php echo $record['prescription_start_date']; ?>">
-                                <label>Start</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-floating">
-                                <input id="prescription_end_date" type="date" class="form-control" placeholder=" "
-                                    value="<?php echo $record['prescription_end_date']; ?>">
-                                <label>Ende</label>
-                            </div>
-                        </div>
-                        <?php
+                    </div>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Inhalt</div>
+                    </div>
+                    <?php
                 if (!empty($record['medicine_section'])) {
                     foreach ($record['medicine_section'] as $medicine) {?>
-                        <div class="col-12">
-                            <div class="h3 m-0 mt-5">Inhalt</div>
+                    <div class="col-12 col-md-9">
+                        <div class="form-floating">
+                            <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
+                                value="<?php echo $medicine['medicine_name_pzn']; ?>" list="medicine-options">
+                            <label>Medikament</label>
                         </div>
-                        <div class="col-12 col-md-9">
-                            <div class="form-floating">
-                                <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
-                                    value="<?php echo $medicine['medicine_name_pzn']; ?>" list="medicine-options">
-                                <label>Medikament</label>
-                            </div>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <div class="form-floating">
+                            <input id="medicine_amount" type="number" class="form-control medicine_amount"
+                                value="<?php echo $medicine['medicine_amount']; ?>" step="1" min="0">
+                            <label>Menge</label>
                         </div>
 
-                        <div class="col-12 col-md-3">
-                            <div class="form-floating">
-                                <input id="medicine_amount" type="number" class="form-control medicine_amount"
-                                    value="<?php echo $medicine['medicine_amount']; ?>" step="1" min="0">
-                                <label>Menge</label>
-                            </div>
-
-                        </div>
-                        <?php
+                    </div>
+                    <?php
                     }
                 }
                 ?>
-                        <div class="medikament_ph"></div>
-                        <datalist id="medicine-options"></datalist>
+                    <div class="medikament_ph"></div>
+                    <datalist id="medicine-options"></datalist>
 
-                        <div class="col-12 d-flex justify-content-center">
-                            <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
-                                <i class="bi bi-plus-circle-fill me-2"></i>
-                                Medikament
-                            </button>
-                        </div>
-                        <div class="col-12">
-                            <div class="h3 m-0 mt-5">Status</div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <select id="status_prescription" class="form-select">
-                                    <option selected><?php echo $record['status_prescription'] ?> </option>
-                                    <?php 
+                    <div class="col-12 d-flex justify-content-center">
+                        <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
+                            <i class="bi bi-plus-circle-fill me-2"></i>
+                            Medikament
+                        </button>
+                    </div>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Status</div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <select id="status_prescription" class="form-select">
+                                <option selected><?php echo $record['status_prescription'] ?> </option>
+                                <?php 
                                 $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
                                 $selected_status_prescription = get_user_meta($_GET['user_id'], 'status_prescription', true);
                                 $key_status_prescription = array_search($selected_status_prescription, $status_prescription);
@@ -188,19 +189,18 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                                     echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
                                     } 
                                 ?>
-                                </select>
-                                <label>Status</label>
-                            </div>
+                            </select>
+                            <label>Status</label>
                         </div>
-                        <div class="col-12">
-                            <button id="save_blister_job" type="button"
-                                class="btn btn-primary btn-lg">Speichern</button>
-                        </div>
-                        <div id="successdown"></div>
                     </div>
-
+                    <div class="col-12">
+                        <button id="save_blister_job" type="button" class="btn btn-primary btn-lg">Speichern</button>
+                    </div>
+                    <div id="successdown"></div>
                 </div>
+
             </div>
+        </div>
     </main>
     <?php } 
 else { ?>
@@ -291,7 +291,8 @@ include_once('footer.php');
           <div class="medikament_ph"></div>`;
 
             // Insert the HTML string representation of the new div element after the div element with the medikament_ph class
-            document.querySelectorAll('.medikament_ph')[document.querySelectorAll('.medikament_ph').length - 1].insertAdjacentHTML('afterend', newDivHTML);
+            document.querySelectorAll('.medikament_ph')[document.querySelectorAll('.medikament_ph')
+                .length - 1].insertAdjacentHTML('afterend', newDivHTML);
 
             // Attach the event listeners to the input element
             document.querySelector('.medicine_name_pzn').addEventListener('input', search);
@@ -323,9 +324,10 @@ include_once('footer.php');
                 </div>
                     <div class="blister_ph"></div>`;
 
-// Insert the HTML string representation of the new div element after the div element with the medikament_ph class
-document.querySelectorAll('.blister_ph')[document.querySelectorAll('.blister_ph').length - 1].insertAdjacentHTML('afterend', blisterDivHTML);
-// document.querySelector('.blister_ph').insertAdjacentHTML('afterend', blisterDivHTML);
+            // Insert the HTML string representation of the new div element after the div element with the medikament_ph class
+            document.querySelectorAll('.blister_ph')[document.querySelectorAll('.blister_ph').length -
+                1].insertAdjacentHTML('afterend', blisterDivHTML);
+            // document.querySelector('.blister_ph').insertAdjacentHTML('afterend', blisterDivHTML);
 
         });
     });
@@ -403,16 +405,35 @@ document.querySelectorAll('.blister_ph')[document.querySelectorAll('.blister_ph'
             var count = Object.keys(blister_jobs).length;
             console.log(count);
             $.post(ajaxurl, data, function(response) {
-                // console.log(response);
-
-                if (response != '') {
+                console.log(typeof response);
+                console.log(response);
+                response = JSON.parse(response);
+                if (response.status == 'success') {
+                    $('#successdown').removeClass('alert alert-danger');
+                    $('input').removeClass('border border-2 border-danger');
                     $('#successdown').addClass('alert alert-success');
-                    $('#successdown').html(response.toString());
+                    $('#successdown').html(response.message);
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
+                } else if (response.status == 'error') {
+                    var errorMessages = response.message;
+                    for (var i = 0; i < errorMessages.length; i++) {
+                        var inputId = errorMessages[i].split(":")[0];
+                        $('#' + inputId).addClass('border-danger');
+                        errorMessages[i] = errorMessages[i].substring(inputId.length + 1);
+                    }
+                    $('#successdown').addClass('alert alert-danger');
+                    $('#successdown').html(errorMessages.join("<br>"));
                     $('#successdown').fadeIn(1000);
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
                     }, 5000);
                 }
+
+
+
             });
         });
     });

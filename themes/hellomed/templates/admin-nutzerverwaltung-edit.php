@@ -192,7 +192,7 @@
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected>
                                 <?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
                             <?php 
-                                $status = array('Aktiv', 'Wartend', 'Inaktiv', 'Gefährdet');
+                                $status = array('Aktiv', 'Inaktiv', 'Wartend');
                                 $selectedstatus = get_user_meta($_GET['user_id'], 'status', true);
                                 $keystatus = array_search($selectedstatus, $status);
                              unset($status[$keystatus]);
@@ -313,14 +313,30 @@ jQuery(document).ready(function($) {
 
         $.post(ajaxurl, data, function(response) {
             // if there is at least a field changed (is not empty), show the success div (disappears after 5 seconds)
-            if (response != '') {
-                $('#successdown').addClass('alert alert-success');
-                $('#successdown').html(response.toString());
-                $('#successdown').fadeIn(1000);
-                setTimeout(function() {
-                    $('#successdown').fadeOut(1000);
-                }, 5000);
-            }
+            response = JSON.parse(response);
+                if (response.status == 'success') {
+                    $('#successdown').removeClass('alert alert-danger');
+                    $('input').removeClass('border border-2 border-danger');
+                    $('#successdown').addClass('alert alert-success');
+                    $('#successdown').html(response.message);
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
+                } else if (response.status == 'error') {
+                    var errorMessages = response.message;
+                    for (var i = 0; i < errorMessages.length; i++) {
+                        var inputId = errorMessages[i].split(":")[0];
+                        $('#' + inputId).addClass('border-danger');
+                        errorMessages[i] = errorMessages[i].substring(inputId.length + 1);
+                    }
+                    $('#successdown').addClass('alert alert-danger');
+                    $('#successdown').html(errorMessages.join("<br>"));
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
+                }
             // update the input fields with the new data
             $('#first_name').val(first_name);
             $('#last_name').val(last_name);
@@ -391,8 +407,6 @@ function search() {
         });
     });
 }
-
-
 
 window.addEventListener('load', fetchData);
 document.querySelector('.insurance_company').addEventListener('input', search);

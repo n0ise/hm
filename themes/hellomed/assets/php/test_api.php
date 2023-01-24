@@ -23,13 +23,17 @@ $token_result = curl_exec($token_ch);
 $token_result = json_decode($token_result, true);
 $token = $token_result['access_token'];
 
-// today date
-$today= date("Y-m-d");
-// $id_new= "351384";
-// taking id from POST request in /os-medikationsplan.php, so it will grab API based on the user 
-$id_new= $_POST['id'];
+// $patient_url = "https://api.blisterwuerfel.de/ext-api/patient/".$id_new."/2023-01-19";
 
-$patient_url = "https://api.blisterwuerfel.de/ext-api/patient/".$id_new."/".$today;
+$date = date("Y-m-d");
+$currentDay = date("w", strtotime($date));
+// calculating monday based on the current day's week 
+$monday = date("Y-m-d", strtotime("-".($currentDay-1)." days", strtotime($date)));
+// taking id from POST request in /medikationsplan.php, so it will grab API based on the user 
+$id_new= $_POST['id'];
+// $id_new = "347427";
+$patient_url = "https://api.blisterwuerfel.de/ext-api/patient/".$id_new."/".$monday;
+
 $patient_headers = array(
     'Authorization: Bearer ' . $token,
     'Content-Type: application/json'

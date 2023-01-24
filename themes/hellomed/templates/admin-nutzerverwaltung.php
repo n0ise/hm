@@ -84,11 +84,11 @@
                 } ?>
                 </tbody>
             </table>
-            <div class="row mt-5">
+            <!-- <div class="row mt-5">
                 <div class="col-4 offset-4">
                     <a class="btn btn-primary btn-lg" href="admin-nutzerverwaltung-edit.php">Neuen Nutzer anlegen</a>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
