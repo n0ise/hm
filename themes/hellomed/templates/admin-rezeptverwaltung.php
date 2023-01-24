@@ -1,4 +1,4 @@
-<?php /* Template Name: Admin Rezeptverwaltung s  */ ?>
+<?php /* Template Name: Admin Rezeptverwaltung */ ?>
 
 <!-- include_once header.php from template  -->
 <?php include_once('header.php'); ?>
@@ -78,7 +78,7 @@ $users = get_users( array( 'role' => 'client' ) );
             </table>
             <div class="row mt-5">
                 <div class="col-4 offset-4">
-                    <a class="btn btn-primary btn-lg" href="admin-rezeptverwaltung-edit?new=1">Neues Rezept anlegen</a>
+                    <a class="btn btn-primary btn-lg" href="admin-neu-rezeptverwaltung">Neues Rezept anlegen</a>
                 </div>
             </div>
 
