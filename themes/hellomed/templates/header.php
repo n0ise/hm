@@ -1,24 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/favicon.svg" type="image/svg+xml">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
-<!-- jQuery  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript"></script>
-
-<!-- include css.css from olly UI-->
-<link rel="stylesheet" href="https://ui.hellomed.com/css/index.css">
-
 <title><?php echo get_the_title(); ?> | hellomed</title>
 
-</head>
+<link rel="icon" href="https://ui.hellomed.com/src/v1.0/img/favicon.svg" type="image/svg+xml">
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/bootstrap.5.2.3.min.css">
+<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/bootstrap.icons.1.9.1.css">
+
+<!-- jQuery  -->
+<script src="https://ui.hellomed.com/src/v1.0/js/jquery-3.6.3.min.js" type="text/javascript"></script>
+
+<!-- Custom -->
+<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/index.css">
+
 <!-- include variables with all fields from acf/wp -->
 <?php 
 include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
@@ -31,7 +29,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
     <div class="container">
         <div class="hm-logo">
             <a href="index.php">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/logo.svg">
+                <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg">
             </a>
         </div>
         <!-- checking if logged in and show the whole nav header -->

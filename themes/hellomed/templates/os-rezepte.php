@@ -23,7 +23,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
 
             <div class="h2 mb-5">
                 Rezepte
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/icons/onboarding/prescription2.svg">
+                <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/prescription2.svg">
             </div>
             <table class="table table-striped">
                 <thead>
@@ -71,8 +71,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
                     <div class="btn btn-primary btn-lg modalopen">Rezept
                         herunterladen</div>
 
-                    <!-- //TODO modal section  WIP-->
-                    <div class="modal fade bd-rezept-modal-lg" tabindex="-1" role="dialog" aria-labelledby="RezeptModal"
+                     <div class="modal fade bd-rezept-modal-lg" tabindex="-1" role="dialog" aria-labelledby="RezeptModal"
                         aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">

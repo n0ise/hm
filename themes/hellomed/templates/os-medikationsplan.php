@@ -1,11 +1,14 @@
 <?php
-/*
-Template Name: OS Medikationsplan
-*/
-?>
-<!-- include_once header.php from template  -->
-<?php include_once('os-header.php'); 
+/* Template Name: OS Medikationsplan */
 
+// include_once header.php from template  
+ include_once('os-header.php'); 
+ ?>
+
+<!--  Lodash  -->
+<script src="https://ui.hellomed.com/src/v1.0/js/lodash.4.17.21.min.js"></script>
+
+<?php
 // TODO - Check if the user is logged in and various conditions
 // taking the current id of the user and passing it to the api.php file
 $user_id = get_current_user_id();
@@ -51,11 +54,11 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
         <div class="hm-content">
             <div class="h2 mb-5">
                 Medikationsplan
-                <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/packaging.svg">
+                <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/packaging.svg">
             </div>
             <!-- loading image  -->
             <div class="loading-logo">
-                <img src="/wp-content/themes/hellomed/assets/img/logo.svg" alt="Loading logo">
+                <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg" alt="Loading logo">
             </div>
             <div class="hm-medplan-wrapper" style="display:none">
 

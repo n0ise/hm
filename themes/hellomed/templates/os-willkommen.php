@@ -11,7 +11,7 @@
     <div class="hm-content">
 
       <div class="text-center">
-      <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/get_started.svg">
+      <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/get_started.svg">
         <div class="h2 my-4">Willkommen bei hellomed!</div>
       </div>
       <p>
@@ -25,13 +25,6 @@
       <p>
         Bei Fragen rund um Ihre Account-Aktivierung melden Sie sich per<br>E-Mail an
         patient@hellomed.com oder telefonisch unter 030&nbsp;6941&nbsp;132.
-      </p>
-      <p>
-        In der Zwischenzeit können Sie auf Ihrer
-        <a href="os-berechtigungen">Berechtigungsseite</a> vorbei schauen.
-        Sie haben dort die Möglichkeit sich für unseren automatisierten
-        Folgerezept-Service anzumelden. Weitere Informationen finden Sie dort
-        beschrieben.
       </p>
       <p>Das hellomed-Team</p>
 

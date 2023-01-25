@@ -11,7 +11,7 @@ $user_id = get_current_user_id();
         <div class="hm-content">
 
             <div class="h2 mb-5">Einstellungen
-                <img src="wp-content/themes/hellomed/assets/img/icons/onboarding/about_me.svg">
+                <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/about_me.svg">
             </div>
 
             <div id="success"></div>
