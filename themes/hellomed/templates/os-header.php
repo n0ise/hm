@@ -42,7 +42,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     $prescription_status = $row['status_prescription'];
                     $prescription_id = $row['prescription_id'];
                     $prescription_end_date = $row['prescription_end_date'];
-                    $prescription_end_datetime = DateTime::createFromFormat('d.m.Y', $prescription_end_date);
+                    
+                    $prescription_end_datetime = DateTime::createFromFormat('Y-m-d', $prescription_end_date);
                     $prescription_end_timestamp = $prescription_end_datetime->getTimestamp();
                     $prescription_end_date_formatted = $prescription_end_datetime->format('d.m.Y');
                         // two weeks before the expiry date 
@@ -62,7 +63,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <i class="bi bi-exclamation-circle-fill"></i>
             <div>
                 Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum
-                <b><?php echo $prescription_end_date; ?></b> aus.
+                <b><?php echo $prescription_end_date_formatted; ?></b> aus.
                 Bitte senden Sie Ihr Folgerezept spätestens bis zum
                 <b><?php echo $two_weeks_before->format('d.m.Y'); ?></b> postalisch oder per
                 Rezept-Upload an uns.
