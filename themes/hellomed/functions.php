@@ -481,17 +481,17 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 			$hasError = true;
 			$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus";
 		} else {
-			if (!empty($record['geschlecht']) && $_POST['geschlecht'] !== $record['geschlecht']) {
-				$record['geschlecht'] = $_POST['geschlecht'];
+			if (!empty($record['geschlecht']) && $_POST['geschlecht'] !== get_user_meta( $user_id, 'geschlecht', true )) {
+				update_user_meta( $user_id, 'geschlecht', $_POST['geschlecht'] );
 				$updates_needed[] = array(
 					'meta_key' => 'geschlecht',
-					'meta_value' => $record['geschlecht']
+					'meta_value' => $_POST['geschlecht']
 				);
 				$updates_made = true;
-			} elseif ($_POST['geschlecht'] === $record['geschlecht']) {
+			} elseif ($_POST['geschlecht'] === get_user_meta( $user_id, 'geschlecht', true )) {
 				// there is nothing to update, go on
 			} else {
-				$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus.";
+				$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus2.";
 				$hasError = true;
 			}
 		}
