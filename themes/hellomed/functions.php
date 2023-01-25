@@ -612,57 +612,81 @@ foreach ($rezept_input as &$record) {
 		}
 	}
 	
-
-	if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $record['doctor_name'] ) {
-		$record['doctor_name'] = $_POST['doctor_name'];
-		// echo "<li> Arzt aktualisiert </li>";
-		$updates_made = true;
-	}
-
-	if ( !empty($_POST['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] != $record['prescription_date_by_doctor'] ) {
-		// converting to d.m.y (from yyyy/mm/dd)
-		// $_POST['prescription_date_by_doctor'] = date('yyyy-MM-dd', strtotime($_POST['prescription_date_by_doctor']));
-		$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
-		// echo "<li> Verschreibungstdatum aktualisiert </li>";
-		$updates_needed[] = array(
-			'meta_key' => 'prescription_date_by_doctor',
-			'meta_value' => $record['prescription_date_by_doctor']
-		);
-		$updates_made = true;	
-	} else {
+	if (isset($_POST['doctor_name']) && (empty($_POST['doctor_name']))) {
 		$hasError = true;
-		$errorMessages[]= "prescription_date_by_doctor: Fehler: Rezept Start muss vor Rezept Ende liegen.";
+		$errorMessages[] = "doctor_name: Fehler: Bitte geben Sie Ihre Artz ein";
+		} else {
+			if ( !empty($_POST['doctor_name']) && $_POST['doctor_name'] != $record['doctor_name'] ) {
+				$record['doctor_name'] = $_POST['doctor_name'];
+				// echo "<li> Arzt aktualisiert </li>";
+				$updates_made = true;
+			}
+		}
+	
+	if (isset($_POST['prescription_date_by_doctor'])) {
+		if (empty($_POST['prescription_date_by_doctor'])) {
+			$hasError = true;
+			$errorMessages[] = "prescription_date_by_doctor: Fehler: Bitte geben Sie ein Datum ein.";
+		} else {
+			if (!empty($record['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] !== $record['prescription_date_by_doctor']) {
+				$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
+				$updates_needed[] = array(
+					'meta_key' => 'prescription_date_by_doctor',
+					'meta_value' => $record['prescription_date_by_doctor']
+				);
+				$updates_made = true;
+			} elseif ($_POST['prescription_date_by_doctor'] === $record['prescription_date_by_doctor']) {
+				// there is nothing to update, go on
+			} else {
+				$errorMessages[] = "prescription_date_by_doctor: Fehler: Fehler: Bitte geben Sie ein gültiges Datum ein.";
+				$hasError = true;
+			}
+		}
 	}
+	
 
-	if ( !empty($_POST['prescription_start_date']) && $_POST['prescription_start_date'] != $record['prescription_start_date'] ) {
-		// converting to d.m.y (from yyyy/mm/dd)
-		// $_POST['prescription_start_date'] = date('yyyy-MM-dd', strtotime($_POST['prescription_start_date']));
-		$record['prescription_start_date'] = $_POST['prescription_start_date'];
-		// echo "<li> Rezept Start aktualisiert </li>";
-		$updates_needed[] = array(
-			'meta_key' => 'prescription_start_date',
-			'meta_value' => $record['prescription_start_date']
-		);
-		$updates_made = true;	
-	} else {
+	if (isset($_POST['prescription_start_date'])) {
+		if (empty($_POST['prescription_start_date'])) {
 			$hasError = true;
-			$errorMessages[]= "prescription_start_date: Fehler: Rezept Start muss vor Rezept Ende liegen.";
+			$errorMessages[] = "prescription_start_date: Fehler: Bitte geben Sie ein Startdatum ein.";
+		} else {
+			if (!empty($record['prescription_start_date']) && $_POST['prescription_start_date'] !== $record['prescription_start_date']) {
+				$record['prescription_start_date'] = $_POST['prescription_start_date'];
+				$updates_needed[] = array(
+					'meta_key' => 'prescription_start_date',
+					'meta_value' => $record['prescription_start_date']
+				);
+				$updates_made = true;
+			} elseif ($_POST['prescription_start_date'] === $record['prescription_start_date']) {
+				// there is nothing to update, go on
+			} else {
+				$errorMessages[] = "prescription_start_date: Fehler: Bitte geben Sie ein gültiges Startdatum ein.";
+				$hasError = true;
+			}
 		}
-
-	if ( !empty($_POST['prescription_end_date']) && $_POST['prescription_end_date'] != $record['prescription_end_date'] ) {
-		// converting to d.m.y (from yyyy/mm/dd)
-		// $_POST['prescription_end_date'] = date('yyyy-MM-dd', strtotime($_POST['prescription_end_date']));
-		$record['prescription_end_date'] = $_POST['prescription_end_date'];
-		// echo "<li> Rezept Ende aktualisiert </li>";
-		$updates_needed[] = array(
-			'meta_key' => 'prescription_end_date',
-			'meta_value' => $record['prescription_end_date']
-		);
-		$updates_made = true;	
-	} else {
+	}
+	
+	if (isset($_POST['prescription_end_date'])) {
+		if (empty($_POST['prescription_end_date'])) {
 			$hasError = true;
-			$errorMessages[]= "prescription_end_date: Fehler: Rezept Ende muss nach Rezept Start liegen.";
+			$errorMessages[] = "prescription_end_date: Fehler: Bitte geben Sie ein Enddatum ein.";
+		} else {
+			if (!empty($record['prescription_end_date']) && $_POST['prescription_date_by_doctor'] !== $record['prescription_date_by_doctor']) {
+				$record['prescription_end_date'] = $_POST['prescription_end_date'];
+				$updates_needed[] = array(
+					'meta_key' => 'prescription_end_date',
+					'meta_value' => $record['prescription_end_date']
+				);
+				$updates_made = true;
+			} elseif ($_POST['prescription_end_date'] === $record['prescription_end_date']) {
+				// there is nothing to update, go on
+			} else {
+				$errorMessages[] = "prescription_end_date: Fehler: Bitte geben Sie ein gültiges Enddatum ein.";
+				$hasError = true;
+			}
 		}
+	}
+	
 
 	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $record['status_prescription'] ) {
 		$record['status_prescription'] = $_POST['status_prescription'];
