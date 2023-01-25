@@ -10,7 +10,9 @@
 	<div class="hm-auth-form my-4">
     <div class="row gy-3">
       <div class="col-12">
-        <div class="h2 m-0">Registrierung</div>
+      <div class="h3 mb-3">Registrierung
+        <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrieren Sie sich oder einen Angehörigen als Patient bei hellomed. Die Registrierung dauert nur wenige Minuten. Unsere hellomed Apotheker melden Sich nach der Registrierung bei Ihnen innerhalb von 48 Stunden telefonisch"> </i>
+        </div>
       </div>
 	
 
@@ -30,7 +32,7 @@
         <div class="form-floating">
 			
 			<input required  class="form-control" type="text" name="first_name" id="first-name" required="required" placeholder=" ">
-			<label for="first_name"><?php _e( 'Name', 'hellomed-custom-login' ); ?></label>
+			<label for="first_name"><?php _e( 'Ihr Vorname', 'hellomed-custom-login' ); ?></label>
 		</div>
       </div>
 
@@ -38,7 +40,7 @@
         <div class="form-floating">
 			
 			<input required class="form-control" type="text" name="last_name" id="last-name" required="required" placeholder=" ">
-			<label for="last_name"><?php _e( 'Nachname', 'hellomed-custom-login' ); ?></label>
+			<label for="last_name"><?php _e( 'Ihr Nachname', 'hellomed-custom-login' ); ?></label>
 		</div>
       </div>
 
@@ -46,7 +48,7 @@
         <div class="form-floating">
 
 			<input required class="form-control"  type="text" name="email" id="email" required="required" placeholder=" ">
-			<label for="email"><?php _e( 'Was ist Ihre E-Mail Adresse?', 'hellomed-custom-login' ); ?> </label>
+			<label for="email"><?php _e( 'Ihre E-Mail-Adresse', 'hellomed-custom-login' ); ?> </label>
 		</div>
       </div>
 
@@ -66,7 +68,7 @@
           <input  class="form-check-input" type="checkbox" id="test4">
           <label class="form-check-label text-justify" for="test4">
           <small>
-              Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Produktempfehlungen per E-Mail, Errinerungsmails zur Einreichung eines Folgerezeptes verarbeitet werden.
+          Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Errinerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
             </small>
       </label>  
         </div>
@@ -76,16 +78,16 @@
           <input  class="form-check-input" type="checkbox" id="test5">
           <label class="form-check-label text-justify"  for="test5">
           <small>
-              Ja ich möchte weitere Informationen zu Neuigkeiten und Angebote, sowie Kommunikation betreffend der Nutzung von hellomedOs per E-Mail oder Telefon von der hellomed Group GmbH erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht. 
+              Ja ich möchte weitere Informationen zu Neuigkeiten und Angeboten von der hellomed Group GmbH per E-Mail oder Telefon erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht.
             </small>
           </label>
         </div>
       </div>
       <div class="col-12">
         <small class="d-block pt-3 text-justify border-top">
-          Ich kann meine Einwilligungen und die Schweigepflichtentbindungserklärung jederzeit mit Wirkung für die Zukunft in meinem hellomedOs Kundenkonto widerrufen.
+        Ich kann meine Einwilligungen und die Schweigepflichtentbindungserklärung jederzeit mit Wirkung für die Zukunft in meinem hellomedOs Kundenkonto widerrufen. 
         </small>
-      </div>
+      </div> 
 
 		<!-- <p class="form-row">
 			//?php _e( 'Notiz: Es wird ein automatisches Passwort generiert und per E-Mail zugesandt. ', 'hellomed-custom-login' ); ?>

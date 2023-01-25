@@ -200,22 +200,30 @@ class Hellomed_Custom_Login_Plugin {
 			} else {
 				$redirect_url = $redirect_to;
 			}
-		} else {
+		} 
+
+			elseif(in_array( 'admin_panel', (array) $user->roles )){
+				$redirect_url = home_url( '/admin-dashboard.php' );
+				wp_redirect( $redirect_url );
+				exit;
+			}
+
+		else {
 			
-			// if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
+			if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
 				$redirect_url = home_url( '/onboarding' );
 				
-			//  }
-			// else{
+			 }
+			else{
 				
-			// 	if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
-			// 		$redirect_url = home_url( '/os-medikationsplan' ) ;
+				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
+					$redirect_url = home_url( '/os-medikationsplan' ) ;
 					
-			// 	 }
-			// 	 else{
-			// 		$redirect_url = home_url( '/os-willkommen' ) ;
-			// 	 }
-			// }
+				 }
+				 else{
+					$redirect_url = home_url( '/os-willkommen' ) ;
+				 }
+			}
 		
 		}
 	
@@ -319,8 +327,6 @@ class Hellomed_Custom_Login_Plugin {
 		$attributes = shortcode_atts( $default_attributes, $attributes );
 	
 		if ( is_user_logged_in() ) {
-
-	
 			$this->redirect_logged_in_user();
 			exit;
 			//return __( 'Sie sind bereits angemeldet.', 'hellomed-custom-login' );
@@ -703,7 +709,6 @@ class Hellomed_Custom_Login_Plugin {
 					wp_set_current_user( $user_id, $user->user_login );
 					wp_set_auth_cookie( $user_id );
 					do_action( 'wp_login', $user->user_login );
-	
 				}
 				
 				// wp_redirect( home_url( 'anmelden?password=changed' ) );
@@ -793,8 +798,7 @@ class Hellomed_Custom_Login_Plugin {
 			}
 
 	//TODO file upload
-
-
+	
 				$rezept_type = $_POST['rezept_type'];
 
 					if ( !empty( $_POST['listfilenames'] ) ) {
@@ -941,9 +945,6 @@ class Hellomed_Custom_Login_Plugin {
 				$message = str_replace('>','',$message);
 				$message = str_replace("\r\n",'<br>',$message);
 
-
-
-
 			// $wp_new_user_notification_email = array(
 			// 	'to'      => $user->user_email,
 			// 	/* translators: Login details notification email subject. %s: Site title. */
@@ -993,9 +994,6 @@ class Hellomed_Custom_Login_Plugin {
 	 
 	// 	return  $wp_new_user_notification_email;
 	// }
-
-
-
 
 
 	//
@@ -1102,9 +1100,17 @@ class Hellomed_Custom_Login_Plugin {
 			} else {
 				wp_redirect( admin_url() );
 			}
-		} else {
 
-			
+		} 
+
+		elseif(in_array( 'admin_panel', (array) $user->roles )){
+			$redirect_url = home_url( '/admin-dashboard' );
+			wp_redirect( $redirect_url );
+			exit;
+		}
+		
+		else {
+
 			if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 0){
 				$redirect_url = home_url( '/onboarding' );
 				
@@ -1113,10 +1119,9 @@ class Hellomed_Custom_Login_Plugin {
 				
 				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
 					$redirect_url = home_url( '/os-medikationsplan' ) ;
-					
 				 }
 				 else{
-					$redirect_url = home_url( '/os-willkommen' ) ;
+					$redirect_url = home_url( '/willkommen' ) ;
 				 }
 			}
 			wp_redirect( $redirect_url );

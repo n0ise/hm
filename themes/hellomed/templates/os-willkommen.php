@@ -24,7 +24,7 @@
       </ol>
       <p>
         Bei Fragen rund um Ihre Account-Aktivierung melden Sie sich per<br>E-Mail an
-        patient@hellomed.com oder telefonisch unter 030&nbsp;6941&nbsp;132.
+        <a href="mailto:patient@hellomed.com">patient@hellomed.com</a> oder telefonisch unter <a href="tel:0306941132">030&nbsp;6941&nbsp;132</a>.
       </p>
       <p>Das hellomed-Team</p>
 

@@ -24,9 +24,10 @@
                 <div class="h3 mb-3">
             <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/about_me.svg">
             Patienteninformationen
-            <i class="bi bi-info-circle"
-                data-bs-toggle="tooltip" data-placement="top"
-                title="Wir benötigen nur noch wenige patient:innenrelevante Informationen von dir, damit dich unsere Apotheker:innen beim Start mit hellomed bestmöglichst beraten können.">  </i>
+            <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Um Ihre Registrierung abzuschließen benötigen wir von
+Ihnen oder Ihrem Angehörigen noch einige Daten. Alle
+Daten Die Sie eingeben sind die Daten des Patienten und
+nicht des Angehörigen."> </i>
             </div>
         </div>
 
@@ -44,19 +45,19 @@
                 <div class="col-12">
                     <div class="p-3 bg-light">
                         <div class="text-secondary">
-                            Sie haben sich im vorherigen Schritt als Angehöriger identifiziert. Bitte nennen Sie uns hier Ihren Namen damit wir Sie später unter diesem kontaktieren können.
+                            Sie haben sich im vorherigen Schritt als Angehöriger identifiziert. Bitte nennen Sie uns hier den Namen des Patienten und fahren Sie unten ebenfalls mit den Angaben des Patienten fort.
                         </div>
                         <div class="mt-3">
                             <div class="form-floating">
                                 <input required id="patient_first_name" name="patient_first_name" type="text" class="form-control" placeholder=" " />
-                                <label for="patient_first_name">Name des Angehörigen</label>
+                                <label for="patient_first_name">Name des Patienten</label>
                                 <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                             </div>
                         </div>
                         <div class="mt-3">
                             <div class="form-floating">
                                 <input required id="patient_last_name" name="patient_last_name" type="text" class="form-control" placeholder=" " />
-                                <label for="patient_last_name">Nachname des Angehörigen</label>
+                                <label for="patient_last_name">Nachname des Patienten</label>
                                 <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                             </div>
                         </div>
@@ -114,6 +115,10 @@
                     <div class="h3 mb-3">
                     <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/shipping_adress.svg">
                     Anschrift & Lieferadresse
+                    <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Für eine Belieferung mit unseren hellomed Blistern, geben
+Sie bitte die Lieferadresse des Patienten ein sowie eine
+Telefonnummer unter der Sie stets für möglicherweise
+wichtige Rückfragen erreichbar sind."> </i>
                     </div>
                 </div>
 
@@ -184,6 +189,10 @@
             <div class="h3 mb-3">
           <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription2.svg">
           Rezeptinformationen
+          <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Schluss mit Rezeptechaos, um mit hellomed zu starten
+benötigen wir einmalig alle Ihre Rezepte. Mögliche Folgerezepte
+können dann bequem in Ihrem hellomed Kundenkonto an uns
+verschickt oder hochgeladen werden."> </i>
         </div>
          </div>
 
@@ -195,7 +204,7 @@
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input required id="startdatumpicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
+                        <input required id="startdatumpicker" readonly="readonly" name="geburt" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
                         <label id="startdatumlabel" for="startdatumpicker">Was ist Ihr Wunsch-Startdatum?</label>
                         <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
@@ -218,8 +227,8 @@
                         <label class="btn btn-outline-primary" for="rezeptfoto">Rezeptfoto</label>
                         <input type="radio" class="btn-check" name="rezept_type" value="eRezept" id="eRezept" autocomplete="off" onclick="ihaveeRezept();" />
                         <label class="btn btn-outline-primary" for="eRezept">E-Rezept</label>
-                        <input type="radio" class="btn-check" name="rezept_type" value="medplan" id="medplan" autocomplete="off" onclick="ihaveMedplan();" />
-                        <label class="btn btn-outline-primary" for="medplan">Medikationsplan</label>
+                        <!-- <input type="radio" class="btn-check" name="rezept_type" value="medplan" id="medplan" autocomplete="off" onclick="ihaveMedplan();" />
+                        <label class="btn btn-outline-primary" for="medplan">Medikationsplan</label> -->
                     </div>
                 </div>
 
@@ -230,7 +239,7 @@
                             <div id="drag-drop-area"></div> 
                         <!-- Uploaded files list -->
 
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <!-- <div class="invalid-feedback">Dies ist ein Pflichtfeld</div> -->
                         <div class="uploaded-files" style="display:none;">
                             <ol></ol>
                         </div>
@@ -292,6 +301,10 @@
                     <div class="h3 mb-3">
                     <img src="/wp-content/themes/hellomed/assets/img/icons/onboarding/prescription1.svg">
                     Versicherungsinformation
+                    <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Auf Basis Ihrer Rezepte & Medikationspläne versorgen wir Sie
+bestmöglich. Ihre Krankenkassen Information hilft dabei, denn
+eine Medikationsplanung hängt auch von möglichen
+Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                     </div>
                 </div>
                 <div class="col-12">
@@ -336,7 +349,8 @@
 
                 <div class="col-12">
 
-                <div id="progressbarcustom" class="for-ProgressBar" style="display: none;"></div>
+                <div id="progressbarcustom" class="for-ProgressBar" style="display: none;">
+                </div>
                     <input id="hideInputLog" type="submit" name="submit" class="register-button" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
                     <label for="hideInputLog" id="labelsubmit" class="btn btn-primary btn-lg">Anmeldung abschließen</label>
                 </div>
@@ -351,14 +365,12 @@
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/multistep.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/search-function.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.de.min.js" integrity="sha512-3V4cUR2MLZNeqi+4bPuXnotN7VESQC2ynlNH/fUljXZiQk1BGowTqO5O2gElABNMIXzzpYg5d8DxNoXKlM210w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
 
 
 <!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
@@ -899,6 +911,8 @@ function startdatumSelectedBlur(){
    border: 2px dashed var(--color-hellomed);
    
 }
+
+</style>
 
 <?php } 
 else { ?>
