@@ -1,11 +1,13 @@
 
 <?php if(is_user_logged_in()) { ?>
 
-   <link rel="stylesheet" href="https://ui.hellomed.com/css/bootstrap.datepicker.1.9.0.css">
+   <link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/bootstrap.datepicker.1.9.0.css">
 
-   <link rel="stylesheet" href="https://ui.hellomed.com/css/bootstrap.datepicker.1.9.0.custom.css">
+   <link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/bootstrap.datepicker.1.9.0.custom.css">
 
-    <link rel="stylesheet" href="https://ui.hellomed.com/css/uppy.3.3.1.min.css" >
+    <link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/uppy.3.3.1.min.css" >
+
+
 
    <div class="hm-auth-wrap">
     <div class="hm-logo">
@@ -214,7 +216,7 @@ verschickt oder hochgeladen werden."> </i>
                     <label class="form-label">Liegen Ihre Rezepte bereits vor?</label>
                     <div class="btn-group d-flex">
                         <input type="radio" class="btn-check" name="first_rezept_uploaded" value="1" id="flexRadioDefault1" autocomplete="off" onclick="ihaverezept();" />
-                        <label class="btn btn-outline-primary" for="flexRadioDefault1">Ja, liegen vor</label>
+                        <label class="btn btn-outline-primary" for="flexRadioDefault1">Ja, ich habe sie vor mir</label>
                         <input type="radio" class="btn-check" name="first_rezept_uploaded" value="0" id="flexRadioDefault2" autocomplete="off" checked onclick="idonthaverezept();" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault2">Nein, noch nicht</label>
                     </div>
@@ -234,57 +236,44 @@ verschickt oder hochgeladen werden."> </i>
 
                 <div class="col-12" id="rezepthochladen"  style="display: none;">
                     <label id="rezeptlabel" class="form-label">Rezept hochladen</label>
-
-
                             <div id="drag-drop-area"></div> 
                         <!-- Uploaded files list -->
-
-                        <!-- <div class="invalid-feedback">Dies ist ein Pflichtfeld</div> -->
                         <div class="uploaded-files" style="display:none;">
                             <ol></ol>
                         </div>
-        <!-- 
-                        <h1>Hidden values</h1>
-                        <ol name="test">
-                            <li><input type="hidden" value="testvalue">Cofee</li>
-                            <li><input type="hidden" value="testvalue1">Tea</li>
-                        </ol>
-                        <input type='hidden' id='test' name='test' /> -->
-
-                        
                         <div class="col-12" style="display: block;">
-                        <!-- <div class="form-floating">
-                                <input id="filelisthidden" name="filelisthidden" type="list" class="form-control" placeholder=" " />
-                            </div> -->
                         </div>
-
-
-
-                    <!-- <div id="drag-drop-area"></div>  -->
-
-                        <!-- <div class="dropzone" id="mydropzone">
-
-                           <div class="dz-message d-flex flex-column" style="width:100%">
-                           
-                           <span class="upload-area-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="340.531" height="419.116" viewBox="0 0 340.531 419.116">
-                                        <g id="files-new" clip-path="url(#clip-files-new)">
-                                            <path
-                                                id="Union_2"
-                                                data-name="Union 2"
-                                                d="M-2904.708-8.885A39.292,39.292,0,0,1-2944-48.177V-388.708A39.292,39.292,0,0,1-2904.708-428h209.558a13.1,13.1,0,0,1,9.3,3.8l78.584,78.584a13.1,13.1,0,0,1,3.8,9.3V-48.177a39.292,39.292,0,0,1-39.292,39.292Zm-13.1-379.823V-48.177a13.1,13.1,0,0,0,13.1,13.1h261.947a13.1,13.1,0,0,0,13.1-13.1V-323.221h-52.39a26.2,26.2,0,0,1-26.194-26.195v-52.39h-196.46A13.1,13.1,0,0,0-2917.805-388.708Zm146.5,241.621a14.269,14.269,0,0,1-7.883-12.758v-19.113h-68.841c-7.869,0-7.87-47.619,0-47.619h68.842v-18.8a14.271,14.271,0,0,1,7.882-12.758,14.239,14.239,0,0,1,14.925,1.354l57.019,42.764c.242.185.328.485.555.671a13.9,13.9,0,0,1,2.751,3.292,14.57,14.57,0,0,1,.984,1.454,14.114,14.114,0,0,1,1.411,5.987,14.006,14.006,0,0,1-1.411,5.973,14.653,14.653,0,0,1-.984,1.468,13.9,13.9,0,0,1-2.751,3.293c-.228.2-.313.485-.555.671l-57.019,42.764a14.26,14.26,0,0,1-8.558,2.847A14.326,14.326,0,0,1-2771.3-147.087Z"
-                                                transform="translate(2944 428)"
-                                                fill="var(--color-hellomed)"
-                                            />
-                                        </g>
-                                    </svg>
-                                </span>
-                                <span class="upload-area-title">Wählen Sie eine Datei aus oder ziehen Sie hierher</span>
-                           </div>
-                        </div>  -->
                 </div>
 
-           
+
+
+
+
+                <div class="col-12">
+                    <label class="form-label">Liegt Ihnen ein Medikationsplan vor?</label>
+                    <div class="btn-group d-flex">
+                        <input type="radio" class="btn-check" name="medplan_uploaded" value="1" id="medplanRadioDefault1" autocomplete="off" onclick="ihavemedplan();" />
+                        <label class="btn btn-outline-primary" for="medplanRadioDefault1">Ja</label>
+                        <input type="radio" class="btn-check" name="medplan_uploaded" value="0" id="medplanRadioDefault2" autocomplete="off" checked onclick="idonthavemedplan();" />
+                        <label class="btn btn-outline-primary" for="medplanRadioDefault2">Nein</label>
+                    </div>
+                </div>
+
+                <div class="col-12" id="medplanhochladen"  style="display: none;">
+                    <label id="medplanlabel" class="form-label">Medplan hochladen</label>
+                            <div id="drag-drop-area"></div> 
+                        <!-- Uploaded files list -->
+                        <div class="uploaded-files" style="display:none;">
+                            <ol></ol>
+                        </div>
+                        <div class="col-12" style="display: block;">
+                        </div>
+                </div>
+
+
+
+
+
                 <div class="col-12">
                     <button type="button" id="submit-dropzone" class="next btn btn-primary btn-lg next3">Weiter</button>
                 </div>
@@ -363,14 +352,13 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
 
 </div>
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://ui.hellomed.com/src/v1.0/js/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="https://ui.hellomed.com/src/v1.0/js/bootstrap.5.2.3.bundle.min.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/multistep.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/search-function.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.de.min.js" integrity="sha512-3V4cUR2MLZNeqi+4bPuXnotN7VESQC2ynlNH/fUljXZiQk1BGowTqO5O2gElABNMIXzzpYg5d8DxNoXKlM210w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ui.hellomed.com/src/v1.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://ui.hellomed.com/src/v1.0/js/bootstrap-datepicker.de.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 <!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
@@ -396,7 +384,7 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                                 var heightview = 650;
                             }
                      
-                        import {Uppy, Dashboard, XHRUpload, Compressor, Webcam, ProgressBar} from "https://releases.transloadit.com/uppy/v3.3.1/uppy.min.mjs"
+                        import {Uppy, Dashboard, XHRUpload, Compressor, Webcam, ProgressBar} from "https://ui.hellomed.com/src/v1.0/js/uppy.min.mjs"
                        
                         var uppy = new Uppy(
                             {
@@ -806,6 +794,37 @@ function idonthaverezept(){
       $('#medplan').prop('checked', false);
 }
 
+
+
+function ihavemedplan(){
+
+  document.getElementById('medplanhochladen').style.display ='block';
+  
+    document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
+     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
+    
+
+     $('#hideInputLog').prop('disabled', true);
+     $('#labelsubmit').text('Datei-Upload-Verarbeitung');
+
+     document.getElementById('progressbarcustommedplan').style.display = 'block';
+
+}
+
+function idonthavemedplan(){
+
+    $('#hideInputLog').prop('disabled', false);
+     $('#labelsubmit').text('Anmeldung abschließen');
+
+    document.getElementById('progressbarcustommedplan').style.display = 'none';
+
+
+  document.getElementById('medplanhochladen').style.display = 'none';
+   
+}
+
+
+
                     $(document).ready(function() {
                     $(document.body).on('click', 'button[data-cy="Webcam"]' ,function(){
                     // $('button[data-cy="Webcam"]').on("click", function () {
@@ -824,14 +843,12 @@ function idonthaverezept(){
                         if($('#rezeptfoto').is(':checked'))
                             {
                                 ihaveRezeptfoto();
-                            }else if($('#eRezept').is(':checked'))
+                            }
+                            else ($('#eRezept').is(':checked'))
                             {
                             ihaveeRezept();
                             }
-                            else
-                            {
-                            ihaveMedplan();
-                            }
+                          
                         });
                     });
                     })
@@ -857,11 +874,11 @@ function ihaveeRezept(){
     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay2.png)");
   
 }
-function ihaveMedplan(){
-  document.getElementById('rezepthochladen').style.display ='block';
-  document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
-    $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
-}
+// function ihaveMedplan(){
+//   document.getElementById('rezepthochladen').style.display ='block';
+//   document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
+//     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
+// }
                      
 
 
