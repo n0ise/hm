@@ -39,10 +39,10 @@
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
-                            <div class="input-group">
+                            <div class="input-group gap-1">
                                 <input id="prescription_id_no" type="text" class="form-control" value="">
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary" type="button"
+                                    <button class="btn btn-primary btn-sm" type="button"
                                         onclick="generateRandomID()">Random</button>
                                 </div>
                             </div>
@@ -67,13 +67,13 @@
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
                             <input id="blister_start_date" type="date"
-                                class=" blister_start_date form-control date-convert" placeholder="tt.mm.jjjj" value="">
+                                class=" blister_start_date form-control" placeholder="tt.mm.jjjj" value="">
                             <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_end_date" type="date" class="blister_end_date form-control date-convert"
+                            <input id="blister_end_date" type="date" class="blister_end_date form-control"
                                 placeholder="tt.mm.jjjj" value="">
                             <label>Ende</label>
                         </div>
@@ -108,7 +108,7 @@
 
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_date_by_doctor" type="date" class="form-control date-convert"
+                            <input id="prescription_date_by_doctor" type="date" class="form-control"
                                 placeholder="tt.mm.jjjj" value="">
                             <label>Verschreibungsdatum</label>
                         </div>
@@ -116,7 +116,7 @@
 
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_start_date" type="date" class="form-control date-convert"
+                            <input id="prescription_start_date" type="date" class="form-control"
                                 placeholder="tt.mm.jjjj" value="">
                             <label>Start</label>
                         </div>
@@ -124,7 +124,7 @@
 
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_end_date" type="date" class="form-control date-convert"
+                            <input id="prescription_end_date" type="date" class="form-control"
                                 placeholder="tt.mm.jjjj" value="">
                             <label>Ende</label>
                         </div>
@@ -297,7 +297,7 @@ include_once('footer.php');
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="form-floating">
-                        <input type="text"  id="blister_end_date" class="form-control blister_end_date" value="">
+                        <input type="date"  id="blister_end_date" class="form-control blister_end_date" value="">
                         <label>Ende</label>
                     </div>
                 </div>

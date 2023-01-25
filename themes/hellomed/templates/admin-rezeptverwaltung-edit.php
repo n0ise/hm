@@ -74,14 +74,14 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_start_date" type="date" class=" blister_start_date form-control"
+                            <input id="blister_start_date" type="date" class=" blister_start_date form-control date-convert"
                                 value="<?php echo $blister_job['blister_start_date'] ?>">
                             <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_end_date" type="date" class="blister_end_date form-control"
+                            <input id="blister_end_date" type="date" class="blister_end_date form-control date-convert"
                                 value="<?php echo $blister_job['blister_end_date'] ?>">
                             <label>Ende</label>
                         </div>
@@ -126,14 +126,14 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_start_date" type="date" class="form-control" placeholder=" "
-                                value="<?php echo $record['prescription_start_date']; ?>">
+                            <input id="prescription_start_date" type="date" class="form-control" 
+                                value="<?php echo $record['prescription_start_date']; ?>" ?>
                             <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_end_date" type="date" class="form-control" placeholder=" "
+                            <input id="prescription_end_date" type="date" class="form-control" 
                                 value="<?php echo $record['prescription_end_date']; ?>">
                             <label>Ende</label>
                         </div>
@@ -318,7 +318,7 @@ include_once('footer.php');
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="form-floating">
-                        <input type="text"  id="blister_end_date" class="form-control blister_end_date" value="">
+                        <input type="date"  id="blister_end_date" class="form-control blister_end_date" value="">
                         <label>Ende</label>
                     </div>
                 </div>
@@ -437,4 +437,4 @@ include_once('footer.php');
             });
         });
     });
-    </script>
+</script>
