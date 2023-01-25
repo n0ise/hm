@@ -476,12 +476,27 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 		}
 	}
 
-	if ( !empty($_POST['geschlecht']) && $_POST['geschlecht'] != get_user_meta( $user_id, 'geschlecht', true )) {
-		$gender = $_POST['geschlecht'];
-		update_user_meta( $user_id, 'geschlecht', $gender );
-		// echo "<li> Geschlecht aktualisiert </li> ";
-		$updates_made = true;
-	}	
+	if (isset($_POST['geschlecht'])) {
+		if (empty($_POST['geschlecht'])) {
+			$hasError = true;
+			$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus";
+		} else {
+			if (!empty($record['geschlecht']) && $_POST['geschlecht'] !== $record['geschlecht']) {
+				$record['geschlecht'] = $_POST['geschlecht'];
+				$updates_needed[] = array(
+					'meta_key' => 'geschlecht',
+					'meta_value' => $record['geschlecht']
+				);
+				$updates_made = true;
+			} elseif ($_POST['geschlecht'] === $record['geschlecht']) {
+				// there is nothing to update, go on
+			} else {
+				$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus.";
+				$hasError = true;
+			}
+		}
+	}
+	
 
 	if ( !empty($_POST['status']) && $_POST['status'] != get_user_meta( $user_id, 'status', true )) {
 		$status = $_POST['status'];
@@ -638,7 +653,7 @@ foreach ($rezept_input as &$record) {
 			} elseif ($_POST['prescription_date_by_doctor'] === $record['prescription_date_by_doctor']) {
 				// there is nothing to update, go on
 			} else {
-				$errorMessages[] = "prescription_date_by_doctor: Fehler: Fehler: Bitte geben Sie ein gültiges Datum ein.";
+				$errorMessages[] = "prescription_date_by_doctor: Fehler: Bitte geben Sie ein gültiges Datum ein.";
 				$hasError = true;
 			}
 		}
