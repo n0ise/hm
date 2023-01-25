@@ -2,9 +2,9 @@
 <footer class="hm-footer">
   <div class="container">
     <div>
-      <a href>Impressum</a>
-      <a href>AGB</a>
-      <a href>Datenschutz</a>
+      <a href="/impressum" target="_blank">Impressum</a>
+      <a href="/agb" target="_blank">AGB</a>
+      <a href="/datenschutz" target="_blank">Datenschutz</a>
     </div>
     <div>
       <img src="https://hellomed.com/wp-content/uploads/2022/05/Artboard.svg">
@@ -15,18 +15,8 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Lodash -->
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://ui.hellomed.com/src/v1.0/js/bootstrap.5.2.3.bundle.min.js"></script>
 
 <!-- Custom js -->
-<script src="https://ui.hellomed.com/js/ios-safari.js"></script>
-<script src="https://ui.hellomed.com/js/off-canvas.js"></script>
-
-<!-- if page is medikamente, load this  -->
-<!-- for the moment is OUT, because im including the js in the page itself with ajax, after sending the id -->
-<?php //if (is_page('os-medikationsplan')) { ?>
-<!-- <script src="wp-content/themes/hellomed/assets/js/medication.js"></script> -->
-<?php // } ?>
-
+<script src="https://ui.hellomed.com/src/v1.0/js/off-canvas.js"></script>
+<script src="https://ui.hellomed.com/src/v1.0/js/ios-safari.js"></script>
