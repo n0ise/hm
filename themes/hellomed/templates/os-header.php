@@ -30,7 +30,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
     <header class="hm-header">
         <?php  
         // if page is os-rezepte 
-    if (is_page('os-rezepte')) { 
+    if (is_page('rezepte')) { 
             
         // checking current user, and the if the patient have prescriptions 
         $current_user_id = get_current_user_id();
