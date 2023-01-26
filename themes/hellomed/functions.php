@@ -475,19 +475,20 @@ if (isset($_POST['postcode'])) {
 }
 	
 
-if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
-		$hasError = true;
-		$errorMessages[] = "geburt: Fehler: Bitte geben Sie Ihren Geburtstag ein.";
-	} else {
-		if ( !empty($_POST['geburt']) && $_POST['geburt'] != get_user_meta( $user_id, 'geburt', true )) {
-			$birthday = $_POST['geburt'];
-			update_user_meta( $user_id, 'geburt', $birthday );
-			// echo "<li> Geburtstag aktualisiert </li> ";
-			$updates_needed[] = array(
-				'meta_key' => 'geburt',
-				'meta_value' => $birthday
-			);
-			$updates_made = true;	
+	if (isset($_POST['geburt'])) {
+		if (empty($_POST['geburt'])) {			
+			$hasError = true;
+			$errorMessages[] = "geburt: Fehler: Bitte geben Sie Ihren Geburtstag ein.";
+		} else {
+			if ( !empty($_POST['geburt']) && $_POST['geburt'] != get_user_meta( $user_id, 'geburt', true )) {
+				$birthday = $_POST['geburt'];
+				update_user_meta( $user_id, 'geburt', $birthday );
+				$updates_needed[] = array(
+					'meta_key' => 'geburt',
+					'meta_value' => $birthday
+				);
+				$updates_made = true;	
+			}
 		}
 	}
 
@@ -496,7 +497,7 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 			$hasError = true;
 			$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus.";
 		} else {
-			if (!empty($record['geschlecht']) && $_POST['geschlecht'] !== get_user_meta( $user_id, 'geschlecht', true )) {
+			if (!empty($_POST['geschlecht']) && $_POST['geschlecht'] !== get_user_meta( $user_id, 'geschlecht', true )) {
 				update_user_meta( $user_id, 'geschlecht', $_POST['geschlecht'] );
 				$updates_needed[] = array(
 					'meta_key' => 'geschlecht',
@@ -512,7 +513,6 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 		}
 	}
 	
-
 	if ( !empty($_POST['status']) && $_POST['status'] != get_user_meta( $user_id, 'status', true )) {
 		$status = $_POST['status'];
 		update_user_meta( $user_id, 'status', $status );
@@ -520,20 +520,20 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 	}
 
 	// checking if user is set and id exists before saving 
-if (isset($_POST['new_user_id']) && (empty($_POST['new_user_id']))) {
-	$hasError = true;
-	$errorMessages[] = "new_user_id: Fehler: Bitte geben Sie eine Benutzer-ID ein.";
-	} else {
-	if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
-		$new_user_id=$_POST['new_user_id'];
-		$args = array(
-			  'meta_key'     => 'new_user_id',
-			  'meta_value'   => $_POST['new_user_id'],
-			  'meta_compare' => '=',
-			  'fields'       => 'ID'
-		);
+	if (isset($_POST['new_user_id']) && (empty($_POST['new_user_id']))) {
+		$hasError = true;
+		$errorMessages[] = "new_user_id: Fehler: Bitte geben Sie eine Benutzer-ID ein.";
+		} else {
+		if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
+			$new_user_id=$_POST['new_user_id'];
+			$args = array(
+				  'meta_key'     => 'new_user_id',
+				  'meta_value'   => $_POST['new_user_id'],
+				  'meta_compare' => '=',
+				  'fields'       => 'ID'
+			);
 	
-		$existingUsers = get_users($args);
+			$existingUsers = get_users($args);
 		if (!empty($existingUsers)) {
 			$hasError = true;
 			$errorMessages[] = "new_user_id: Fehler: Benutzer-ID existiert bereits, wählen Sie eine andere.";
@@ -542,7 +542,8 @@ if (isset($_POST['new_user_id']) && (empty($_POST['new_user_id']))) {
 				'meta_key' => 'new_user_id',
 				'meta_value' => $new_user_id
 			);
-			$updates_made = true;		}
+			$updates_made = true;		
+		}
 	}
 }	
 
@@ -600,7 +601,6 @@ if (isset($_POST['new_user_id']) && (empty($_POST['new_user_id']))) {
 			$updates_made = true;
 		}
 	}
-	
 
 	   // debug
 	   // $rezept_input[0]['rezept_id'] = $_POST['rez
@@ -661,7 +661,6 @@ foreach ($rezept_input as &$record) {
 		}
 	}
 	
-
 	if (isset($_POST['prescription_start_date'])) {
 		if (empty($_POST['prescription_start_date'])) {
 			$hasError = true;
@@ -688,7 +687,7 @@ foreach ($rezept_input as &$record) {
 			$hasError = true;
 			$errorMessages[] = "prescription_end_date: Fehler: Bitte geben Sie ein Enddatum ein.";
 		} else {
-			if (!empty($record['prescription_end_date']) && $_POST['prescription_date_by_doctor'] !== $record['prescription_date_by_doctor']) {
+			if (!empty($record['prescription_end_date']) && $_POST['prescription_end_date'] !== $record['prescription_end_date']) {
 				$record['prescription_end_date'] = $_POST['prescription_end_date'];
 				$updates_needed[] = array(
 					'meta_key' => 'prescription_end_date',

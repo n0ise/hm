@@ -55,7 +55,7 @@
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected>
                                 <?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
                             <?php 
-                                $geschlecht = array('Männlich', 'Weiblich', 'Divers');
+                                $geschlecht = array('Männlich', 'Weiblich');
                                 $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
                                 $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
                                 unset($geschlecht[$keygeschlecht]);
