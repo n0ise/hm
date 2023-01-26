@@ -179,6 +179,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <div class="col-12">
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
+                                <option value="" disabled selected>Bitte Wählen</option>
                                 <option selected><?php echo $record['status_prescription'] ?> </option>
                                 <?php 
                                 $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');

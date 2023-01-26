@@ -703,10 +703,12 @@ foreach ($rezept_input as &$record) {
 		}
 	}
 	
-
-	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != $record['status_prescription'] ) {
+	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != "Bitte wählen") {
 		$record['status_prescription'] = $_POST['status_prescription'];
 		$updates_made = true;
+	} else {
+		$hasError = true;
+		$errorMessages[] = "status_prescription: Fehler: Bitte wählen Sie einen Status aus.";
 	}
 
 	foreach ($_POST['blister_jobs'] as $item) {
