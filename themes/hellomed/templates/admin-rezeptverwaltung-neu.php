@@ -387,6 +387,7 @@ include_once('footer.php');
                 if (response.status == 'success') {
                     $('#successdown').removeClass('alert alert-danger');
                     $('input').removeClass('border border-2 border-danger');
+                    $('select').removeClass('border border-2 border-danger');
                     $('#successdown').addClass('alert alert-success');
                     $('#successdown').html(response.message);
                     $('#successdown').fadeIn(1000);

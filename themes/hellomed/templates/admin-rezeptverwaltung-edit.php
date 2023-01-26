@@ -337,16 +337,16 @@ include_once('footer.php');
     jQuery(document).ready(function($) {
         $('#save_blister_job').click(function() {
 
-            var blister_job_id = $('#blister_job_id').val();
-            var blister_start_date = $('#blister_start_date').val();
-            var blister_end_date = $('#blister_end_date').val();
+            // var blister_job_id = $('#blister_job_id').val();
+            // var blister_start_date = $('#blister_start_date').val();
+            // var blister_end_date = $('#blister_end_date').val();
             var prescription_id = $('#prescription_id').val();
             var doctor_name = $('#doctor_name').val();
             var prescription_date_by_doctor = $('#prescription_date_by_doctor').val();
             var prescription_start_date = $('#prescription_start_date').val();
             var prescription_end_date = $('#prescription_end_date').val();
-            var medicine_name_pzn = $('#medicine_name_pzn').val();
-            var medicine_amount = $('#medicine_amount').val();
+            // var medicine_name_pzn = $('#medicine_name_pzn').val();
+            // var medicine_amount = $('#medicine_amount').val();
             var status_prescription = $('#status_prescription').val();
             var new_user_id = $('#new_user_id').val();
 
@@ -382,16 +382,16 @@ include_once('footer.php');
             var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
             var data = {
                 'action': 'edit_patient',
-                'blister_job_id': blister_job_id,
-                'blister_start_date': blister_start_date,
-                'blister_end_date': blister_end_date,
+                // 'blister_job_id': blister_job_id,
+                // 'blister_start_date': blister_start_date,
+                // 'blister_end_date': blister_end_date,
                 'prescription_id': prescription_id,
                 'doctor_name': doctor_name,
                 'prescription_date_by_doctor': prescription_date_by_doctor,
                 'prescription_start_date': prescription_start_date,
                 'prescription_end_date': prescription_end_date,
-                'medicine_name_pzn': medicine_name_pzn,
-                'medicine_amount': medicine_amount,
+                // 'medicine_name_pzn': medicine_name_pzn,
+                // 'medicine_amount': medicine_amount,
                 'prescription_id': prescription_id,
                 'status_prescription': status_prescription,
                 'blister_jobs': blister_jobs,
