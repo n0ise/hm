@@ -396,21 +396,27 @@ if (isset($_POST['last_name']) && (empty($_POST['last_name']))) {
 	// 	$updates_made = true;
 	// }
 
-if (isset($_POST['telephone']) && (empty($_POST['telephone']))) {
-	$hasError = true;
-	$errorMessages[] = "telephone: Fehler: Bitte geben Sie Ihre Telefonnummer ein.";
+if (isset($_POST['telephone'])) {
+	if (empty($_POST['telephone'])) {
+		$hasError = true;
+		$errorMessages[] = "telephone: Fehler: Bitte geben Sie Ihre Telefonnummer ein.";
 	} else {
-		if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
-			$phone = $_POST['telephone'];
-			// update_user_meta( $user_id, 'telephone', $phone );
-			// echo "<li> Telefon aktualisiert </li> ";
-			$updates_needed[] = array(
-				'meta_key' => 'telephone',
-				'meta_value' => $phone
-			);
-			$updates_made = true;
+		if (preg_match("/^(\+49|0049|0)[1-9]{1}[0-9]{9}$/", $_POST['telephone'])) {
+			if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
+				$phone = $_POST['telephone'];
+				$updates_needed[] = array(
+					'meta_key' => 'telephone',
+					'meta_value' => $phone
+				);
+				$updates_made = true;
+			}
+		} else {
+			$hasError = true;
+			$errorMessages[] = "telephone: Fehler: Bitte geben Sie eine gültige Telefonnummer im Format +491234567890, 00491234567890, oder 01234567890 ein.";
 		}
 	}
+}
+	
 
 if (isset($_POST['strasse']) && (empty($_POST['strasse']))) {
 	$hasError = true;
@@ -444,21 +450,28 @@ if (isset($_POST['stadt']) && (empty($_POST['stadt']))) {
 		}	
 	}
 
-if (isset($_POST['postcode']) && (empty($_POST['postcode']))) {
-	$hasError = true;
-	$errorMessages[] = "postcode: Fehler: Bitte geben Sie eine PZL ein.";
+if (isset($_POST['postcode'])) {
+	if (empty($_POST['postcode'])) {
+		$hasError = true;
+		$errorMessages[] = "postcode: Fehler: Bitte geben Sie eine Postleitzahl ein.";
 	} else {
-		if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
-			$zip = $_POST['postcode'];
-			update_user_meta( $user_id, 'postcode', $zip );
-			// echo "<li> PLZ aktualisiert </li> ";
-			$updates_needed[] = array(
-				'meta_key' => 'stadt',
-				'meta_value' => $city
-			);
-			$updates_made = true;
+		if (preg_match("/^[0-9]{5}$/", $_POST['postcode'])) {
+			if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
+				$zip = $_POST['postcode'];
+				update_user_meta( $user_id, 'postcode', $zip );
+				$updates_needed[] = array(
+					'meta_key' => 'stadt',
+					'meta_value' => $city
+				);
+				$updates_made = true;
+			}
+		} else {
+			$hasError = true;
+			$errorMessages[] = "postcode: Fehler: Bitte geben Sie eine gültige Postleitzahl ein (5-stellig)";
 		}
 	}
+}
+	
 
 if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 		$hasError = true;
@@ -479,7 +492,7 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 	if (isset($_POST['geschlecht'])) {
 		if (empty($_POST['geschlecht'])) {
 			$hasError = true;
-			$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus";
+			$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus.";
 		} else {
 			if (!empty($record['geschlecht']) && $_POST['geschlecht'] !== get_user_meta( $user_id, 'geschlecht', true )) {
 				update_user_meta( $user_id, 'geschlecht', $_POST['geschlecht'] );
@@ -491,7 +504,7 @@ if (isset($_POST['geburt']) && (empty($_POST['geburt']))) {
 			} elseif ($_POST['geschlecht'] === get_user_meta( $user_id, 'geschlecht', true )) {
 				// there is nothing to update, go on
 			} else {
-				$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus2.";
+				$errorMessages[] = "geschlecht: Fehler: Bitte wählen Sie ein Geschlecht aus.";
 				$hasError = true;
 			}
 		}
