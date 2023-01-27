@@ -593,10 +593,10 @@ class Hellomed_Custom_Login_Plugin {
 				$last_name = sanitize_text_field( $_POST['last_name'] );
 				$patient_caregiver = $_POST['patientcaregiverid'] ;
 				if (isset($_POST['personal_data_checkbox'])) {
-					$personal_data_checkbox = 1;
+					$personal_data_checkbox = true;
 				}
 				if (isset($_POST['newsletter_checkbox'])) {
-					$newsletter_checkbox = 1;
+					$newsletter_checkbox = true;
 				}
 
 				// echo "<script type='text/javascript'>alert('$patient_caregiver');</script>";

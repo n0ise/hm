@@ -33,7 +33,7 @@ $user_id = get_current_user_id();
         </div>
         <!-- checking if logged in and show the whole nav header -->
        
-        <?php if(is_user_logged_in() && get_field('status', 'user_' .$user_id ) != "Wartend") { ?>
+        <?php if(is_user_logged_in() && get_field('status', 'user_' .$user_id ) == "Wartend" && get_field('status', 'user_' .$user_id ) == "Inaktiv" && get_field('status', 'user_' .$user_id ) == "Gefähred")  { ?>
 
        
       
@@ -72,14 +72,12 @@ $user_id = get_current_user_id();
 
         </div>
     </div>
-    <?php } else { ?>
-                //TODO something? 
+   
+    <?php } else {
+                  //TODO something
+                 header("Refresh:0; url=/admin-dashboard");
 
-
-                <?php header("Refresh:0; url=/admin-dashboard"); ?>
-
-
-                <?php   } ?>
+                   } ?>
 </header>
 
 <nav class="hm-offcanvas">

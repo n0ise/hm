@@ -33,7 +33,6 @@ nicht des Angehörigen."> </i>
             </div>
         </div>
 
-
                 <div class="col-12">
                     <div class="progress">
                         <div class="progress-bar" style="width: 25%;">Schritt 1/4</div>
@@ -84,6 +83,7 @@ nicht des Angehörigen."> </i>
                         <label id="birthdaylabel" for="birthdaypicker">Was ist Ihr Geburtsdatum?</label>
                         <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
+
                 </div>
 
                 <div class="col-12">
@@ -1159,12 +1159,16 @@ function idonthavemedplan(){
 
                         if($('#rezeptfoto').is(':checked'))
                             {
-                                console.log("rezept foto");
+                               // console.log("rezept foto");
                                 ihaveRezeptfoto();
                             }
                             else  {
-                                console.log("erezept");
+                              //  console.log("erezept");
                             ihaveeRezept();
+                            }
+
+                            if($('#medplanRadioDefault1').is(':checked')){
+                                ihaveMedplan();
                             }
                           
                         });
@@ -1192,11 +1196,11 @@ function ihaveeRezept(){
     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay2.png)");
   
 }
-// function ihaveMedplan(){
+function ihaveMedplan(){
 //   document.getElementById('rezepthochladen').style.display ='block';
 //   document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
-//     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
-// }
+    $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
+}
                      
 
 
