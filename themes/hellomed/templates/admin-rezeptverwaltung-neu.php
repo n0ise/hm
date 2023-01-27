@@ -374,7 +374,8 @@ include_once('footer.php');
                 'medikament': medikament,
                 'patient_select': patient_select,
                 'prescription_id_no': prescription_id_no,
-                'user_id': user_id
+                'user_id': user_id,
+                'rezept_type': 'by_admin'
             }
             console.log(data);
             // count blister_jobs, debug

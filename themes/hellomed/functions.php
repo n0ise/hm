@@ -784,6 +784,8 @@ add_action('wp_ajax_new_prescription', function() {
 
 	$new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
 	
+
+
 	if ( !empty($_POST['patient_select'])) {
 		$new_row['new_user_id'] = $_POST['patient_select'];
 		$updated_made=true;
@@ -799,6 +801,13 @@ add_action('wp_ajax_new_prescription', function() {
 		$errorMessages[]= "doctor_name: Bitte schreiben Sie einen Arzt.";
 
 	}
+
+	if (!empty($_POST['rezept_type'])) {
+		$new_row['rezept_file'][0]['rezept_type'] = $_POST['rezept_type'];
+		$updates_made = true;
+		} else {
+		$errorMessages[]= "rezept_type: Bitte geben Sie einen Rezepttyp an.";
+		}
 	
 	if ( !empty($_POST['prescription_date_by_doctor'])) {
 		$new_row['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
