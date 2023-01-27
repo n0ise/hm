@@ -61,9 +61,9 @@ $status="Alle";
                         <td data-label="User ID"><?php echo $user_id; ?></td>
                         <td data-label="Name"><?php 
                             if ($patient_caregiver == 'Caregiver') {
-                               echo $user_firstname. " ".$user_lastname;echo "<br><span class=small>Caregiver: ".get_field('caregiver_vorname', 'user_' . $user->ID).' '.get_field('caregiver_nachname', 'user_' . $user->ID). "</span>"; 
+                               echo $user_firstname. " ".$user_lastname; echo "<br><span class=small>Caregiver: ".$user->first_name.' '.$user->last_name. "</span>"; 
                             } else {
-                             echo $user_firstname. " ".$user_lastname; 
+                             echo $user->first_name. " ".$user->last_name; 
                             } 
                             ?>                           
                         </td>
