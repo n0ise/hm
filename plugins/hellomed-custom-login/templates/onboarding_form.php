@@ -70,9 +70,9 @@ nicht des Angehörigen."> </i>
 
                 <div class="col-12">
                     <div id="validbuttongroup" class="btn-group d-flex">
-                        <input required type="radio" class="btn-check" name="geschlecht" value="male" id="radiomale" autocomplete="off" />
+                        <input required type="radio" class="btn-check" name="geschlecht" value="Männlich" id="radiomale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiomale">Männlich</label>
-                        <input type="radio" class="btn-check" name="geschlecht" value="female" id="radiofemale" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="geschlecht" value="Weiblich" id="radiofemale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
                     </div>
                     <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
@@ -204,7 +204,7 @@ verschickt oder hochgeladen werden."> </i>
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input required id="startdatumpicker" readonly="readonly" name="geburt" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
+                        <input required id="startdatumpicker" readonly="readonly" name="startdatumpick" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
                         <label id="startdatumlabel" for="startdatumpicker">Was ist Ihr Wunsch-Startdatum?</label>
                         <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
@@ -291,9 +291,9 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                 <div class="col-12">
                     <label class="form-label">Wie sind sie versichert?</label>
                     <div id="validbuttongroup" class="btn-group d-flex">
-                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="privat" id="flexRadioDefault11" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Privat" id="flexRadioDefault11" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault11">Privat</label>
-                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="gesetzlich" checked id="flexRadioDefault22" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Gesetzlich" checked id="flexRadioDefault22" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault22">Gesetzlich</label>
                     </div>
                     <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
@@ -319,7 +319,7 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
 
                 <div id="progressbarcustom" class="for-ProgressBar" style="display: none;">
                 </div>
-                    <input id="hideInputLog" type="submit" name="submit" class="register-button" value="<?php _e( 'Submit', 'hellomed-custom-login' ); ?>" />
+                    <input id="hideInputLog" type="submit" name="submit" class="register-button" value="<?php _e( 'Anmeldung abschließen', 'hellomed-custom-login' ); ?>" />
                     <label for="hideInputLog" id="labelsubmit" class="btn btn-primary btn-lg">Anmeldung abschließen</label>
                 </div>
                 <div class="col-12">

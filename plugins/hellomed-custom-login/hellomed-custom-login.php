@@ -787,9 +787,9 @@ class Hellomed_Custom_Login_Plugin {
 				update_user_meta( $user_id, 'telephone', $phone );
 			}
 		
-			if ( !empty( $_POST['start_date'] ) ) {
-				$start_date = $_POST['start_date'];
-				update_user_meta( $user_id, 'rezept_start', $start_date );
+			if ( !empty( $_POST['startdatumpick'] ) ) {
+				$start_date = $_POST['startdatumpick'];
+				update_user_meta( $user_id, 'start_date', $start_date );
 			}
 
 			if ( !empty( $_POST['first_rezept_uploaded'] ) ) {
