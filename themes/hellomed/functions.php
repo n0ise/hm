@@ -652,35 +652,28 @@ foreach ($rezept_input as &$record) {
 					'meta_value' => $record['prescription_date_by_doctor']
 				);
 				$updates_made = true;
-			} elseif ($_POST['prescription_date_by_doctor'] === $record['prescription_date_by_doctor']) {
-				// there is nothing to update, go on
-			} else {
-				$errorMessages[] = "prescription_date_by_doctor: Bitte geben Sie ein gültiges Datum ein.";
-				$hasError = true;
 			}
 		}
 	}
+		
+		
 	
 	if (isset($_POST['prescription_start_date'])) {
 		if (empty($_POST['prescription_start_date'])) {
 			$hasError = true;
 			$errorMessages[] = "prescription_start_date: Bitte geben Sie ein Startdatum ein.";
 		} else {
-			if (!empty($record['prescription_start_date']) && $_POST['prescription_start_date'] !== $record['prescription_start_date']) {
+			if (empty($record['prescription_start_date']) || $_POST['prescription_start_date'] !== $record['prescription_start_date']) {
 				$record['prescription_start_date'] = $_POST['prescription_start_date'];
 				$updates_needed[] = array(
 					'meta_key' => 'prescription_start_date',
 					'meta_value' => $record['prescription_start_date']
 				);
 				$updates_made = true;
-			} elseif ($_POST['prescription_start_date'] === $record['prescription_start_date']) {
-				// there is nothing to update, go on
-			} else {
-				$errorMessages[] = "prescription_start_date: Bitte geben Sie ein gültiges Startdatum ein.";
-				$hasError = true;
 			}
 		}
 	}
+	
 	
 	if (isset($_POST['prescription_end_date'])) {
 		if (empty($_POST['prescription_end_date'])) {
@@ -694,14 +687,10 @@ foreach ($rezept_input as &$record) {
 					'meta_value' => $record['prescription_end_date']
 				);
 				$updates_made = true;
-			} elseif ($_POST['prescription_end_date'] === $record['prescription_end_date']) {
-				// there is nothing to update, go on
-			} else {
-				$errorMessages[] = "prescription_end_date: Bitte geben Sie ein gültiges Enddatum ein.";
-				$hasError = true;
-			}
+			} 
 		}
 	}
+	
 	
 	if (  $_POST['status_prescription'] != "Bitte wählen") {
 		$record['status'] = $_POST['status_prescription'];
