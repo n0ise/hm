@@ -640,64 +640,38 @@ foreach ($rezept_input as &$record) {
 			}
 		}
 	
-	if (isset($_POST['prescription_date_by_doctor'])) {
-		if (empty($_POST['prescription_date_by_doctor'])) {
-			$hasError = true;
-			$errorMessages[] = "prescription_date_by_doctor: Bitte geben Sie ein Datum ein.";
+	if ( isset($_POST['prescription_date_by_doctor']) && !empty($_POST['prescription_date_by_doctor'])) {
+		$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];			$updates_made = true;
 		} else {
-			if (!empty($record['prescription_date_by_doctor']) && $_POST['prescription_date_by_doctor'] !== $record['prescription_date_by_doctor']) {
-				$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
-				$updates_needed[] = array(
-					'meta_key' => 'prescription_date_by_doctor',
-					'meta_value' => $record['prescription_date_by_doctor']
-				);
-				$updates_made = true;
-			}
-		}
-	}
-		
-		
-	
-	if (isset($_POST['prescription_start_date'])) {
-		if (empty($_POST['prescription_start_date'])) {
 			$hasError = true;
-			$errorMessages[] = "prescription_start_date: Bitte geben Sie ein Startdatum ein.";
-		} else {
-			if (empty($record['prescription_start_date']) || $_POST['prescription_start_date'] !== $record['prescription_start_date']) {
-				$record['prescription_start_date'] = $_POST['prescription_start_date'];
-				$updates_needed[] = array(
-					'meta_key' => 'prescription_start_date',
-					'meta_value' => $record['prescription_start_date']
-				);
-				$updates_made = true;
-			}
+			$errorMessages[]= "prescription_date_by_doctor: Bitte geben Sie ein Datum ein.";
 		}
-	}
-	
-	
-	if (isset($_POST['prescription_end_date'])) {
-		if (empty($_POST['prescription_end_date'])) {
-			$hasError = true;
-			$errorMessages[] = "prescription_end_date: Bitte geben Sie ein Enddatum ein.";
-		} else {
-			if (!empty($record['prescription_end_date']) && $_POST['prescription_end_date'] !== $record['prescription_end_date']) {
-				$record['prescription_end_date'] = $_POST['prescription_end_date'];
-				$updates_needed[] = array(
-					'meta_key' => 'prescription_end_date',
-					'meta_value' => $record['prescription_end_date']
-				);
-				$updates_made = true;
-			} 
-		}
-	}
-	
-	
-	if (  $_POST['status_prescription'] != "Bitte wählen") {
-		$record['status'] = $_POST['status_prescription'];
+			
+	if ( isset($_POST['prescription_start_date']) && !empty($_POST['prescription_start_date'])) {
+		$record['prescription_start_date'] = $_POST['prescription_start_date'];
 		$updates_made = true;
-	} else {
-		$hasError = true;
-		$errorMessages[] = "status_prescription: Bitte wählen Sie einen Status aus.";
+		} else {
+			$hasError = true;
+			$errorMessages[]= "prescription_start_date: Bitte geben Sie ein Startdatum ein.";
+		}
+		
+	if ( isset($_POST['prescription_end_date']) && !empty($_POST['prescription_end_date'])) {
+		$record['prescription_end_date'] = $_POST['prescription_end_date'];
+		$updates_made = true;
+		} else {
+			$hasError = true;
+			$errorMessages[]= "prescription_end_date: Bitte geben Sie ein Enddatum ein.";
+		}
+	
+		
+	if (isset($_POST['status_prescription'])) {
+		if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != "Bitte wählen") {
+			$record['status_prescription'] = $_POST['status_prescription'];
+			$updates_made = true;
+		} else {
+			$hasError = true;
+			$errorMessages[] = "status_prescription: Bitte wählen Sie einen Status aus.";
+		}
 	}
 
 	foreach ($_POST['blister_jobs'] as $item) {
@@ -822,13 +796,15 @@ add_action('wp_ajax_new_prescription', function() {
 		$errorMessages[]= "prescription_end_date: Bitte geben Sie ein Enddatum ein.";
 	}
 	
-	if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != "Bitte wählen") {
+	if (isset($_POST['status_prescription'])) {
+		if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != "Bitte wählen") {
 		$new_row['status_prescription'] = $_POST['status_prescription'];
 		$updates_made = true;
-	} else {
+		} else {
 		$hasError = true;
 		$errorMessages[] = "status_prescription: Bitte wählen Sie einen Status aus.";
-	}
+		}
+		}
 	
 	foreach ($_POST['medikament'] as $item) {
 		if (empty($item['medicine_name_pzn']) || empty($item['medicine_amount'])) {
