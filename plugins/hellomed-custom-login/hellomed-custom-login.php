@@ -592,10 +592,16 @@ class Hellomed_Custom_Login_Plugin {
 				$first_name = sanitize_text_field( $_POST['first_name'] );
 				$last_name = sanitize_text_field( $_POST['last_name'] );
 				$patient_caregiver = $_POST['patientcaregiverid'] ;
+				if (isset($_POST['personal_data_checkbox'])) {
+					$personal_data_checkbox = 1;
+				}
+				if (isset($_POST['newsletter_checkbox'])) {
+					$newsletter_checkbox = 1;
+				}
 
 				// echo "<script type='text/javascript'>alert('$patient_caregiver');</script>";
 
-				$result = $this->register_user( $email, $first_name, $last_name, $patient_caregiver );
+				$result = $this->register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $newsletter_checkbox);
 
 			
 
@@ -1050,7 +1056,7 @@ class Hellomed_Custom_Login_Plugin {
 	 *
 	 * @return int|WP_Error         The id of the user that was created, or error if failed.
 	 */
-	private function register_user( $email, $first_name, $last_name, $patient_caregiver ) {
+	private function register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $newsletter_checkbox) {
 		$errors = new WP_Error();
 
 		// Email address is used as both username and email. It is also the only
@@ -1080,8 +1086,11 @@ class Hellomed_Custom_Login_Plugin {
 		$user_id = wp_insert_user( $user_data , );
 
 		update_field('patient_caregiver', $patient_caregiver, 'user_' . $user_id);
-
 		update_field('confirmed_or_not', 0, 'user_' . $user_id);
+
+		update_field('personal_data_checkbox', $personal_data_checkbox, 'user_' . $user_id);
+		update_field('newsletter_checkbox', $newsletter_checkbox, 'user_' . $user_id);
+
 
 		wp_new_user_notification( $user_id, $password );
 

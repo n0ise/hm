@@ -65,7 +65,7 @@
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input  class="form-check-input" type="checkbox" id="test4">
+          <input class="form-check-input" type="checkbox" id="test4" name="personal_data_checkbox">
           <label class="form-check-label text-justify" for="test4">
           <small>
           Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Errinerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
@@ -75,7 +75,7 @@
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input  class="form-check-input" type="checkbox" id="test5">
+          <input  class="form-check-input" type="checkbox" id="test5" name="newsletter_checkbox">
           <label class="form-check-label text-justify"  for="test5">
           <small>
               Ja ich möchte weitere Informationen zu Neuigkeiten und Angeboten von der hellomed Group GmbH per E-Mail oder Telefon erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht.
