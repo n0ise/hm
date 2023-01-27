@@ -86,7 +86,7 @@ if (!empty($rezept['medicine_section'])) {
             </div>
         </div>
     </div>
-    <?php header("Refresh:10; url=/anmelden"); 
+    <?php header("Refresh:0; url=/anmelden"); 
         }
 
 // da footer 

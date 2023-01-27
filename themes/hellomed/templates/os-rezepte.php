@@ -90,7 +90,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
             </div>
         </div>
     </div>
-    <?php header("Refresh:10; url=/anmelden"); 
+    <?php header("Refresh:0; url=/anmelden"); 
 }
 
 // da footer 
