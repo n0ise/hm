@@ -741,7 +741,7 @@ class Hellomed_Custom_Login_Plugin {
 
 			// save field to user profile 
 			if ( !empty( $patient_first_name ) ) {
-				$patient_first_name = $_POST['patient_last_name'];
+				$patient_first_name = $_POST['patient_first_name'];
 				update_user_meta( $user_id, 'patient_first_name', $patient_first_name );
 			}
 			if ( !empty( $_POST['patient_last_name'] ) ) {

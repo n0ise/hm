@@ -30,7 +30,10 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <!-- </a> -->
         </div>
         <!-- checking if logged in and show the whole nav header -->
-        <?php if(is_user_logged_in()) { ?>
+        <?php if(is_user_logged_in() && get_field('status', 'user_' . $current_user_id) != "Wartend") { ?>
+
+       
+      
         <div class="d-none d-lg-block">
             <nav class="hm-nav">
             </nav>
@@ -66,9 +69,14 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 
         </div>
     </div>
-    <?php } else {
+    <?php } else { ?>
                 //TODO something? 
-                     } ?>
+
+
+                <?php header("Refresh:0; url=/admin-dashboard"); ?>
+
+
+                <?php   } ?>
 </header>
 
 <nav class="hm-offcanvas">
