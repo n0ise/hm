@@ -13,7 +13,7 @@
     <div class="container">
         <div class="hm-content">
 
-            <div class="h2 mb-5">Nutzer hinzufügen/editieren</div>
+            <div class="h2 mb-5">Nutzer bearbeiten</div>
 
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {

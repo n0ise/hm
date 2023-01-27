@@ -207,25 +207,30 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         Es wurde kein Medikationsplan für diesen Benutzer hochgeladen.
                     </div>
                     <?php endif; ?>
-                    
+
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Status</div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
-                                <option value="" disabled selected>Bitte Wählen</option>
-                                <option selected><?php echo $record['status_prescription'] ?> </option>
-                                <?php 
-                                $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
-                                $selected_status_prescription = get_user_meta($_GET['user_id'], 'status_prescription', true);
-                                $key_status_prescription = array_search($selected_status_prescription, $status_prescription);
-                                unset($status_prescription[$key_status_prescription]);
-                                    foreach ($status_prescription as $value_status_prescription) {
-                                    echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
-                                    } 
-                                ?>
+                                <?php
+        $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
+        $selected_status_prescription = $record['status_prescription'];
+        if (!$selected_status_prescription) {
+            echo '<option value="" disabled selected>Bitte Wählen</option>';
+        }
+        foreach ($status_prescription as $value_status_prescription) {
+            if($selected_status_prescription == $value_status_prescription) {
+                echo '<option value="' . $value_status_prescription . '" selected>' . $value_status_prescription . '</option>';
+            } else {
+                echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
+            }
+        }
+    ?>
                             </select>
+
+
                             <label>Status</label>
                         </div>
                     </div>
