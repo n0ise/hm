@@ -812,8 +812,15 @@ class Hellomed_Custom_Login_Plugin {
 								$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
 								$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
 								$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
-				
 						}
+
+
+				
+
+						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+						// print("<pre>".print_r($arr3,true)."</pre>");
+						// die;
 
 						$listfilenamesarray2 = array();
 						$arr3 = array();
@@ -834,18 +841,23 @@ class Hellomed_Custom_Login_Plugin {
 							foreach($listfilenamesarray as $key=>$val)
 								{
 									$arr3['rezept_file'] = array_merge($val, $listfilenamesarray2[$key]);
+									$arr3['new_user_id']= $user_id;
 								}
 						}
 
 							else{
 								$arr3 = $listfilenamesarray;
+								$arr3['new_user_id']= $user_id;
 							}
 
+
+					
+
 						add_row('rezept_input', $arr3, 'user_'.$user_id);
-						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
-						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
-						// print("<pre>".print_r($arr3,true)."</pre>");
-						// die;
+						print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+						print("<pre>".print_r($arr3,true)."</pre>");
+						die;
 					}
 					
 
