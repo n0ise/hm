@@ -203,7 +203,7 @@ class Hellomed_Custom_Login_Plugin {
 		} 
 
 			elseif(in_array( 'admin_panel', (array) $user->roles )){
-				$redirect_url = home_url( '/admin-dashboard.php' );
+				$redirect_url = home_url( '/admin-dashboard' );
 				wp_redirect( $redirect_url );
 				exit;
 			}
@@ -217,11 +217,11 @@ class Hellomed_Custom_Login_Plugin {
 			else{
 				
 				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
-					$redirect_url = home_url( '/os-medikationsplan' ) ;
+					$redirect_url = home_url( '/medikationsplan' ) ;
 					
 				 }
 				 else{
-					$redirect_url = home_url( '/os-willkommen' ) ;
+					$redirect_url = home_url( '/willkommen' ) ;
 				 }
 			}
 		
@@ -854,10 +854,10 @@ class Hellomed_Custom_Login_Plugin {
 					
 
 						add_row('rezept_input', $arr3, 'user_'.$user_id);
-						print("<pre>".print_r($listfilenamesarray,true)."</pre>");
-						print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
-						print("<pre>".print_r($arr3,true)."</pre>");
-						die;
+						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+						// print("<pre>".print_r($arr3,true)."</pre>");
+						// die;
 					}
 					
 
@@ -885,7 +885,7 @@ class Hellomed_Custom_Login_Plugin {
 
 			// TODO // TODO // TODO // TODO // TODO 
 			//remmber to revert
-			update_user_meta( $user_id, 'has_completed_onboarding', 0 );
+			update_user_meta( $user_id, 'has_completed_onboarding', 1 );
 
 			wp_redirect( $redirect_url );
 			exit;
@@ -1159,7 +1159,7 @@ class Hellomed_Custom_Login_Plugin {
 			else{
 				
 				if ( get_field('status', 'user_' .$user_id) == 'Aktiv'){
-					$redirect_url = home_url( '/os-medikationsplan' ) ;
+					$redirect_url = home_url( '/medikationsplan' ) ;
 				 }
 				 else{
 					$redirect_url = home_url( '/willkommen' ) ;
