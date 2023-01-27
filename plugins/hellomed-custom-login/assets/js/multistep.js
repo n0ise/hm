@@ -5,29 +5,29 @@
   $(".next").on("click", function () {
 
   
-    // var nextstep = false;
+    var nextstep = false;
   
-    // if (step == 1) {
+    if (step == 1) {
 
-    //   nextstep = checkForm("step1");
-    // } 
+      nextstep = checkForm("step1");
+    } 
     
-    // else if (step == 2) {
+    else if (step == 2) {
    
-    //   nextstep = checkForm("step2");
-    // } 
+      nextstep = checkForm("step2");
+    } 
     
-    // else if (step == 3) {
-    //   nextstep = checkForm("step3");
-    // } 
+    else if (step == 3) {
+      nextstep = checkForm("step3");
+    } 
     
-    // else if (step == 4) {
-    //   nextstep = checkForm("step4");
-    // } 
+    else if (step == 4) {
+      nextstep = checkForm("step4");
+    } 
   
-    // else {
+    else {
       nextstep = true;
-    //  }
+      }
   
     if (nextstep == true) {
       if (step < $(".step").length) {

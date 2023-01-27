@@ -146,7 +146,7 @@ wichtige Rückfragen erreichbar sind."> </i>
                 </div>
                 <div class="col-4 pe-0">
                     <div class="form-floating">
-                        <input required id="plz" name="postcode" type="text" class="form-control" placeholder=" " />
+                        <input required id="plz" name="postcode" maxlength="5" type="text" class="form-control" placeholder=" " />
                         <label for="plz">Postleitzahl</label>
                         <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                     </div>
@@ -177,9 +177,7 @@ wichtige Rückfragen erreichbar sind."> </i>
                 </div>
                 <div class="col-12">
 
-                    <!-- <a href class="d-block text-center back btn">Zurück</a>   -->
-
-                    <button type="button" class="action back btn btn-sm btn-outline-warning">Zurück</button>
+                    <button type="button" class="action back btn btn-sm">Zurück</button>
                 </div>
             </div>
         </div>
@@ -237,48 +235,36 @@ verschickt oder hochgeladen werden."> </i>
                 <div class="col-12" id="rezepthochladen"  style="display: none;">
                     <label id="rezeptlabel" class="form-label">Rezept hochladen</label>
                             <div id="drag-drop-area"></div> 
-                        <!-- Uploaded files list -->
-                        <div class="uploaded-files" style="display:none;">
-                            <ol></ol>
-                        </div>
-                        <div class="col-12" style="display: block;">
-                        </div>
                 </div>
 
 
-
-
-
-                <div class="col-12">
+                <div class="col-12" id="medplanhochlade" style="display: none;">
                     <label class="form-label">Liegt Ihnen ein Medikationsplan vor?</label>
                     <div class="btn-group d-flex">
                         <input type="radio" class="btn-check" name="medplan_uploaded" value="1" id="medplanRadioDefault1" autocomplete="off" onclick="ihavemedplan();" />
-                        <label class="btn btn-outline-primary" for="medplanRadioDefault1">Ja</label>
+                        <label class="btn btn-outline-primary" for="medplanRadioDefault1">Ja, liegt vor</label>
                         <input type="radio" class="btn-check" name="medplan_uploaded" value="0" id="medplanRadioDefault2" autocomplete="off" checked onclick="idonthavemedplan();" />
-                        <label class="btn btn-outline-primary" for="medplanRadioDefault2">Nein</label>
+                        <label class="btn btn-outline-primary" for="medplanRadioDefault2">Nein, noch nicht</label>
                     </div>
                 </div>
 
                 <div class="col-12" id="medplanhochladen"  style="display: none;">
                     <label id="medplanlabel" class="form-label">Medplan hochladen</label>
-                            <div id="drag-drop-area"></div> 
-                        <!-- Uploaded files list -->
-                        <div class="uploaded-files" style="display:none;">
-                            <ol></ol>
-                        </div>
-                        <div class="col-12" style="display: block;">
-                        </div>
+                            <div id="drag-drop-area2"></div>    
                 </div>
 
 
-
+                            <!-- Uploaded files list -->
+                        <div class="uploaded-files" style="display:none;">
+                            <ol></ol>
+                        </div>
 
 
                 <div class="col-12">
                     <button type="button" id="submit-dropzone" class="next btn btn-primary btn-lg next3">Weiter</button>
                 </div>
                 <div class="col-12">
-                    <button type="button" class="action back btn btn-sm btn-outline-warning">Zurück</button>
+                    <button type="button" class="action back btn btn-sm ">Zurück</button>
                 </div>
             </div>
         </div>
@@ -313,13 +299,6 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                     <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
                 </div>
 
-                <!-- <div class="col-12">
-                    <div class="form-floating">
-                        <input id="krankenversicherung" name="insurance_company" type="text" class="form-control" placeholder=" " />
-                        <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
-                    </div>
-                </div> -->
-
                 <div class="col-12">
                     <div class="form-floating">
                         <input required id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
@@ -344,7 +323,7 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                     <label for="hideInputLog" id="labelsubmit" class="btn btn-primary btn-lg">Anmeldung abschließen</label>
                 </div>
                 <div class="col-12">
-                    <button type="button" class="action back btn btn-sm btn-outline-warning">Zurück</button>
+                    <button type="button" class="action back btn btn-sm ">Zurück</button>
                 </div>
             </div>
         </div>
@@ -360,316 +339,650 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
 <script src="https://ui.hellomed.com/src/v1.0/js/bootstrap-datepicker.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://ui.hellomed.com/src/v1.0/js/bootstrap-datepicker.de.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
 
-<!-- <button type="button" class="btn btn-primary btn-lg">Weiter</button> -->
-<!-- <button id="save" type="submit" name="submit" class="action submit btn btn-primary btn-lg" style="display: none">Submit</button> -->
+(function($) {
+  $.fn.inputFilter = function(callback, errMsg) {
+    return this.on("input keydown keyup mousedown mouseup select contextmenu drop focusout", function(e) {
+      if (callback(this.value)) {
+        // Accepted value
+        if (["keydown","mousedown","focusout"].indexOf(e.type) >= 0){
+          $(this).removeClass("is-invalid");
+          this.setCustomValidity("");
+        }
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        // Rejected value - restore the previous one
+        $(this).addClass("is-invalid");
+        this.setCustomValidity(errMsg);
+        this.reportValidity();
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        // Rejected value - nothing to restore
+        this.value = "";
+      }
+    });
+  };
+}(jQuery));
 
 
-  <!-- <div class="card-footer">
-      <button class="action back btn btn-sm btn-outline-warning" style="display: none">Back</button> -->
-    <!-- <button class="action next btn  btn-primary btn-lg float-end">Next</button>
-     <button class="action submit btn btn-sm btn-outline-success float-end" style="display: none">Submit</button> -->
-    <!-- </div> -->
+$("#plz").inputFilter(function(value) {
+  return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 100000); }, "Must be a postcode");
+
+$("#telefon").inputFilter(function(value) {
+    return /^-?\d*[+]?\d*$/.test(value); }, "Must be a phone number");
+
+
+//   [0-9]*\/*(\+49)*[ ]*(\([0-9]+\))*([ ]*(-|–)*[ ]*[0-9]+)*
+
+//     \+?[0-9]+([0-9]|\/|\(|\)|\-| ){10,}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 
 
     <script type="module">
 
-                            if (screen && screen.width / screen.height > 1) {
-                                    var heightview = 425;
-                            }
-                            else {
-                                var heightview = 650;
-                            }
-                     
-                        import {Uppy, Dashboard, XHRUpload, Compressor, Webcam, ProgressBar} from "https://ui.hellomed.com/src/v1.0/js/uppy.min.mjs"
-                       
-                        var uppy = new Uppy(
-                            {
-                               
-                                restrictions: {
-                                allowedFileTypes: ['image/*', '.pdf'],
-                                },
-                            
+        if (screen && screen.width / screen.height > 1) {
+            var heightview = 425;
+        }
+        else {
+        var heightview = 650;
+        }
 
-                                onBeforeFileAdded: (file) => {
-                                const name = Date.now() + '_' + file.name
-                                Object.defineProperty(file.data, 'name', {
-                                writable: true,
-                                value: name
-                                });
-                                return { ...file, name, meta: { ...file.meta, name } }
-                                },
-                             
-                            // autoProceed: true,
-                            locale: {
+        import {
+        Uppy,
+        Dashboard,
+        XHRUpload,
+        Compressor,
+        Webcam,
+        ProgressBar
+        } from "https://ui.hellomed.com/src/v1.0/js/uppy.min.mjs"
 
-                            strings: {
-                                addBulkFilesFailed: {
-                                        '0': 'Das Hinzufügen einer Datei ist aufgrund eines internen Fehlers fehlgeschlagen',
-                                        '1': 'Das Hinzufügen von %{smart_count} Dateien ist aufgrund eines internen Fehlers fehlgeschlagen',
-                                    },
-                                    addingMoreFiles: 'Dateien hinzufügen',
-                                    addMore: 'Mehr hinzufügen',
-                                    addMoreFiles: 'Dateien hinzufügen',
-                                    allFilesFromFolderNamed: 'Alle Dateien vom Ordner %{name}',
-                                    allowAccessDescription: 'Um Bilder oder Videos mit Ihrer Kamera aufzunehmen, erlauben Sie dieser Website bitte den Zugriff auf Ihre Kamera.',
-                                    allowAccessTitle: 'Bitte erlauben Sie Zugriff auf Ihre Kamera',
-                                    aspectRatioLandscape: 'Zuschneiden auf Querformat (16:9)',
-                                    aspectRatioPortrait: 'Zuschneiden auf Hochformat (9:16)',
-                                    aspectRatioSquare: 'Zuschneiden auf Quadrat',
-                                    authenticateWith: 'Mit %{pluginName} verbinden',
-                                    authenticateWithTitle: 'Bitte authentifizieren Sie sich mit %{pluginName}, um Dateien auszuwählen',
-                                    back: 'Zurück',
-                                    backToSearch: 'Zurück zur Suche',
-                                    browse: 'durchsuchen',
-                                    browseFiles: 'Dateien durchsuchen',
-                                    browseFolders: 'Ordner durchsuchen',
-                                    cancel: 'Abbrechen',
-                                    cancelUpload: 'Hochladen abbrechen',
-                                    chooseFiles: 'Dateien auswählen',
-                                    closeModal: 'Fenster schließen',
-                                    companionError: 'Verbindung zu Companion fehlgeschlagen',
-                                    companionUnauthorizeHint: 'Um die Autorisierung für Ihr %{provider} Konto aufzuheben, gehen Sie bitte zu %{url}',
-                                    complete: 'Fertig',
-                                    connectedToInternet: 'Mit dem Internet verbunden',
-                                    copyLink: 'Link kopieren',
-                                    copyLinkToClipboardFallback: 'Untenstehende URL kopieren',
-                                    copyLinkToClipboardSuccess: 'Link in die Zwischenablage kopiert',
-                                    creatingAssembly: 'Das Hochladen wird vorbereiten...',
-                                    creatingAssemblyFailed: 'Transloadit: Assembly konnte nicht erstellt werden',
-                                    dashboardTitle: 'Hochladen von Dateien',
-                                    dashboardWindowTitle: 'Hochladen von Dateien (ESC drücken zum Schließen)',
-                                    dataUploadedOfTotal: '%{complete} von %{total}',
-                                    discardRecordedFile: 'Aufgenommene Datei verwerfen',
-                                    done: 'Abgeschlossen',
-                                    dropHereOr: 'Dateien hier ablegen oder %{browse}',
-                                    dropHint: 'Dateien hier ablegen',
-                                    dropPasteBoth: 'Dateien hier ablegen/einfügen, %{browseFiles} oder %{browseFolders}',
-                                    dropPasteFiles: 'Dateien hier ablegen/einfügen oder %{browseFiles}',
-                                    dropPasteFolders: 'Dateien hier ablegen/einfügen oder %{browseFolders}',
-                                    dropPasteImportBoth: 'Dateien hier ablegen/einfügen, %{browse} oder von folgenden Quellen importieren:',
-                                    dropPasteImportFiles: 'Dateien hier ablegen, %{browseFiles} oder importieren von:',
-                                    dropPasteImportFolders: 'Dateien hier ablegen/einfügen, %{browseFolders} oder von folgenden Quellen importieren:',
-                                    editFile: 'Datei bearbeiten',
-                                    editFileWithFilename: 'Datei %{file} bearbeiten',
-                                    editing: '%{file} bearbeiten',
-                                    emptyFolderAdded: 'Keine Dateien hinzugefügt, da der Ordner leer war',
-                                    encoding: 'Kodieren...',
-                                    enterCorrectUrl: 'Falsche URL: Bitte stellen Sie sicher, dass Sie einen direkten Link zu einer Datei eingeben',
-                                    enterTextToSearch: 'Text zum Suchen von Bildern eingeben',
-                                    enterUrlToImport: 'URL zum Importieren einer Datei eingeben',
-                                    exceedsSize: 'Datei %{file} ist größer als die maximal erlaubte Dateigröße von %{size}',
-                                    failedToFetch: 'Companion konnte diese URL nicht verarbeiten - stellen Sie bitte sicher, dass sie korrekt ist',
-                                    failedToUpload: 'Fehler beim Hochladen der Datei %{file}',
-                                    filesUploadedOfTotal: {
-                                        '0': '%{complete} von %{smart_count} Datei hochgeladen',
-                                        '1': '%{complete} von %{smart_count} Dateien hochgeladen',
-                                    },
-                                    filter: 'Filter',
-                                    finishEditingFile: 'Bearbeitung beenden',
-                                    flipHorizontal: 'Horizontal spiegeln',
-                                    folderAdded: {
-                                        '0': 'Eine Datei von %{folder} hinzugefügt',
-                                        '1': '%{smart_count} Dateien von %{folder} hinzugefügt',
-                                    },
-                                    folderAlreadyAdded: 'Der Ordner "%{folder}" wurde bereits hinzugefügt',
-                                    generatingThumbnails: 'Erstellen von Miniaturansichten...',
-                                    import: 'Importieren',
-                                    importFiles: 'Importiere Dateien von:',
-                                    importFrom: 'Importieren von %{name}',
-                                    inferiorSize: 'Diese Datei ist kleiner als die minimal erlaubte Dateigröße von %{size}',
-                                    loading: 'Laden...',
-                                    logOut: 'Abmelden',
-                                    micDisabled: 'Zugriff auf Mikrofon von Benutzer abgelehnt',
-                                    missingRequiredMetaField: 'Fehlende erforderliche Meta-Felder',
-                                    missingRequiredMetaFieldOnFile: 'Fehlende erforderliche Meta-Felder in %{fileName}',
-                                    myDevice: 'Mein Gerät',
-                                    noCameraDescription: 'Bitte Kamera anschließen, um Bilder oder Videos aufzunehmen',
-                                    noCameraTitle: 'Kamera nicht verfügbar',
-                                    noDuplicates: 'Datei \'%{fileName}\' existiert bereits und kann nicht erneut hinzugefügt werden',
-                                    noFilesFound: 'Sie haben hier keine Dateien oder Ordner',
-                                    noInternetConnection: 'Keine Internetverbindung',
-                                    noMoreFilesAllowed: 'Während der Upload läuft, können keine weiteren Dateien hinzugefügt werden',
-                                    openFolderNamed: 'Ordner %{name} öffnen',
-                                    pause: 'Pausieren',
-                                    paused: 'Pausiert',
-                                    pauseUpload: 'Hochladen pausieren',
-                                    pluginNameBox: 'Box',
-                                    pluginNameCamera: 'Kamera',
-                                    pluginNameDropbox: 'Dropbox',
-                                    pluginNameFacebook: 'Facebook',
-                                    pluginNameGoogleDrive: 'Google Drive',
-                                    pluginNameInstagram: 'Instagram',
-                                    pluginNameOneDrive: 'OneDrive',
-                                    pluginNameZoom: 'Zoom',
-                                    poweredBy: 'Powered by %{uppy}',
-                                    processingXFiles: {
-                                        '0': 'Eine Datei verarbeiten',
-                                        '1': '%{smart_count} Dateien verarbeiten',
-                                    },
-                                    recording: 'Aufnahme',
-                                    recordingLength: 'Aufnahmedauer %{recording_length}',
-                                    recordingStoppedMaxSize: 'Die Aufnahme wurde gestoppt, weil die Dateigröße das Limit überschritten hat',
-                                    recoveredAllFiles: 'Wir haben alle Dateien wiederhergestellt. Sie können mit dem Hochladen fortfahren.',
-                                    recoveredXFiles: {
-                                        '0': 'Wir konnten eine Datei nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
-                                        '1': 'Wir konnten %{smart_count} Dateien nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
-                                    },
-                                    removeFile: 'Datei entfernen',
-                                    reSelect: 'Erneut auswählen',
-                                    resetFilter: 'Filter zurücksetzen',
-                                    resume: 'Fortsetzen',
-                                    resumeUpload: 'Hochladen fortsetzen',
-                                    retry: 'Erneut versuchen',
-                                    retryUpload: 'Hochladen erneut versuchen',
-                                    revert: 'Rückgängig machen',
-                                    rotate: 'Drehen',
-                                    save: 'Speichern',
-                                    saveChanges: 'Änderungen speichern',
-                                    searchImages: 'Suche nach Bildern',
-                                    selectX: {
-                                        '0': 'Wählen Sie %{smart_count}',
-                                        '1': 'Wählen Sie %{smart_count}',
-                                    },
-                                    sessionRestored: '',
-                                    smile: 'Bitte lächeln!',
-                                    startCapturing: 'Bildschirmaufnahme starten',
-                                    startRecording: 'Videoaufnahme starten',
-                                    stopCapturing: 'Bildschirmaufnahme stoppen',
-                                    stopRecording: 'Videoaufnahme stoppen',
-                                    streamActive: 'Stream aktiv',
-                                    streamPassive: 'Stream passiv',
-                                    submitRecordedFile: 'Aufgezeichnete Datei verwenden',
-                                    takePicture: 'Ein Foto machen',
-                                    timedOut: 'Upload für %{seconds} Sekunden stehen geblieben, breche ab.',
-                                    upload: 'Hochladen',
-                                    uploadComplete: 'Hochladen abgeschlossen',
-                                    uploadFailed: 'Hochladen fehlgeschlagen',
-                                    uploading: 'Wird hochgeladen',
-                                    uploadingXFiles: {
-                                        '0': 'Eine Datei wird hochgeladen',
-                                        '1': '%{smart_count} Dateien werden hochgeladen',
-                                    },
-                                    uploadPaused: 'Hochladen pausiert',
-                                    uploadXFiles: {
-                                        '0': 'Eine Datei hochladen',
-                                        '1': '%{smart_count} Dateien hochladen',
-                                    },
-                                    uploadXNewFiles: {
-                                        '0': '+%{smart_count} Datei hochladen',
-                                        '1': '+%{smart_count} Dateien hochladen',
-                                    },
-                                    xFilesSelected: {
-                                        '0': 'Eine Datei ausgewählt',
-                                        '1': '%{smart_count} Dateien ausgewählt',
-                                    },
-                                    xMoreFilesAdded: {
-                                        '0': 'Eine weitere Datei hinzugefügt',
-                                        '1': '%{smart_count} weitere Dateien hinzugefügt',
-                                    },
-                                    xTimeLeft: '%{time} verbleibend',
-                                    youCanOnlyUploadFileTypes: 'Sie können nur folgende Dateitypen hochladen: %{types}',
-                                    youCanOnlyUploadX: {
-                                        '0': 'Sie können nur eine Datei hochladen',
-                                        '1': 'Sie können nur %{smart_count} Dateien hochladen',
-                                    },
-                                    youHaveToAtLeastSelectX: {
-                                        '0': 'Sie müssen mindestens eine Datei auswählen',
-                                        '1': 'Sie müssen mindestens %{smart_count} Dateien auswählen',
-                                    },
-                                    zoomIn: 'Vergrößern',
-                                    zoomOut: 'Verkleinern',  
-                            }
+        var uppy = new Uppy({
 
-                             }
-                            //     onBeforeFileAdded: (currentFile, files) => {
-                            //      const modifiedFile = {
-                            //     ...currentFile,
-                            //     name:  'yourfilename' + Date.now()
-                            //     }
-                            // return modifiedFile
-                            // }
+            restrictions: {
+                allowedFileTypes: ['image/*', '.pdf'],
+            },
+
+            onBeforeFileAdded: (file) => {
+                const name = Date.now() + '_' + file.name
+                Object.defineProperty(file.data, 'name', {
+                    writable: true,
+                    value: name
+                });
+                return {
+                    ...file,
+                    name,
+                    meta: {
+                        ...file.meta,
+                        name
+                    }
+                }
+            },
+            locale: {
+
+                strings: {
+                    addBulkFilesFailed: {
+                        '0': 'Das Hinzufügen einer Datei ist aufgrund eines internen Fehlers fehlgeschlagen',
+                        '1': 'Das Hinzufügen von %{smart_count} Dateien ist aufgrund eines internen Fehlers fehlgeschlagen',
+                    },
+                    addingMoreFiles: 'Dateien hinzufügen',
+                    addMore: 'Mehr hinzufügen',
+                    addMoreFiles: 'Dateien hinzufügen',
+                    allFilesFromFolderNamed: 'Alle Dateien vom Ordner %{name}',
+                    allowAccessDescription: 'Um Bilder oder Videos mit Ihrer Kamera aufzunehmen, erlauben Sie dieser Website bitte den Zugriff auf Ihre Kamera.',
+                    allowAccessTitle: 'Bitte erlauben Sie Zugriff auf Ihre Kamera',
+                    aspectRatioLandscape: 'Zuschneiden auf Querformat (16:9)',
+                    aspectRatioPortrait: 'Zuschneiden auf Hochformat (9:16)',
+                    aspectRatioSquare: 'Zuschneiden auf Quadrat',
+                    authenticateWith: 'Mit %{pluginName} verbinden',
+                    authenticateWithTitle: 'Bitte authentifizieren Sie sich mit %{pluginName}, um Dateien auszuwählen',
+                    back: 'Zurück',
+                    backToSearch: 'Zurück zur Suche',
+                    browse: 'durchsuchen',
+                    browseFiles: 'Dateien durchsuchen',
+                    browseFolders: 'Ordner durchsuchen',
+                    cancel: 'Abbrechen',
+                    cancelUpload: 'Hochladen abbrechen',
+                    chooseFiles: 'Dateien auswählen',
+                    closeModal: 'Fenster schließen',
+                    companionError: 'Verbindung zu Companion fehlgeschlagen',
+                    companionUnauthorizeHint: 'Um die Autorisierung für Ihr %{provider} Konto aufzuheben, gehen Sie bitte zu %{url}',
+                    complete: 'Fertig',
+                    connectedToInternet: 'Mit dem Internet verbunden',
+                    copyLink: 'Link kopieren',
+                    copyLinkToClipboardFallback: 'Untenstehende URL kopieren',
+                    copyLinkToClipboardSuccess: 'Link in die Zwischenablage kopiert',
+                    creatingAssembly: 'Das Hochladen wird vorbereiten...',
+                    creatingAssemblyFailed: 'Transloadit: Assembly konnte nicht erstellt werden',
+                    dashboardTitle: 'Hochladen von Dateien',
+                    dashboardWindowTitle: 'Hochladen von Dateien (ESC drücken zum Schließen)',
+                    dataUploadedOfTotal: '%{complete} von %{total}',
+                    discardRecordedFile: 'Aufgenommene Datei verwerfen',
+                    done: 'Abgeschlossen',
+                    dropHereOr: 'Dateien hier ablegen oder %{browse}',
+                    dropHint: 'Dateien hier ablegen',
+                    dropPasteBoth: 'Dateien hier ablegen/einfügen, %{browseFiles} oder %{browseFolders}',
+                    dropPasteFiles: 'Dateien hier ablegen/einfügen oder %{browseFiles}',
+                    dropPasteFolders: 'Dateien hier ablegen/einfügen oder %{browseFolders}',
+                    dropPasteImportBoth: 'Dateien hier ablegen/einfügen, %{browse} oder von folgenden Quellen importieren:',
+                    dropPasteImportFiles: 'Dateien hier ablegen, %{browseFiles} oder importieren von:',
+                    dropPasteImportFolders: 'Dateien hier ablegen/einfügen, %{browseFolders} oder von folgenden Quellen importieren:',
+                    editFile: 'Datei bearbeiten',
+                    editFileWithFilename: 'Datei %{file} bearbeiten',
+                    editing: '%{file} bearbeiten',
+                    emptyFolderAdded: 'Keine Dateien hinzugefügt, da der Ordner leer war',
+                    encoding: 'Kodieren...',
+                    enterCorrectUrl: 'Falsche URL: Bitte stellen Sie sicher, dass Sie einen direkten Link zu einer Datei eingeben',
+                    enterTextToSearch: 'Text zum Suchen von Bildern eingeben',
+                    enterUrlToImport: 'URL zum Importieren einer Datei eingeben',
+                    exceedsSize: 'Datei %{file} ist größer als die maximal erlaubte Dateigröße von %{size}',
+                    failedToFetch: 'Companion konnte diese URL nicht verarbeiten - stellen Sie bitte sicher, dass sie korrekt ist',
+                    failedToUpload: 'Fehler beim Hochladen der Datei %{file}',
+                    filesUploadedOfTotal: {
+                        '0': '%{complete} von %{smart_count} Datei hochgeladen',
+                        '1': '%{complete} von %{smart_count} Dateien hochgeladen',
+                    },
+                    filter: 'Filter',
+                    finishEditingFile: 'Bearbeitung beenden',
+                    flipHorizontal: 'Horizontal spiegeln',
+                    folderAdded: {
+                        '0': 'Eine Datei von %{folder} hinzugefügt',
+                        '1': '%{smart_count} Dateien von %{folder} hinzugefügt',
+                    },
+                    folderAlreadyAdded: 'Der Ordner "%{folder}" wurde bereits hinzugefügt',
+                    generatingThumbnails: 'Erstellen von Miniaturansichten...',
+                    import: 'Importieren',
+                    importFiles: 'Importiere Dateien von:',
+                    importFrom: 'Importieren von %{name}',
+                    inferiorSize: 'Diese Datei ist kleiner als die minimal erlaubte Dateigröße von %{size}',
+                    loading: 'Laden...',
+                    logOut: 'Abmelden',
+                    micDisabled: 'Zugriff auf Mikrofon von Benutzer abgelehnt',
+                    missingRequiredMetaField: 'Fehlende erforderliche Meta-Felder',
+                    missingRequiredMetaFieldOnFile: 'Fehlende erforderliche Meta-Felder in %{fileName}',
+                    myDevice: 'Mein Gerät',
+                    noCameraDescription: 'Bitte Kamera anschließen, um Bilder oder Videos aufzunehmen',
+                    noCameraTitle: 'Kamera nicht verfügbar',
+                    noDuplicates: 'Datei \'%{fileName}\' existiert bereits und kann nicht erneut hinzugefügt werden',
+                    noFilesFound: 'Sie haben hier keine Dateien oder Ordner',
+                    noInternetConnection: 'Keine Internetverbindung',
+                    noMoreFilesAllowed: 'Während der Upload läuft, können keine weiteren Dateien hinzugefügt werden',
+                    openFolderNamed: 'Ordner %{name} öffnen',
+                    pause: 'Pausieren',
+                    paused: 'Pausiert',
+                    pauseUpload: 'Hochladen pausieren',
+                    pluginNameBox: 'Box',
+                    pluginNameCamera: 'Kamera',
+                    pluginNameDropbox: 'Dropbox',
+                    pluginNameFacebook: 'Facebook',
+                    pluginNameGoogleDrive: 'Google Drive',
+                    pluginNameInstagram: 'Instagram',
+                    pluginNameOneDrive: 'OneDrive',
+                    pluginNameZoom: 'Zoom',
+                    poweredBy: 'Powered by %{uppy}',
+                    processingXFiles: {
+                        '0': 'Eine Datei verarbeiten',
+                        '1': '%{smart_count} Dateien verarbeiten',
+                    },
+                    recording: 'Aufnahme',
+                    recordingLength: 'Aufnahmedauer %{recording_length}',
+                    recordingStoppedMaxSize: 'Die Aufnahme wurde gestoppt, weil die Dateigröße das Limit überschritten hat',
+                    recoveredAllFiles: 'Wir haben alle Dateien wiederhergestellt. Sie können mit dem Hochladen fortfahren.',
+                    recoveredXFiles: {
+                        '0': 'Wir konnten eine Datei nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
+                        '1': 'Wir konnten %{smart_count} Dateien nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
+                    },
+                    removeFile: 'Datei entfernen',
+                    reSelect: 'Erneut auswählen',
+                    resetFilter: 'Filter zurücksetzen',
+                    resume: 'Fortsetzen',
+                    resumeUpload: 'Hochladen fortsetzen',
+                    retry: 'Erneut versuchen',
+                    retryUpload: 'Hochladen erneut versuchen',
+                    revert: 'Rückgängig machen',
+                    rotate: 'Drehen',
+                    save: 'Speichern',
+                    saveChanges: 'Änderungen speichern',
+                    searchImages: 'Suche nach Bildern',
+                    selectX: {
+                        '0': 'Wählen Sie %{smart_count}',
+                        '1': 'Wählen Sie %{smart_count}',
+                    },
+                    sessionRestored: '',
+                    smile: 'Bitte lächeln!',
+                    startCapturing: 'Bildschirmaufnahme starten',
+                    startRecording: 'Videoaufnahme starten',
+                    stopCapturing: 'Bildschirmaufnahme stoppen',
+                    stopRecording: 'Videoaufnahme stoppen',
+                    streamActive: 'Stream aktiv',
+                    streamPassive: 'Stream passiv',
+                    submitRecordedFile: 'Aufgezeichnete Datei verwenden',
+                    takePicture: 'Ein Foto machen',
+                    timedOut: 'Upload für %{seconds} Sekunden stehen geblieben, breche ab.',
+                    upload: 'Hochladen',
+                    uploadComplete: 'Hochladen abgeschlossen',
+                    uploadFailed: 'Hochladen fehlgeschlagen',
+                    uploading: 'Wird hochgeladen',
+                    uploadingXFiles: {
+                        '0': 'Eine Datei wird hochgeladen',
+                        '1': '%{smart_count} Dateien werden hochgeladen',
+                    },
+                    uploadPaused: 'Hochladen pausiert',
+                    uploadXFiles: {
+                        '0': 'Eine Datei hochladen',
+                        '1': '%{smart_count} Dateien hochladen',
+                    },
+                    uploadXNewFiles: {
+                        '0': '+%{smart_count} Datei hochladen',
+                        '1': '+%{smart_count} Dateien hochladen',
+                    },
+                    xFilesSelected: {
+                        '0': 'Eine Datei ausgewählt',
+                        '1': '%{smart_count} Dateien ausgewählt',
+                    },
+                    xMoreFilesAdded: {
+                        '0': 'Eine weitere Datei hinzugefügt',
+                        '1': '%{smart_count} weitere Dateien hinzugefügt',
+                    },
+                    xTimeLeft: '%{time} verbleibend',
+                    youCanOnlyUploadFileTypes: 'Sie können nur folgende Dateitypen hochladen: %{types}',
+                    youCanOnlyUploadX: {
+                        '0': 'Sie können nur eine Datei hochladen',
+                        '1': 'Sie können nur %{smart_count} Dateien hochladen',
+                    },
+                    youHaveToAtLeastSelectX: {
+                        '0': 'Sie müssen mindestens eine Datei auswählen',
+                        '1': 'Sie müssen mindestens %{smart_count} Dateien auswählen',
+                    },
+                    zoomIn: 'Vergrößern',
+                    zoomOut: 'Verkleinern',
+                }
+
+            }
+
+        })
 
 
-                            })
 
-                            .use(Dashboard, {
-                                inline: true,
-                                height: heightview,
-                                proudlyDisplayPoweredByUppy:false,
-                                target: '#drag-drop-area',
-                                doneButtonHandler: null,
-                                showRemoveButtonAfterComplete: true,
-                                hideUploadButton: true,
+        .use(Dashboard, {
+            inline: true,
+            height: heightview,
+            proudlyDisplayPoweredByUppy: false,
+            target: '#drag-drop-area',
+            doneButtonHandler: null,
+            showRemoveButtonAfterComplete: true,
+            hideUploadButton: true,
+        })
 
-                            })
-                        
-                            .use(Webcam, { 
-                                target: Dashboard,
-                                onBeforeSnapshot: () => Promise.resolve(),
-                                countdown: false,
-                                modes: [
-                                    'picture',
-                                ],
-                                mirror: false,
-                                showVideoSourceDropdown: false,
-                                /** @deprecated Use `videoConstraints.facingMode` instead. */
-                                facingMode: 'environment',
-                                videoConstraints: {
-                                    facingMode: 'environment',
-                                },
-                                preferredImageMimeType: null,
-                                preferredVideoMimeType: null,
-                                showRecordingLength: false,
-                                mobileNativeCamera: false,
-                                locale: {},
-                            })
+        .use(Webcam, {
+            target: Dashboard,
+            onBeforeSnapshot: () => Promise.resolve(),
+            countdown: false,
+            modes: [
+                'picture',
+            ],
+            mirror: false,
+            showVideoSourceDropdown: false,
+            /** @deprecated Use `videoConstraints.facingMode` instead. */
+            facingMode: 'environment',
+            videoConstraints: {
+                facingMode: 'environment',
+            },
+            preferredImageMimeType: null,
+            preferredVideoMimeType: null,
+            showRecordingLength: false,
+            mobileNativeCamera: false,
+            locale: {},
+        })
 
-                            // .use(Compressor, {
-                            //     quality: 0.6,
-                            // })
-                    
-                            .use(XHRUpload, {
-                                endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
-                                fieldName: 'my_file',
-                            })
+        .use(XHRUpload, {
+            endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
+            fieldName: 'my_file',
+        })
 
-                            .use(ProgressBar, { 
-                                target: '.for-ProgressBar', 
-                                hideAfterFinish: true, 
-                            });
+        .use(ProgressBar, {
+            target: '.for-ProgressBar',
+            hideAfterFinish: true,
+        });
 
-                            uppy.on('upload-success', (file, response) => {
-                                // console.log(file.name);
-                                const url = response.uploadURL
-                                    const fileName = file.name
-                                    const li = document.createElement('li')
-                                    const input = document.createElement('input')
-                                    input.type = 'hidden'
-                                    input.value = fileName
-                                    input.name = 'listfilenames[]'
-                                    input.appendChild(document.createTextNode(fileName))
-                                    li.appendChild(input)
-                                    document.querySelector('.uploaded-files ol').appendChild(li)
-                            });
 
-                            $('#submit-dropzone').click(() => {
-                                uppy.upload();
-                            });
 
-                            uppy.on('complete', (result) => {
 
-                                $('#hideInputLog').prop('disabled', false);
-                                  $('#labelsubmit').text('Anmeldung abschließen');
-                                  document.getElementById('progressbarcustom').style.display = 'none';
-                          //  console.log('Upload complete! We’ve uploaded these files:', result.successful)
-                            })
-                    
 
-                        </script>
+
+        var uppy2 = new Uppy({
+
+                restrictions: {
+                    allowedFileTypes: ['image/*', '.pdf'],
+                },
+
+                onBeforeFileAdded: (file) => {
+                    const name = Date.now() + '_' + file.name
+                    Object.defineProperty(file.data, 'name', {
+                        writable: true,
+                        value: name
+                    });
+                    return {
+                        ...file,
+                        name,
+                        meta: {
+                            ...file.meta,
+                            name
+                        }
+                    }
+                },
+                locale: {
+
+                    strings: {
+                        addBulkFilesFailed: {
+                            '0': 'Das Hinzufügen einer Datei ist aufgrund eines internen Fehlers fehlgeschlagen',
+                            '1': 'Das Hinzufügen von %{smart_count} Dateien ist aufgrund eines internen Fehlers fehlgeschlagen',
+                        },
+                        addingMoreFiles: 'Dateien hinzufügen',
+                        addMore: 'Mehr hinzufügen',
+                        addMoreFiles: 'Dateien hinzufügen',
+                        allFilesFromFolderNamed: 'Alle Dateien vom Ordner %{name}',
+                        allowAccessDescription: 'Um Bilder oder Videos mit Ihrer Kamera aufzunehmen, erlauben Sie dieser Website bitte den Zugriff auf Ihre Kamera.',
+                        allowAccessTitle: 'Bitte erlauben Sie Zugriff auf Ihre Kamera',
+                        aspectRatioLandscape: 'Zuschneiden auf Querformat (16:9)',
+                        aspectRatioPortrait: 'Zuschneiden auf Hochformat (9:16)',
+                        aspectRatioSquare: 'Zuschneiden auf Quadrat',
+                        authenticateWith: 'Mit %{pluginName} verbinden',
+                        authenticateWithTitle: 'Bitte authentifizieren Sie sich mit %{pluginName}, um Dateien auszuwählen',
+                        back: 'Zurück',
+                        backToSearch: 'Zurück zur Suche',
+                        browse: 'durchsuchen',
+                        browseFiles: 'Dateien durchsuchen',
+                        browseFolders: 'Ordner durchsuchen',
+                        cancel: 'Abbrechen',
+                        cancelUpload: 'Hochladen abbrechen',
+                        chooseFiles: 'Dateien auswählen',
+                        closeModal: 'Fenster schließen',
+                        companionError: 'Verbindung zu Companion fehlgeschlagen',
+                        companionUnauthorizeHint: 'Um die Autorisierung für Ihr %{provider} Konto aufzuheben, gehen Sie bitte zu %{url}',
+                        complete: 'Fertig',
+                        connectedToInternet: 'Mit dem Internet verbunden',
+                        copyLink: 'Link kopieren',
+                        copyLinkToClipboardFallback: 'Untenstehende URL kopieren',
+                        copyLinkToClipboardSuccess: 'Link in die Zwischenablage kopiert',
+                        creatingAssembly: 'Das Hochladen wird vorbereiten...',
+                        creatingAssemblyFailed: 'Transloadit: Assembly konnte nicht erstellt werden',
+                        dashboardTitle: 'Hochladen von Dateien',
+                        dashboardWindowTitle: 'Hochladen von Dateien (ESC drücken zum Schließen)',
+                        dataUploadedOfTotal: '%{complete} von %{total}',
+                        discardRecordedFile: 'Aufgenommene Datei verwerfen',
+                        done: 'Abgeschlossen',
+                        dropHereOr: 'Dateien hier ablegen oder %{browse}',
+                        dropHint: 'Dateien hier ablegen',
+                        dropPasteBoth: 'Dateien hier ablegen/einfügen, %{browseFiles} oder %{browseFolders}',
+                        dropPasteFiles: 'Dateien hier ablegen/einfügen oder %{browseFiles}',
+                        dropPasteFolders: 'Dateien hier ablegen/einfügen oder %{browseFolders}',
+                        dropPasteImportBoth: 'Dateien hier ablegen/einfügen, %{browse} oder von folgenden Quellen importieren:',
+                        dropPasteImportFiles: 'Dateien hier ablegen, %{browseFiles} oder importieren von:',
+                        dropPasteImportFolders: 'Dateien hier ablegen/einfügen, %{browseFolders} oder von folgenden Quellen importieren:',
+                        editFile: 'Datei bearbeiten',
+                        editFileWithFilename: 'Datei %{file} bearbeiten',
+                        editing: '%{file} bearbeiten',
+                        emptyFolderAdded: 'Keine Dateien hinzugefügt, da der Ordner leer war',
+                        encoding: 'Kodieren...',
+                        enterCorrectUrl: 'Falsche URL: Bitte stellen Sie sicher, dass Sie einen direkten Link zu einer Datei eingeben',
+                        enterTextToSearch: 'Text zum Suchen von Bildern eingeben',
+                        enterUrlToImport: 'URL zum Importieren einer Datei eingeben',
+                        exceedsSize: 'Datei %{file} ist größer als die maximal erlaubte Dateigröße von %{size}',
+                        failedToFetch: 'Companion konnte diese URL nicht verarbeiten - stellen Sie bitte sicher, dass sie korrekt ist',
+                        failedToUpload: 'Fehler beim Hochladen der Datei %{file}',
+                        filesUploadedOfTotal: {
+                            '0': '%{complete} von %{smart_count} Datei hochgeladen',
+                            '1': '%{complete} von %{smart_count} Dateien hochgeladen',
+                        },
+                        filter: 'Filter',
+                        finishEditingFile: 'Bearbeitung beenden',
+                        flipHorizontal: 'Horizontal spiegeln',
+                        folderAdded: {
+                            '0': 'Eine Datei von %{folder} hinzugefügt',
+                            '1': '%{smart_count} Dateien von %{folder} hinzugefügt',
+                        },
+                        folderAlreadyAdded: 'Der Ordner "%{folder}" wurde bereits hinzugefügt',
+                        generatingThumbnails: 'Erstellen von Miniaturansichten...',
+                        import: 'Importieren',
+                        importFiles: 'Importiere Dateien von:',
+                        importFrom: 'Importieren von %{name}',
+                        inferiorSize: 'Diese Datei ist kleiner als die minimal erlaubte Dateigröße von %{size}',
+                        loading: 'Laden...',
+                        logOut: 'Abmelden',
+                        micDisabled: 'Zugriff auf Mikrofon von Benutzer abgelehnt',
+                        missingRequiredMetaField: 'Fehlende erforderliche Meta-Felder',
+                        missingRequiredMetaFieldOnFile: 'Fehlende erforderliche Meta-Felder in %{fileName}',
+                        myDevice: 'Mein Gerät',
+                        noCameraDescription: 'Bitte Kamera anschließen, um Bilder oder Videos aufzunehmen',
+                        noCameraTitle: 'Kamera nicht verfügbar',
+                        noDuplicates: 'Datei \'%{fileName}\' existiert bereits und kann nicht erneut hinzugefügt werden',
+                        noFilesFound: 'Sie haben hier keine Dateien oder Ordner',
+                        noInternetConnection: 'Keine Internetverbindung',
+                        noMoreFilesAllowed: 'Während der Upload läuft, können keine weiteren Dateien hinzugefügt werden',
+                        openFolderNamed: 'Ordner %{name} öffnen',
+                        pause: 'Pausieren',
+                        paused: 'Pausiert',
+                        pauseUpload: 'Hochladen pausieren',
+                        pluginNameBox: 'Box',
+                        pluginNameCamera: 'Kamera',
+                        pluginNameDropbox: 'Dropbox',
+                        pluginNameFacebook: 'Facebook',
+                        pluginNameGoogleDrive: 'Google Drive',
+                        pluginNameInstagram: 'Instagram',
+                        pluginNameOneDrive: 'OneDrive',
+                        pluginNameZoom: 'Zoom',
+                        poweredBy: 'Powered by %{uppy}',
+                        processingXFiles: {
+                            '0': 'Eine Datei verarbeiten',
+                            '1': '%{smart_count} Dateien verarbeiten',
+                        },
+                        recording: 'Aufnahme',
+                        recordingLength: 'Aufnahmedauer %{recording_length}',
+                        recordingStoppedMaxSize: 'Die Aufnahme wurde gestoppt, weil die Dateigröße das Limit überschritten hat',
+                        recoveredAllFiles: 'Wir haben alle Dateien wiederhergestellt. Sie können mit dem Hochladen fortfahren.',
+                        recoveredXFiles: {
+                            '0': 'Wir konnten eine Datei nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
+                            '1': 'Wir konnten %{smart_count} Dateien nicht vollständig wiederherstellen. Bitte wählen Sie sie erneut aus und fahren Sie dann mit dem Hochladen fort.',
+                        },
+                        removeFile: 'Datei entfernen',
+                        reSelect: 'Erneut auswählen',
+                        resetFilter: 'Filter zurücksetzen',
+                        resume: 'Fortsetzen',
+                        resumeUpload: 'Hochladen fortsetzen',
+                        retry: 'Erneut versuchen',
+                        retryUpload: 'Hochladen erneut versuchen',
+                        revert: 'Rückgängig machen',
+                        rotate: 'Drehen',
+                        save: 'Speichern',
+                        saveChanges: 'Änderungen speichern',
+                        searchImages: 'Suche nach Bildern',
+                        selectX: {
+                            '0': 'Wählen Sie %{smart_count}',
+                            '1': 'Wählen Sie %{smart_count}',
+                        },
+                        sessionRestored: '',
+                        smile: 'Bitte lächeln!',
+                        startCapturing: 'Bildschirmaufnahme starten',
+                        startRecording: 'Videoaufnahme starten',
+                        stopCapturing: 'Bildschirmaufnahme stoppen',
+                        stopRecording: 'Videoaufnahme stoppen',
+                        streamActive: 'Stream aktiv',
+                        streamPassive: 'Stream passiv',
+                        submitRecordedFile: 'Aufgezeichnete Datei verwenden',
+                        takePicture: 'Ein Foto machen',
+                        timedOut: 'Upload für %{seconds} Sekunden stehen geblieben, breche ab.',
+                        upload: 'Hochladen',
+                        uploadComplete: 'Hochladen abgeschlossen',
+                        uploadFailed: 'Hochladen fehlgeschlagen',
+                        uploading: 'Wird hochgeladen',
+                        uploadingXFiles: {
+                            '0': 'Eine Datei wird hochgeladen',
+                            '1': '%{smart_count} Dateien werden hochgeladen',
+                        },
+                        uploadPaused: 'Hochladen pausiert',
+                        uploadXFiles: {
+                            '0': 'Eine Datei hochladen',
+                            '1': '%{smart_count} Dateien hochladen',
+                        },
+                        uploadXNewFiles: {
+                            '0': '+%{smart_count} Datei hochladen',
+                            '1': '+%{smart_count} Dateien hochladen',
+                        },
+                        xFilesSelected: {
+                            '0': 'Eine Datei ausgewählt',
+                            '1': '%{smart_count} Dateien ausgewählt',
+                        },
+                        xMoreFilesAdded: {
+                            '0': 'Eine weitere Datei hinzugefügt',
+                            '1': '%{smart_count} weitere Dateien hinzugefügt',
+                        },
+                        xTimeLeft: '%{time} verbleibend',
+                        youCanOnlyUploadFileTypes: 'Sie können nur folgende Dateitypen hochladen: %{types}',
+                        youCanOnlyUploadX: {
+                            '0': 'Sie können nur eine Datei hochladen',
+                            '1': 'Sie können nur %{smart_count} Dateien hochladen',
+                        },
+                        youHaveToAtLeastSelectX: {
+                            '0': 'Sie müssen mindestens eine Datei auswählen',
+                            '1': 'Sie müssen mindestens %{smart_count} Dateien auswählen',
+                        },
+                        zoomIn: 'Vergrößern',
+                        zoomOut: 'Verkleinern',
+                    }
+
+                }
+
+                })
+
+
+
+                .use(Dashboard, {
+                inline: true,
+                height: heightview,
+                proudlyDisplayPoweredByUppy: false,
+                target: '#drag-drop-area2',
+                doneButtonHandler: null,
+                showRemoveButtonAfterComplete: true,
+                hideUploadButton: true,
+                })
+
+                .use(Webcam, {
+                target: Dashboard,
+                onBeforeSnapshot: () => Promise.resolve(),
+                countdown: false,
+                modes: [
+                    'picture',
+                ],
+                mirror: false,
+                showVideoSourceDropdown: false,
+                /** @deprecated Use `videoConstraints.facingMode` instead. */
+                facingMode: 'environment',
+                videoConstraints: {
+                    facingMode: 'environment',
+                },
+                preferredImageMimeType: null,
+                preferredVideoMimeType: null,
+                showRecordingLength: false,
+                mobileNativeCamera: false,
+                locale: {},
+                })
+
+                .use(XHRUpload, {
+                endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
+                fieldName: 'my_file',
+                })
+
+                .use(ProgressBar, {
+                target: '.for-ProgressBar',
+                hideAfterFinish: true,
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        uppy.on('upload-success', (file, response) => {
+        const url = response.uploadURL
+        const fileName = file.name
+        const li = document.createElement('li')
+        const input = document.createElement('input')
+        input.type = 'hidden'
+        input.value = fileName
+        input.name = 'listfilenames[]'
+        input.appendChild(document.createTextNode(fileName))
+        li.appendChild(input)
+        document.querySelector('.uploaded-files ol').appendChild(li)
+        });
+
+        uppy.on('complete', (result) => {
+            $('#hideInputLog').prop('disabled', false);
+            $('#labelsubmit').text('Anmeldung abschließen');
+            document.getElementById('progressbarcustom').style.display = 'none';
+            //  console.log('Upload complete! We’ve uploaded these files:', result.successful)
+        });
+
+
+
+
+        uppy2.on('upload-success', (file, response) => {
+        const url = response.uploadURL
+        const fileName = file.name
+        const li = document.createElement('li')
+        const input = document.createElement('input')
+        input.type = 'hidden'
+        input.value = fileName
+        input.name = 'listfilenames2[]'
+        input.appendChild(document.createTextNode(fileName))
+        li.appendChild(input)
+        document.querySelector('.uploaded-files ol').appendChild(li)
+        });
+
+    
+        uppy2.on('complete', (result) => {
+            $('#hideInputLog').prop('disabled', false);
+            $('#labelsubmit').text('Anmeldung abschließen');
+            document.getElementById('progressbarcustom').style.display = 'none';
+            //  console.log('Upload complete! We’ve uploaded these files:', result.successful)
+        });
+
+
+        $('#submit-dropzone').click(() => {
+        uppy.upload();
+        uppy2.upload();
+        });
+
+</script>
+
 
                 
 
@@ -771,6 +1084,7 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
    function ihaverezept(){
   document.getElementById('haveFile').style.display ='block';
   document.getElementById('rezepthochladen').style.display ='block';
+  document.getElementById('medplanhochlade').style.display ='block';
     document.getElementById('rezeptlabel').innerHTML = 'Rezeptfoto hochladen';
      $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay1.png)");
      $('#rezeptfoto').prop('checked', true);
@@ -789,6 +1103,7 @@ function idonthaverezept(){
 
   document.getElementById('haveFile').style.display = 'none';
   document.getElementById('rezepthochladen').style.display = 'none';
+  document.getElementById('medplanhochlade').style.display ='none';
       $('#rezeptfoto').prop('checked', false);
       $('#eRezept').prop('checked', false);
       $('#medplan').prop('checked', false);
@@ -800,27 +1115,29 @@ function ihavemedplan(){
 
   document.getElementById('medplanhochladen').style.display ='block';
   
-    document.getElementById('rezeptlabel').innerHTML = 'Medplan hochladen';
-     $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
+    document.getElementById('medplanlabel').innerHTML = 'Medplan hochladen';
+   //  $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
     
 
      $('#hideInputLog').prop('disabled', true);
      $('#labelsubmit').text('Datei-Upload-Verarbeitung');
 
-     document.getElementById('progressbarcustommedplan').style.display = 'block';
+   //  document.getElementById('progressbarcustommedplan').style.display = 'block';
 
 }
 
 function idonthavemedplan(){
 
+   // console.log("idonthavemedplan");
+
+  document.getElementById('medplanhochladen').style.display = 'none';
+
+
     $('#hideInputLog').prop('disabled', false);
      $('#labelsubmit').text('Anmeldung abschließen');
 
-    document.getElementById('progressbarcustommedplan').style.display = 'none';
+   // document.getElementById('progressbarcustommedplan').style.display = 'none';
 
-
-  document.getElementById('medplanhochladen').style.display = 'none';
-   
 }
 
 
@@ -842,10 +1159,11 @@ function idonthavemedplan(){
 
                         if($('#rezeptfoto').is(':checked'))
                             {
+                                console.log("rezept foto");
                                 ihaveRezeptfoto();
                             }
-                            else ($('#eRezept').is(':checked'))
-                            {
+                            else  {
+                                console.log("erezept");
                             ihaveeRezept();
                             }
                           
@@ -898,6 +1216,37 @@ function startdatumSelected(){
 function startdatumSelectedBlur(){
   document.getElementById('startdatumlabel').innerHTML = 'Was ist Ihr Wunsch-Startdatum?';
 }
+
+
+
+
+
+
+
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+
 
 
 </script>

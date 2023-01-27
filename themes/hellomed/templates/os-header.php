@@ -7,9 +7,6 @@
 
 <link rel="icon" href="https://ui.hellomed.com/src/v1.0/img/favicon.svg" type="image/svg+xml">
 
-<!-- Bootstrap -->
-<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/bootstrap.5.2.3.min.css">
-<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/bootstrap.icons.1.9.1.css">
 
 <!-- jQuery  -->
 <script src="https://ui.hellomed.com/src/v1.0/js/jquery-3.6.3.min.js" type="text/javascript"></script>

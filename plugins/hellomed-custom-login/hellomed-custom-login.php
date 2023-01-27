@@ -802,20 +802,49 @@ class Hellomed_Custom_Login_Plugin {
 				$rezept_type = $_POST['rezept_type'];
 
 					if ( !empty( $_POST['listfilenames'] ) ) {
+
 						$listfilenames = $_POST['listfilenames'];
 
 						$listfilenamesarray = array();
 						foreach($listfilenames as $key => $value) {
-
 								$listfilenamesarray['rezept_file'][$key]['rezept_filename'] = $value;
 								$listfilenamesarray['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
 								$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
 								$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
 								$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
-
+				
 						}
-						add_row('rezept_input', $listfilenamesarray, 'user_'.$user_id);
+
+						$listfilenamesarray2 = array();
+						$arr3 = array();
+
+						if ( !empty( $_POST['listfilenames2'] ) ) {
+
+							$listfilenames2 = $_POST['listfilenames2'];
+
+					
+							foreach($listfilenames2 as $key => $value) {
+									$listfilenamesarray2['rezept_file'][$key]['rezept_filename'] = $value;
+									$listfilenamesarray2['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
+									$listfilenamesarray2['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
+									$listfilenamesarray2['rezept_file'][$key]['rezept_directory'] = $user_id;
+									$listfilenamesarray2['rezept_file'][$key]['rezept_type'] = "medplan";
+							}
+
+							foreach($listfilenamesarray as $key=>$val)
+								{
+									$arr3['rezept_file'] = array_merge($val, $listfilenamesarray2[$key]);
+								}
+						}
+
+							else{
+								$arr3 = $listfilenamesarray;
+							}
+
+						add_row('rezept_input', $arr3, 'user_'.$user_id);
 						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+						// print("<pre>".print_r($arr3,true)."</pre>");
 						// die;
 					}
 					
