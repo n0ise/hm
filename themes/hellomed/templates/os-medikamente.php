@@ -2,14 +2,19 @@
 /*
 Template Name: OS Medikamente
 */
-?>
-<!-- include_once header.php from template  -->
-<?php include_once('os-header.php'); ?>
-<!-- show the content if the user is logged in   -->
-<?php if(is_user_logged_in()) { ?>
-<?php
-// current user id logged in 
 $user_id = get_current_user_id();
+// if user is not logged in, go to anmelden 
+// if is not having account active, can't see page and go to willkommen  
+ob_start();
+if (!is_user_logged_in() || get_field('status', 'user_' . $user_id) != 'Aktiv') {
+    $redirect_url = is_user_logged_in() ? 'willkommen' : 'anmelden';
+    header("Location: $redirect_url");
+    exit;
+}
+// include_once header.php from template  
+ include_once('os-header.php'); 
+ 
+// current user id logged in 
 $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
 
 <main>
@@ -73,21 +78,9 @@ if (!empty($rezept['medicine_section'])) {
     </div>
 </main>
 <?php
- } else { ?>
-<!-- or show the message and redirect if the user is ooout  -->
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-            </div>
-        </div>
-    </div>
-    <?php header("Refresh:0; url=/anmelden"); 
-        }
+ 
+ ob_end_flush();
+
 
 // da footer 
 include_once('footer.php');

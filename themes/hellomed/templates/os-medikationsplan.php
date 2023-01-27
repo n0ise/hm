@@ -1,6 +1,14 @@
 <?php
 /* Template Name: OS Medikationsplan */
-
+$user_id = get_current_user_id();
+// if user is not logged in, go to anmelden 
+// if is not having account active, can't see page and go to willkommen  
+ob_start();
+if (!is_user_logged_in() || get_field('status', 'user_' . $user_id) != 'Aktiv') {
+    $redirect_url = is_user_logged_in() ? 'willkommen' : 'anmelden';
+    header("Location: $redirect_url");
+    exit;
+}
 // include_once header.php from template  
  include_once('os-header.php'); 
  ?>
@@ -11,7 +19,6 @@
 <?php
 // TODO - Check if the user is logged in and various conditions
 // taking the current id of the user and passing it to the api.php file
-$user_id = get_current_user_id();
 $new_user_id= get_field('new_user_id', 'user_' . $user_id);
 $patient_url = get_stylesheet_directory_uri() . '/assets/php/test_api.php';
 ?>
@@ -107,7 +114,8 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
     </div>
 </main>
 <?php
- 
+ob_end_flush();
+
 
 // da footer 
 include_once('footer.php');
