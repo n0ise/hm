@@ -74,7 +74,8 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_start_date" type="date" class=" blister_start_date form-control date-convert"
+                            <input id="blister_start_date" type="date"
+                                class=" blister_start_date form-control date-convert"
                                 value="<?php echo $blister_job['blister_start_date'] ?>">
                             <label>Start</label>
                         </div>
@@ -126,14 +127,14 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_start_date" type="date" class="form-control" 
+                            <input id="prescription_start_date" type="date" class="form-control"
                                 value="<?php echo $record['prescription_start_date']; ?>" ?>
                             <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_end_date" type="date" class="form-control" 
+                            <input id="prescription_end_date" type="date" class="form-control"
                                 value="<?php echo $record['prescription_end_date']; ?>">
                             <label>Ende</label>
                         </div>
@@ -173,6 +174,39 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                             Medikament
                         </button>
                     </div>
+                    <?php
+                    //checking if the user have a rezept_file with rezept_type named medplan 
+                    // and show a download in case, with rezept_url as a value   
+                    $medplan_files = array();
+                    if($rezept_input){
+                        foreach($rezept_input as $input){
+                            if( $input['new_user_id'] === $new_user_id){
+                                foreach($input['rezept_file'] as $file){
+                                    if(strpos($file['rezept_type'], 'medplan') !== false ){
+                                        $medplan_files[] = $file['rezept_url'];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if(!empty($medplan_files)): ?>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Medikationsplan</div>
+                    </div>
+                    <?php foreach($medplan_files as $file): ?>
+                    <div class="col-12">
+                        Es wurde ein Medikationsplan für dieses Rezept hochgeladen: <a href="<?php echo $file; ?>"
+                            download>Download</a>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Medikationsplan</div>
+                    </div>
+                    <div class="col-12">
+                        Es wurde kein Medikationsplan für diesen Benutzer hochgeladen.
+                    </div>
+                    <?php endif; ?>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Status</div>
                     </div>
@@ -438,4 +472,4 @@ include_once('footer.php');
             });
         });
     });
-</script>
+    </script>

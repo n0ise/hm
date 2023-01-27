@@ -41,12 +41,10 @@ $users = get_users( array( 'role' => 'client' ) );
                         $prescription_date_by_doctor = get_field('prescription_doctor_by_name', 'user_' . $user->ID);
                         $prescription_status = get_field('prescription_status', 'user_' . $user->ID);
                         // var_dump($user_rezept);
-                    
-                        
                             foreach ($user_rezept as $rezept) {
-                       
-                        //    var_dump($rezept);
-                  ?>
+                                // check if rezept_type is set and if it is not medplan show the prescriptions
+                                if(isset($rezept['rezept_file'][0]['rezept_type']) && $rezept['rezept_file'][0]['rezept_type'] != 'medplan') {
+                      ?>
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
@@ -61,15 +59,18 @@ $users = get_users( array( 'role' => 'client' ) );
                         ?>
                         </td>
                         <td data-label="Status">
-                            <span class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']);?> "><?php echo $rezept['status_prescription']; ?></span>
+                            <span
+                                class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']);?> "><?php echo $rezept['status_prescription']; ?></span>
                         </td>
                         <td data-label="Aktionen">
-                            <a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
-                            <i class="bi bi-pencil-fill"></i> Editieren</a></td>
+                            <a
+                                href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
+                                <i class="bi bi-pencil-fill"></i> Editieren</a>
+                        </td>
                     </tr>
 
                     <?php           
-                    //  }
+                     }
                         }
                     }
             ?>
