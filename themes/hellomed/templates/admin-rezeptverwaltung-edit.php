@@ -180,7 +180,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     $medplan_files = array();
                     if($rezept_input){
                         foreach($rezept_input as $input){
-                            if( $input['new_user_id'] === $new_user_id){
+                            if( $input['prescription_id'] === $rezept_id){
                                 foreach($input['rezept_file'] as $file){
                                     if(strpos($file['rezept_type'], 'medplan') !== false ){
                                         $medplan_files[] = $file['rezept_url'];
@@ -207,6 +207,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         Es wurde kein Medikationsplan für diesen Benutzer hochgeladen.
                     </div>
                     <?php endif; ?>
+                    
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Status</div>
                     </div>

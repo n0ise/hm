@@ -33,30 +33,31 @@ $users = get_users( array( 'role' => 'client' ) );
                 </thead>
                 <tbody>
                     <?php
-                      foreach ($users as $user) {
+                     foreach ($users as $user) {
                         $user_id =  get_field( 'new_user_id', 'user_' . $user->ID );
                         $user_name = $user->display_name;
                         $user_status = get_field('status', 'user_' . $user->ID);
                         $user_rezept = get_field('rezept_input', 'user_' . $user->ID);
                         $prescription_date_by_doctor = get_field('prescription_doctor_by_name', 'user_' . $user->ID);
                         $prescription_status = get_field('prescription_status', 'user_' . $user->ID);
-                        // var_dump($user_rezept);
-                            foreach ($user_rezept as $rezept) {
-                                // check if rezept_type is set and if it is not medplan show the prescriptions
-                                if(isset($rezept['rezept_file'][0]['rezept_type']) && $rezept['rezept_file'][0]['rezept_type'] != 'medplan') {
-                      ?>
+                        // loop through each rezept_file
+                        foreach ($user_rezept as $rezept) {
+                            foreach ($rezept['rezept_file'] as $rezept_file) {
+                                if(isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
+                                    // Display the row here
+                        ?>
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
                         <td data-label="Verschreibungsdatum"><?php echo $rezept['prescription_date_by_doctor']; ?></td>
                         <td data-label="Medikamente"><?php 
-                        if (!empty($rezept['medicine_section'])) {
-                            foreach ($rezept['medicine_section'] as $medicine) {
-                                //  the medicine fields show but removing the latest elements if it's the latest (fuck that was tricky)
-                                echo $medicine['medicine_name_pzn'] . " (x".$medicine['medicine_amount']. ")" . (end($rezept['medicine_section']) == $medicine ? '' : ', ');
-                            }
-                        }
-                        ?>
+                                        if (!empty($rezept['medicine_section'])) {
+                                            foreach ($rezept['medicine_section'] as $medicine) {
+                                                //  the medicine fields show but removing the latest elements if it's the latest (fuck that was tricky)
+                                                echo $medicine['medicine_name_pzn'] . " (x".$medicine['medicine_amount']. ")" . (end($rezept['medicine_section']) == $medicine ? '' : ', ');
+                                            }
+                                        }
+                                        ?>
                         </td>
                         <td data-label="Status">
                             <span
@@ -68,11 +69,12 @@ $users = get_users( array( 'role' => 'client' ) );
                                 <i class="bi bi-pencil-fill"></i> Editieren</a>
                         </td>
                     </tr>
-
                     <?php           
-                     }
+                                }
+                            }
                         }
                     }
+                    
             ?>
 
                 </tbody>
