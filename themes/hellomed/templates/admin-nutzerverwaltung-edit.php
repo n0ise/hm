@@ -55,7 +55,7 @@
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected>
                                 <?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
                             <?php 
-                                $geschlecht = array('Männlich', 'Weiblich', 'Divers');
+                                $geschlecht = array('Männlich', 'Weiblich');
                                 $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
                                 $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
                                 unset($geschlecht[$keygeschlecht]);
@@ -189,6 +189,7 @@
                 <div class="col-12">
                     <div class="form-floating">
                         <select id="status" class="form-select">
+                        <option value="" disabled selected>Bitte wählen</option>
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected>
                                 <?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
                             <?php 
@@ -314,28 +315,43 @@ jQuery(document).ready(function($) {
         $.post(ajaxurl, data, function(response) {
             // if there is at least a field changed (is not empty), show the success div (disappears after 5 seconds)
             response = JSON.parse(response);
-                if (response.status == 'success') {
-                    $('#successdown').removeClass('alert alert-danger');
-                    $('input').removeClass('border border-2 border-danger');
-                    $('#successdown').addClass('alert alert-success');
-                    $('#successdown').html(response.message);
-                    $('#successdown').fadeIn(1000);
-                    setTimeout(function() {
-                        $('#successdown').fadeOut(1000);
-                    }, 5000);
-                } else if (response.status == 'error') {
-                    var errorMessages = response.message;
-                    for (var i = 0; i < errorMessages.length; i++) {
-                        var inputId = errorMessages[i].split(":")[0];
-                        $('#' + inputId).addClass('border-danger');
-                        errorMessages[i] = errorMessages[i].substring(inputId.length + 1);
-                    }
-                    $('#successdown').addClass('alert alert-danger');
-                    $('#successdown').html(errorMessages.join("<br>"));
-                    $('#successdown').fadeIn(1000);
-                    setTimeout(function() {
-                        $('#successdown').fadeOut(1000);
-                    }, 5000);
+
+            // remove invalid when focusing on the field
+            $('input').on('focus', function() {
+                $(this).removeClass('is-invalid');
+                $(this).next('.invalid-feedback').remove();
+            });
+
+            if (response.status == 'success') {
+                //remove error classes and messages
+                $('#successdown').removeClass('alert alert-danger');
+                $('input').removeClass('is-invalid');
+                $('.invalid-feedback').remove();
+                //add success classes and message
+                // $('input').addClass('is-valid');
+                $('#successdown').addClass('alert alert-success');
+                $('#successdown').html(response.message);
+                $('#successdown').fadeIn(1000);
+                setTimeout(function() {
+                    $('#successdown').fadeOut(1000);
+                }, 5000);
+
+            } else if (response.status == 'error') {
+                var errorMessages = response.message;
+                //loop through error messages and add to corresponding input fields
+                for (var i = 0; i < errorMessages.length; i++) {
+                    var inputId = errorMessages[i].split(":")[0];
+                    $('#' + inputId).addClass('is-invalid');
+                    $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[i].substring(inputId.length + 1) + '</div>');
+                }
+                //add error class and message
+                $('#successdown').addClass('alert alert-danger');
+                $('#successdown').html('Fehler: Bitte überprüfen Sie die rot markierten Felde');
+                $('#successdown').fadeIn(1000);
+                setTimeout(function() {
+                    $('#successdown').fadeOut(1000);
+                }, 5000);
+
                 }
             // update the input fields with the new data
             $('#first_name').val(first_name);

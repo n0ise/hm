@@ -74,14 +74,14 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_start_date" type="date" class=" blister_start_date form-control"
+                            <input id="blister_start_date" type="date" class=" blister_start_date form-control date-convert"
                                 value="<?php echo $blister_job['blister_start_date'] ?>">
                             <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_end_date" type="date" class="blister_end_date form-control"
+                            <input id="blister_end_date" type="date" class="blister_end_date form-control date-convert"
                                 value="<?php echo $blister_job['blister_end_date'] ?>">
                             <label>Ende</label>
                         </div>
@@ -126,14 +126,14 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_start_date" type="date" class="form-control" placeholder=" "
-                                value="<?php echo $record['prescription_start_date']; ?>">
+                            <input id="prescription_start_date" type="date" class="form-control" 
+                                value="<?php echo $record['prescription_start_date']; ?>" ?>
                             <label>Start</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_end_date" type="date" class="form-control" placeholder=" "
+                            <input id="prescription_end_date" type="date" class="form-control" 
                                 value="<?php echo $record['prescription_end_date']; ?>">
                             <label>Ende</label>
                         </div>
@@ -179,6 +179,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <div class="col-12">
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
+                                <option value="" disabled selected>Bitte Wählen</option>
                                 <option selected><?php echo $record['status_prescription'] ?> </option>
                                 <?php 
                                 $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
@@ -318,7 +319,7 @@ include_once('footer.php');
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="form-floating">
-                        <input type="text"  id="blister_end_date" class="form-control blister_end_date" value="">
+                        <input type="date"  id="blister_end_date" class="form-control blister_end_date" value="">
                         <label>Ende</label>
                     </div>
                 </div>
@@ -337,16 +338,16 @@ include_once('footer.php');
     jQuery(document).ready(function($) {
         $('#save_blister_job').click(function() {
 
-            var blister_job_id = $('#blister_job_id').val();
-            var blister_start_date = $('#blister_start_date').val();
-            var blister_end_date = $('#blister_end_date').val();
+            // var blister_job_id = $('#blister_job_id').val();
+            // var blister_start_date = $('#blister_start_date').val();
+            // var blister_end_date = $('#blister_end_date').val();
             var prescription_id = $('#prescription_id').val();
             var doctor_name = $('#doctor_name').val();
             var prescription_date_by_doctor = $('#prescription_date_by_doctor').val();
             var prescription_start_date = $('#prescription_start_date').val();
             var prescription_end_date = $('#prescription_end_date').val();
-            var medicine_name_pzn = $('#medicine_name_pzn').val();
-            var medicine_amount = $('#medicine_amount').val();
+            // var medicine_name_pzn = $('#medicine_name_pzn').val();
+            // var medicine_amount = $('#medicine_amount').val();
             var status_prescription = $('#status_prescription').val();
             var new_user_id = $('#new_user_id').val();
 
@@ -382,16 +383,16 @@ include_once('footer.php');
             var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
             var data = {
                 'action': 'edit_patient',
-                'blister_job_id': blister_job_id,
-                'blister_start_date': blister_start_date,
-                'blister_end_date': blister_end_date,
+                // 'blister_job_id': blister_job_id,
+                // 'blister_start_date': blister_start_date,
+                // 'blister_end_date': blister_end_date,
                 'prescription_id': prescription_id,
                 'doctor_name': doctor_name,
                 'prescription_date_by_doctor': prescription_date_by_doctor,
                 'prescription_start_date': prescription_start_date,
                 'prescription_end_date': prescription_end_date,
-                'medicine_name_pzn': medicine_name_pzn,
-                'medicine_amount': medicine_amount,
+                // 'medicine_name_pzn': medicine_name_pzn,
+                // 'medicine_amount': medicine_amount,
                 'prescription_id': prescription_id,
                 'status_prescription': status_prescription,
                 'blister_jobs': blister_jobs,
@@ -437,4 +438,4 @@ include_once('footer.php');
             });
         });
     });
-    </script>
+</script>
