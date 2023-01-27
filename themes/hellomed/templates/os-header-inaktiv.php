@@ -18,6 +18,8 @@
 <!-- include variables with all fields from acf/wp -->
 <?php 
 include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
+
+$user_id = get_current_user_id();
 ?>
 <!-- local css, for lando  -->
 <!-- <link rel="stylesheet" href="/UI/css/index.css"> -->
@@ -30,7 +32,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <!-- </a> -->
         </div>
         <!-- checking if logged in and show the whole nav header -->
-        <?php if(is_user_logged_in() && get_field('status', 'user_' . $current_user_id) != "Wartend") { ?>
+       
+        <?php if(is_user_logged_in() && get_field('status', 'user_' .$user_id ) != "Wartend") { ?>
 
        
       
