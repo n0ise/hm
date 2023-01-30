@@ -15,7 +15,7 @@
   </div>
 </footer>
 
-<script src="https://ui.hellomed.com/src/v1.0/js/bootstrap.5.2.3.bundle.min.js"></script>
+<script src="https://ui.hellomed.com/src/v1.0/js/bootstrap.5.3.0.bundle.min.js"></script>
 
 <!-- Custom js -->
 <script src="https://ui.hellomed.com/src/v1.0/js/off-canvas.js"></script>
