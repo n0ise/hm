@@ -446,31 +446,43 @@ include_once('footer.php');
             var count = Object.keys(blister_jobs).length;
             console.log(count);
             $.post(ajaxurl, data, function(response) {
-                console.log(typeof response);
-                console.log(response);
                 response = JSON.parse(response);
-                if (response.status == 'success') {
-                    $('#successdown').removeClass('alert alert-danger');
-                    $('input').removeClass('border border-2 border-danger');
-                    $('#successdown').addClass('alert alert-success');
-                    $('#successdown').html(response.message);
-                    $('#successdown').fadeIn(1000);
-                    setTimeout(function() {
-                        $('#successdown').fadeOut(1000);
-                    }, 5000);
-                } else if (response.status == 'error') {
-                    var errorMessages = response.message;
-                    for (var i = 0; i < errorMessages.length; i++) {
-                        var inputId = errorMessages[i].split(":")[0];
-                        $('#' + inputId).addClass('border-danger');
-                        errorMessages[i] = errorMessages[i].substring(inputId.length + 1);
-                    }
-                    $('#successdown').addClass('alert alert-danger');
-                    $('#successdown').html(errorMessages.join("<br>"));
-                    $('#successdown').fadeIn(1000);
-                    setTimeout(function() {
-                        $('#successdown').fadeOut(1000);
-                    }, 5000);
+
+// remove invalid when focusing on the field
+$('input').on('focus', function() {
+    $(this).removeClass('is-invalid');
+    $(this).next('.invalid-feedback').remove();
+});
+
+if (response.status == 'success') {
+    //remove error classes and messages
+    $('#successdown').removeClass('alert alert-danger');
+    $('input').removeClass('is-invalid');
+    $('.invalid-feedback').remove();
+    //add success classes and message
+    // $('input').addClass('is-valid');
+    $('#successdown').addClass('alert alert-success');
+    $('#successdown').html(response.message);
+    $('#successdown').fadeIn(1000);
+    setTimeout(function() {
+        $('#successdown').fadeOut(1000);
+    }, 5000);
+
+} else if (response.status == 'error') {
+    var errorMessages = response.message;
+    //loop through error messages and add to corresponding input fields
+    for (var i = 0; i < errorMessages.length; i++) {
+        var inputId = errorMessages[i].split(":")[0];
+        $('#' + inputId).addClass('is-invalid');
+        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[i].substring(inputId.length + 1) + '</div>');
+    }
+    //add error class and message
+    $('#successdown').addClass('alert alert-danger');
+    $('#successdown').html('Fehler: Bitte überprüfen Sie die rot markierten Felde');
+    $('#successdown').fadeIn(1000);
+    setTimeout(function() {
+        $('#successdown').fadeOut(1000);
+    }, 5000);
                 }
 
 

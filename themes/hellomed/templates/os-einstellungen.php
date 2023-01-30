@@ -27,7 +27,7 @@ $user_id = get_current_user_id();
                 <div class="col-12 ">
                     <div class="form-floating">
                         <input id="geschlecht" type="text" class="form-control"
-                           value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" disabled>
+                            value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" disabled>
                         <label>Geschlecht</label>
                     </div>
                 </div>
@@ -263,24 +263,40 @@ include_once('footer.php');
             };
             $.post(ajaxurl, data, function(response) {
                 response = JSON.parse(response);
+
+                // remove invalid when focusing on the field
+                $('input').on('focus', function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').remove();
+                });
+
                 if (response.status == 'success') {
+                    //remove error classes and messages
                     $('#successdown').removeClass('alert alert-danger');
-                    $('input').removeClass('border border-2 border-danger');
+                    $('input').removeClass('is-invalid');
+                    $('.invalid-feedback').remove();
+                    //add success classes and message
+                    // $('input').addClass('is-valid');
                     $('#successdown').addClass('alert alert-success');
                     $('#successdown').html(response.message);
                     $('#successdown').fadeIn(1000);
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
                     }, 5000);
+
                 } else if (response.status == 'error') {
                     var errorMessages = response.message;
+                    //loop through error messages and add to corresponding input fields
                     for (var i = 0; i < errorMessages.length; i++) {
                         var inputId = errorMessages[i].split(":")[0];
-                        $('#' + inputId).addClass('border-danger');
-                        errorMessages[i] = errorMessages[i].substring(inputId.length + 1);
+                        $('#' + inputId).addClass('is-invalid');
+                        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[
+                            i].substring(inputId.length + 1) + '</div>');
                     }
+                    //add error class and message
                     $('#successdown').addClass('alert alert-danger');
-                    $('#successdown').html(errorMessages.join("<br>"));
+                    $('#successdown').html(
+                        'Fehler: Bitte überprüfen Sie die rot markierten Felde');
                     $('#successdown').fadeIn(1000);
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
@@ -342,7 +358,7 @@ include_once('footer.php');
         // Show all results that include the search term
         const searchResults = data.filter(company => company.name.toLowerCase().includes(searchTerm.toLowerCase()));
         document.querySelector('#insurance-options').innerHTML =
-        '<ul id="filter-records" class="hm-autocomplete"></ul>';
+            '<ul id="filter-records" class="hm-autocomplete"></ul>';
 
         searchResults.forEach(result => {
             const option = document.createElement('li');
