@@ -221,7 +221,7 @@ verschickt oder hochgeladen werden."> </i>
                 </div>
 
                 <div class="col-12" id="haveFile" style="display: none;">
-                    <label class="form-label">Liegen Rezepte oder Medikationsplan vor?</label>
+                    <label class="form-label">Welche Art von Rezept liegt Ihnen vor?</label>
                     <div class="btn-group d-flex">
                         <input type="radio" class="btn-check" name="rezept_type" value="rezeptfoto" id="rezeptfoto" autocomplete="off" checked onclick="ihaveRezeptfoto();"/>
                         <label class="btn btn-outline-primary" for="rezeptfoto">Rezeptfoto</label>
@@ -249,7 +249,7 @@ verschickt oder hochgeladen werden."> </i>
                 </div>
 
                 <div class="col-12" id="medplanhochladen"  style="display: none;">
-                    <label id="medplanlabel" class="form-label">Medplan hochladen</label>
+                    <label id="medplanlabel" class="form-label">Medikationsplan hochladen</label>
                             <div id="drag-drop-area2"></div>    
                 </div>
 
@@ -1115,7 +1115,7 @@ function ihavemedplan(){
 
   document.getElementById('medplanhochladen').style.display ='block';
   
-    document.getElementById('medplanlabel').innerHTML = 'Medplan hochladen';
+    document.getElementById('medplanlabel').innerHTML = 'Medikationsplan hochladen';
    //  $("#Webcam-overlay").css("content","url(wp-content/themes/hellomed/assets/img/icons/onboarding/Overlay3.png)");
     
 

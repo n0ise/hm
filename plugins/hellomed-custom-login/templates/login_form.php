@@ -18,7 +18,7 @@
       <div class="col-12">
         <div class="form-floating">
 		<input type="text" class="form-control" name="log" id="user_login" placeholder=" ">
-		<label for="user_login"><?php _e( 'Email', 'hellomed-custom-login' ); ?></label>
+		<label for="user_login"><?php _e( 'E-Mail', 'hellomed-custom-login' ); ?></label>
         </div>
       </div>
       <div class="col-12">

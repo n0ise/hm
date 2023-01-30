@@ -19,7 +19,7 @@
 	<p>
 		<?php
 			_e(
-				"Geben Sie Ihre E-Mail Adresse ein und wir senden Ihnen einen Passwort zurücksetzen link zu.",
+				"Geben Sie hier Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.",
 				'hellomed_custom_login'
 			);
 		?>

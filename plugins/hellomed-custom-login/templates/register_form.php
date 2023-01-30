@@ -68,7 +68,7 @@
           <input class="form-check-input" type="checkbox" id="test4" name="personal_data_checkbox">
           <label class="form-check-label text-justify" for="test4">
           <small>
-          Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Errinerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
+          Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Erinnerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
             </small>
       </label>  
         </div>

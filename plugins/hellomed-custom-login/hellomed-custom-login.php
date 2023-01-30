@@ -1189,14 +1189,14 @@ class Hellomed_Custom_Login_Plugin {
 			// Login errors
 
 			case 'empty_username':
-				return __( 'Sie haben eine E-Mail Adresse oder?', 'hellomed-custom-login' );
+				return __( 'Bitte geben Sie eine E-Mail-Adresse ein.', 'hellomed-custom-login' );
 
 			case 'empty_password':
-				return __( 'Sie müssen ein Passwort eingeben um sich einzuloggen.', 'hellomed-custom-login' );
+				return __( 'Bitte geben Sie ein Passwort ein.', 'hellomed-custom-login' );
 
 			case 'invalid_username':
 				return __(
-					"Es gibt keinen Account mit dieser E-Mail Adresse. Vielleicht hast du einen anderen Account bei der Anmeldung genutzt?",
+					"Es gibt keinen Account mit dieser E-Mail-Adresse. Vielleicht haben Sie einen anderen Account bei der Anmeldung genutzt?",
 					'hellomed-custom-login'
 				);
 
