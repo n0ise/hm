@@ -178,12 +178,16 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     //checking if the user have a rezept_file with rezept_type named medplan 
                     // and show a download in case, with rezept_url as a value   
                     $medplan_files = array();
+                    $erezept_files = array();
                     if($rezept_input){
                         foreach($rezept_input as $input){
                             if( $input['prescription_id'] === $rezept_id){
                                 foreach($input['rezept_file'] as $file){
                                     if(strpos($file['rezept_type'], 'medplan') !== false ){
                                         $medplan_files[] = $file['rezept_url'];
+                                    }
+                                    if(strpos($file['rezept_type'], 'erezept') !== false || strpos($file['rezept_type'], 'rezept') !== false){
+                                        $erezept_files[] = $file['rezept_url'];
                                     }
                                 }
                             }
@@ -195,9 +199,25 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <?php foreach($medplan_files as $file): ?>
                     <div class="col-12">
-                        Es wurde ein Medikationsplan für dieses Rezept hochgeladen: <a href="<?php echo $file; ?>"
-                            download>Download</a>
+                        Es wurde ein Medikationsplan für dieses Rezept hochgeladen:
+                        <a href="#" data-toggle="modal" data-target="#medplanPreviewModal">Vorschau</a> |
+                        <a href="<?php echo $file; ?>" download>Download</a>
                     </div>
+                    <!-- <div class="modal fade" id="medplanPreviewModal" tabindex="-1" role="dialog"
+                        aria-labelledby="medplanPreviewModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-center modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="medplanPreviewModalLabel">Medikationsplan Vorschau</h5>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Schließen</button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="<?php //echo $file; ?>" alt="Medikationsplan Vorschau">
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
                     <?php endforeach; ?>
                     <?php else: ?>
                     <div class="col-12">
@@ -205,6 +225,47 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="col-12">
                         Es wurde kein Medikationsplan für diesen Benutzer hochgeladen.
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if(!empty($erezept_files)): ?>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Rezept File</div>
+                    </div>
+                    <?php
+    if (count($erezept_files) > 1) {
+        echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+    } else {
+        echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+    }
+    foreach($erezept_files as $file): ?>
+                    <div class="modal fade erezeptPreviewModal" id="erezeptPreviewModal" tabindex="-1" role="dialog"
+                        aria-labelledby="erezeptPreviewModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="erezeptPreviewModalLabel">Rezeptfeld Vorschau</h5>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Schließen</button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="<?php echo $file; ?>" alt="Rezept Vorschau">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <a href="#" data-toggle="modal" data-target=".erezeptPreviewModal">Vorschau</a> |
+                        <a href="<?php echo $file; ?>" download>Download</a>
+                    </div>
+
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <div class="col-12">
+                        <div class="h3 m-0 mt-5">Rezept File</div>
+                    </div>
+                    <div class="col-12">
+                        Es wurde kein Rezept File für dieses Rezept hochgeladen.
                     </div>
                     <?php endif; ?>
 
@@ -448,41 +509,43 @@ include_once('footer.php');
             $.post(ajaxurl, data, function(response) {
                 response = JSON.parse(response);
 
-// remove invalid when focusing on the field
-$('input').on('focus', function() {
-    $(this).removeClass('is-invalid');
-    $(this).next('.invalid-feedback').remove();
-});
+                // remove invalid when focusing on the field
+                $('input').on('focus', function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').remove();
+                });
 
-if (response.status == 'success') {
-    //remove error classes and messages
-    $('#successdown').removeClass('alert alert-danger');
-    $('input').removeClass('is-invalid');
-    $('.invalid-feedback').remove();
-    //add success classes and message
-    // $('input').addClass('is-valid');
-    $('#successdown').addClass('alert alert-success');
-    $('#successdown').html(response.message);
-    $('#successdown').fadeIn(1000);
-    setTimeout(function() {
-        $('#successdown').fadeOut(1000);
-    }, 5000);
+                if (response.status == 'success') {
+                    //remove error classes and messages
+                    $('#successdown').removeClass('alert alert-danger');
+                    $('input').removeClass('is-invalid');
+                    $('.invalid-feedback').remove();
+                    //add success classes and message
+                    // $('input').addClass('is-valid');
+                    $('#successdown').addClass('alert alert-success');
+                    $('#successdown').html(response.message);
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
 
-} else if (response.status == 'error') {
-    var errorMessages = response.message;
-    //loop through error messages and add to corresponding input fields
-    for (var i = 0; i < errorMessages.length; i++) {
-        var inputId = errorMessages[i].split(":")[0];
-        $('#' + inputId).addClass('is-invalid');
-        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[i].substring(inputId.length + 1) + '</div>');
-    }
-    //add error class and message
-    $('#successdown').addClass('alert alert-danger');
-    $('#successdown').html('Fehler: Bitte überprüfen Sie die rot markierten Felde');
-    $('#successdown').fadeIn(1000);
-    setTimeout(function() {
-        $('#successdown').fadeOut(1000);
-    }, 5000);
+                } else if (response.status == 'error') {
+                    var errorMessages = response.message;
+                    //loop through error messages and add to corresponding input fields
+                    for (var i = 0; i < errorMessages.length; i++) {
+                        var inputId = errorMessages[i].split(":")[0];
+                        $('#' + inputId).addClass('is-invalid');
+                        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[
+                            i].substring(inputId.length + 1) + '</div>');
+                    }
+                    //add error class and message
+                    $('#successdown').addClass('alert alert-danger');
+                    $('#successdown').html(
+                        'Fehler: Bitte überprüfen Sie die rot markierten Felde');
+                    $('#successdown').fadeIn(1000);
+                    setTimeout(function() {
+                        $('#successdown').fadeOut(1000);
+                    }, 5000);
                 }
 
 
