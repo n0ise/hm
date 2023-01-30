@@ -332,7 +332,7 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
 </div>
 
 <script type="text/javascript" src="https://ui.hellomed.com/src/v1.0/js/jquery-3.6.3.min.js"></script>
-<script type="text/javascript" src="https://ui.hellomed.com/src/v1.0/js/bootstrap.5.2.3.bundle.min.js"></script>
+<script type="text/javascript" src="https://ui.hellomed.com/src/v1.0/js/bootstrap.5.3.0.bundle.min.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/multistep.js"></script>
 <script type="text/javascript" src="/wp-content/plugins/hellomed-custom-login/assets/js/search-function.js"></script>
 
