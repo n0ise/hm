@@ -42,10 +42,15 @@ $users = get_users( array( 'role' => 'client' ) );
                         $prescription_status = get_field('prescription_status', 'user_' . $user->ID);
                         // loop through each rezept_file
                         foreach ($user_rezept as $rezept) {
+                            $displayed = false;
                             foreach ($rezept['rezept_file'] as $rezept_file) {
-                                if(isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
-                                    // Display the row here
-                        ?>
+                              if (isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
+                                if (!$displayed) {
+                                  // showing the first row 
+                                  $displayed = true;
+                                } else {
+                                  break;
+                                }?>
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
