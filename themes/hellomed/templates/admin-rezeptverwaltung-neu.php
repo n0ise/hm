@@ -33,23 +33,8 @@
                         </select>
                         <input type="hidden" id="user_id" name="user_id" value="">
                     </div>
-
-                    <div class="col-12">
-                        <div class="h3 m-0">Prescrition ID</div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <div class="input-group gap-1">
-                                <input id="prescription_id_no" type="text" class="form-control" value="">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary btn-sm" type="button"
-                                        onclick="generateRandomID()">Random</button>
-                                </div>
-                            </div>
-                            <!-- <label>Prescription ID</label> -->
-                        </div>
-                    </div>
-
+                    <!-- hidden random id  -->
+                    <input id="prescription_id_no" type="hidden" class="form-control">
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Blisterjob</div>
                     </div>
@@ -66,8 +51,8 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="blister_start_date" type="date"
-                                class=" blister_start_date form-control" placeholder="tt.mm.jjjj" value="">
+                            <input id="blister_start_date" type="date" class=" blister_start_date form-control"
+                                placeholder="tt.mm.jjjj" value="">
                             <label>Start</label>
                         </div>
                     </div>
@@ -124,8 +109,8 @@
 
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
-                            <input id="prescription_end_date" type="date" class="form-control"
-                                placeholder="tt.mm.jjjj" value="">
+                            <input id="prescription_end_date" type="date" class="form-control" placeholder="tt.mm.jjjj"
+                                value="">
                             <label>Ende</label>
                         </div>
                     </div>
@@ -163,12 +148,12 @@
                     <div class="col-12">
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
-                                    <option selected="">Bitte wählen</option>
-                                    <option>Aktiv</option>
-                                    <option>Inaktiv</option>
-                                    <option>Wartend</option>
-                                    <option>Gefähred</option>
-                                </select>
+                                <option selected="">Bitte wählen</option>
+                                <option>Aktiv</option>
+                                <option>Inaktiv</option>
+                                <option>Wartend</option>
+                                <option>Gefähred</option>
+                            </select>
                             <label>Status</label>
                         </div>
                     </div>
@@ -385,25 +370,40 @@ include_once('footer.php');
                 console.log(typeof response);
                 console.log(response);
                 response = JSON.parse(response);
+
+                // remove invalid when focusing on the field
+                $('input').on('focus', function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').remove();
+                });
+
                 if (response.status == 'success') {
+                    //remove error classes and messages
                     $('#successdown').removeClass('alert alert-danger');
-                    $('input').removeClass('border border-2 border-danger');
-                    $('select').removeClass('border border-2 border-danger');
+                    $('input').removeClass('is-invalid');
+                    $('.invalid-feedback').remove();
+                    //add success classes and message
+                    // $('input').addClass('is-valid');
                     $('#successdown').addClass('alert alert-success');
                     $('#successdown').html(response.message);
                     $('#successdown').fadeIn(1000);
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
                     }, 5000);
+
                 } else if (response.status == 'error') {
                     var errorMessages = response.message;
+                    //loop through error messages and add to corresponding input fields
                     for (var i = 0; i < errorMessages.length; i++) {
                         var inputId = errorMessages[i].split(":")[0];
-                        $('#' + inputId).addClass('border-danger');
-                        errorMessages[i] = errorMessages[i].substring(inputId.length + 1);
+                        $('#' + inputId).addClass('is-invalid');
+                        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[
+                            i].substring(inputId.length + 1) + '</div>');
                     }
+                    //add error class and message
                     $('#successdown').addClass('alert alert-danger');
-                    $('#successdown').html(errorMessages.join("<br>"));
+                    $('#successdown').html(
+                        'Fehler: Bitte überprüfen Sie die rot markierten Felde');
                     $('#successdown').fadeIn(1000);
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
@@ -414,13 +414,20 @@ include_once('footer.php');
     });
     </script>
 
-    <!-- random id number idea, for lazy peeps -->
     <script>
+    // generating numerical random ID 
     function generateRandomID() {
-        var min = 100;
-        var max = 100000;
-        var randomID = Math.floor(Math.random() * (max - min + 1)) + min;
-        document.getElementById("prescription_id_no").value = randomID;
+        return Math.floor(Math.random() * (1000000000 - 100) + 100);
+    }
+
+    var prescriptionID = generateRandomID();
+    console.log("Prescription ID: ", prescriptionID);
+
+    var prescriptionInput = document.getElementById("prescription_id_no");
+    if (prescriptionInput) {
+        prescriptionInput.value = prescriptionID;
+    } else {
+        console.error("Element with ID 'prescription_id_no' not found.");
     }
 
     // take correspondent ID (wordpress ID not deutche blister) and secretly assign it to the input

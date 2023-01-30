@@ -745,7 +745,22 @@ add_action('wp_ajax_new_prescription', function() {
  	// deutsche blister ID 
 	$new_user_id = 	$_POST['patient_select'];
 
-	$new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
+	// checking if the id is already existen, and then update 
+	if (!empty($rezept_input)) {
+		foreach ($rezept_input as $input) {
+		  if ($input['prescription_id'] == $_POST['prescription_id_no']) {
+			$hasError = true;
+			$errorMessages[] = "successdown: Sie hatten so viel Pech, dass die zufällige ID dieselbe wie eine andere in der Datenbank war. Bitte erneut einreichen.";
+			break;
+		  }
+		}
+	  }
+	  
+	  if (!$hasError) {
+		$new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
+		$updated_made = true;
+	  }
+	// $new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
 	
 
 
