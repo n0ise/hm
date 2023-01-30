@@ -176,7 +176,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <?php
                     //checking if the user have a rezept_file with rezept_type named medplan 
-                    // and show a download in case, with rezept_url as a value   
+                    // and show a download in case, with file_url as a value   
                     $medplan_files = array();
                     $erezept_files = array();
                     if($rezept_input){
@@ -184,10 +184,10 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                             if( $input['prescription_id'] === $rezept_id){
                                 foreach($input['rezept_file'] as $file){
                                     if(strpos($file['rezept_type'], 'medplan') !== false ){
-                                        $medplan_files[] = $file['rezept_url'];
+                                        $medplan_files[] = $file['file_url'];
                                     }
                                     if(strpos($file['rezept_type'], 'erezept') !== false || strpos($file['rezept_type'], 'rezept') !== false){
-                                        $erezept_files[] = $file['rezept_url'];
+                                        $erezept_files[] = $file['file_url'];
                                     }
                                 }
                             }
@@ -197,7 +197,8 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
                     </div>
-                    <?php foreach($medplan_files as $file): ?>
+                    <?php foreach($medplan_files as $file):
+?>
                     <div class="col-12">
                         Es wurde ein Medikationsplan für dieses Rezept hochgeladen:
                         <a href="#" data-toggle="modal" data-target="#medplanPreviewModal">Vorschau</a> |
@@ -238,7 +239,8 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
     } else {
         echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
     }
-    foreach($erezept_files as $file): ?>
+    foreach($erezept_files as $file): 
+    ?>
                     <div class="modal fade erezeptPreviewModal" id="erezeptPreviewModal" tabindex="-1" role="dialog"
                         aria-labelledby="erezeptPreviewModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
