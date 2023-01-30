@@ -4,7 +4,7 @@
 <?php include_once('header.php'); ?>
 
 <!-- if logged in  -->
-<?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
+<?php if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
 
 <main>
     <div class="container">

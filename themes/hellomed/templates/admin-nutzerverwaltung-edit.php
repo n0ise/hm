@@ -4,11 +4,7 @@
 
 <!-- taking id from the browser param, sent from Editieren in /admin-nutzerverwaltung  -->
 <?php $user_id=$_GET['user_id']; ?>
-<?php if(is_user_logged_in() && current_user_can('administrator')) { 
-   // var_dump($user_id);
-   
-    ?>
-
+<?php if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
 <main>
     <div class="container">
         <div class="hm-content">

@@ -1,9 +1,9 @@
 <?php /* Template Name: Admin Dashboard */ ?>
 
 <!-- include_once header.php from template  -->
-<?php include_once('header.php'); ?>
-<!-- if logged in and can administrate -->
-<?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
+<?php include_once('header.php'); 
+// <!-- if logged in and can administrate --> ?>
+<?php if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
 <main>
     <div class="container">
         <div class="hm-content">

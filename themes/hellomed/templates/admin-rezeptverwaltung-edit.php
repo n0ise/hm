@@ -2,7 +2,7 @@
 <!-- include_once header.php from template  -->
 <?php include_once('header.php'); ?>
 <!-- show the content if the user is logged in   -->
-<?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
+<?php if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
 
 
 <!-- and sidebar  -->
