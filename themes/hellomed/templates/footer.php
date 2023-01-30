@@ -20,3 +20,11 @@
 <!-- Custom js -->
 <script src="https://ui.hellomed.com/src/v1.0/js/off-canvas.js"></script>
 <script src="https://ui.hellomed.com/src/v1.0/js/ios-safari.js"></script>
+
+
+<script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+</script>

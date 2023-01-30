@@ -603,8 +603,6 @@ class Hellomed_Custom_Login_Plugin {
 
 				$result = $this->register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $newsletter_checkbox);
 
-			
-
 				if ( is_wp_error( $result ) ) {
 					// Parse errors into a string and append as parameter to redirect
 					$errors = join( ',', $result->get_error_codes() );
