@@ -52,14 +52,14 @@ nicht des Angehörigen."> </i>
                             <div class="form-floating">
                                 <input required id="patient_first_name" name="patient_first_name" type="text" class="form-control" placeholder=" " />
                                 <label for="patient_first_name">Name des Patienten</label>
-                                <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                                <div class="invalid-feedback">Pflichtfeld</div>
                             </div>
                         </div>
                         <div class="mt-3">
                             <div class="form-floating">
                                 <input required id="patient_last_name" name="patient_last_name" type="text" class="form-control" placeholder=" " />
                                 <label for="patient_last_name">Nachname des Patienten</label>
-                                <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                                <div class="invalid-feedback">Pflichtfeld</div>
                             </div>
                         </div>
                     </div>
@@ -74,14 +74,14 @@ nicht des Angehörigen."> </i>
                         <input type="radio" class="btn-check" name="geschlecht" value="Weiblich" id="radiofemale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
                     </div>
-                    <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                    <div class="invalid-feedback">Pflichtfeld</div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
                         <input required id="birthdaypicker" name="geburt" type="text" class="form-control" placeholder=" " onblur="birthdaySelectedBlur();" onfocus="birthdaySelected();" />
                         <label id="birthdaylabel" for="birthdaypicker">Was ist Ihr Geburtsdatum?</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
 
                 </div>
@@ -134,28 +134,28 @@ wichtige Rückfragen erreichbar sind."> </i>
                     <div class="form-floating">
                         <input required id="strase" name="strasse" type="text" class="form-control" placeholder=" " />
                         <label for="strase">Straße</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-4 ps-0">
                     <div class="form-floating">
                         <input required id="strasenr" name="nrno" type="text" class="form-control" placeholder=" " />
                         <label for="strasenr">Nr</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-4 pe-0">
                     <div class="form-floating">
                         <input required id="plz" name="postcode" maxlength="5" type="text" class="form-control" placeholder=" " />
                         <label for="plz">Postleitzahl</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="form-floating">
                         <input required id="Ort" name="stadt" type="text" class="form-control" placeholder=" " />
                         <label for="Ort">Wohnort</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -168,7 +168,7 @@ wichtige Rückfragen erreichbar sind."> </i>
                     <div class="form-floating">
                         <input required id="telefon" name="telephone" type="text" class="form-control" placeholder=" " />
                         <label for="telefon">Was ist Ihre Telefonnummer?</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                 </div>
 
@@ -206,7 +206,7 @@ verschickt oder hochgeladen werden."> </i>
                     <div class="form-floating">
                         <input required id="startdatumpicker" readonly="readonly" name="startdatumpick" type="text" class="form-control" placeholder=" " onblur="startdatumSelectedBlur();" onfocus="startdatumSelected();" />
                         <label id="startdatumlabel" for="startdatumpicker">Was ist Ihr Wunsch-Startdatum?</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                 </div>
 
@@ -296,14 +296,14 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                         <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Gesetzlich" checked id="flexRadioDefault22" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault22">Gesetzlich</label>
                     </div>
-                    <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                    <div class="invalid-feedback">Pflichtfeld</div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
                         <input required id="krankenversicherung" name="insurance_company" type="text" class="form-control insurance_company" placeholder=" " />
                         <label for="krankenversicherung">Wie heißt Ihre Krankenversicherung?</label>
-                        <div class="invalid-feedback">Dies ist ein Pflichtfeld</div>
+                        <div class="invalid-feedback">Pflichtfeld</div>
                     </div>
                     <div id="filter-records"></div>
                 </div>
