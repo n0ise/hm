@@ -26,19 +26,8 @@ $user_id = get_current_user_id();
                 </div>
                 <div class="col-12 ">
                     <div class="form-floating">
-                        <select id="geschlecht" class="form-select">
-                            <option value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" selected>
-                                <?php echo get_user_meta($user_id, 'geschlecht', true); ?></option>
-                            <?php 
-                                $geschlecht = array('Männlich', 'Weiblich');
-                                $selectedgeschlecht = get_user_meta($user_id, 'geschlecht', true);
-                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
-                                unset($geschlecht[$keygeschlecht]);
-                                    foreach ($geschlecht as $valuegeschlecht) {
-                                    echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
-                                    } 
-                                ?>
-                        </select>
+                        <input id="geschlecht" type="text" class="form-control"
+                           value="<?php echo get_user_meta($user_id, 'geschlecht', true); ?>" disabled>
                         <label>Geschlecht</label>
                     </div>
                 </div>
@@ -66,7 +55,7 @@ $user_id = get_current_user_id();
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="geburt" type="date" class="form-control"
-                            value="<?php echo get_user_meta($user_id, 'geburt', true); ?>">
+                            value="<?php echo get_user_meta($user_id, 'geburt', true); ?>" disabled>
                         <label>Geburtstag</label>
                     </div>
                 </div>
