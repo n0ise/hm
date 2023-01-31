@@ -186,7 +186,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                                     if(strpos($file['rezept_type'], 'medplan') !== false ){
                                         $medplan_files[] = $file['file_url'];
                                     }
-                                    if(strpos($file['rezept_type'], 'erezept') !== false || strpos($file['rezept_type'], 'rezept') !== false){
+                                    if(strpos($file['rezept_type'], 'erezept') !== false || strpos($file['rezept_type'], 'rezeptfoto') !== false){
                                         $erezept_files[] = $file['file_url'];
                                     }
                                 }
@@ -197,29 +197,34 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
                     </div>
-                    <?php foreach($medplan_files as $file):
-?>
+                    <?php $counter = 1; 
+      foreach($medplan_files as $file): ?>
                     <div class="col-12">
                         Es wurde ein Medikationsplan für dieses Rezept hochgeladen:
-                        <a href="#" data-toggle="modal" data-target="#medplanPreviewModal">Vorschau</a> |
+                        <a class="modal_m" href="javascript:void(0)" data-toggle="modal"
+                            data-target="#medplanPreviewModal<?php echo $counter; ?>">Vorschau</a> |
                         <a href="<?php echo $file; ?>" download>Download</a>
                     </div>
-                    <!-- <div class="modal fade" id="medplanPreviewModal" tabindex="-1" role="dialog"
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="medplanPreviewModal<?php echo $counter; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="medplanPreviewModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-center modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="medplanPreviewModalLabel">Medikationsplan Vorschau</h5>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Schließen</button>
+                        <div class="modal-dialog modal-lg modal-dialog-center" role="document">
+                            <div class="modal-content p-5 pt-4">
+                                <div class="modal-header p-0 border-0">
+                                    <h5 class="modal-title pt-1 fs-3" id="medplanPreviewModalLabel">Medikationsplan Vorschau</h5>
+                                    <button type="button" class="btn-close modal-close" data-dismiss="modal"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <img src="<?php //echo $file; ?>" alt="Medikationsplan Vorschau">
+                                <div class="modal-body p-0">
+                                    <div class="modal-img mt-3 mb-4">
+                                        <img src="<?php echo $file; ?>" alt="Medikationsplan Vorschau">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-                    <?php endforeach; ?>
+                    </div>
+                    <?php $counter++; endforeach; ?>
+
                     <?php else: ?>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
@@ -229,39 +234,43 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <?php endif; ?>
 
+                    <?php $counter = 0; ?>
                     <?php if(!empty($erezept_files)): ?>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Rezept File</div>
+                        <div class="h3 m-0 mt-5">Rezeptfelder</div>
                     </div>
                     <?php
-    if (count($erezept_files) > 1) {
-        echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
-    } else {
-        echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
-    }
-    foreach($erezept_files as $file): 
+        if (count($erezept_files) > 1) {
+            echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+        } else {
+            echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+        }
+        foreach($erezept_files as $file): 
     ?>
-                    <div class="modal fade erezeptPreviewModal" id="erezeptPreviewModal" tabindex="-1" role="dialog"
+                    <div class="col-12">
+                        <a class="modal_r" href="javascript:void(0)" data-toggle="modal"
+                            data-target=".erezeptPreviewModal<?php echo $counter; ?>">Vorschau</a> |
+                        <a href="<?php echo $file; ?>" download>Download</a>
+                    </div>
+                    <div class="modal fade erezeptPreviewModal<?php echo $counter; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="erezeptPreviewModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="erezeptPreviewModalLabel">Rezeptfeld Vorschau</h5>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Schließen</button>
+                        <div class="modal-dialog modal-lg modal-dialog-center" role="document">
+                            <div class="modal-content p-5 pt-4">
+                                <div class="modal-header p-0 border-0">
+                                    <h5 class="modal-title pt-1 fs-3" id="erezeptPreviewModalLabel">Rezept Vorschau</h5>
+                                    <button type="button" class="btn-close modal-close" data-dismiss="modal"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <img src="<?php echo $file; ?>" alt="Rezept Vorschau">
+                                <div class="modal-body p-0">
+                                    <div class="modal-img mt-3 mb-4">
+                                        <img src="<?php echo $file; ?>" alt="Rezept Vorschau">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <a href="#" data-toggle="modal" data-target=".erezeptPreviewModal">Vorschau</a> |
-                        <a href="<?php echo $file; ?>" download>Download</a>
-                    </div>
-
+                    <?php $counter++; ?>
                     <?php endforeach; ?>
+
                     <?php else: ?>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Rezept File</div>
@@ -278,21 +287,20 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
                                 <?php
-        $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
-        $selected_status_prescription = $record['status_prescription'];
-        if (!$selected_status_prescription) {
-            echo '<option value="" disabled selected>Bitte Wählen</option>';
-        }
-        foreach ($status_prescription as $value_status_prescription) {
-            if($selected_status_prescription == $value_status_prescription) {
-                echo '<option value="' . $value_status_prescription . '" selected>' . $value_status_prescription . '</option>';
-            } else {
-                echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
-            }
-        }
-    ?>
+                                    $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
+                                    $selected_status_prescription = $record['status_prescription'];
+                                    if (!$selected_status_prescription) {
+                                        echo '<option value="" disabled selected>Bitte Wählen</option>';
+                                    }
+                                    foreach ($status_prescription as $value_status_prescription) {
+                                        if($selected_status_prescription == $value_status_prescription) {
+                                            echo '<option value="' . $value_status_prescription . '" selected>' . $value_status_prescription . '</option>';
+                                        } else {
+                                            echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
+                                        }
+                                    }
+                                ?>
                             </select>
-
 
                             <label>Status</label>
                         </div>
@@ -555,4 +563,30 @@ include_once('footer.php');
             });
         });
     });
+
+    // modal for Files, for medikationplan and rezept
+    // $('#exampleModalCenter').on('show.bs.modal', function() {
+    //     console.log('Modal is being triggered');
+    // });
+    $(document).ready(function() {
+        $('#exampleModalCenter').modal({
+            show: false
+        });
+
+        $('.modal_m').on('click', function() {
+            let targetModalId = $(this).data('target');
+            $(targetModalId).modal('show');
+        });
+
+        $('.modal_r').on('click', function() {
+            var modalId = $(this).data("target");
+            $(modalId).modal('show');
+        });
+    });
+    // closiiing tiiime 🎶
+    $('.modal-close').on('click', function() {
+    var modal = $(this).closest('.modal');
+    modal.modal('hide');
+});
+
     </script>
