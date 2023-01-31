@@ -209,7 +209,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <!-- Modal -->
                     <div class="modal fade" id="medplanPreviewModal<?php echo $counter; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="medplanPreviewModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-center" role="document">
+                        <div class="modal-rezept modal-dialog modal-lg modal-dialog-center" role="document">
                             <div class="modal-content p-5 pt-4">
                                 <div class="modal-header p-0 border-0">
                                     <h5 class="modal-title pt-1 fs-3" id="medplanPreviewModalLabel">Medikationsplan Vorschau</h5>
@@ -254,7 +254,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     </div>
                     <div class="modal fade erezeptPreviewModal<?php echo $counter; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="erezeptPreviewModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-center" role="document">
+                        <div class="modal-rezept modal-dialog modal-lg modal-dialog-center" role="document">
                             <div class="modal-content p-5 pt-4">
                                 <div class="modal-header p-0 border-0">
                                     <h5 class="modal-title pt-1 fs-3" id="erezeptPreviewModalLabel">Rezept Vorschau</h5>
@@ -588,5 +588,4 @@ include_once('footer.php');
     var modal = $(this).closest('.modal');
     modal.modal('hide');
 });
-
     </script>
