@@ -3,8 +3,9 @@
 <?php include_once('header.php'); ?>
 
 <!-- taking id from the browser param, sent from Editieren in /admin-nutzerverwaltung  -->
-<?php $user_id=$_GET['user_id']; ?>
-<?php if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
+<?php $user_id=$_GET['user_id']; 
+
+ if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
 <main>
     <div class="container">
         <div class="hm-content">
@@ -14,8 +15,14 @@
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {
                 // var_dump($user_id);
+            
                 // get user data
                 $user = get_userdata($user_id);
+                // var_dump($user->ID);
+                $patient_caregiver = get_field('patient_caregiver', 'user_' . $user->ID);
+                $user_firstname = $user->user_firstname;
+                $user_lastname = $user->user_lastname;
+           
             ?>
             <div class="row gy-4 hm-settings-grid">
                 <div class="col-12">
@@ -34,17 +41,33 @@
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="first_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'patient_first_name', true); ?>">
+                            value="<?php echo $user_firstname; ?>">
                         <label>Vorname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'patient_last_name', true); ?>">
+                            value="<?php echo $user_lastname; ?>">
                         <label>Nachname</label>
                     </div>
                 </div>
+                <?php if ($patient_caregiver == 'caregiver') { ?>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                        <input id="patient_first_name" type="text" class="form-control border border-primary"
+                            placeholder=" " value="<?php echo get_field('patient_first_name', 'user_' . $user->ID); ?>">
+                        <label>Patient Vorname</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                        <input id="patient_last_name" type="text" class="form-control border border-primary"
+                            placeholder=" " value="<?php echo get_field('patient_last_name', 'user_' . $user->ID); ?>">
+                        <label>Patient Nachname</label>
+                    </div>
+                </div>
+                <?php } ?>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <select id="geschlecht" class="form-select">
@@ -185,7 +208,7 @@
                 <div class="col-12">
                     <div class="form-floating">
                         <select id="status" class="form-select">
-                        <option value="" disabled selected>Bitte wählen</option>
+                            <option value="" disabled selected>Bitte wählen</option>
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'status', true); ?>" selected>
                                 <?php echo get_user_meta($_GET['user_id'], 'status', true); ?></option>
                             <?php 
@@ -264,6 +287,8 @@ jQuery(document).ready(function($) {
     $('#save').click(function() {
         var first_name = $('#first_name').val();
         var last_name = $('#last_name').val();
+        var patient_first_name = $('#patient_first_name').val();
+        var patient_last_name = $('#patient_last_name').val();
         var geschlecht = $('#geschlecht').val();
         var geburt = $('#geburt').val();
         var krankheiten = $('#krankheiten').val();
@@ -288,6 +313,8 @@ jQuery(document).ready(function($) {
             'user_id': <?php echo $user_id; ?>,
             'first_name': first_name,
             'last_name': last_name,
+            'patient_first_name': patient_first_name,
+            'patient_last_name': patient_last_name,
             'geschlecht': geschlecht,
             'geburt': geburt,
             'krankheiten': krankheiten,
@@ -338,7 +365,8 @@ jQuery(document).ready(function($) {
                 for (var i = 0; i < errorMessages.length; i++) {
                     var inputId = errorMessages[i].split(":")[0];
                     $('#' + inputId).addClass('is-invalid');
-                    $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[i].substring(inputId.length + 1) + '</div>');
+                    $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[i]
+                        .substring(inputId.length + 1) + '</div>');
                 }
                 //add error class and message
                 $('#successdown').addClass('alert alert-danger');
@@ -348,10 +376,12 @@ jQuery(document).ready(function($) {
                     $('#successdown').fadeOut(1000);
                 }, 5000);
 
-                }
+            }
             // update the input fields with the new data
             $('#first_name').val(first_name);
             $('#last_name').val(last_name);
+            $('#patient_first_name').val(patient_first_name);
+            $('#patient_last_name').val(patient_last_name);
             $('#telephone').val(telephone);
             $('#strasse').val(strasse);
             $('#postcode').val(postcode);

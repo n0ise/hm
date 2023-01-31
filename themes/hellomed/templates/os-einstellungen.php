@@ -19,6 +19,9 @@ $user_id = get_current_user_id();
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {
             $user = get_userdata($user_id);
+            $patient_caregiver = get_field('patient_caregiver', 'user_' . $user->ID);
+            $user_firstname = $user->user_firstname;
+            $user_lastname = $user->user_lastname;
             ?>
             <div class="row gy-4 hm-settings-grid">
                 <div class="col-12">
@@ -34,17 +37,33 @@ $user_id = get_current_user_id();
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="first_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'patient_first_name', true); ?>">
+                            value="<?php echo $user_firstname ?>">
                         <label>Vorname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'patient_last_name', true); ?>">
+                            value="<?php echo $user_lastname; ?>">
                         <label>Nachname</label>
                     </div>
                 </div>
+                <?php if ($patient_caregiver == 'caregiver') { ?>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                        <input id="patient_first_name" type="text" class="form-control border border-primary"
+                            placeholder=" " value="<?php echo get_field('patient_first_name', 'user_' . $user->ID); ?>">
+                        <label>Patient Vorname</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                        <input id="patient_last_name" type="text" class="form-control border border-primary"
+                            placeholder=" " value="<?php echo get_field('patient_last_name', 'user_' . $user->ID); ?>">
+                        <label>Patient Nachname</label>
+                    </div>
+                </div>
+                <?php } ?>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "

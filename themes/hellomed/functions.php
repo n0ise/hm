@@ -356,42 +356,68 @@ add_action('wp_ajax_edit_patient', function() {
 	$errorMessages = array();
 	$updates_needed = array();
 	
-if (isset($_POST['first_name'])) {
-	if (empty($_POST['first_name'])) {
-		$hasError = true;
-		$errorMessages[] = "first_name: Bitte geben Sie Ihren Vornamen ein.";
-	} else {
-		if ( !empty($_POST['first_name']) && $_POST['first_name'] != get_user_meta( $user_id, 'patient_first_name', true )) {
-			$last_name = $_POST['first_name'];
-			$updates_needed[] = array(
-			'meta_key' => 'patient_first_name',
-			'meta_value' => $last_name
-			);
-			$updates_made = true;
+	if (isset($_POST['first_name'])) {
+		if (empty($_POST['first_name'])) {
+			$hasError = true;
+			$errorMessages[] = "first_name: Bitte geben Sie Ihren Vornamen ein.";
+		} else {
+			if (!empty($_POST['first_name']) && $_POST['first_name'] != $user->first_name) {
+				$first_name = $_POST['first_name'];
+				update_user_meta($user_id, 'first_name', $first_name);
+				$updates_made = true;
 			}
+		}
 	}
-}
-	
-if (isset($_POST['last_name'])) {
-	if (empty($_POST['last_name'])) {
-		$hasError = true;
-		$errorMessages[] = "last_name: Bitte geben Sie Ihren Nachnamen ein.";
-	} else {
-		if (preg_match('/^[a-zA-Z ]+$/', $_POST['last_name'])) {
-			if ( !empty($_POST['last_name']) && $_POST['last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
+
+	if (isset($_POST['last_name'])) {
+		if (empty($_POST['last_name'])) {
+			$hasError = true;
+			$errorMessages[] = "last_name: Bitte geben Sie Ihren Vornamen ein.";
+		} else {
+			if (!empty($_POST['last_name']) && $_POST['last_name'] != $user->last_name) {
 				$last_name = $_POST['last_name'];
+				update_user_meta($user_id, 'last_name', $last_name);
+				$updates_made = true;
+			}
+		}
+	}
+
+	if (isset($_POST['patient_first_name'])) {
+		if (empty($_POST['patient_first_name'])) {
+			$hasError = true;
+			$errorMessages[] = "patient_first_name: Bitte geben Sie Ihren Vornamen ein.";
+		} else {
+			if ( !empty($_POST['patient_first_name']) && $_POST['patient_first_name'] != get_user_meta( $user_id, 'patient_first_name', true )) {
+				$last_name = $_POST['patient_first_name'];
 				$updates_needed[] = array(
-				'meta_key' => 'patient_last_name',
+				'meta_key' => 'patient_first_name',
 				'meta_value' => $last_name
 				);
 				$updates_made = true;
-			}
-		} else {
-			$hasError = true;
-			$errorMessages[] = "last_name: Bitte geben Sie einen gültigen Nachnamen ein.";
+				}
 		}
 	}
-}
+	
+	if (isset($_POST['patient_last_name'])) {
+		if (empty($_POST['patient_last_name'])) {
+			$hasError = true;
+			$errorMessages[] = "last_name: Bitte geben Sie Ihren Nachnamen ein.";
+		} else {
+			if (preg_match('/^[a-zA-Z ]+$/', $_POST['last_name'])) {
+				if ( !empty($_POST['patient_last_name']) && $_POST['patient_last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
+					$last_name = $_POST['patient_last_name'];
+					$updates_needed[] = array(
+					'meta_key' => 'patient_last_name',
+					'meta_value' => $last_name
+					);
+					$updates_made = true;
+			}
+			} else {
+				$hasError = true;
+				$errorMessages[] = "patient_last_name: Bitte geben Sie einen gültigen Nachnamen ein.";
+			}
+		}
+	}
 
 
 	// email might be not needed in the forms
@@ -402,77 +428,77 @@ if (isset($_POST['last_name'])) {
 	// 	$updates_made = true;
 	// }
 
-if (isset($_POST['telephone'])) {
-	if (empty($_POST['telephone'])) {
-		$hasError = true;
-		$errorMessages[] = "telephone: Bitte geben Sie Ihre Telefonnummer ein.";
-	} else {
-		if (preg_match("/^(\+49|0049|0)[1-9]{1}[0-9]{9}$/", $_POST['telephone'])) {
-			if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
-				$phone = $_POST['telephone'];
-				$updates_needed[] = array(
-					'meta_key' => 'telephone',
-					'meta_value' => $phone
-				);
-				$updates_made = true;
-			}
-		} else {
+	if (isset($_POST['telephone'])) {
+		if (empty($_POST['telephone'])) {
 			$hasError = true;
-			$errorMessages[] = "telephone: Bitte geben Sie eine gültige Telefonnummer im Format +491234567890, 00491234567890, oder 01234567890 ein.";
+			$errorMessages[] = "telephone: Bitte geben Sie Ihre Telefonnummer ein.";
+		} else {
+			if (preg_match("/^(\+49|0049|0)[1-9]{1}[0-9]{9}$/", $_POST['telephone'])) {
+				if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
+					$phone = $_POST['telephone'];
+					$updates_needed[] = array(
+						'meta_key' => 'telephone',
+						'meta_value' => $phone
+					);
+					$updates_made = true;
+				}
+			} else {
+				$hasError = true;
+				$errorMessages[] = "telephone: Bitte geben Sie eine gültige Telefonnummer im Format +491234567890, 00491234567890, oder 01234567890 ein.";
+			}
 		}
 	}
-}
 	
 
-if (isset($_POST['strasse']) && (empty($_POST['strasse']))) {
-	$hasError = true;
-	$errorMessages[] = "strasse: Bitte geben Sie eine Strasse ein.";
-	} else {
-		if ( !empty($_POST['strasse']) && $_POST['strasse'] != get_user_meta( $user_id, 'strasse', true )) {
-			$address = $_POST['strasse'];
-			$updates_needed[] = array(
-				'meta_key' => 'strasse',
-				'meta_value' => $address
-			);
-			$updates_made = true;	
-		}
-	}
-
-if (isset($_POST['stadt']) && (empty($_POST['stadt']))) {
-	$hasError = true;
-	$errorMessages[] = "stadt: Bitte geben Sie eine Stadt ein.";
-	} else {
-		if ( !empty($_POST['stadt']) && $_POST['stadt'] != get_user_meta( $user_id, 'stadt', true )) {
-			$city = $_POST['stadt'];
-			$updates_needed[] = array(
-				'meta_key' => 'stadt',
-				'meta_value' => $city
-			);
-			$updates_made = true;	
-		}	
-	}
-
-if (isset($_POST['postcode'])) {
-	if (empty($_POST['postcode'])) {
+	if (isset($_POST['strasse']) && (empty($_POST['strasse']))) {
 		$hasError = true;
-		$errorMessages[] = "postcode: Bitte geben Sie eine Postleitzahl ein.";
-	} else {
-		if (preg_match("/^[0-9]{5}$/", $_POST['postcode'])) {
-			if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
-				$zip = $_POST['postcode'];
-				update_user_meta( $user_id, 'postcode', $zip );
+		$errorMessages[] = "strasse: Bitte geben Sie eine Strasse ein.";
+		} else {
+			if ( !empty($_POST['strasse']) && $_POST['strasse'] != get_user_meta( $user_id, 'strasse', true )) {
+				$address = $_POST['strasse'];
+				$updates_needed[] = array(
+					'meta_key' => 'strasse',
+					'meta_value' => $address
+				);
+				$updates_made = true;	
+			}
+		}
+
+	if (isset($_POST['stadt']) && (empty($_POST['stadt']))) {
+		$hasError = true;
+		$errorMessages[] = "stadt: Bitte geben Sie eine Stadt ein.";
+		} else {
+			if ( !empty($_POST['stadt']) && $_POST['stadt'] != get_user_meta( $user_id, 'stadt', true )) {
+				$city = $_POST['stadt'];
 				$updates_needed[] = array(
 					'meta_key' => 'stadt',
 					'meta_value' => $city
 				);
-				$updates_made = true;
-			}
-		} else {
+				$updates_made = true;	
+			}	
+		}
+
+	if (isset($_POST['postcode'])) {
+		if (empty($_POST['postcode'])) {
 			$hasError = true;
-			$errorMessages[] = "postcode: Bitte geben Sie eine gültige Postleitzahl ein (5-stellig)";
+			$errorMessages[] = "postcode: Bitte geben Sie eine Postleitzahl ein.";
+		} else {
+			if (preg_match("/^[0-9]{5}$/", $_POST['postcode'])) {
+				if ( !empty($_POST['postcode']) && $_POST['postcode'] != get_user_meta( $user_id, 'postcode', true )) {
+					$zip = $_POST['postcode'];
+					update_user_meta( $user_id, 'postcode', $zip );
+					$updates_needed[] = array(
+						'meta_key' => 'stadt',
+						'meta_value' => $city
+					);
+					$updates_made = true;
+				}
+			} else {
+				$hasError = true;
+				$errorMessages[] = "postcode: Bitte geben Sie eine gültige Postleitzahl ein (5-stellig)";
+			}
 		}
 	}
-}
 	
 
 	if (isset($_POST['geburt'])) {
@@ -640,30 +666,35 @@ foreach ($rezept_input as &$record) {
 			}
 		}
 	
-	if ( isset($_POST['prescription_date_by_doctor']) && !empty($_POST['prescription_date_by_doctor'])) {
-		$record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];			$updates_made = true;
-		} else {
-			$hasError = true;
-			$errorMessages[]= "prescription_date_by_doctor: Bitte geben Sie ein Datum ein.";
-		}
-			
-	if ( isset($_POST['prescription_start_date']) && !empty($_POST['prescription_start_date'])) {
-		$record['prescription_start_date'] = $_POST['prescription_start_date'];
-		$updates_made = true;
-		} else {
-			$hasError = true;
-			$errorMessages[]= "prescription_start_date: Bitte geben Sie ein Startdatum ein.";
-		}
-		
-	if ( isset($_POST['prescription_end_date']) && !empty($_POST['prescription_end_date'])) {
-		$record['prescription_end_date'] = $_POST['prescription_end_date'];
-		$updates_made = true;
-		} else {
-			$hasError = true;
-			$errorMessages[]= "prescription_end_date: Bitte geben Sie ein Enddatum ein.";
-		}
-	
-		
+		if (isset($_POST['prescription_date_by_doctor'])) {
+			if (!empty($_POST['prescription_date_by_doctor'])) {
+			  $record['prescription_date_by_doctor'] = $_POST['prescription_date_by_doctor'];
+			  $updates_made = true;
+			} else {
+			  $hasError = true;
+			  $errorMessages[] = "prescription_date_by_doctor: Bitte geben Sie ein Datum ein.";
+			}
+		  }
+		  
+		  if (isset($_POST['prescription_end_date'])) {
+			if (!empty($_POST['prescription_end_date'])) {
+			  $record['prescription_end_date'] = $_POST['prescription_end_date'];
+			  $updates_made = true;
+			} else {
+			  $hasError = true;
+			  $errorMessages[]= "prescription_end_date: Bitte geben Sie ein Enddatum ein.";
+			}
+		  }
+		  if (isset($_POST['prescription_start_date'])) {
+			if (!empty($_POST['prescription_start_date'])) {
+			  $record['prescription_start_date'] = $_POST['prescription_start_date'];
+			  $updates_made = true;
+			} else {
+			  $hasError = true;
+			  $errorMessages[]= "prescription_start_date: Bitte geben Sie ein Startdatum ein.";
+			}
+		  }
+		 
 	if (isset($_POST['status_prescription'])) {
 		if ( !empty($_POST['status_prescription']) && $_POST['status_prescription'] != "Bitte wählen") {
 			$record['status_prescription'] = $_POST['status_prescription'];
