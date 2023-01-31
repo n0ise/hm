@@ -233,6 +233,8 @@ include_once('footer.php');
         $('#save').click(function() {
             var first_name = $('#first_name').val();
             var last_name = $('#last_name').val();
+            var patient_first_name = $('#patient_first_name').val();
+            var patient_last_name = $('#patient_last_name').val();
             var geschlecht = $('#geschlecht').val();
             var geburt = $('#geburt').val();
             var krankheiten = $('#krankheiten').val();
@@ -259,6 +261,8 @@ include_once('footer.php');
                 'user_id': <?php echo $user_id; ?>,
                 'first_name': first_name,
                 'last_name': last_name,
+                'patient_first_name': patient_first_name,
+                'patient_last_name': patient_last_name,
                 'geschlecht': geschlecht,
                 'geburt': geburt,
                 'krankheiten': krankheiten,
