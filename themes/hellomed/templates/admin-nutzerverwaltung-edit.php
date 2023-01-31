@@ -89,8 +89,11 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
-                        <input id="geburt" type="date" class="form-control"
-                            value="<?php echo get_user_meta($_GET['user_id'], 'geburt', true); ?>">
+                        <?php
+                            $geburt = get_user_meta($_GET['user_id'], 'geburt', true);
+                            $converted_date = date("Y-m-d", strtotime($geburt));
+                        ?>
+                        <input id="geburt" type="date" class="form-control" value="<?php echo $converted_date; ?>">
                         <label>Geburtstag</label>
                     </div>
                 </div>
@@ -161,8 +164,11 @@
                 </div>
                 <div class="col-12">
                     <div class="form-floating">
-                        <input id="start_date" type="date" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($_GET['user_id'], 'start_date', true); ?>">
+                        <?php
+                            $start_date = get_user_meta($_GET['user_id'], 'start_date', true);
+                            $converted_date = date("Y-m-d", strtotime($start_date));
+                        ?>
+                        <input id="start_date" type="date" class="form-control" value="<?php echo $converted_date; ?>">
                         <label>hellomed Startdatum</label>
                     </div>
                 </div>
