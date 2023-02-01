@@ -26,7 +26,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 <header class="hm-header">
     <div class="container">
         <div class="hm-logo">
-            <a href="index.php">
+            <a href="/anmelden">
                 <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg">
             </a>
         </div>
