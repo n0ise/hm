@@ -58,11 +58,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
         <div class="hm-preheader <?php echo $class; ?>" id="prescription-<?php echo $prescription_id; ?>">
             <i class="bi bi-exclamation-circle-fill"></i>
             <div>
-                Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum
+                Ihr aktueller Rezeptzyklus für das Rezept <b><?php echo $prescription_id; ?></b> und somit die Belieferung durch hellomed läuft zum
                 <b><?php echo $prescription_end_date_formatted; ?></b> aus.
-                Bitte senden Sie Ihr Folgerezept spätestens bis zum
+                Bitte senden Sie uns ein Folgerezept bis zum
                 <b><?php echo $two_weeks_before->format('d.m.Y'); ?></b> postalisch oder per
-                Rezept-Upload an uns.
+                E-Rezept zu.
             </div>
             <i class="bi bi-x-circle"></i>
         </div>
