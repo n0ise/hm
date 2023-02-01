@@ -64,16 +64,6 @@ if (!empty($rezept['medicine_section'])) {
 
                 </tbody>
             </table>
-
-            <div class=" row mt-5">
-                <div class="col-12 col-md-4 offset-md-4">
-                    <!--// TODO here putting data from user TBD -->
-                    <a class="btn btn-primary btn-lg"
-                        href="mailto:patient@hellomed.com?subject=Neues Folgerezept - Folgerezept für meine Blister&amp;body=Sehr geehrte Damen und Herren, im Anhang dieser E-Mail finden Sie mein Folgerezept mit Bitte um Bearbeitung. Beste Grüße">Folgerezept
-                        einreichen</a>
-                </div>
-            </div>
-
         </div>
     </div>
 </main>
