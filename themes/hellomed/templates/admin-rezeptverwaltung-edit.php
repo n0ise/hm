@@ -140,7 +140,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Inhalt</div>
+                        <div class="h3 m-0 mt-5">Medikamente</div>
                     </div>
                     <?php
                 if (!empty($record['medicine_section'])) {
@@ -230,7 +230,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
                     </div>
                     <div class="col-12">
-                        Es wurde kein Medikationsplan für diesen Benutzer hochgeladen.
+                        Es wurde kein Medikationsplan für diesen Patient hochgeladen.
                     </div>
                     <?php endif; ?>
 
@@ -287,7 +287,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
                                 <?php
-                                    $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
+                                    $status_prescription = array('Aktiv', 'Wartend','Gefährdet', 'Inaktiv');
                                     $selected_status_prescription = $record['status_prescription'];
                                     if (!$selected_status_prescription) {
                                         echo '<option value="" disabled selected>Bitte Wählen</option>';
