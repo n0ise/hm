@@ -39,6 +39,8 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
                         <th>Rezept ID</th>
                         <th>Arzt</th>
                         <th>Verschreibungsdatum</th>
+                        <th>Startdatum</th>
+                        <th>Enddatum</th>
                         <th>Enthaltene Medikamente</th>
                         <th>Status</th>
                     </tr>
@@ -53,6 +55,8 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
                         <td data-label="Verschreibungsdatum"><?php echo $rezept['prescription_date_by_doctor']; ?></td>
+                        <td data-label="Startdatum"><?php echo $rezept['prescription_start_date']; ?></td>
+                        <td data-label="Enddatum"><?php echo $rezept['prescription_end_date']; ?></td>
                         <td data-label="Enthaltene Medikamente">
                             <!-- show the medicine_section -->
                             <?php
