@@ -123,7 +123,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
-                    <li><a class="dropdown-item" href="einstellungen">Einstellungen</a></li>
+                    <li><a class="dropdown-item" href="/einstellungen">Einstellungen</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -151,11 +151,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <ul>
                 <!-- check the page slug and make the correspondent <li> with class active -->
                 <li><a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
-                        href="/os-medikationsplan">Medikationsplan</a></li>
-                <li><a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>" href="/os-rezepte">Rezepte</a>
+                        href="/medikationsplan">Medikationsplan</a></li>
+                <li><a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>" href="/rezepte">Rezepte</a>
                 </li>
                 <li><a class="<?php if (is_page('os-medikamente')) { echo 'active'; } ?>"
-                        href="/os-medikamente">Medikamente</a> </li>
+                        href="/medikamente">Medikamente</a> </li>
             </ul>
             <div class="hm-offcanvas-profile">
                 <div class="hm-dropdown">
@@ -169,8 +169,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
             </div>
             <ul>
-                <li><a href="os-hilfe">FAQ & Hilfe</a></li>
-                <li><a href="os-einstellungen">Einstellungen</a></li>
+                <li><a href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
+                <li><a href="/einstellungen">Einstellungen</a></li>
                 <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
             </ul>
         </div>
