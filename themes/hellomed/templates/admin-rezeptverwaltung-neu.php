@@ -11,26 +11,44 @@
                 <div class="h2 mb-5">Rezept bearbeiten</div>
                 <div class="row gy-4 hm-settings-grid">
                     <div class="col-12">
-                        <div class="h3 m-0">Benutzer</div>
+                        <div class="h3 m-0">Patient</div>
                     </div>
+
+
                     <div class="col-12">
-                        <select id="patient_select" name="patient_select" class="form-control"
-                            onchange="updateSelectedID()">
-                            <option value="" disabled selected>Patienten auswählen</option>
-                            <?php 
-                                $patients = get_users( array( 'role' => 'client' ) );
-                                foreach ( $patients as $patient ) {
-                                    $new_user_id = get_field('new_user_id', 'user_'.$patient->ID);
-                                    $patient_first_name = get_field('patient_first_name', 'user_'.$patient->ID);
-                                    $patient_last_name = get_field('patient_last_name', 'user_'.$patient->ID);
-                            ?>
-                            <option value="<?php echo $new_user_id; ?>" data-patientid="<?php echo $patient->ID; ?>">
-                                <?php echo $new_user_id . ' - ' . $patient_first_name. " ".$patient_last_name; ?>
-                            </option>
-                            <?php 
-                                }
-                            ?>
-                        </select>
+                        <?php 
+                        $patients = get_users( array( 'role' => 'client' ) );
+                        $patientsWithDetails = [];
+                        $new_user_ids = [];
+                        $patient_first_names = [];
+                        $patient_last_names = [];
+                        foreach ( $patients as $patient ) {
+                            $new_user_id = get_field('new_user_id', 'user_'.$patient->ID);
+                            $patient_first_name = get_field('patient_first_name', 'user_'.$patient->ID);
+                            $patient_last_name = get_field('patient_last_name', 'user_'.$patient->ID);
+
+                            $new_user_ids[] = $new_user_id;
+                            $patient_first_names[] = $patient_first_name;
+                            $patient_last_names[] = $patient_last_name;
+
+                            $patientsWithDetails[] = [
+                                'ID' => $patient->ID,
+                                'new_user_id' => $new_user_id,
+                                'patient_first_name' => $patient_first_name,
+                                'patient_last_name' => $patient_last_name,
+                            ];
+                        }
+
+                        ?>
+                        <div class="form-group">
+                            <input type="text" id="patient_select" name="patient_select" class="form-control"
+                                oninput="search_patient()" onchange="updateSelectedID()" onfocus="search_patient()">
+                            <div id="patient_options">
+                                <ul id="patient_records" class="hm-autocomplete"
+                                    data-patientid="<?php echo $patient->ID; ?>"></ul>
+                            </div>
+                        </div>
+
                         <input type="hidden" id="user_id" name="user_id" value="">
                     </div>
                     <!-- hidden random id  -->
@@ -115,7 +133,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Inhalt</div>
+                        <div class="h3 m-0 mt-5">Medikamente</div>
                     </div>
 
                     <div class="col-12 col-md-9">
@@ -429,11 +447,48 @@ include_once('footer.php');
     } else {
         console.error("Element with ID 'prescription_id_no' not found.");
     }
+    </script>
+    <script>
+    function search_patient() {
+        const input = document.querySelector('#patient_select');
+        const searchTerm = input.value;
 
-    // take correspondent ID (wordpress ID not deutche blister) and secretly assign it to the input
-    function updateSelectedID() {
-        var selectedOption = document.getElementById("patient_select").selectedOptions[0];
-        var patientID = selectedOption.getAttribute("data-patientid");
-        document.getElementById("user_id").value = patientID;
+        const patients = <?php echo json_encode($patientsWithDetails); ?>;
+        document.querySelector('#patient_options').innerHTML = '';
+
+        // Show all results if the search term is empty
+        if (searchTerm === '') {
+            patients.forEach(result => {
+                const option = document.createElement('li');
+                option.classList.add('hm-autocomplete-item');
+                option.innerHTML = `
+        <div class="hm-autocomplete-name">${result.new_user_id} ${result.patient_first_name} ${result.patient_last_name}</div>
+      `;
+                option.setAttribute("data-patientid", result.ID);
+                document.querySelector('#patient_options').appendChild(option);
+                option.addEventListener('click', function(event) {
+                    document.querySelector('#patient_select').value = `${result.new_user_id}`;
+                    document.querySelector('#patient_options').innerHTML = '';
+                    document.querySelector('#user_id').value = result.ID;
+                });
+            });
+        } else {
+            // Show all results that include the search term
+            const searchResults = patients.filter(patient => String(patient.new_user_id).includes(searchTerm));
+            searchResults.forEach(result => {
+                const option = document.createElement('li');
+                option.classList.add('hm-autocomplete-item');
+                option.innerHTML = `
+        <div class="hm-autocomplete-name">${result.new_user_id} ${result.patient_first_name} ${result.patient_last_name}</div>
+      `;
+                option.setAttribute("data-patientid", result.ID);
+                document.querySelector('#patient_options').appendChild(option);
+                option.addEventListener('click', function(event) {
+                    document.querySelector('#patient_select').value = `${result.new_user_id}`;
+                    document.querySelector('#patient_options').innerHTML = '';
+                    document.querySelector('#user_id').value = result.ID;
+                });
+            });
+        }
     }
     </script>
