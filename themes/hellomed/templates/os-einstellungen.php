@@ -141,16 +141,6 @@ $user_id = get_current_user_id();
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="h3 m-0 mt-5">Verblisterung</div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <input id="start_date" type="date" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'start_date', true); ?>">
-                        <label>hellomed Startdatum</label>
-                    </div>
-                </div>
-                <div class="col-12">
                     <div class="h3 m-0 mt-5">Krankenkasse</div>
                 </div>
                 <div class="col-12">
@@ -246,7 +236,7 @@ include_once('footer.php');
             var zusatz = $('#zusatz').val();
             var telephone = $('#telephone').val();
             var privat_or_gesetzlich = $('input[name="privat_or_gesetzlich"]:checked').val();
-            var start_date = $('#start_date').val();
+            // var start_date = $('#start_date').val();
             var insurance_company = $('#insurance_company').val();
             var insurance_number = $('#insurance_number').val();
 
@@ -274,7 +264,7 @@ include_once('footer.php');
                 'zusatz': zusatz,
                 'telephone': telephone,
                 'privat_or_gesetzlich': privat_or_gesetzlich,
-                'start_date': start_date,
+                // 'start_date': start_date,
                 'insurance_company': insurance_company,
                 'insurance_number': insurance_number
 
@@ -338,7 +328,7 @@ include_once('footer.php');
                 $('#geschlecht').val(geschlecht);
                 $('#insurance_company').val(insurance_company);
                 $('#insurance_number').val(insurance_number);
-                $('#start_date').val(start_date);
+                // $('#start_date').val(start_date);
                 $('#krankheiten').val(krankheiten);
                 $('#nrno').val(nrno);
 
