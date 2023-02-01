@@ -51,16 +51,14 @@
 
                         <input type="hidden" id="user_id" name="user_id" value="">
                     </div>
-                    <!-- hidden random id  -->
-                    <input id="prescription_id_no" type="hidden" class="form-control">
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Blisterjob</div>
                     </div>
                     <?php 
-    if (!empty($record['blister_job'])) {
-      foreach ($record['blister_job'] as $blister_job) {
+                        if (!empty($record['blister_job'])) {
+                        foreach ($record['blister_job'] as $blister_job) {
 
-  ?>
+                    ?>
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
                             <input id="blister_job_id" type="text" class="blister_job_id form-control" value="ID">
@@ -329,7 +327,13 @@ include_once('footer.php');
             // var medicine_amount = $('#medicine_amount').val();
             var status_prescription = $('#status_prescription').val();
             var patient_select = $('#patient_select').val();
-            var prescription_id_no = $('#prescription_id_no').val();
+            // var prescription_id_no = $('#prescription_id_no').val();
+            // generating randomID
+            function generateRandomID() {
+             return Math.floor(Math.random() * (1000000000 - 100) + 100);
+            }
+            var prescription_id_no = generateRandomID();
+            console.log("Prescription ID: ", prescription_id_no);
             var user_id = $('#user_id').val();
             // for each value in blister_jobs, get the values and put it in an array
 
@@ -430,23 +434,6 @@ include_once('footer.php');
             });
         });
     });
-    </script>
-
-    <script>
-    // generating numerical random ID 
-    function generateRandomID() {
-        return Math.floor(Math.random() * (1000000000 - 100) + 100);
-    }
-
-    var prescriptionID = generateRandomID();
-    console.log("Prescription ID: ", prescriptionID);
-
-    var prescriptionInput = document.getElementById("prescription_id_no");
-    if (prescriptionInput) {
-        prescriptionInput.value = prescriptionID;
-    } else {
-        console.error("Element with ID 'prescription_id_no' not found.");
-    }
     </script>
     <script>
     function search_patient() {
