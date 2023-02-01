@@ -57,7 +57,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         </div>
                     </div> -->
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Blisterjob</div>
+                        <div class="h3 m-0 mt-5" id="error_blister">Blisterjob</div>
                     </div>
                     <?php 
     if (!empty($record['blister_job'])) {
@@ -140,7 +140,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Medikamente</div>
+                        <div class="h3 m-0 mt-5" id="error_medikamente">Medikamente</div>
                     </div>
                     <?php
                 if (!empty($record['medicine_section'])) {
@@ -518,6 +518,7 @@ include_once('footer.php');
             console.log(count);
             $.post(ajaxurl, data, function(response) {
                 response = JSON.parse(response);
+                console.log(response);
 
                 // remove invalid when focusing on the field
                 $('input').on('focus', function() {
@@ -557,9 +558,6 @@ include_once('footer.php');
                         $('#successdown').fadeOut(1000);
                     }, 5000);
                 }
-
-
-
             });
         });
     });

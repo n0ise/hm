@@ -52,7 +52,7 @@
                         <input type="hidden" id="user_id" name="user_id" value="">
                     </div>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Blisterjob</div>
+                        <div class="h3 m-0 mt-5" id="error_blister">Blisterjob</div>
                     </div>
                     <?php 
                         if (!empty($record['blister_job'])) {
@@ -131,9 +131,8 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Medikamente</div>
+                        <div class="h3 m-0 mt-5" id="error_medikamente">Medikamente</div>
                     </div>
-
                     <div class="col-12 col-md-9">
                         <div class="form-floating">
                             <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn" value=""

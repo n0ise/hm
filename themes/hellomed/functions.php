@@ -707,7 +707,7 @@ foreach ($rezept_input as &$record) {
 
 	foreach ($_POST['blister_jobs'] as $item) {
 		if (empty($item['blister_job_id']) || empty($item['blister_start_date']) || empty($item['blister_end_date'])) {
-			$errorMessages[] = "blister: Bitte füllen Sie alle Felder für den Blister-Job aus.";
+			$errorMessages[] = "error_blister: <i class=\"bi bi-exclamation-triangle-fill\"></i> Bitte füllen Sie alle Felder für den Blister-Job aus.";
 			$hasError = true;
 		} else {
 			$record['blister_job'] = $_POST['blister_jobs'];
@@ -717,7 +717,7 @@ foreach ($rezept_input as &$record) {
 	
 	foreach ($_POST['medikament'] as $item) {
 		if (empty($item['medicine_name_pzn']) || empty($item['medicine_amount'])) {
-			$errorMessages[] = "inhalt: Bitte füllen Sie alle Felder für den Medikamente aus.";
+			$errorMessages[] = "error_medikamente: <i class=\"bi bi-exclamation-triangle-fill\"></i> Bitte füllen Sie alle Felder für den Medikamente aus.";
 			$hasError = true;
 		} else {
 			$record['medicine_section'] = $_POST['medikament'];
@@ -854,7 +854,7 @@ add_action('wp_ajax_new_prescription', function() {
 	
 	foreach ($_POST['medikament'] as $item) {
 		if (empty($item['medicine_name_pzn']) || empty($item['medicine_amount'])) {
-				$errorMessages[] = "Bitte füllen Sie alle Felder für den Medikamente aus.";
+				$errorMessages[] = "error_medikamente: <i class=\"bi bi-exclamation-triangle-fill\"></i> Bitte füllen Sie alle Felder für den Medikamente aus.";
 				$hasError = true;
 			} 
 		else
@@ -866,7 +866,7 @@ add_action('wp_ajax_new_prescription', function() {
 
 	foreach ($_POST['blister_jobs'] as $item) {
     	if (empty($item['blister_job_id']) || empty($item['blister_start_date']) || empty($item['blister_end_date'])) {
-       			$errorMessages[] = "Bitte füllen Sie alle Felder für den Blister-Job aus.";
+       			$errorMessages[] = "error_blister: <i class=\"bi bi-exclamation-triangle-fill\"></i> Bitte füllen Sie alle Felder für den Blister-Job aus.";
        			$hasError = true;
     		} 
 		else 
