@@ -397,7 +397,7 @@ include_once('footer.php');
             // this is taking count of how many repeaters, and add it into the ID 
             counter++;
             let newDivHTML =
-    `<div class="col-12 col-md-9">
+                `<div class="col-12 col-md-9">
         <div class="form-floating">
             <input id="medicine_name_pzn_${counter}" type="text" class="form-control medicine_name_pzn" value="" list="medicine-options_${counter}">
             <label>Medikament</label>
@@ -559,22 +559,29 @@ include_once('footer.php');
                     }, 5000);
 
                 } else if (response.status == 'error') {
-                    var errorMessages = response.message;
-                    //loop through error messages and add to corresponding input fields
-                    for (var i = 0; i < errorMessages.length; i++) {
-                        var inputId = errorMessages[i].split(":")[0];
-                        $('#' + inputId).addClass('is-invalid');
-                        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[
-                            i].substring(inputId.length + 1) + '</div>');
+                    if (response.message.length == 0) {
+                        $('#successdown').addClass('alert alert-danger');
+                        $('#successdown').html(
+                            'Es gab keine neuen Felder zum Speichern');
+                    } else {
+                        var errorMessages = response.message;
+                        //loop through error messages and add to corresponding input fields
+                        for (var i = 0; i < errorMessages.length; i++) {
+                            var inputId = errorMessages[i].split(":")[0];
+                            $('#' + inputId).addClass('is-invalid');
+                            $('#' + inputId).after('<div class="invalid-feedback">' +
+                                errorMessages[
+                                    i].substring(inputId.length + 1) + '</div>');
+                        }
+                        //add error class and message
+                        $('#successdown').addClass('alert alert-danger');
+                        $('#successdown').html(
+                            'Fehler: Bitte überprüfen Sie die rot markierten Felde');
+                        $('#successdown').fadeIn(1000);
+                        setTimeout(function() {
+                            $('#successdown').fadeOut(1000);
+                        }, 5000);
                     }
-                    //add error class and message
-                    $('#successdown').addClass('alert alert-danger');
-                    $('#successdown').html(
-                        'Fehler: Bitte überprüfen Sie die rot markierten Felde');
-                    $('#successdown').fadeIn(1000);
-                    setTimeout(function() {
-                        $('#successdown').fadeOut(1000);
-                    }, 5000);
                 }
             });
         });
