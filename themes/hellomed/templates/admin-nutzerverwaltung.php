@@ -56,6 +56,7 @@ $status="Alle";
                 $user_lastname = get_field('patient_last_name', 'user_' . $user->ID);
                 $user_status = get_field('status', 'user_' . $user->ID);
                 $date = get_field('geburt', 'user_' . $user->ID); 
+                $formatted_date = date("d.m.Y", strtotime($date));
         ?>
                     <tr>
                         <td data-label="User ID"><?php echo $user_id; ?></td>
@@ -67,7 +68,7 @@ $status="Alle";
                             } 
                             ?>                           
                         </td>
-                        <td data-label="Geburtsdatum"><?php  echo $date; ?></td>
+                        <td data-label="Geburtsdatum"><?php  echo $formatted_date; ?></td>
                         <td data-label="E-Mail"><?php echo $user->user_email; ?></td>
                         <td data-label="Telefon"><?php echo $user->telephone; ?></td>
                         <td data-label="Status"><span

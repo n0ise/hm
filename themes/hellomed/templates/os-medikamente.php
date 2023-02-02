@@ -53,7 +53,7 @@ if (!empty($rezept['medicine_section'])) {
                     <tr>
                         <td data-label="Name"><?php echo $item; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
-                        <td data-label="Verschreibungsdatum"><?php echo $rezept['prescription_date_by_doctor']; ?></td>
+                        <td data-label="Verschreibungsdatum"><?php echo date("d.m.Y", strtotime($rezept['prescription_date_by_doctor'])); ?></td>
                         <td data-label="Enthalten in Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Status"><span
                                 class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']); ?>">
