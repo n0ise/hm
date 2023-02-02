@@ -459,22 +459,46 @@ include_once('footer.php');
         const patients = <?php echo json_encode($patientsWithDetails); ?>;
         document.querySelector('#patient_options').innerHTML = '';
 
-        document.querySelector(`#patient_options`).innerHTML =
-            `<ul id="filter-records" class="p-2 hm-autocomplete"></ul>`;
+        // Show all results if the search term is empty
+        if (!searchTerm) {
+            document.querySelector(`#patient_options`).innerHTML =
+                `<ul id="filter-records" class="p-2 hm-autocomplete"></ul>`;
 
-        patients.forEach(result => {
-            const option = document.createElement('li');
-            option.classList.add('hm-autocomplete-item');
-            option.innerHTML = `
-      <div class="hm-autocomplete-name">ID: ${result.new_user_id} (${result.patient_first_name} ${result.patient_last_name})</div>
-    `;
-            option.setAttribute("data-patientid", result.ID);
-            document.querySelector('#filter-records').appendChild(option);
-            option.addEventListener('click', function(event) {
-                document.querySelector('#patient_select').value = `${result.new_user_id}`;
-                document.querySelector('#patient_options').innerHTML = '';
-                document.querySelector('#user_id').value = result.ID;
+            patients.forEach(result => {
+                const option = document.createElement('li');
+                option.classList.add('hm-autocomplete-item');
+                option.innerHTML = `
+              <div class="hm-autocomplete-name">ID: ${result.new_user_id} (${result.patient_first_name} ${result.patient_last_name})</div>
+            `;
+                option.setAttribute("data-patientid", result.ID);
+                document.querySelector('#filter-records').appendChild(option);
+                option.addEventListener('click', function(event) {
+                    document.querySelector('#patient_select').value = `${result.new_user_id}`;
+                    document.querySelector('#patient_options').innerHTML = '';
+                    document.querySelector('#user_id').value = result.ID;
+                });
             });
-        });
+        } else {
+            // Show all results that include the search term
+            const searchResults = patients.filter(patient => String(patient.new_user_id).includes(searchTerm));
+
+            document.querySelector(`#patient_options`).innerHTML =
+                `<ul id="filter-records" class="p-2 hm-autocomplete"></ul>`;
+
+            searchResults.forEach(result => {
+                const option = document.createElement('li');
+                option.classList.add('hm-autocomplete-item');
+                option.innerHTML = `
+              <div class="hm-autocomplete-name">ID: ${result.new_user_id} (${result.patient_first_name} ${result.patient_last_name})</div>
+            `;
+                option.setAttribute("data-patientid", result.ID);
+                document.querySelector('#filter-records').appendChild(option);
+                option.addEventListener('click', function(event) {
+                    document.querySelector('#patient_select').value = `${result.new_user_id}`;
+                    document.querySelector('#patient_options').innerHTML = '';
+                    document.querySelector('#user_id').value = result.ID;
+                });
+            });
+        }
     }
     </script>
