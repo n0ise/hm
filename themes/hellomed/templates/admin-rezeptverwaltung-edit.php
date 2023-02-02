@@ -52,7 +52,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <!-- <div class="col-12">
                         <div class="form-floating">
                             <input id="prescription_id_no" type="text" class="form-control"
-                                value="<?php echo $record['prescription_id']; ?>">
+                                value="<?php //echo $record['prescription_id']; ?>">
                             <label>Prescription ID</label>
                         </div>
                     </div> -->
@@ -60,10 +60,10 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="h3 m-0 mt-5" id="error_blister">Blisterjob</div>
                     </div>
                     <?php 
-    if (!empty($record['blister_job'])) {
-      foreach ($record['blister_job'] as $blister_job) {
+                        if (!empty($record['blister_job'])) {
+                        foreach ($record['blister_job'] as $blister_job) {
 
-  ?>
+                    ?>
 
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
@@ -165,8 +165,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     }
                 }
                 ?>
-                    <div class="medikament_ph"></div>
-                    <datalist id="medicine-options"></datalist>
+                    <div class="d-none medikament_ph"></div>
 
                     <div class="col-12 d-flex justify-content-center">
                         <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
@@ -198,7 +197,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
                     </div>
                     <?php $counter = 1; 
-      foreach($medplan_files as $file): ?>
+                        foreach($medplan_files as $file): ?>
                     <div class="col-12">
                         Es wurde ein Medikationsplan für dieses Rezept hochgeladen:
                         <a class="modal_m" href="javascript:void(0)" data-toggle="modal"
@@ -212,7 +211,8 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="modal-rezept modal-dialog modal-lg modal-dialog-center" role="document">
                             <div class="modal-content p-5 pt-4">
                                 <div class="modal-header p-0 border-0">
-                                    <h5 class="modal-title pt-1 fs-3" id="medplanPreviewModalLabel">Medikationsplan Vorschau</h5>
+                                    <h5 class="modal-title pt-1 fs-3" id="medplanPreviewModalLabel">Medikationsplan
+                                        Vorschau</h5>
                                     <button type="button" class="btn-close modal-close" data-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body p-0">
@@ -240,13 +240,13 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="h3 m-0 mt-5">Rezeptfelder</div>
                     </div>
                     <?php
-        if (count($erezept_files) > 1) {
-            echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
-        } else {
-            echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
-        }
-        foreach($erezept_files as $file): 
-    ?>
+                        if (count($erezept_files) > 1) {
+                            echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+                        } else {
+                            echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+                        }
+                        foreach($erezept_files as $file): 
+                    ?>
                     <div class="col-12">
                         <a class="modal_r" href="javascript:void(0)" data-toggle="modal"
                             data-target=".erezeptPreviewModal<?php echo $counter; ?>">Vorschau</a> |
@@ -359,55 +359,68 @@ include_once('footer.php');
                 });
             });
     }
+    let counter = 0;
 
     function search() {
-        // console.log('search called');
-        const searchTerm = this.value;
+        console.log('search called');
 
+        const searchTerm = this.value;
         if (searchTerm.length < 3) {
             return;
         }
-        const searchResults = data.slice(0, 10);
+        const searchResults = data.filter(result => result.Artikelbezeichnung.toLowerCase().includes(searchTerm
+            .toLowerCase()));
+        // console.log(searchResults);
+        document.querySelector(`#medicine-options_${counter}`).innerHTML =
+            `<ul id="filter-records" class="hm-autocomplete"></ul>`;
 
-        document.querySelector('#medicine-options').innerHTML = '';
         searchResults.forEach(result => {
-            const option = document.createElement('option');
-            option.value = result.Artikelbezeichnung;
-            option.label = result.PZN;
-            document.querySelector('#medicine-options').appendChild(option);
+            const option = document.createElement('li');
+            option.classList.add('hm-autocomplete-item');
+            option.classList.add('p-2');
+            option.innerHTML = `
+<div class="hm-autocomplete-name">${result.Artikelbezeichnung}</div>
+`;
+            document.querySelector(`#filter-records`).appendChild(option);
+            option.addEventListener('click', function() {
+                document.querySelector(`#medicine_name_pzn_${counter}`).value = result
+                    .Artikelbezeichnung;
+                document.querySelector(`#medicine-options_${counter}`).innerHTML = '';
+            });
         });
+
     }
 
     jQuery(document).ready(function($) {
         $('#add_medicine_div').click(function() {
             fetchData();
-
-            // Create a string of HTML that represents the new div element and its contents
+            // this is taking count of how many repeaters, and add it into the ID 
+            counter++;
             let newDivHTML =
-                `<div class="col-12 col-md-9">
-              <div class="form-floating">
-                  <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
-                      value="" list="medicine-options">
-                  <label>Medikament</label>
-              </div>
-          </div>
+    `<div class="col-12 col-md-9">
+        <div class="form-floating">
+            <input id="medicine_name_pzn_${counter}" type="text" class="form-control medicine_name_pzn" value="" list="medicine-options_${counter}">
+            <label>Medikament</label>
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class="form-floating">
+            <input id="medicine_amount" type="number" class="form-control medicine_amount" value="" step="1" min="0">
+            <label>Menge</label>
+        </div>
+    </div>    
+    <div class="d-none medikament_ph"></div>
+    <div id="medicine-options_${counter}">
+        <ul></ul>
+    </div>
+`;
 
-          <div class="col-12 col-md-3">
-              <div class="form-floating">
-                  <input id="medicine_amount" type="number" class="form-control medicine_amount"
-                      value="" step="1" min="0">
-                  <label>Menge</label>
-              </div>
 
-          </div>
-          <div class="medikament_ph"></div>`;
-
-            // Insert the HTML string representation of the new div element after the div element with the medikament_ph class
             document.querySelectorAll('.medikament_ph')[document.querySelectorAll('.medikament_ph')
                 .length - 1].insertAdjacentHTML('afterend', newDivHTML);
 
-            // Attach the event listeners to the input element
-            document.querySelector('.medicine_name_pzn').addEventListener('input', search);
+            // ..aand this attach the event listener to the input element with ID #medicine_name_pzn_${counter}
+            document.querySelector(`#medicine_name_pzn_${counter}`).addEventListener('input', search);
         });
     });
     </script>
@@ -525,11 +538,16 @@ include_once('footer.php');
                     $(this).removeClass('is-invalid');
                     $(this).next('.invalid-feedback').remove();
                 });
+                $('select').on('focus', function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').remove();
+                });
 
                 if (response.status == 'success') {
                     //remove error classes and messages
                     $('#successdown').removeClass('alert alert-danger');
                     $('input').removeClass('is-invalid');
+                    $('select').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
                     //add success classes and message
                     // $('input').addClass('is-valid');
@@ -583,7 +601,7 @@ include_once('footer.php');
     });
     // closiiing tiiime 🎶
     $('.modal-close').on('click', function() {
-    var modal = $(this).closest('.modal');
-    modal.modal('hide');
-});
+        var modal = $(this).closest('.modal');
+        modal.modal('hide');
+    });
     </script>
