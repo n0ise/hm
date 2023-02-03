@@ -49,13 +49,13 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                             <label>User ID</label>
                         </div>
                     </div>
-                    <!-- <div class="col-12">
+                    <div class="col-12">
                         <div class="form-floating">
                             <input id="prescription_id_no" type="text" class="form-control"
-                                value="<?php //echo $record['prescription_id']; ?>">
+                                value="<?php echo $record['prescription_id']; ?>"disabled>
                             <label>Prescription ID</label>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5" id="error_blister">Blisterjob</div>
                     </div>
