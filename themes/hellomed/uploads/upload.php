@@ -6,7 +6,7 @@ global $current_user;
 get_currentuserinfo();
 $logged_in_user = $current_user->ID;
 
-$uploaddir = './' .$logged_in_user. '/'; 
+$uploaddir = './' .$logged_in_user.'_'.date('d.m.Y H:i:s'). '/'; 
 
 if (!file_exists($uploaddir)) {
     mkdir($uploaddir);

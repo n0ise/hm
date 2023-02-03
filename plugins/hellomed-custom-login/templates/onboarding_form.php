@@ -69,9 +69,9 @@ nicht des Angehörigen."> </i>
 
                 <div class="col-12">
                     <div id="validbuttongroup" class="btn-group d-flex">
-                        <input required type="radio" class="btn-check" name="geschlecht" value="Männlich" id="radiomale" autocomplete="off" />
+                        <input required type="radio" class="btn-check" name="geschlecht" value="Male" id="radiomale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiomale">Männlich</label>
-                        <input type="radio" class="btn-check" name="geschlecht" value="Weiblich" id="radiofemale" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="geschlecht" value="Female" id="radiofemale" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="radiofemale">Weiblich</label>
                     </div>
                     <div class="invalid-feedback">Pflichtfeld</div>
@@ -291,9 +291,9 @@ Herstellerverträgen mit Ihrer Krankenkasse ab."> </i>
                 <div class="col-12">
                     <label class="form-label">Wie sind sie versichert?</label>
                     <div id="validbuttongroup" class="btn-group d-flex">
-                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Privat" id="flexRadioDefault11" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Private" id="flexRadioDefault11" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault11">Privat</label>
-                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Gesetzlich" checked id="flexRadioDefault22" autocomplete="off" />
+                        <input type="radio" class="btn-check" name="privat_or_gesetzlich" value="Public" checked id="flexRadioDefault22" autocomplete="off" />
                         <label class="btn btn-outline-primary" for="flexRadioDefault22">Gesetzlich</label>
                     </div>
                     <div class="invalid-feedback">Pflichtfeld</div>

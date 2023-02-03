@@ -39,6 +39,7 @@ class Hellomed_Custom_Login_Plugin {
 
 
 		add_action( 'admin_post', array( $this, 'do_onboarding' ) );
+		add_action( 'admin_post', array( $this, 'do_funnel' ) );
 
 
 
@@ -60,6 +61,7 @@ class Hellomed_Custom_Login_Plugin {
 		add_shortcode( 'custom-password-reset-form', array( $this, 'render_password_reset_form' ) );
 
 		add_shortcode( 'custom-onboarding-form', array( $this, 'render_onboarding_form' ) );
+		add_shortcode( 'custom-funnel-form', array( $this, 'render_funnel_form' ) );
 
 	}
 
@@ -86,6 +88,10 @@ class Hellomed_Custom_Login_Plugin {
 			'onboarding' => array(
 				'title' => __( 'Onboarding', 'hellomed-custom-login' ),
 				'content' => '[custom-onboarding-form]'
+			),
+			'funnel' => array(
+				'title' => __( 'Funnel', 'hellomed-custom-login' ),
+				'content' => '[custom-funnel-form]'
 			),
 			'passwort-vergessen' => array(
 				'title' => __( 'Passwort vergessen?', 'hellomed-custom-login' ),
@@ -409,7 +415,7 @@ class Hellomed_Custom_Login_Plugin {
 
 
 	/**
-	 * A shortcode for rendering the new user registration form.
+	 * A shortcode for rendering the onboarding form.
 	 *
 	 * @param  array   $attributes  Shortcode attributes.
 	 * @param  string  $content     The text content for shortcode. Not used.
@@ -448,6 +454,52 @@ class Hellomed_Custom_Login_Plugin {
 
 			return $this->get_template_html( 'onboarding_form', $attributes );
 			}
+
+
+		}
+	}
+
+
+		/**
+	 * A shortcode for rendering the funnel form.
+	 *
+	 * @param  array   $attributes  Shortcode attributes.
+	 * @param  string  $content     The text content for shortcode. Not used.
+	 *
+	 * @return string  The shortcode output
+	 */
+	public function render_funnel_form( $attributes, $content = null ) {
+		// Parse shortcode attributes
+		$default_attributes = array( 'show_title' => false );
+		$attributes = shortcode_atts( $default_attributes, $attributes );
+
+		$user = wp_get_current_user();
+		$user_id = $user->ID;
+
+		if ( !is_user_logged_in() ) {
+			$this->redirect_to_custom_login();
+			exit;
+			//return __( 'Please log in', 'hellomed-custom-login' );
+		} else {
+
+			// if ( get_field('has_completed_onboarding', 'user_' .$user_id) == 1){
+			// 	$this->redirect_logged_in_user();
+			// 	exit;
+			//  }
+
+			// Retrieve possible errors from request parameters
+			
+			$attributes['errors'] = array();
+			if ( isset( $_REQUEST['register-errors'] ) ) {
+				$error_codes = explode( ',', $_REQUEST['register-errors'] );
+
+				foreach ( $error_codes as $error_code ) {
+					$attributes['errors'] []= $this->get_error_message( $error_code );
+				}
+			}
+
+			return $this->get_template_html( 'funnel_form', $attributes );
+			
 
 
 		}
@@ -598,10 +650,16 @@ class Hellomed_Custom_Login_Plugin {
 				if (isset($_POST['newsletter_checkbox'])) {
 					$newsletter_checkbox = true;
 				}
+				if (isset($_POST['reminder_checkbox'])) {
+					$reminder_checkbox = true;
+				}
+				if (isset($_POST['agb_checkbox'])) {
+					$agb_checkbox = true;
+				}
 
 				// echo "<script type='text/javascript'>alert('$patient_caregiver');</script>";
 
-				$result = $this->register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $newsletter_checkbox);
+				$result = $this->register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $reminder_checkbox, $newsletter_checkbox, $agb_checkbox);
 
 				if ( is_wp_error( $result ) ) {
 					// Parse errors into a string and append as parameter to redirect
@@ -611,15 +669,42 @@ class Hellomed_Custom_Login_Plugin {
 					// Success, redirect to login page.
 					$redirect_url = home_url( 'anmelden' );
 					$redirect_url = add_query_arg( 'registered', $email, $redirect_url );
+
+					include 'assets/api/api_requests.php';
+					include 'assets/api/refresh_token.php';
+
+					$formDataa = array(
+						"data" => array(
+							array(
+								"First_Name" => $first_name,
+								"Last_Name" => $last_name,
+								"Email" => $email,
+								"patient_or_caregiver" => $patient_caregiver,
+								"agb" => $agb_checkbox,
+								"gdpr" => $personal_data_checkbox,
+								"reminder_opt_in" => $reminder_checkbox,
+								"newsletter_opt_in" => $newsletter_checkbox,
+								"Lead_Source" => "hellomedOS_registrierung",
+								"Lead_Status" => "Interessiert"
+							)
+						)
+					);
+
+					$accessToken = refreshAccessToken();
+					sendDataToZoho($formDataa, $accessToken);
+
 				}
 			}
+
+
 
 			wp_redirect( $redirect_url );
 			exit;
 		}
 	}
 
-	/**
+
+		/**
 	 * Initiates password reset.
 	 */
 	public function do_password_lost() {
@@ -726,7 +811,227 @@ class Hellomed_Custom_Login_Plugin {
 		}
 	}
 
+
+
 	public function do_onboarding() {
+
+		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
+			$user = wp_get_current_user();
+			$user_id = $user->ID;
+
+
+			$redirect_url = home_url( 'onboarding' );
+			// user_id
+		//	$user_id = $_POST['user_id'];
+		$formDataUpdate['data'][0]['Lead_Source'] = "hellomedOS_empty";
+		$formDataUpdate['data'][0]['Lead_Status'] = "Interessiert";
+
+			// save field to user profile 
+			if ( !empty( $_POST['patient_first_name'] ) ) {
+				$patient_first_name = $_POST['patient_first_name'];
+				update_user_meta( $user_id, 'patient_first_name', $patient_first_name );
+				$formDataUpdate['data'][0]['patient_name'] = $patient_first_name;
+			}
+			if ( !empty( $_POST['patient_last_name'] ) ) {
+				$patient_last_name = $_POST['patient_last_name'];
+				update_user_meta( $user_id, 'patient_last_name', $patient_last_name );
+				$formDataUpdate['data'][0]['patient_lastname'] = $patient_last_name;
+			}
+
+			if ( !empty( $_POST['geschlecht'] ) ) {
+				$gender = $_POST['geschlecht'];
+				update_user_meta( $user_id, 'geschlecht', $gender );
+			}
+			if ( !empty( $_POST['geburt'] ) ) {
+				$birthday = $_POST['geburt'];
+				update_user_meta( $user_id, 'geburt', $birthday );
+			}
+			if ( !empty( $_POST['krankheiten'] ) ) {
+				$krankheiten = $_POST['krankheiten'];
+				update_user_meta( $user_id, 'krankheiten', $krankheiten );
+			}
+			if ( !empty( $_POST['allergien'] ) ) {
+				$allergies = $_POST['allergien'];
+				update_user_meta( $user_id, 'allergies', $allergies );
+			}
+
+			if ( !empty( $_POST['strasse'] ) ) {
+				$address = $_POST['strasse'];
+				update_user_meta( $user_id, 'strasse', $address );
+			}
+
+			if ( !empty( $_POST['nrno'] ) ) {
+				$nrno = $_POST['nrno'];
+				update_user_meta( $user_id, 'nrno', $nrno );
+			}
+
+			if ( !empty( $_POST['postcode'] ) ) {
+				$zip = $_POST['postcode'];
+				update_user_meta( $user_id, 'postcode', $zip );
+			}
+			if ( !empty( $_POST['stadt'] ) ) {
+				$city = $_POST['stadt'];
+				update_user_meta( $user_id, 'stadt', $city );
+			}
+			if ( !empty( $_POST['zusatzinformationen'] ) ) {
+				$zusatzinformationen = $_POST['zusatzinformationen'];
+				update_user_meta( $user_id, 'zusatzinformationen', $zusatzinformationen );
+			}
+			if ( !empty( $_POST['telephone'] ) ) {
+				$phone = $_POST['telephone'];
+				update_user_meta( $user_id, 'telephone', $phone );
+			}
+		
+			if ( !empty( $_POST['startdatumpick'] ) ) {
+				$start_date = $_POST['startdatumpick'];
+				update_user_meta( $user_id, 'start_date', $start_date );
+			}
+
+			if ( !empty( $_POST['first_rezept_uploaded'] ) ) {
+				$first_rezept_uploaded = $_POST['first_rezept_uploaded'];
+				update_user_meta( $user_id, 'first_rezept_uploaded', $first_rezept_uploaded );
+			}
+
+	//TODO file upload
+	
+				$rezept_type = $_POST['rezept_type'];
+
+					if ( !empty( $_POST['listfilenames'] ) ) {
+
+						$listfilenames = $_POST['listfilenames'];
+
+						$formDataUpdate['data'][0]['Prescription_available'] = "Yes";
+						$formDataUpdate['data'][0]['Prescriptions_links'] = "Please check hellomedOS for the files (work on progress)";
+						$formDataUpdate['data'][0]['Lead_Source'] = "hellomedOS_full";
+						$formDataUpdate['data'][0]['Lead_Status'] = "Qualified";
+						
+						$listfilenamesarray = array();
+						foreach($listfilenames as $key => $value) {
+								$listfilenamesarray['rezept_file'][$key]['rezept_filename'] = $value;
+								$listfilenamesarray['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
+								$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
+								$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
+								$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
+						}
+
+						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+						// print("<pre>".print_r($arr3,true)."</pre>");
+						// die;
+
+						$listfilenamesarray2 = array();
+						$arr3 = array();
+
+						if ( !empty( $_POST['listfilenames2'] ) ) {
+
+							$listfilenames2 = $_POST['listfilenames2'];
+
+							$formDataUpdate['data'][0]['Medplan_available'] = "Yes";
+							$formDataUpdate['data'][0]['Medplan_links'] = "Please check hellomedOS for the files (work on progress)";
+
+							foreach($listfilenames2 as $key => $value) {
+									$listfilenamesarray2['rezept_file'][$key]['rezept_filename'] = $value;
+									$listfilenamesarray2['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
+									$listfilenamesarray2['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
+									$listfilenamesarray2['rezept_file'][$key]['rezept_directory'] = $user_id;
+									$listfilenamesarray2['rezept_file'][$key]['rezept_type'] = "medplan";
+							}
+
+							foreach($listfilenamesarray as $key=>$val)
+								{
+									$arr3['rezept_file'] = array_merge($val, $listfilenamesarray2[$key]);
+									$arr3['new_user_id']= $user_id;
+								}
+						}
+
+							else{
+								$arr3 = $listfilenamesarray;
+								$arr3['new_user_id']= $user_id;
+							}
+
+
+					
+
+						add_row('rezept_input', $arr3, 'user_'.$user_id);
+						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+						// print("<pre>".print_r($arr3,true)."</pre>");
+						// die;
+					}
+					
+
+				if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
+					$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
+					update_user_meta( $user_id, 'privat_or_gesetzlich', $privat_or_gesetzlich );
+				}
+
+			if ( !empty( $_POST['insurance_company'] ) ) {
+				$insurance_company = $_POST['insurance_company'];
+				update_user_meta( $user_id, 'insurance_company', $insurance_company );
+			}
+			if ( !empty( $_POST['insurance_number'] ) ) {
+				$insurance_number = $_POST['insurance_number'];
+				update_user_meta( $user_id, 'insurance_number', $insurance_number );
+			}
+		
+			// TODO completed onboarding
+			// if ( !empty( $_POST['status'] ) ) {
+			// 	$status = $_POST['status'];
+			// 	update_user_meta( $user_id, 'has_completed_onboarding', $status );
+			// }
+
+			update_user_meta( $user_id, 'status', 'Wartend' );
+
+			// TODO // TODO // TODO // TODO // TODO 
+			//remmber to revert
+			update_user_meta( $user_id, 'has_completed_onboarding', 1);
+
+			$startchangeformat = str_replace('.', '-', $start_date);
+			$startdayiso = date('Y-m-d', strtotime($startchangeformat));
+
+			$birthdaychangeformat = str_replace('.', '-', $birthday);
+			$birthdayiso = date('Y-m-d', strtotime($birthdaychangeformat));
+
+					// var_dump($data);
+
+					include 'assets/api/api_requests.php';
+					include 'assets/api/refresh_token.php';
+
+						$newvaluesUpdate = array(
+							"Email" => $user->user_email,
+							"gender" => $gender,
+							"birthday" => $birthdayiso,
+							"sickness" => $krankheiten,
+							"allergies" => $allergies,
+							"Street" => $address,
+							"house_number" => $nrno,
+							"Zip_Code" => $zip,
+							"City" => $city,
+							"delivery_notes" => $zusatzinformationen,
+							"Phone" => $phone,
+							"starting_date" => $startdayiso,
+							"insurance_status" => $privat_or_gesetzlich,
+							"insurance_name" => $insurance_company,
+							"duplicate_check_fields" => array(
+								"Email"
+							)
+						);
+			
+					 $formDataUpdate['data'][0] = array_merge($formDataUpdate['data'][0], $newvaluesUpdate);
+
+					var_dump($formDataUpdate);
+
+					$accessToken = refreshAccessToken();
+					updateDataToZoho($formDataUpdate, $accessToken);
+
+			wp_redirect( $redirect_url );
+			exit;
+		}
+	}
+
+
+
+	public function do_funnel() {
 
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
 			$user = wp_get_current_user();
@@ -879,22 +1184,17 @@ class Hellomed_Custom_Login_Plugin {
 				update_user_meta( $user_id, 'insurance_number', $insurance_number );
 			}
 		
-			// TODO completed onboarding
-			// if ( !empty( $_POST['status'] ) ) {
-			// 	$status = $_POST['status'];
-			// 	update_user_meta( $user_id, 'has_completed_onboarding', $status );
-			// }
-
-			update_user_meta( $user_id, 'status', 'Wartend' );
-
-			// TODO // TODO // TODO // TODO // TODO 
-			//remmber to revert
-			update_user_meta( $user_id, 'has_completed_onboarding', 1 );
 
 			wp_redirect( $redirect_url );
 			exit;
 		}
 	}
+
+
+
+
+
+
 
 	//
 	// OTHER CUSTOMIZATIONS
@@ -1054,7 +1354,7 @@ class Hellomed_Custom_Login_Plugin {
 	 *
 	 * @return int|WP_Error         The id of the user that was created, or error if failed.
 	 */
-	private function register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $newsletter_checkbox) {
+	private function register_user( $email, $first_name, $last_name, $patient_caregiver, $personal_data_checkbox, $reminder_checkbox, $newsletter_checkbox, $agb_checkbox) {
 		$errors = new WP_Error();
 
 		// Email address is used as both username and email. It is also the only
@@ -1086,7 +1386,10 @@ class Hellomed_Custom_Login_Plugin {
 		update_field('patient_caregiver', $patient_caregiver, 'user_' . $user_id);
 		update_field('confirmed_or_not', 0, 'user_' . $user_id);
 
+
+		update_field('agb_checkbox', $agb_checkbox, 'user_' . $user_id);
 		update_field('personal_data_checkbox', $personal_data_checkbox, 'user_' . $user_id);
+		update_field('reminder_checkbox', $reminder_checkbox, 'user_' . $user_id);
 		update_field('newsletter_checkbox', $newsletter_checkbox, 'user_' . $user_id);
 
 

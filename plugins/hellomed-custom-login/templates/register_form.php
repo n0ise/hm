@@ -10,7 +10,7 @@
 	<div class="hm-auth-form my-4">
     <div class="row gy-3">
       <div class="col-12">
-      <div class="h3 mb-3">Registrierung
+      <div class="h2 m-0">Registrierung
         <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrieren Sie sich oder einen Angehörigen als Patient bei hellomed. Die Registrierung dauert nur wenige Minuten. Unsere hellomed Apotheker melden Sich nach der Registrierung bei Ihnen innerhalb von 48 Stunden telefonisch"> </i>
         </div>
       </div>
@@ -55,38 +55,40 @@
 
 	  <div class="col-12">
         <div class="form-check m-0">
-          <input required class="form-check-input" type="checkbox" id="test3">
-          <label class="form-check-label text-justify" for="test3">
-          <small>
-              Ich habe die <a href>AGB</a> und die <a href>Datenschutzerklärung</a> zur Kenntnis genommen. *
-            </small>
+        <input required class="form-check-input" type="checkbox" id="legal-3" name="agb_checkbox" required>
+        <label class="form-check-label text-legal" for="legal-3">
+            Ich habe die <a href>AGB</a> und die <a href>Datenschutzerklärung</a> zur Kenntnis genommen.
           </label>
         </div>
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input class="form-check-input" type="checkbox" id="test4" name="personal_data_checkbox">
-          <label class="form-check-label text-justify" for="test4">
-          <small>
-          Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Erinnerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
-            </small>
-      </label>  
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="form-check m-0">
-          <input  class="form-check-input" type="checkbox" id="test5" name="newsletter_checkbox">
-          <label class="form-check-label text-justify"  for="test5">
-          <small>
-              Ja ich möchte weitere Informationen zu Neuigkeiten und Angeboten von der hellomed Group GmbH per E-Mail oder Telefon erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht.
-            </small>
+          <input class="form-check-input" type="checkbox" id="legal-4" name="personal_data_checkbox">
+          <label class="form-check-label text-legal" for="legal-4">
+            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten, zum Zweck der Führung meines Kundenkontos wie aus der <a href>Datenschutzerklärung</a> ersichtlich verarbeitet werden.
           </label>
         </div>
       </div>
       <div class="col-12">
-        <small class="d-block pt-3 text-justify border-top">
-        Ich kann meine Einwilligungen und die Schweigepflichtentbindungserklärung jederzeit mit Wirkung für die Zukunft in meinem hellomedOs Kundenkonto widerrufen. 
-        </small>
+        <div class="form-check m-0">
+          <input  class="form-check-input" type="checkbox" id="legal-5" name="reminder_checkbox">
+          <label class="form-check-label text-legal" for="legal-5">
+            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Erinnerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+      <div class="form-check m-0">
+          <input class="form-check-input" type="checkbox" id="legal-6" name="newsletter_checkbox">
+          <label class="form-check-label text-legal" for="legal-6">
+            Ja ich möchte weitere Informationen zu Neuigkeiten und Angeboten von der hellomed Group GmbH per E-Mail oder Telefon erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht.
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+      <div class="d-block pt-3 text-legal border-top">
+      Ich kann meine Einwilligungen und die Schweigepflicht&shy;entbindungs&shy;erklärung jederzeit mit Wirkung für die Zukunft in meinem hellomedOs Kundenkonto widerrufen. 
+        </div>
       </div> 
 
 		<!-- <p class="form-row">
