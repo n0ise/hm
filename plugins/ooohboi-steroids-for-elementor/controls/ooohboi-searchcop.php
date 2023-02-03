@@ -73,7 +73,7 @@ class OoohBoi_SearchCop {
 		$element->add_control(
 			'_ob_searchcop_use_it',
 			[
-                'label' => __( 'Enable Butter Buttons?', 'ooohboi-steroids' ), 
+                'label' => __( 'Enable Search Cop?', 'ooohboi-steroids' ), 
 				'separator' => 'after', 
 				'type' => Controls_Manager::SWITCHER,
 				'label_on' => __( 'Yes', 'ooohboi-steroids' ),

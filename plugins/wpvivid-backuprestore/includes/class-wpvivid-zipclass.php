@@ -387,6 +387,9 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
 
     public function extract($files, $path = '', $option = array())
     {
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+
         if(!empty($option)){
             $GLOBALS['wpvivid_extract_option'] = $option;
         }
@@ -399,8 +402,8 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
         foreach ($files as $file)
         {
             $wpvivid_plugin->restore_data->write_log('start extracting file:'.$file,'notice');
-            $archive = new PclZip($file);
-            $zip_ret = $archive->extract(PCLZIP_OPT_PATH, $path,PCLZIP_OPT_REPLACE_NEWER,PCLZIP_CB_PRE_EXTRACT,'wpvivid_function_pre_extract_callback',PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
+            $archive = new WPvivid_PclZip($file);
+            $zip_ret = $archive->extract(WPVIVID_PCLZIP_OPT_PATH, $path,WPVIVID_PCLZIP_OPT_REPLACE_NEWER,WPVIVID_PCLZIP_CB_PRE_EXTRACT,'wpvivid_function_pre_extract_callback',WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
             if(!$zip_ret)
             {
                 $ret['result']=WPVIVID_FAILED;
@@ -420,6 +423,9 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
 
     public function extract_ex($files,$path = '',$extract_files=array())
     {
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+
         global $wpvivid_plugin;
         //$wpvivid_plugin->restore_data->write_log('start prepare extract','notice');
         define(PCLZIP_TEMPORARY_DIR,dirname($path));
@@ -429,8 +435,8 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
         {
             $wpvivid_plugin->restore_data->write_log('start extracting file:'.$file,'notice');
             $wpvivid_plugin->restore_data->write_log('extract child file:'.json_encode($extract_files),'notice');
-            $archive = new PclZip($file);
-            $zip_ret = $archive->extract(PCLZIP_OPT_BY_NAME,$extract_files,PCLZIP_OPT_PATH, $path,PCLZIP_OPT_REPLACE_NEWER,PCLZIP_CB_PRE_EXTRACT,'wpvivid_function_pre_extract_callback',PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
+            $archive = new WPvivid_PclZip($file);
+            $zip_ret = $archive->extract(WPVIVID_PCLZIP_OPT_BY_NAME,$extract_files,WPVIVID_PCLZIP_OPT_PATH, $path,WPVIVID_PCLZIP_OPT_REPLACE_NEWER,WPVIVID_PCLZIP_CB_PRE_EXTRACT,'wpvivid_function_pre_extract_callback',WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
             if(!$zip_ret)
             {
                 $ret['result']=WPVIVID_FAILED;
@@ -450,16 +456,19 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
 
     public function extract_by_files($files,$zip,$path = '')
     {
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+
         define(PCLZIP_TEMPORARY_DIR,$path);
         $flag = true;
         $table = array();
-        $archive = new PclZip($zip);
+        $archive = new WPvivid_PclZip($zip);
         $list = $archive -> listContent();
         foreach ($list as $item)
         {
             if(strstr($item['filename'],WPVIVID_ZIPCLASS_JSONFILE_NAME))
             {
-                $result = $archive->extract(PCLZIP_OPT_BY_NAME, WPVIVID_ZIPCLASS_JSONFILE_NAME);
+                $result = $archive->extract(WPVIVID_PCLZIP_OPT_BY_NAME, WPVIVID_ZIPCLASS_JSONFILE_NAME);
                 if($result)
                 {
                     $json = json_decode(file_get_contents(dirname($zip).WPVIVID_ZIPCLASS_JSONFILE_NAME),true);
@@ -468,7 +477,7 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
             }
         }
 
-        $str = $archive->extract(PCLZIP_OPT_PATH, $path, PCLZIP_OPT_BY_NAME, $files, PCLZIP_OPT_REPLACE_NEWER,PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
+        $str = $archive->extract(WPVIVID_PCLZIP_OPT_PATH, $path, WPVIVID_PCLZIP_OPT_BY_NAME, $files, WPVIVID_PCLZIP_OPT_REPLACE_NEWER,WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
         if(!$str){
             $flag = false;
             $error = $archive->errorInfo(true);
@@ -497,10 +506,13 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
     }
 
     public function get_include_zip($files,$allpackages){
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+
         $i = sizeof($files);
         $zips = array();
         foreach ( $allpackages as $item){
-            $archive = new PclZip($item);
+            $archive = new WPvivid_PclZip($item);
             $lists = $archive -> listContent();
             foreach ($lists as $file){
                 if($this -> _in_array($file['filename'],$files)){
@@ -521,12 +533,16 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
     }
 
     public function listcontent($path){
-        $zip = new PclZip($path);
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+        $zip = new WPvivid_PclZip($path);
         $list = $zip->listContent();
         return $list;
     }
     public function listnum($path , $includeFolder = false){
-        $zip = new PclZip($path);
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+        $zip = new WPvivid_PclZip($path);
         $list = $zip->listContent();
         $index = 0;
         foreach ($list as $item){
@@ -546,8 +562,10 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
 
     public function get_json_data($path, $json_type = 'backup')
     {
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
         $json_file_name = $json_type === 'backup' ? 'wpvivid_package_info.json' : 'wpvivid_export_package_info.json';
-        $archive = new PclZip($path);
+        $archive = new WPvivid_PclZip($path);
         $list = $archive->listContent();
         if($list == false){
             return array('result'=>WPVIVID_FAILED,'error'=>$archive->errorInfo(true));
@@ -557,7 +575,7 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
             foreach ($list as $item) {
                 if (basename($item['filename']) === $json_file_name) {
                     $b_exist = true;
-                    $result = $archive->extract(PCLZIP_OPT_BY_NAME, $json_file_name, PCLZIP_OPT_EXTRACT_AS_STRING);
+                    $result = $archive->extract(WPVIVID_PCLZIP_OPT_BY_NAME, $json_file_name, WPVIVID_PCLZIP_OPT_EXTRACT_AS_STRING);
                     if ($result != 0) {
                         return array('result'=>WPVIVID_SUCCESS,'json_data'=>$result[0]['content']);
                     } else {
@@ -574,7 +592,9 @@ class WPvivid_ZipClass extends Wpvivid_Compress_Default
 
     public function list_file($path)
     {
-        $archive = new PclZip($path);
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+        $archive = new WPvivid_PclZip($path);
         $list = $archive->listContent();
 
         $files=array();
@@ -976,8 +996,9 @@ class WPvivid_PclZip_Class
         if(file_exists($name))
             @unlink($name);
 
-        $archive = new PclZip($name);
-
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
+        $archive = new WPvivid_PclZip($name);
         if(isset($options['compress']['no_compress']))
         {
             $no_compress=$options['compress']['no_compress'];
@@ -1029,7 +1050,7 @@ class WPvivid_PclZip_Class
             global $wpdb;
             $json_info['mysql_version'] = $wpdb->db_version();
             file_put_contents($temp_path,print_r(json_encode($json_info),true));
-            $archive -> add($temp_path,PCLZIP_OPT_REMOVE_PATH,dirname($temp_path));
+            $archive -> add($temp_path,WPVIVID_PCLZIP_OPT_REMOVE_PATH,dirname($temp_path));
             @unlink($temp_path);
         }
 
@@ -1048,16 +1069,16 @@ class WPvivid_PclZip_Class
             {
                 if($use_temp_size!=0)
                 {
-                    $ret = $archive -> add($files,PCLZIP_OPT_REMOVE_PATH,$replace_path,PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',PCLZIP_OPT_NO_COMPRESSION,PCLZIP_OPT_TEMP_FILE_THRESHOLD,$use_temp_size);
+                    $ret = $archive -> add($files,WPVIVID_PCLZIP_OPT_REMOVE_PATH,$replace_path,WPVIVID_PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',WPVIVID_PCLZIP_OPT_NO_COMPRESSION,WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,$use_temp_size);
                 }
                 else
                 {
-                    $ret = $archive -> add($files,PCLZIP_OPT_REMOVE_PATH,$replace_path,PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',PCLZIP_OPT_NO_COMPRESSION,PCLZIP_OPT_TEMP_FILE_ON);
+                    $ret = $archive -> add($files,WPVIVID_PCLZIP_OPT_REMOVE_PATH,$replace_path,WPVIVID_PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',WPVIVID_PCLZIP_OPT_NO_COMPRESSION,WPVIVID_PCLZIP_OPT_TEMP_FILE_ON);
                 }
             }
             else
             {
-                $ret = $archive -> add($files,PCLZIP_OPT_REMOVE_PATH,$replace_path,PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',PCLZIP_OPT_NO_COMPRESSION,PCLZIP_OPT_TEMP_FILE_OFF);
+                $ret = $archive -> add($files,WPVIVID_PCLZIP_OPT_REMOVE_PATH,$replace_path,WPVIVID_PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',WPVIVID_PCLZIP_OPT_NO_COMPRESSION,WPVIVID_PCLZIP_OPT_TEMP_FILE_OFF);
             }
         }
         else
@@ -1066,16 +1087,16 @@ class WPvivid_PclZip_Class
             {
                 if($use_temp_size!=0)
                 {
-                    $ret = $archive -> add($files,PCLZIP_OPT_REMOVE_PATH,$replace_path,PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',PCLZIP_OPT_TEMP_FILE_THRESHOLD,$use_temp_size);
+                    $ret = $archive -> add($files,WPVIVID_PCLZIP_OPT_REMOVE_PATH,$replace_path,WPVIVID_PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,$use_temp_size);
                 }
                 else
                 {
-                    $ret = $archive -> add($files,PCLZIP_OPT_REMOVE_PATH,$replace_path,PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',PCLZIP_OPT_TEMP_FILE_ON);
+                    $ret = $archive -> add($files,WPVIVID_PCLZIP_OPT_REMOVE_PATH,$replace_path,WPVIVID_PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',WPVIVID_PCLZIP_OPT_TEMP_FILE_ON);
                 }
             }
             else
             {
-                $ret = $archive -> add($files,PCLZIP_OPT_REMOVE_PATH,$replace_path,PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',PCLZIP_OPT_TEMP_FILE_OFF);
+                $ret = $archive -> add($files,WPVIVID_PCLZIP_OPT_REMOVE_PATH,$replace_path,WPVIVID_PCLZIP_CB_PRE_ADD,'wpvivid_function_per_add_callback',WPVIVID_PCLZIP_OPT_TEMP_FILE_OFF);
             }
         }
 

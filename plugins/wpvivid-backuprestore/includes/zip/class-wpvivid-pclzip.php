@@ -5716,17 +5716,34 @@
   // --------------------------------------------------------------------------------
   function WPvivid_PclZipUtilTranslateWinPath($p_path, $p_remove_disk_letter=true)
   {
-    if (stristr(php_uname(), 'windows')) {
-      // ----- Look for potential disk letter
-      if (($p_remove_disk_letter) && (($v_position = strpos($p_path, ':')) != false)) {
-          $p_path = substr($p_path, $v_position+1);
+      if (function_exists('php_uname') && strpos(ini_get('disable_functions'), 'php_uname') === false)
+      {
+          if (stristr(php_uname(), 'windows')) {
+              // ----- Look for potential disk letter
+              if (($p_remove_disk_letter) && (($v_position = strpos($p_path, ':')) != false)) {
+                  $p_path = substr($p_path, $v_position+1);
+              }
+              // ----- Change potential windows directory separator
+              if ((strpos($p_path, '\\') > 0) || (substr($p_path, 0,1) == '\\')) {
+                  $p_path = strtr($p_path, '\\', '/');
+              }
+          }
       }
-      // ----- Change potential windows directory separator
-      if ((strpos($p_path, '\\') > 0) || (substr($p_path, 0,1) == '\\')) {
-          $p_path = strtr($p_path, '\\', '/');
+      else
+      {
+          if(DIRECTORY_SEPARATOR === '\\' && PHP_SHLIB_SUFFIX === 'dll' && PATH_SEPARATOR === ';')
+          {
+              // ----- Look for potential disk letter
+              if (($p_remove_disk_letter) && (($v_position = strpos($p_path, ':')) != false)) {
+                  $p_path = substr($p_path, $v_position+1);
+              }
+              // ----- Change potential windows directory separator
+              if ((strpos($p_path, '\\') > 0) || (substr($p_path, 0,1) == '\\')) {
+                  $p_path = strtr($p_path, '\\', '/');
+              }
+          }
       }
-    }
-    return $p_path;
+      return $p_path;
   }
   // --------------------------------------------------------------------------------
 

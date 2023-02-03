@@ -1,10 +1,10 @@
 <?php
 use Elementor\Controls_Manager;
-use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Css_Filter; 
+use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -233,14 +233,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 100,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_overlay_w_alt_tablet' => '', 
+							'_ob_steroids_overlay_w_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_overlay_w_alt_mobile' => '', 
+							'_ob_steroids_overlay_w_alt' => '', 
 						],
 					],
 				],
@@ -294,14 +294,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 100,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_overlay_h_alt_tablet' => '', 
+							'_ob_steroids_overlay_h_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_overlay_h_alt_mobile' => '', 
+							'_ob_steroids_overlay_h_alt' => '', 
 						],
 					],
 				],
@@ -355,14 +355,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_overlay_y_alt_tablet' => '', 
+							'_ob_steroids_overlay_y_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_overlay_y_alt_mobile' => '', 
+							'_ob_steroids_overlay_y_alt' => '', 
 						],
 					],
 				],
@@ -416,14 +416,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_overlay_x_alt_tablet' => '', 
+							'_ob_steroids_overlay_x_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_overlay_x_alt_mobile' => '', 
+							'_ob_steroids_overlay_x_alt' => '', 
 						],
 					],
 				],
@@ -657,22 +657,22 @@ class OoohBoi_Overlay_Underlay {
 					'_ob_poopart_use' => 'yes', 
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-has-background-overlay > .elementor-widget-container:before' => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
-							'_ob_steroids_overlay_mask_size_tablet' => [ 'initial' ], 
+							'_ob_steroids_overlay_mask_size' => [ 'initial' ], 
 							'_ob_steroids_overlay_popover_masq' => 'yes', 
 							'_ob_poopart_use' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-has-background-overlay > .elementor-widget-container:before' => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
-							'_ob_steroids_overlay_mask_size_mobile' => [ 'initial' ], 
+							'_ob_steroids_overlay_mask_size' => [ 'initial' ], 
 							'_ob_steroids_overlay_popover_masq' => 'yes', 
 							'_ob_poopart_use' => 'yes', 
 						],
@@ -873,14 +873,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 100,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_underlay_w_alt_tablet' => '', 
+							'_ob_steroids_underlay_w_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_underlay_w_alt_mobile' => '', 
+							'_ob_steroids_underlay_w_alt' => '', 
 						],
 					],
 				],
@@ -932,14 +932,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 100,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_underlay_h_alt_tablet' => '', 
+							'_ob_steroids_underlay_h_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_underlay_h_alt_mobile' => '', 
+							'_ob_steroids_underlay_h_alt' => '', 
 						],
 					],
 				],
@@ -991,14 +991,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_underlay_y_alt_tablet' => '', 
+							'_ob_steroids_underlay_y_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_underlay_y_alt_mobile' => '', 
+							'_ob_steroids_underlay_y_alt' => '', 
 						],
 					],
 				],
@@ -1050,14 +1050,14 @@ class OoohBoi_Overlay_Underlay {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
-							'_ob_steroids_underlay_x_alt_tablet' => '', 
+							'_ob_steroids_underlay_x_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
-							'_ob_steroids_underlay_x_alt_mobile' => '', 
+							'_ob_steroids_underlay_x_alt' => '', 
 						],
 					],
 				],
@@ -1286,22 +1286,22 @@ class OoohBoi_Overlay_Underlay {
 					'_ob_poopart_use' => 'yes', 
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-has-background-overlay > .elementor-widget-container:after' => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
-							'_ob_steroids_underlay_mask_size_tablet' => [ 'initial' ], 
+							'_ob_steroids_underlay_mask_size' => [ 'initial' ], 
 							'_ob_steroids_underlay_popover_masq' => 'yes', 
 							'_ob_poopart_use' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
 							'{{WRAPPER}}.ob-has-background-overlay > .elementor-widget-container:after' => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
-							'_ob_steroids_underlay_mask_size_mobile' => [ 'initial' ], 
+							'_ob_steroids_underlay_mask_size' => [ 'initial' ], 
 							'_ob_steroids_underlay_popover_masq' => 'yes', 
 							'_ob_poopart_use' => 'yes', 
 						],

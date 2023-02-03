@@ -35,6 +35,7 @@
                         this.$element.addClass( 'ob-is-interactor' );
                     } else if( '' === this.getElementSettings( '_ob_do_interactor' ) ) { 
                         this.$element.removeClass( 'ob-is-interactor' ); 
+                        this.deployInteractor();
                     }
                 } 
             }, 
@@ -47,6 +48,11 @@
 
                 var el_settings = {}; 
 
+                // reset actions
+                this.$element.off( 'click' );
+                this.$element.off( 'mouseenter' );
+                this.$element.off( 'mouseleave' );
+
                 el_settings._ob_i_type = this.getElementSettings( '_ob_i_type' ) || 'mouseenter'; 
                 el_settings.rptr = this.getElementSettings( '_ob_i_props_repeater' ); 
 
@@ -55,11 +61,6 @@
                 var all_elements = [];
                 var me = this.$element;
                 var _this = this;
-
-                // reset actions
-                me.off( 'click' );
-                me.off( 'mouseenter' );
-                me.off( 'mouseleave' );
 
                 $.each( el_settings.rptr, function( i, val ) {
 

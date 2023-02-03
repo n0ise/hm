@@ -3,8 +3,8 @@ Contributors: OoohBoi
 Tags: page-builder, elementor, add-on, background-overlay, vertical text, ghost elements, overlapping columns
 Donate link: https://www.paypal.me/ooohboi
 Requires at least: 5.0
-Tested up to: 6.0
-Stable tag: 2.0.0
+Tested up to: 6.1
+Stable tag: 2.1.3
 Requires PHP: 7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0
@@ -15,9 +15,17 @@ Boost your Elementor with some fresh and yet innovative options.
 
 An awesome set of tools, options and settings that expand Elementor defaults. Instead of creating new Elementor Widgets, these act like an upgrade of existing options or the self-standing panels thing. 
 
-= What is new? =
+== What is new? ==
 
-Added 1 new extension : POSTMAN
+= Featuring a Better Templates Library! =
+
+- Add/remove/update preview image
+- Export and Import with preview
+- Works with any 3rd party plugin
+- Cross-domain friendly
+- WP Admin integration
+- Bulk-export and bulk-import support
+- Keep template name on export
 
 == Installation ==
 
@@ -26,7 +34,7 @@ Added 1 new extension : POSTMAN
 
 == Upgrade Notice ==
 
-1.9.9 - Beware of the changes to the language file!
+2.1.0 - Beware of changes to the language file!
 
 == Frequently Asked Questions ==
 
@@ -40,7 +48,45 @@ Rest assured, you won't miss them because there will always be an eye-catching i
 
 No, you don't. It'll work with both free version of Elementor and Elementor PRO.
 
-== Changelog ==
+== Changelog == 
+
+= 2.1.3 = 
+- Fix: BETTER TEMPLATES LIBRARY - Oh shit, not again... yup, bite the bullet dude!
+
+= 2.1.2 = 
+- Fix: BETTER TEMPLATES LIBRARY - Preview placeholder oversized
+  Please note that this extension must be activated explicity from now on!
+- Fix: SEARCHCOP - extension label
+
+= 2.1.1 = 
+- Fix: BETTER TEMPLATES LIBRARY - Admin and Elementor local library view broken after disabling this extension
+
+= 2.1.0 = 
+- New: BETTER TEMPLATES LIBRARY - Export and Import local templates with preview
+
+= 2.0.5 =
+- Update: GLIDER - now fully renewed; Navigation, Pagination, Easing effects, custom SVG icons...
+- Fix: HOVERANIMATOR - due to the class name changes to Flex Container in Elementor v3.8 this extension stopped working
+
+= 2.0.4 =
+- New: TYPO - More options to your Elementor Kit (Site Settings)
+- Fix: OVERLAIZ - due to the class name changes to Container in Elementor v3.8 
+- Updates: cdnjs libraries; GSAP (3.11.3), ScrollTrigger (3.11.3), ScrollTo (3.11.3), MotionPath (3.11.3)
+
+= 2.0.3 =
+- Fix: POSTMAN - Quotations background color is being displayed atop the text
+- Fix: TABBR - '_ob_use_tabbr' critical error for Elementor 3.7 + 
+- New: POSTMAN - Padding option added to Quotations
+
+= 2.0.2 =
+- Fix: conflict with the latest Elementor v3.7.5  
+
+= 2.0.1 =
+- Fix: GLIDER - "glider-XXXXXXXX-gotoslide-0" link to a slide number 0 not working
+- Fix: WIDGET STALKER - Width value missing for Tablets and Mobiles since Ele 3.7
+- Fix: Replaced functions deprecated by Elementor 3.7
+- New: BREAKING BAD - Min height option added to Column 
+- Updates: cdnjs libraries; GSAP (3.11), ScrollTrigger (3.11), ScrollTo (3.11), MotionPath (3.11)
 
 = 2.0.0 =
 - New extension: POSTMAN - Style up Text Editor or Posts widget content (headings, paragraph, lists, blockquotes)

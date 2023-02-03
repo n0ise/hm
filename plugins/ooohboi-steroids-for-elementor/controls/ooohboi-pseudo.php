@@ -1,10 +1,10 @@
 <?php
 use Elementor\Controls_Manager; 
-use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Css_Filter; 
+use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -243,17 +243,17 @@ class OoohBoi_Pseudo {
 					'size' => 50,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_w_alt_tablet' => '', 
+							'_ob_pseudo_before_w_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_w_alt_mobile' => '', 
+							'_ob_pseudo_before_w_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -308,17 +308,17 @@ class OoohBoi_Pseudo {
 					'size' => 50,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_h_alt_tablet' => '', 
+							'_ob_pseudo_before_h_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_h_alt_mobile' => '', 
+							'_ob_pseudo_before_h_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -373,17 +373,17 @@ class OoohBoi_Pseudo {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_y_alt_tablet' => '', 
+							'_ob_pseudo_before_y_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_y_alt_mobile' => '', 
+							'_ob_pseudo_before_y_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -438,17 +438,17 @@ class OoohBoi_Pseudo {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_x_alt_tablet' => '', 
+							'_ob_pseudo_before_x_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_x_alt_mobile' => '', 
+							'_ob_pseudo_before_x_alt' => '', 
 							'_ob_pseudo_before_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -685,23 +685,23 @@ class OoohBoi_Pseudo {
 					'_ob_pseudo_before_popover_masq' => 'yes', 
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'selectors' => [
 							$selector_before => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_mask_size_tablet' => [ 'initial' ],
+							'_ob_pseudo_before_mask_size' => [ 'initial' ],
 							'_ob_pseudo_before_popover_masq' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
 							$selector_before => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_before_mask_size_mobile' => [ 'initial' ], 
+							'_ob_pseudo_before_mask_size' => [ 'initial' ], 
 							'_ob_pseudo_before_popover_masq' => 'yes', 
 						],
 					],
@@ -901,16 +901,16 @@ class OoohBoi_Pseudo {
 					'size' => 50,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_w_alt_tablet' => '', 
+							'_ob_pseudo_after_w_alt' => '', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_w_alt_mobile' => '', 
+							'_ob_pseudo_after_w_alt' => '', 
 						],
 					],
 				],
@@ -962,17 +962,17 @@ class OoohBoi_Pseudo {
 					'size' => 50,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_h_alt_tablet' => '', 
+							'_ob_pseudo_after_h_alt' => '', 
 							'_ob_pseudo_after_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_h_alt_mobile' => '', 
+							'_ob_pseudo_after_h_alt' => '', 
 							'_ob_pseudo_after_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -1025,17 +1025,17 @@ class OoohBoi_Pseudo {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_y_alt_tablet' => '', 
+							'_ob_pseudo_after_y_alt' => '', 
 							'_ob_pseudo_after_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_y_alt_mobile' => '', 
+							'_ob_pseudo_after_y_alt' => '', 
 							'_ob_pseudo_after_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -1088,17 +1088,17 @@ class OoohBoi_Pseudo {
 					'size' => 0,
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_x_alt_tablet' => '', 
+							'_ob_pseudo_after_x_alt' => '', 
 							'_ob_pseudo_after_popover_whyxrot' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_x_alt_mobile' => '', 
+							'_ob_pseudo_after_x_alt' => '', 
 							'_ob_pseudo_after_popover_whyxrot' => 'yes', 
 						],
 					],
@@ -1329,23 +1329,23 @@ class OoohBoi_Pseudo {
 					'_ob_pseudo_after_popover_masq' => 'yes', 
 				],
 				'device_args' => [
-					Controls_Stack::RESPONSIVE_TABLET => [
+					Breakpoints_Manager::BREAKPOINT_KEY_TABLET => [
 						'selectors' => [
 							$selector_after => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_mask_size_tablet' => [ 'initial' ],
+							'_ob_pseudo_after_mask_size' => [ 'initial' ],
 							'_ob_pseudo_after_popover_masq' => 'yes', 
 						],
 					],
-					Controls_Stack::RESPONSIVE_MOBILE => [
+					Breakpoints_Manager::BREAKPOINT_KEY_MOBILE => [
 						'selectors' => [
 							$selector_after => '-webkit-mask-size: {{SIZE}}{{UNIT}} auto; mask-size: {{SIZE}}{{UNIT}} auto;',
 						],
 						'condition' => [
                             '_ob_column_has_pseudo' => 'yes', 
-							'_ob_pseudo_after_mask_size_mobile' => [ 'initial' ], 
+							'_ob_pseudo_after_mask_size' => [ 'initial' ], 
 							'_ob_pseudo_after_popover_masq' => 'yes', 
 						],
 					],
