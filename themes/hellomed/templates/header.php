@@ -26,7 +26,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 <header class="hm-header">
     <div class="container">
         <div class="hm-logo">
-            <a href="index.php">
+            <a href="/anmelden">
                 <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg">
             </a>
         </div>
@@ -101,8 +101,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
       </div>
     </div>
     <ul>
-      <li><a href="os-hilfe">FAQ & Hilfe</a></li>
-      <li><a href="os-einstellungen">Einstellungen</a></li>
+      <li><a href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
       <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
     </ul>
   </div>

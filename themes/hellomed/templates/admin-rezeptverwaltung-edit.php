@@ -52,18 +52,18 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <!-- <div class="col-12">
                         <div class="form-floating">
                             <input id="prescription_id_no" type="text" class="form-control"
-                                value="<?php echo $record['prescription_id']; ?>">
+                                value="<?php //echo $record['prescription_id']; ?>">
                             <label>Prescription ID</label>
                         </div>
                     </div> -->
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Blisterjob</div>
+                        <div class="h3 m-0 mt-5" id="error_blister">Blisterjob</div>
                     </div>
                     <?php 
-    if (!empty($record['blister_job'])) {
-      foreach ($record['blister_job'] as $blister_job) {
+                        if (!empty($record['blister_job'])) {
+                        foreach ($record['blister_job'] as $blister_job) {
 
-  ?>
+                    ?>
 
                     <div class="col-12 col-md-4">
                         <div class="form-floating">
@@ -140,7 +140,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Inhalt</div>
+                        <div class="h3 m-0 mt-5" id="error_medikamente">Medikamente</div>
                     </div>
                     <?php
                 if (!empty($record['medicine_section'])) {
@@ -165,8 +165,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     }
                 }
                 ?>
-                    <div class="medikament_ph"></div>
-                    <datalist id="medicine-options"></datalist>
+                    <div class="d-none medikament_ph"></div>
 
                     <div class="col-12 d-flex justify-content-center">
                         <button id="add_medicine_div" type="button" class="btn btn-light btn-sm">
@@ -186,7 +185,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                                     if(strpos($file['rezept_type'], 'medplan') !== false ){
                                         $medplan_files[] = $file['file_url'];
                                     }
-                                    if(strpos($file['rezept_type'], 'erezept') !== false || strpos($file['rezept_type'], 'rezept') !== false){
+                                    if(strpos($file['rezept_type'], 'erezept') !== false || strpos($file['rezept_type'], 'rezeptfoto') !== false){
                                         $erezept_files[] = $file['file_url'];
                                     }
                                 }
@@ -197,71 +196,81 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
                     </div>
-                    <?php foreach($medplan_files as $file):
-?>
+                    <?php $counter = 1; 
+                        foreach($medplan_files as $file): ?>
                     <div class="col-12">
                         Es wurde ein Medikationsplan für dieses Rezept hochgeladen:
-                        <a href="#" data-toggle="modal" data-target="#medplanPreviewModal">Vorschau</a> |
+                        <a class="modal_m" href="javascript:void(0)" data-toggle="modal"
+                            data-target="#medplanPreviewModal<?php echo $counter; ?>">Vorschau</a> |
                         <a href="<?php echo $file; ?>" download>Download</a>
                     </div>
-                    <!-- <div class="modal fade" id="medplanPreviewModal" tabindex="-1" role="dialog"
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="medplanPreviewModal<?php echo $counter; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="medplanPreviewModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-center modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="medplanPreviewModalLabel">Medikationsplan Vorschau</h5>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Schließen</button>
+                        <div class="modal-rezept modal-dialog modal-lg modal-dialog-center" role="document">
+                            <div class="modal-content p-5 pt-4">
+                                <div class="modal-header p-0 border-0">
+                                    <h5 class="modal-title pt-1 fs-3" id="medplanPreviewModalLabel">Medikationsplan
+                                        Vorschau</h5>
+                                    <button type="button" class="btn-close modal-close" data-dismiss="modal"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <img src="<?php //echo $file; ?>" alt="Medikationsplan Vorschau">
+                                <div class="modal-body p-0">
+                                    <div class="modal-img mt-3 mb-4">
+                                        <img src="<?php echo $file; ?>" alt="Medikationsplan Vorschau">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-                    <?php endforeach; ?>
+                    </div>
+                    <?php $counter++; endforeach; ?>
+
                     <?php else: ?>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Medikationsplan</div>
                     </div>
                     <div class="col-12">
-                        Es wurde kein Medikationsplan für diesen Benutzer hochgeladen.
+                        Es wurde kein Medikationsplan für diesen Patient hochgeladen.
                     </div>
                     <?php endif; ?>
 
+                    <?php $counter = 0; ?>
                     <?php if(!empty($erezept_files)): ?>
                     <div class="col-12">
-                        <div class="h3 m-0 mt-5">Rezept File</div>
+                        <div class="h3 m-0 mt-5">Rezeptfelder</div>
                     </div>
                     <?php
-    if (count($erezept_files) > 1) {
-        echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
-    } else {
-        echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
-    }
-    foreach($erezept_files as $file): 
-    ?>
-                    <div class="modal fade erezeptPreviewModal" id="erezeptPreviewModal" tabindex="-1" role="dialog"
+                        if (count($erezept_files) > 1) {
+                            echo "<div class='col-12'> Es wurden " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+                        } else {
+                            echo "<div class='col-12'> Es wurde " . count($erezept_files) . " Rezeptfelder für dieses Rezept hochgeladen:</div>";
+                        }
+                        foreach($erezept_files as $file): 
+                    ?>
+                    <div class="col-12">
+                        <a class="modal_r" href="javascript:void(0)" data-toggle="modal"
+                            data-target=".erezeptPreviewModal<?php echo $counter; ?>">Vorschau</a> |
+                        <a href="<?php echo $file; ?>" download>Download</a>
+                    </div>
+                    <div class="modal fade erezeptPreviewModal<?php echo $counter; ?>" tabindex="-1" role="dialog"
                         aria-labelledby="erezeptPreviewModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="erezeptPreviewModalLabel">Rezeptfeld Vorschau</h5>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Schließen</button>
+                        <div class="modal-rezept modal-dialog modal-lg modal-dialog-center" role="document">
+                            <div class="modal-content p-5 pt-4">
+                                <div class="modal-header p-0 border-0">
+                                    <h5 class="modal-title pt-1 fs-3" id="erezeptPreviewModalLabel">Rezept Vorschau</h5>
+                                    <button type="button" class="btn-close modal-close" data-dismiss="modal"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <img src="<?php echo $file; ?>" alt="Rezept Vorschau">
+                                <div class="modal-body p-0">
+                                    <div class="modal-img mt-3 mb-4">
+                                        <img src="<?php echo $file; ?>" alt="Rezept Vorschau">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <a href="#" data-toggle="modal" data-target=".erezeptPreviewModal">Vorschau</a> |
-                        <a href="<?php echo $file; ?>" download>Download</a>
-                    </div>
-
+                    <?php $counter++; ?>
                     <?php endforeach; ?>
+
                     <?php else: ?>
                     <div class="col-12">
                         <div class="h3 m-0 mt-5">Rezept File</div>
@@ -278,21 +287,20 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="form-floating">
                             <select id="status_prescription" class="form-select">
                                 <?php
-        $status_prescription = array('Inaktiv', 'Wartend','Gefährdet', 'Aktiv');
-        $selected_status_prescription = $record['status_prescription'];
-        if (!$selected_status_prescription) {
-            echo '<option value="" disabled selected>Bitte Wählen</option>';
-        }
-        foreach ($status_prescription as $value_status_prescription) {
-            if($selected_status_prescription == $value_status_prescription) {
-                echo '<option value="' . $value_status_prescription . '" selected>' . $value_status_prescription . '</option>';
-            } else {
-                echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
-            }
-        }
-    ?>
+                                    $status_prescription = array('Aktiv', 'Wartend','Gefährdet', 'Inaktiv');
+                                    $selected_status_prescription = $record['status_prescription'];
+                                    if (!$selected_status_prescription) {
+                                        echo '<option value="" disabled selected>Bitte Wählen</option>';
+                                    }
+                                    foreach ($status_prescription as $value_status_prescription) {
+                                        if($selected_status_prescription == $value_status_prescription) {
+                                            echo '<option value="' . $value_status_prescription . '" selected>' . $value_status_prescription . '</option>';
+                                        } else {
+                                            echo '<option value="' . $value_status_prescription . '">' . $value_status_prescription . '</option>';
+                                        }
+                                    }
+                                ?>
                             </select>
-
 
                             <label>Status</label>
                         </div>
@@ -351,55 +359,68 @@ include_once('footer.php');
                 });
             });
     }
+    let counter = 0;
 
     function search() {
-        // console.log('search called');
-        const searchTerm = this.value;
+        console.log('search called');
 
+        const searchTerm = this.value;
         if (searchTerm.length < 3) {
             return;
         }
-        const searchResults = data.slice(0, 10);
+        const searchResults = data.filter(result => result.Artikelbezeichnung.toLowerCase().includes(searchTerm
+            .toLowerCase()));
+        // console.log(searchResults);
+        document.querySelector(`#medicine-options_${counter}`).innerHTML =
+            `<ul id="filter-records" class="hm-autocomplete"></ul>`;
 
-        document.querySelector('#medicine-options').innerHTML = '';
         searchResults.forEach(result => {
-            const option = document.createElement('option');
-            option.value = result.Artikelbezeichnung;
-            option.label = result.PZN;
-            document.querySelector('#medicine-options').appendChild(option);
+            const option = document.createElement('li');
+            option.classList.add('hm-autocomplete-item');
+            option.classList.add('p-2');
+            option.innerHTML = `
+<div class="hm-autocomplete-name">${result.Artikelbezeichnung}</div>
+`;
+            document.querySelector(`#filter-records`).appendChild(option);
+            option.addEventListener('click', function() {
+                document.querySelector(`#medicine_name_pzn_${counter}`).value = result
+                    .Artikelbezeichnung;
+                document.querySelector(`#medicine-options_${counter}`).innerHTML = '';
+            });
         });
+
     }
 
     jQuery(document).ready(function($) {
         $('#add_medicine_div').click(function() {
             fetchData();
-
-            // Create a string of HTML that represents the new div element and its contents
+            // this is taking count of how many repeaters, and add it into the ID 
+            counter++;
             let newDivHTML =
                 `<div class="col-12 col-md-9">
-              <div class="form-floating">
-                  <input id="medicine_name_pzn" type="text" class="form-control medicine_name_pzn"
-                      value="" list="medicine-options">
-                  <label>Medikament</label>
-              </div>
-          </div>
+        <div class="form-floating">
+            <input id="medicine_name_pzn_${counter}" type="text" class="form-control medicine_name_pzn" value="" list="medicine-options_${counter}">
+            <label>Medikament</label>
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <div class="form-floating">
+            <input id="medicine_amount" type="number" class="form-control medicine_amount" value="" step="1" min="0">
+            <label>Menge</label>
+        </div>
+    </div>    
+    <div class="d-none medikament_ph"></div>
+    <div id="medicine-options_${counter}">
+        <ul></ul>
+    </div>
+`;
 
-          <div class="col-12 col-md-3">
-              <div class="form-floating">
-                  <input id="medicine_amount" type="number" class="form-control medicine_amount"
-                      value="" step="1" min="0">
-                  <label>Menge</label>
-              </div>
 
-          </div>
-          <div class="medikament_ph"></div>`;
-
-            // Insert the HTML string representation of the new div element after the div element with the medikament_ph class
             document.querySelectorAll('.medikament_ph')[document.querySelectorAll('.medikament_ph')
                 .length - 1].insertAdjacentHTML('afterend', newDivHTML);
 
-            // Attach the event listeners to the input element
-            document.querySelector('.medicine_name_pzn').addEventListener('input', search);
+            // ..aand this attach the event listener to the input element with ID #medicine_name_pzn_${counter}
+            document.querySelector(`#medicine_name_pzn_${counter}`).addEventListener('input', search);
         });
     });
     </script>
@@ -510,9 +531,14 @@ include_once('footer.php');
             console.log(count);
             $.post(ajaxurl, data, function(response) {
                 response = JSON.parse(response);
+                console.log(response);
 
                 // remove invalid when focusing on the field
                 $('input').on('focus', function() {
+                    $(this).removeClass('is-invalid');
+                    $(this).next('.invalid-feedback').remove();
+                });
+                $('select').on('focus', function() {
                     $(this).removeClass('is-invalid');
                     $(this).next('.invalid-feedback').remove();
                 });
@@ -521,6 +547,7 @@ include_once('footer.php');
                     //remove error classes and messages
                     $('#successdown').removeClass('alert alert-danger');
                     $('input').removeClass('is-invalid');
+                    $('select').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
                     //add success classes and message
                     // $('input').addClass('is-valid');
@@ -532,27 +559,56 @@ include_once('footer.php');
                     }, 5000);
 
                 } else if (response.status == 'error') {
-                    var errorMessages = response.message;
-                    //loop through error messages and add to corresponding input fields
-                    for (var i = 0; i < errorMessages.length; i++) {
-                        var inputId = errorMessages[i].split(":")[0];
-                        $('#' + inputId).addClass('is-invalid');
-                        $('#' + inputId).after('<div class="invalid-feedback">' + errorMessages[
-                            i].substring(inputId.length + 1) + '</div>');
+                    if (response.message.length == 0) {
+                        $('#successdown').addClass('alert alert-danger');
+                        $('#successdown').html(
+                            'Es gab keine neuen Felder zum Speichern');
+                    } else {
+                        var errorMessages = response.message;
+                        //loop through error messages and add to corresponding input fields
+                        for (var i = 0; i < errorMessages.length; i++) {
+                            var inputId = errorMessages[i].split(":")[0];
+                            $('#' + inputId).addClass('is-invalid');
+                            $('#' + inputId).after('<div class="invalid-feedback">' +
+                                errorMessages[
+                                    i].substring(inputId.length + 1) + '</div>');
+                        }
+                        //add error class and message
+                        $('#successdown').addClass('alert alert-danger');
+                        $('#successdown').html(
+                            'Fehler: Bitte überprüfen Sie die rot markierten Felde');
+                        $('#successdown').fadeIn(1000);
+                        setTimeout(function() {
+                            $('#successdown').fadeOut(1000);
+                        }, 5000);
                     }
-                    //add error class and message
-                    $('#successdown').addClass('alert alert-danger');
-                    $('#successdown').html(
-                        'Fehler: Bitte überprüfen Sie die rot markierten Felde');
-                    $('#successdown').fadeIn(1000);
-                    setTimeout(function() {
-                        $('#successdown').fadeOut(1000);
-                    }, 5000);
                 }
-
-
-
             });
         });
+    });
+
+    // modal for Files, for medikationplan and rezept
+    // $('#exampleModalCenter').on('show.bs.modal', function() {
+    //     console.log('Modal is being triggered');
+    // });
+    $(document).ready(function() {
+        $('#exampleModalCenter').modal({
+            show: false
+        });
+
+        $('.modal_m').on('click', function() {
+            let targetModalId = $(this).data('target');
+            $(targetModalId).modal('show');
+        });
+
+        $('.modal_r').on('click', function() {
+            var modalId = $(this).data("target");
+            $(modalId).modal('show');
+        });
+    });
+    // closiiing tiiime 🎶
+    $('.modal-close').on('click', function() {
+        var modal = $(this).closest('.modal');
+        modal.modal('hide');
     });
     </script>

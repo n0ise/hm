@@ -4,7 +4,7 @@
 <?php include_once('header.php'); ?>
 
 <!-- show the content if the user is logged in   -->
-<?php if(is_user_logged_in() && current_user_can('administrator')) { ?>
+<?php if(is_user_logged_in() && current_user_can('administrator') || current_user_can('admin_panel') ) { ?>
 
 <?php
 
@@ -54,7 +54,7 @@ $users = get_users( array( 'role' => 'client' ) );
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
-                        <td data-label="Verschreibungsdatum"><?php echo $rezept['prescription_date_by_doctor']; ?></td>
+                        <td data-label="Verschreibungsdatum"><?php echo date("d.m.Y", strtotime($rezept['prescription_date_by_doctor'])); ?></td>
                         <td data-label="Medikamente"><?php 
                                         if (!empty($rezept['medicine_section'])) {
                                             foreach ($rezept['medicine_section'] as $medicine) {

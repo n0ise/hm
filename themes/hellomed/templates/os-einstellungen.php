@@ -19,6 +19,9 @@ $user_id = get_current_user_id();
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {
             $user = get_userdata($user_id);
+            $patient_caregiver = get_field('patient_caregiver', 'user_' . $user->ID);
+            $user_firstname = $user->user_firstname;
+            $user_lastname = $user->user_lastname;
             ?>
             <div class="row gy-4 hm-settings-grid">
                 <div class="col-12">
@@ -34,17 +37,33 @@ $user_id = get_current_user_id();
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="first_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'patient_first_name', true); ?>">
+                            value="<?php echo $user_firstname ?>">
                         <label>Vorname</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'patient_last_name', true); ?>">
+                            value="<?php echo $user_lastname; ?>">
                         <label>Nachname</label>
                     </div>
                 </div>
+                <?php if ($patient_caregiver == 'caregiver') { ?>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                        <input id="patient_first_name" type="text" class="form-control border border-primary"
+                            placeholder=" " value="<?php echo get_field('patient_first_name', 'user_' . $user->ID); ?>">
+                        <label>Patient Vorname</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-floating">
+                        <input id="patient_last_name" type="text" class="form-control border border-primary"
+                            placeholder=" " value="<?php echo get_field('patient_last_name', 'user_' . $user->ID); ?>">
+                        <label>Patient Nachname</label>
+                    </div>
+                </div>
+                <?php } ?>
                 <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="last_name" type="text" class="form-control" placeholder=" "
@@ -119,16 +138,6 @@ $user_id = get_current_user_id();
                         <input id="telephone" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'telephone', true); ?>">
                         <label>Telefon</label>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="h3 m-0 mt-5">Verblisterung</div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <input id="start_date" type="date" class="form-control" placeholder=" "
-                            value="<?php echo get_user_meta($user_id, 'start_date', true); ?>">
-                        <label>hellomed Startdatum</label>
                     </div>
                 </div>
                 <div class="col-12">
@@ -214,6 +223,8 @@ include_once('footer.php');
         $('#save').click(function() {
             var first_name = $('#first_name').val();
             var last_name = $('#last_name').val();
+            var patient_first_name = $('#patient_first_name').val();
+            var patient_last_name = $('#patient_last_name').val();
             var geschlecht = $('#geschlecht').val();
             var geburt = $('#geburt').val();
             var krankheiten = $('#krankheiten').val();
@@ -225,7 +236,7 @@ include_once('footer.php');
             var zusatz = $('#zusatz').val();
             var telephone = $('#telephone').val();
             var privat_or_gesetzlich = $('input[name="privat_or_gesetzlich"]:checked').val();
-            var start_date = $('#start_date').val();
+            // var start_date = $('#start_date').val();
             var insurance_company = $('#insurance_company').val();
             var insurance_number = $('#insurance_number').val();
 
@@ -240,6 +251,8 @@ include_once('footer.php');
                 'user_id': <?php echo $user_id; ?>,
                 'first_name': first_name,
                 'last_name': last_name,
+                'patient_first_name': patient_first_name,
+                'patient_last_name': patient_last_name,
                 'geschlecht': geschlecht,
                 'geburt': geburt,
                 'krankheiten': krankheiten,
@@ -251,7 +264,7 @@ include_once('footer.php');
                 'zusatz': zusatz,
                 'telephone': telephone,
                 'privat_or_gesetzlich': privat_or_gesetzlich,
-                'start_date': start_date,
+                // 'start_date': start_date,
                 'insurance_company': insurance_company,
                 'insurance_number': insurance_number
 
@@ -315,7 +328,7 @@ include_once('footer.php');
                 $('#geschlecht').val(geschlecht);
                 $('#insurance_company').val(insurance_company);
                 $('#insurance_number').val(insurance_number);
-                $('#start_date').val(start_date);
+                // $('#start_date').val(start_date);
                 $('#krankheiten').val(krankheiten);
                 $('#nrno').val(nrno);
 

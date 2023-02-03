@@ -58,11 +58,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
         <div class="hm-preheader <?php echo $class; ?>" id="prescription-<?php echo $prescription_id; ?>">
             <i class="bi bi-exclamation-circle-fill"></i>
             <div>
-                Ihr aktueller Rezeptzyklus und die Belieferung durch hellomed läuft zum
+                Ihr aktueller Rezeptzyklus für das Rezept <b><?php echo $prescription_id; ?></b> und somit die Belieferung durch hellomed läuft zum
                 <b><?php echo $prescription_end_date_formatted; ?></b> aus.
-                Bitte senden Sie Ihr Folgerezept spätestens bis zum
+                Bitte senden Sie uns ein Folgerezept bis zum
                 <b><?php echo $two_weeks_before->format('d.m.Y'); ?></b> postalisch oder per
-                Rezept-Upload an uns.
+                E-Rezept zu.
             </div>
             <i class="bi bi-x-circle"></i>
         </div>
@@ -94,7 +94,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
 
         <div class="container">
             <div class="hm-logo">
-                <a href="index.php">
+                <a href="/anmelden">
                     <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg">
                 </a>
             </div>
@@ -123,7 +123,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
-                    <li><a class="dropdown-item" href="einstellungen">Einstellungen</a></li>
+                    <li><a class="dropdown-item" href="/einstellungen">Einstellungen</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -151,11 +151,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
             <ul>
                 <!-- check the page slug and make the correspondent <li> with class active -->
                 <li><a class="<?php if (is_page('os-medikationsplan')) { echo 'active'; } ?>"
-                        href="/os-medikationsplan">Medikationsplan</a></li>
-                <li><a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>" href="/os-rezepte">Rezepte</a>
+                        href="/medikationsplan">Medikationsplan</a></li>
+                <li><a class="<?php if (is_page('os-rezepte')) { echo 'active'; } ?>" href="/rezepte">Rezepte</a>
                 </li>
                 <li><a class="<?php if (is_page('os-medikamente')) { echo 'active'; } ?>"
-                        href="/os-medikamente">Medikamente</a> </li>
+                        href="/medikamente">Medikamente</a> </li>
             </ul>
             <div class="hm-offcanvas-profile">
                 <div class="hm-dropdown">
@@ -169,8 +169,8 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
             </div>
             <ul>
-                <li><a href="os-hilfe">FAQ & Hilfe</a></li>
-                <li><a href="os-einstellungen">Einstellungen</a></li>
+                <li><a href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
+                <li><a href="/einstellungen">Einstellungen</a></li>
                 <li><a href="<?php echo wp_logout_url( home_url() ); ?>">Logout</a></li>
             </ul>
         </div>

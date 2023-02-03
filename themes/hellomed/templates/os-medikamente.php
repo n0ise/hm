@@ -29,6 +29,8 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Arzt</th>
+                        <th>Verschreibungsdatum</th>
                         <th>Enthalten in Rezept ID</th>
                         <th>Status</th>
                     </tr>
@@ -50,7 +52,9 @@ if (!empty($rezept['medicine_section'])) {
 
                     <tr>
                         <td data-label="Name"><?php echo $item; ?></td>
-                        <td data-label="ID"><?php echo $rezept['prescription_id']; ?></td>
+                        <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
+                        <td data-label="Verschreibungsdatum"><?php echo date("d.m.Y", strtotime($rezept['prescription_date_by_doctor'])); ?></td>
+                        <td data-label="Enthalten in Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Status"><span
                                 class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']); ?>">
                                 <?php echo $rezept['status_prescription']; ?></span></td>
@@ -64,16 +68,6 @@ if (!empty($rezept['medicine_section'])) {
 
                 </tbody>
             </table>
-
-            <div class=" row mt-5">
-                <div class="col-12 col-md-4 offset-md-4">
-                    <!--// TODO here putting data from user TBD -->
-                    <a class="btn btn-primary btn-lg"
-                        href="mailto:patient@hellomed.com?subject=Neues Folgerezept - Folgerezept für meine Blister&amp;body=Sehr geehrte Damen und Herren, im Anhang dieser E-Mail finden Sie mein Folgerezept mit Bitte um Bearbeitung. Beste Grüße">Folgerezept
-                        einreichen</a>
-                </div>
-            </div>
-
         </div>
     </div>
 </main>
