@@ -42,7 +42,6 @@ $status="Alle";
 <a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button" class="btn btn-success btn-sm">Aktiv</button>
 <a href="admin-nutzerverwaltung?status=Wartend"> <button type="button" class="btn btn-warning btn-sm">Wartend</button>
 <a href="admin-nutzerverwaltung?status=Inaktiv"> <button type="button" class="btn btn-secondary btn-sm" >Inaktiv</button>
-<a href="admin-nutzerverwaltung?status=Gefährdet"> <button type="button" class="btn btn-danger btn-sm">Gefährdet</button>
 
         <?php
         foreach ($users as $user) {
