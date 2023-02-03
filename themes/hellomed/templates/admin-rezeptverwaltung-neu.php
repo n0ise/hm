@@ -167,7 +167,7 @@
                                 <option>Aktiv</option>
                                 <option>Inaktiv</option>
                                 <option>Wartend</option>
-                                <option>Gefähred</option>
+                                <option>Gefährdet</option>
                             </select>
                             <label>Status</label>
                         </div>
