@@ -971,14 +971,15 @@ class Hellomed_Custom_Login_Plugin {
 									$arr3['new_user_id']= $user_id;
 									$arr3['prescription_id']= $unique_id;
 									$arr3['status_prescription']= "Wartend";
+									$arr3['prescription_created_time']= date('d.m.Y H:i:s');
 								}
 						}
-
 							else{
 								$arr3 = $listfilenamesarray;
 								$arr3['new_user_id']= $user_id;
 								$arr3['prescription_id']= $unique_id;
 								$arr3['status_prescription']= "Wartend";
+								$arr3['prescription_created_time']= date('d.m.Y H:i:s');
 							
 							}
 
