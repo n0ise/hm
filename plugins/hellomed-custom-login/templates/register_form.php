@@ -20,13 +20,12 @@
 		<div class="col-12">
        <label class="form-label">Sind Sie Patient oder Angehöriger?</label>
         <div class="btn-group d-flex">
-          <input required type="radio" class="btn-check" name="patientcaregiverid" value="patient"  id="patientcaregiverid1" autocomplete="off" checked>
+          <input required type="radio" class="btn-check" name="patientcaregiverid" value="patient" id="patientcaregiverid1" autocomplete="off" checked>
           <label class="btn btn-outline-primary" for="patientcaregiverid1">Patient</label>
           <input type="radio" class="btn-check" name="patientcaregiverid"  value="caregiver" id="patientcaregiverid2" autocomplete="off">
           <label class="btn btn-outline-primary" for="patientcaregiverid2">Angehöriger</label>
         </div>
       </div>
-
 
 	  <div class="col-12">
         <div class="form-floating">
@@ -57,15 +56,15 @@
         <div class="form-check m-0">
         <input required class="form-check-input" type="checkbox" id="legal-3" name="agb_checkbox" required>
         <label class="form-check-label text-legal" for="legal-3">
-            Ich habe die <a href>AGB</a> und die <a href>Datenschutzerklärung</a> zur Kenntnis genommen.
+            Ich habe die <a href>AGB</a> und die <a href>Datenschutzerklärung</a> zur Kenntnis genommen. *
           </label>
         </div>
       </div>
       <div class="col-12">
         <div class="form-check m-0">
-          <input class="form-check-input" type="checkbox" id="legal-4" name="personal_data_checkbox">
+          <input class="form-check-input" type="checkbox" id="legal-4" name="personal_data_checkbox" required>
           <label class="form-check-label text-legal" for="legal-4">
-            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten, zum Zweck der Führung meines Kundenkontos wie aus der <a href>Datenschutzerklärung</a> ersichtlich verarbeitet werden.
+            Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten, zum Zweck der Führung meines Kundenkontos wie aus der <a href>Datenschutzerklärung</a> ersichtlich verarbeitet werden. *
           </label>
         </div>
       </div>
