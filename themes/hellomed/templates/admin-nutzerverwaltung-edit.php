@@ -81,8 +81,8 @@
                                 <?php echo $geschlecht_value; ?></option>
                             <?php 
                                 $geschlecht = array('Männlich', 'Weiblich');
-                                $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
-                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
+                                $selectedgeschlecht = $geschlecht_value;
+                                $keygeschlecht = array_search($geschlecht_value, $geschlecht);
                                 unset($geschlecht[$keygeschlecht]);
                                     foreach ($geschlecht as $valuegeschlecht) {
                                     echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
