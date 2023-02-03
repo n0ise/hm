@@ -40,9 +40,21 @@ $users = get_users( array( 'role' => 'client' ) );
                         $user_rezept = get_field('rezept_input', 'user_' . $user->ID);
                         $prescription_date_by_doctor = get_field('prescription_doctor_by_name', 'user_' . $user->ID);
                         $prescription_status = get_field('prescription_status', 'user_' . $user->ID);
+                    
+
                         // loop through each rezept_file
                         foreach ($user_rezept as $rezept) {
                             $displayed = false;
+                            $date_doctor = $rezept['prescription_date_by_doctor'];
+                            $name_doctor = $rezept['doctor_name'];
+                            if  (empty($name_doctor)) {
+                                $name_doctor = "Not set";
+                            } 
+                        if (empty($date_doctor) || $date_doctor == 0) {
+                        $formatted_date_doctor = "Not set";
+                        } else {
+                        $formatted_date_doctor = date("d.m.Y", strtotime($date_doctor));
+                        }
                             foreach ($rezept['rezept_file'] as $rezept_file) {
                               if (isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
                                 if (!$displayed) {
@@ -53,8 +65,8 @@ $users = get_users( array( 'role' => 'client' ) );
                                 }?>
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
-                        <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
-                        <td data-label="Verschreibungsdatum"><?php echo date("d.m.Y", strtotime($rezept['prescription_date_by_doctor'])); ?></td>
+                        <td data-label="Arzt"><?php echo $name_doctor; ?></td>
+                        <td data-label="Verschreibungsdatum"><?php echo $formatted_date_doctor; ?></td>
                         <td data-label="Medikamente"><?php 
                                         if (!empty($rezept['medicine_section'])) {
                                             foreach ($rezept['medicine_section'] as $medicine) {

@@ -34,15 +34,15 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
         $current_timestamp = time();
         if ($rezept_input) {
             // for each prescription with a status of aktiv, it will then convert the expiring date, compare to what is left  
-                foreach ($rezept_input as $row) {
-                    $prescription_status = $row['status_prescription'];
-                    $prescription_id = $row['prescription_id'];
-                    $prescription_end_date = $row['prescription_end_date'];
-                    
+            foreach ($rezept_input as $row) {
+                $prescription_status = $row['status_prescription'];
+                $prescription_id = $row['prescription_id'];
+                $prescription_end_date = $row['prescription_end_date'];
+                if ($prescription_status == "Aktiv" && isset($prescription_end_date)) {
                     $prescription_end_datetime = DateTime::createFromFormat('Y-m-d', $prescription_end_date);
                     $prescription_end_timestamp = $prescription_end_datetime->getTimestamp();
                     $prescription_end_date_formatted = $prescription_end_datetime->format('d.m.Y');
-                        // two weeks before the expiry date 
+                    // two weeks before the expiry date 
                     $two_weeks_before = $prescription_end_datetime->modify('-14 days');
                     if ($prescription_end_timestamp >= $current_timestamp + 4 * 7 * 24 * 60 * 60) {
                         // More than 4 weeks away
@@ -54,6 +54,11 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                         // Less than 2 weeks away
                         $class = 'theme-red';
                     }
+                    // display row data with $class assigned
+                } else {
+                    // skip processing and displaying the prescription
+                    continue;
+                }
                     ?>
         <div class="hm-preheader <?php echo $class; ?>" id="prescription-<?php echo $prescription_id; ?>">
             <i class="bi bi-exclamation-circle-fill"></i>

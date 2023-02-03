@@ -148,7 +148,7 @@
                     <div class="form-floating">
                         <input id="stadt" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($_GET['user_id'], 'stadt', true); ?>">
-                        <label>Ort</label>
+                        <label>Wohnort</label>
                     </div>
                 </div>
                 <div class="col-6">
