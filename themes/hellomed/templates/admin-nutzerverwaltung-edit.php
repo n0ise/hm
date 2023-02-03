@@ -22,7 +22,13 @@
                 $patient_caregiver = get_field('patient_caregiver', 'user_' . $user->ID);
                 $user_firstname = $user->user_firstname;
                 $user_lastname = $user->user_lastname;
-           
+                $geschlecht_value = get_user_meta($_GET['user_id'], 'geschlecht', true);
+                if ($geschlecht_value === "Male") {
+                  $geschlecht_value = "Männlich";
+                } elseif ($geschlecht_value === "Female") {
+                  $geschlecht_value = "Weiblich";
+                }
+                
             ?>
             <div class="row gy-4 hm-settings-grid">
                 <div class="col-12">
@@ -72,7 +78,7 @@
                     <div class="form-floating">
                         <select id="geschlecht" class="form-select">
                             <option value="<?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?>" selected>
-                                <?php echo get_user_meta($_GET['user_id'], 'geschlecht', true); ?></option>
+                                <?php echo $geschlecht_value; ?></option>
                             <?php 
                                 $geschlecht = array('Männlich', 'Weiblich');
                                 $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);

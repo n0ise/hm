@@ -405,7 +405,7 @@ add_action('wp_ajax_edit_patient', function() {
 	if (isset($_POST['patient_last_name'])) {
 		if (empty($_POST['patient_last_name'])) {
 			$hasError = true;
-			$errorMessages[] = "last_name: Bitte geben Sie Ihren Nachnamen ein.";
+			$errorMessages[] = "patient_last_name: Bitte geben Sie Ihren Nachnamen ein.";
 		} else {
 			if (preg_match('/^[a-zA-Z ]+$/', $_POST['last_name'])) {
 				if ( !empty($_POST['patient_last_name']) && $_POST['patient_last_name'] != get_user_meta( $user_id, 'patient_last_name', true )) {
