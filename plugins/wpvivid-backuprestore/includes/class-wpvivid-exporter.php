@@ -1473,8 +1473,8 @@ class WPvivid_Exporter
 
     private function zip_media_files($xml_file,$files,$file_name,$export_type,$json_info=false)
     {
-        if (!class_exists('PclZip'))
-            include_once(ABSPATH.'/wp-admin/includes/class-pclzip.php');
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
         $path=WP_CONTENT_DIR.DIRECTORY_SEPARATOR.WPvivid_Setting::get_backupdir().DIRECTORY_SEPARATOR.WPVIVID_IMPORT_EXPORT_DIR.DIRECTORY_SEPARATOR.$file_name.'_export_'.$export_type.'.zip';
         $options['compress']['no_compress']=1;
         $options['compress']['use_temp_file']=1;
@@ -1483,8 +1483,7 @@ class WPvivid_Exporter
 
         if(file_exists($path))
             @unlink($path);
-        $archive = new PclZip($path);
-
+        $archive = new WPvivid_PclZip($path);
         if($json_info!==false) {
             $temp_path = dirname($path).DIRECTORY_SEPARATOR.'wpvivid_export_package_info.json';
             if(file_exists($temp_path)) {
@@ -1498,11 +1497,11 @@ class WPvivid_Exporter
                 $json_info['media_size']+=@filesize($file);
             }
             file_put_contents($temp_path,print_r(json_encode($json_info),true));
-            $archive -> add($temp_path,PCLZIP_OPT_REMOVE_PATH,dirname($temp_path));
+            $archive -> add($temp_path,WPVIVID_PCLZIP_OPT_REMOVE_PATH,dirname($temp_path));
             @unlink($temp_path);
         }
 
-        $ret =$archive -> add($xml_file,PCLZIP_OPT_REMOVE_PATH,dirname($xml_file));
+        $ret =$archive -> add($xml_file,WPVIVID_PCLZIP_OPT_REMOVE_PATH,dirname($xml_file));
         @unlink($xml_file);
         if(!$ret)
         {
@@ -1510,7 +1509,7 @@ class WPvivid_Exporter
         }
 
         if(!empty($files)) {
-            $ret = $archive->add($files, PCLZIP_OPT_REMOVE_PATH, WP_CONTENT_DIR, PCLZIP_OPT_TEMP_FILE_THRESHOLD, 16);
+            $ret = $archive->add($files, WPVIVID_PCLZIP_OPT_REMOVE_PATH, WP_CONTENT_DIR, WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD, 16);
         }
 
         if(!$ret)

@@ -536,8 +536,8 @@ class WPvivid_mail_report
 
         $files=WPvivid_error_log::get_error_log();
 
-        if (!class_exists('PclZip'))
-            include_once(ABSPATH.'/wp-admin/includes/class-pclzip.php');
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
 
         $backup_path=WPvivid_Setting::get_backupdir();
         $path=WP_CONTENT_DIR.DIRECTORY_SEPARATOR.$backup_path.DIRECTORY_SEPARATOR.'wpvivid_debug.zip';
@@ -546,11 +546,11 @@ class WPvivid_mail_report
         {
             @unlink( $path);
         }
-        $archive = new PclZip($path);
+        $archive = new WPvivid_PclZip($path);
 
         if(!empty($files))
         {
-            if(!$archive->add($files,PCLZIP_OPT_REMOVE_ALL_PATH))
+            if(!$archive->add($files,WPVIVID_PCLZIP_OPT_REMOVE_ALL_PATH))
             {
                 echo $archive->errorInfo(true).' <a href="'.admin_url().'admin.php?page=WPvivid">retry</a>.';
                 exit;
@@ -567,7 +567,7 @@ class WPvivid_mail_report
         $server_file = fopen($server_file_path, 'x');
         fclose($server_file);
         file_put_contents($server_file_path,$server_info);
-        if(!$archive->add($server_file_path,PCLZIP_OPT_REMOVE_ALL_PATH))
+        if(!$archive->add($server_file_path,WPVIVID_PCLZIP_OPT_REMOVE_ALL_PATH))
         {
             echo $archive->errorInfo(true).' <a href="'.admin_url().'admin.php?page=WPvivid">retry</a>.';
             exit;

@@ -1205,6 +1205,7 @@ class WPvivid_Staging_UI_Display_Free
     public $staging_list_ui;
     public $staging_create_ui;
     public $fresh_install_ui;
+    public $log_page;
 
     public function __construct()
     {
@@ -1222,7 +1223,7 @@ class WPvivid_Staging_UI_Display_Free
     {
         if(is_multisite())
         {
-            switch_to_blog(get_main_network_id());
+            switch_to_blog(get_main_site_id());
             $staging=get_option('wpvivid_staging_data',false);
             restore_current_blog();
         }

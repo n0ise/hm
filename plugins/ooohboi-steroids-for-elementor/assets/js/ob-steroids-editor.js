@@ -4,7 +4,6 @@
 ( function ( $, w ) {
 
     var $window = $( w );
-
     var switch_editor_style = function() {
 
         var dark_css_el = $( '#ooohboi-steroids-styles-editor-dark-css' );

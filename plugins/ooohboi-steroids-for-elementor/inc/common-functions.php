@@ -63,6 +63,13 @@ $fields[] = array(
             'class'   => 'sfe-intro', 
         ),
         array(
+            'id'            => 'ob_use_btl', 
+            'title'			=> 'BETTER TEMPLATES LIBRARY', 
+            'type'			=> 'switcher',
+            'description'	=> sprintf( __( '%sAdd preview to your templates, Export/Import/Share your templates with preview image.%s', 'ooohboi-steroids' ), '<span class="ob-option-desc">', '</span>' ),
+            'default'       => 'no',
+        ),
+        array(
             'id'            => 'ob_use_harakiri', 
             'title'			=> 'HARAKIRI', 
             'type'			=> 'switcher',
@@ -258,6 +265,13 @@ $fields[] = array(
             'title'			=> 'POSTMAN', 
             'type'			=> 'switcher',
             'description'	=> sprintf( __( '%sStyle up the Post Content widget elements%s', 'ooohboi-steroids' ), '<span class="ob-option-desc">', '</span>' ), 
+            'default'       => 'yes',
+        ), 
+        array(
+            'id'            => 'ob_use_typo', 
+            'title'			=> 'TYPO', 
+            'type'			=> 'switcher',
+            'description'	=> sprintf( __( '%sMore controls to your Elementor Kit%s', 'ooohboi-steroids' ), '<span class="ob-option-desc">', '</span>' ), 
             'default'       => 'yes',
         ), 
     ),

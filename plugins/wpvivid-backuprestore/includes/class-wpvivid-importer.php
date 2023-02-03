@@ -562,7 +562,8 @@ class WPvivid_media_importer
 
     public function import($id)
     {
-        if (!class_exists('PclZip')) include_once(ABSPATH.'/wp-admin/includes/class-pclzip.php');
+        if (!class_exists('WPvivid_PclZip'))
+            include_once WPVIVID_PLUGIN_DIR . '/includes/zip/class-wpvivid-pclzip.php';
 
         $this->import_log = new WPvivid_import_data();
 
@@ -579,7 +580,7 @@ class WPvivid_media_importer
         {
             $file_path=$path.DIRECTORY_SEPARATOR.$file;
             $this->import_log->wpvivid_write_import_log('Prepare to retrieve file info, file name: '.$file_path, 'notice');
-            $archive = new PclZip($file_path);
+            $archive = new WPvivid_PclZip($file_path);
             $ret=$this->get_file_info($file_path);
             if($ret['result']=='failed')
             {
@@ -591,7 +592,7 @@ class WPvivid_media_importer
             $xml_file=$ret['json_data']['xml_file'];
             $xml_file_name = $ret['json_data']['xml_file'];
             $this->import_log->wpvivid_write_import_log('Prepare to extract, file name: '.$xml_file, 'notice');
-            $zip_ret = $archive->extract(PCLZIP_OPT_BY_NAME,basename($xml_file),PCLZIP_OPT_PATH,$path,PCLZIP_OPT_REPLACE_NEWER,PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
+            $zip_ret = $archive->extract(WPVIVID_PCLZIP_OPT_BY_NAME,basename($xml_file),WPVIVID_PCLZIP_OPT_PATH,$path,WPVIVID_PCLZIP_OPT_REPLACE_NEWER,WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
             if(!$zip_ret)
             {
                 $this->import_log->wpvivid_write_import_log('Failed to extract, error: '.$archive->errorInfo(true), 'notice');
@@ -602,7 +603,7 @@ class WPvivid_media_importer
             }
             $this->import_log->wpvivid_write_import_log('The file extracton is completed, file name: '.$xml_file, 'notice');
             $this->import_log->wpvivid_write_import_log('Prepare to extract, file name: '.$file_path, 'notice');
-            $zip_ret = $archive->extract(PCLZIP_OPT_PATH, WP_CONTENT_DIR, PCLZIP_OPT_REPLACE_NEWER, PCLZIP_CB_PRE_EXTRACT, 'wpvivid_function_pre_extract_import_callback', PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
+            $zip_ret = $archive->extract(WPVIVID_PCLZIP_OPT_PATH, WP_CONTENT_DIR, WPVIVID_PCLZIP_OPT_REPLACE_NEWER, WPVIVID_PCLZIP_CB_PRE_EXTRACT, 'wpvivid_function_pre_extract_import_callback', WPVIVID_PCLZIP_OPT_TEMP_FILE_THRESHOLD,16);
             if(!$zip_ret)
             {
                 $this->import_log->wpvivid_write_import_log('Failed to extract, error: '.$archive->errorInfo(true), 'notice');
@@ -1906,6 +1907,7 @@ class WPvivid_WXR_Parser_SimpleXML
         if ( function_exists( 'libxml_disable_entity_loader' ) ) {
             $old_value = libxml_disable_entity_loader( true );
         }
+        //$success = $dom->loadXML( file_get_contents( $file ), LIBXML_PARSEHUGE );
         $success = $dom->loadXML( file_get_contents( $file ) );
         if ( ! is_null( $old_value ) )
         {

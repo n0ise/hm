@@ -93,7 +93,7 @@ class WPvivid_Snapshot_Ex
     {
         $wp_admin_bar->add_menu(array(
             'id' => 'wpvivid_snapshot_admin_menu',
-            'title' => 'Quick Snapshot',
+            'title' => '<span class="dashicons-camera-alt ab-icon"></span>'.'Quick Snapshot',
             'meta' =>array(
                 'class' => 'wpvivid-quick-create-snapshot',
             )
@@ -346,7 +346,7 @@ class WPvivid_Snapshot_Ex
                 }, 3000);
 
                 jQuery('#wpvivid_quick_create_snapshot').css({'pointer-events': 'none', 'opacity': '0.4'});
-                wpvivid_post_request(ajax_data, function(data)
+                wpvivid_post_request_quick(ajax_data, function(data)
                 {
                     b_quick_end_create_progress=true;
                     var jsonarray = jQuery.parseJSON(data);
@@ -396,7 +396,7 @@ class WPvivid_Snapshot_Ex
                     'action': 'wpvivid_get_snapshot_progress',
                 };
 
-                wpvivid_post_request(ajax_data, function(data)
+                wpvivid_post_request_quick(ajax_data, function(data)
                 {
                     var jsonarray = jQuery.parseJSON(data);
                     b_quick_end_create_progress=true;
@@ -438,7 +438,7 @@ class WPvivid_Snapshot_Ex
                     'action': 'wpvivid_resume_create_snapshot'
                 };
 
-                wpvivid_post_request(ajax_data, function(data)
+                wpvivid_post_request_quick(ajax_data, function(data)
                 {
                     try {
                         var jsonarray = jQuery.parseJSON(data);

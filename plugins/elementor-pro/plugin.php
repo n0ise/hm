@@ -4,6 +4,7 @@ namespace ElementorPro;
 use ElementorPro\Core\Admin\Admin;
 use ElementorPro\Core\App\App;
 use ElementorPro\Core\Connect;
+use ElementorPro\Core\Compatibility\Compatibility;
 use Elementor\Core\Responsive\Files\Frontend as FrontendFile;
 use Elementor\Utils;
 use ElementorPro\Core\Editor\Editor;
@@ -79,6 +80,11 @@ class Plugin {
 		'ElementorPro\Modules\PanelPostsControl\Controls\Group_Control_Posts' => 'ElementorPro\Modules\QueryControl\Controls\Group_Control_Posts',
 		'ElementorPro\Modules\PanelPostsControl\Controls\Query' => 'ElementorPro\Modules\QueryControl\Controls\Query',
 	];
+
+	/**
+	 * @var \ElementorPro\License\Updater
+	 */
+	public $updater;
 
 	/**
 	 * Throw error on object clone
@@ -414,7 +420,7 @@ class Plugin {
 		add_action( 'elementor/frontend/before_enqueue_scripts', [ $this, 'enqueue_frontend_scripts' ] );
 		add_action( 'elementor/frontend/after_enqueue_styles', [ $this, 'enqueue_styles' ] );
 
-		add_filter( 'elementor/core/responsive/get_stylesheet_templates', [ $this, 'get_responsive_stylesheet_templates' ] );
+		add_filter( 'elementor/core/breakpoints/get_stylesheet_template', [ $this, 'get_responsive_stylesheet_templates' ] );
 		add_action( 'elementor/document/save_version', [ $this, 'on_document_save_version' ] );
 
 		add_filter( 'elementor/editor/localize_settings', function ( $settings ) {
@@ -462,6 +468,8 @@ class Plugin {
 	private function __construct() {
 		spl_autoload_register( [ $this, 'autoload' ] );
 
+		Compatibility::register_actions();
+
 		new Connect\Manager();
 
 		$this->setup_hooks();
@@ -472,6 +480,8 @@ class Plugin {
 
 		$this->app = new App();
 
+		$this->license_admin = new License\Admin();
+
 		if ( is_user_logged_in() ) {
 			$this->integrations = new Integrations_Manager(); // TODO: This one is safe to move out of the condition.
 
@@ -480,7 +490,8 @@ class Plugin {
 
 		if ( is_admin() ) {
 			$this->admin = new Admin();
-			$this->license_admin = new License\Admin();
+
+			$this->license_admin->register_actions();
 		}
 
 		// The `Updater` class is responsible for adding some updates related filters, including auto updates, and since

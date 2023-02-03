@@ -1,6 +1,5 @@
 <?php
 use Elementor\Controls_Manager;
-use Elementor\Controls_Stack;
 use Elementor\Element_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -194,7 +193,7 @@ class OoohBoi_Hover_Animator {
 		$element->add_control(
 			'_ob_allow_hoveranimator_touch',
 			[
-                'label' => sprintf( __( 'Disable on touch devices?%sNEW!%s', 'ooohboi-steroids' ), '<sup class="ob-new-feature">', '</sup>' ),
+                'label' => __( 'Disable on touch devices?', 'ooohboi-steroids' ),
                 
                 'description' => __( 'The effect is visible on touch based devices only. Developer tools can simulate touch devices!', 'ooohboi-steroids' ), 
 				'type' => Controls_Manager::SWITCHER, 

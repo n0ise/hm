@@ -1,7 +1,6 @@
 <?php
 use Elementor\Controls_Manager; 
 use Elementor\Element_Base;
-use Elementor\Controls_Stack;
 use Elementor\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) exit;

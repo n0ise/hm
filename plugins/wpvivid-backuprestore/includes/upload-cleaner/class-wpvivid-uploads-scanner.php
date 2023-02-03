@@ -1315,7 +1315,8 @@ class WPvivid_Uploads_Scanner
                 {
                     if (is_dir($root_path . DIRECTORY_SEPARATOR . $filename))
                     {
-                        if(preg_match('#^\d{4}$#',$filename))
+                        if(preg_match('#^\d{4}$#',$filename) ||
+                            preg_match('/listing-uploads/', $filename))  //add listing-uploads\gallery
                         {
                             $result['folders']=array_merge( $result['folders'],$this->get_sub_folder($root_path . DIRECTORY_SEPARATOR . $filename,$filename));
                         }
