@@ -813,6 +813,8 @@ class Hellomed_Custom_Login_Plugin {
 
 
 
+
+
 	public function do_onboarding() {
 
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
@@ -823,8 +825,8 @@ class Hellomed_Custom_Login_Plugin {
 			$redirect_url = home_url( 'onboarding' );
 			// user_id
 		//	$user_id = $_POST['user_id'];
-		$formDataUpdate['data'][0]['Lead_Source'] = "hellomedOS_empty";
-		$formDataUpdate['data'][0]['Lead_Status'] = "Interessiert";
+			$formDataUpdate['data'][0]['Lead_Source'] = "hellomedOS_empty";
+			$formDataUpdate['data'][0]['Lead_Status'] = "Interessiert";
 
 			// save field to user profile 
 			if ( !empty( $_POST['patient_first_name'] ) ) {
@@ -898,6 +900,31 @@ class Hellomed_Custom_Login_Plugin {
 
 					if ( !empty( $_POST['listfilenames'] ) ) {
 
+						function generate_unique_id() {
+							$id = rand(1, 1000000000);
+							$user_ids = get_users(array(
+								'fields' => 'ID',
+							));
+							$unique = true;
+							foreach ($user_ids as $user_id) {
+								$value = get_field('prescription_id', 'user_' . $user_id);
+								if ($value === false) {
+									continue;
+								}
+								if ($value == $id) {
+									$unique = false;
+									break;
+								}
+							}
+							if (!$unique) {
+								return generate_unique_id();
+							} else {
+								return $id;
+							}
+						}
+
+						$unique_id = generate_unique_id();
+
 						$listfilenames = $_POST['listfilenames'];
 
 						$formDataUpdate['data'][0]['Prescription_available'] = "Yes";
@@ -924,6 +951,7 @@ class Hellomed_Custom_Login_Plugin {
 
 						if ( !empty( $_POST['listfilenames2'] ) ) {
 
+
 							$listfilenames2 = $_POST['listfilenames2'];
 
 							$formDataUpdate['data'][0]['Medplan_available'] = "Yes";
@@ -941,15 +969,20 @@ class Hellomed_Custom_Login_Plugin {
 								{
 									$arr3['rezept_file'] = array_merge($val, $listfilenamesarray2[$key]);
 									$arr3['new_user_id']= $user_id;
+									$arr3['prescription_id']= $unique_id;
+									$arr3['status_prescription']= "Wartend";
 								}
 						}
 
 							else{
 								$arr3 = $listfilenamesarray;
 								$arr3['new_user_id']= $user_id;
+								$arr3['prescription_id']= $unique_id;
+								$arr3['status_prescription']= "Wartend";
+							
 							}
 
-
+							
 					
 
 						add_row('rezept_input', $arr3, 'user_'.$user_id);
@@ -1031,164 +1064,194 @@ class Hellomed_Custom_Login_Plugin {
 
 
 
-	public function do_funnel() {
+	// public function do_funnel() {
 
-		if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
-			$user = wp_get_current_user();
-			$user_id = $user->ID;
+	// 	if ( 'POST' == $_SERVER['REQUEST_METHOD'] ) {
+	// 		$user = wp_get_current_user();
+	// 		$user_id = $user->ID;
 
 
-			$redirect_url = home_url( 'onboarding' );
-			// user_id
-		//	$user_id = $_POST['user_id'];
+	// 		$redirect_url = home_url( 'onboarding' );
+	// 		// user_id
+	// 	//	$user_id = $_POST['user_id'];
 
-			// save field to user profile 
-			if ( !empty( $patient_first_name ) ) {
-				$patient_first_name = $_POST['patient_first_name'];
-				update_user_meta( $user_id, 'patient_first_name', $patient_first_name );
-			}
-			if ( !empty( $_POST['patient_last_name'] ) ) {
-				$patient_last_name = $_POST['patient_last_name'];
-				update_user_meta( $user_id, 'patient_last_name', $patient_last_name );
-			}
+	// 		// save field to user profile 
+	// 		if ( !empty( $patient_first_name ) ) {
+	// 			$patient_first_name = $_POST['patient_first_name'];
+	// 			update_user_meta( $user_id, 'patient_first_name', $patient_first_name );
+	// 		}
+	// 		if ( !empty( $_POST['patient_last_name'] ) ) {
+	// 			$patient_last_name = $_POST['patient_last_name'];
+	// 			update_user_meta( $user_id, 'patient_last_name', $patient_last_name );
+	// 		}
 
-			if ( !empty( $_POST['geschlecht'] ) ) {
-				$gender = $_POST['geschlecht'];
-				update_user_meta( $user_id, 'geschlecht', $gender );
-			}
-			if ( !empty( $_POST['geburt'] ) ) {
-				$birthday = $_POST['geburt'];
-				update_user_meta( $user_id, 'geburt', $birthday );
-			}
-			if ( !empty( $_POST['krankheiten'] ) ) {
-				$krankheiten = $_POST['krankheiten'];
-				update_user_meta( $user_id, 'krankheiten', $krankheiten );
-			}
-			if ( !empty( $_POST['allergien'] ) ) {
-				$allergies = $_POST['allergien'];
-				update_user_meta( $user_id, 'allergies', $allergies );
-			}
+	// 		if ( !empty( $_POST['geschlecht'] ) ) {
+	// 			$gender = $_POST['geschlecht'];
+	// 			update_user_meta( $user_id, 'geschlecht', $gender );
+	// 		}
+	// 		if ( !empty( $_POST['geburt'] ) ) {
+	// 			$birthday = $_POST['geburt'];
+	// 			update_user_meta( $user_id, 'geburt', $birthday );
+	// 		}
+	// 		if ( !empty( $_POST['krankheiten'] ) ) {
+	// 			$krankheiten = $_POST['krankheiten'];
+	// 			update_user_meta( $user_id, 'krankheiten', $krankheiten );
+	// 		}
+	// 		if ( !empty( $_POST['allergien'] ) ) {
+	// 			$allergies = $_POST['allergien'];
+	// 			update_user_meta( $user_id, 'allergies', $allergies );
+	// 		}
 
-			if ( !empty( $_POST['strasse'] ) ) {
-				$address = $_POST['strasse'];
-				update_user_meta( $user_id, 'strasse', $address );
-			}
+	// 		if ( !empty( $_POST['strasse'] ) ) {
+	// 			$address = $_POST['strasse'];
+	// 			update_user_meta( $user_id, 'strasse', $address );
+	// 		}
 
-			if ( !empty( $_POST['nrno'] ) ) {
-				$nrno = $_POST['nrno'];
-				update_user_meta( $user_id, 'nrno', $nrno );
-			}
+	// 		if ( !empty( $_POST['nrno'] ) ) {
+	// 			$nrno = $_POST['nrno'];
+	// 			update_user_meta( $user_id, 'nrno', $nrno );
+	// 		}
 
-			if ( !empty( $_POST['postcode'] ) ) {
-				$zip = $_POST['postcode'];
-				update_user_meta( $user_id, 'postcode', $zip );
-			}
-			if ( !empty( $_POST['stadt'] ) ) {
-				$city = $_POST['stadt'];
-				update_user_meta( $user_id, 'stadt', $city );
-			}
-			if ( !empty( $_POST['zusatzinformationen'] ) ) {
-				$zusatzinformationen = $_POST['zusatzinformationen'];
-				update_user_meta( $user_id, 'zusatzinformationen', $zusatzinformationen );
-			}
-			if ( !empty( $_POST['telephone'] ) ) {
-				$phone = $_POST['telephone'];
-				update_user_meta( $user_id, 'telephone', $phone );
-			}
+	// 		if ( !empty( $_POST['postcode'] ) ) {
+	// 			$zip = $_POST['postcode'];
+	// 			update_user_meta( $user_id, 'postcode', $zip );
+	// 		}
+	// 		if ( !empty( $_POST['stadt'] ) ) {
+	// 			$city = $_POST['stadt'];
+	// 			update_user_meta( $user_id, 'stadt', $city );
+	// 		}
+	// 		if ( !empty( $_POST['zusatzinformationen'] ) ) {
+	// 			$zusatzinformationen = $_POST['zusatzinformationen'];
+	// 			update_user_meta( $user_id, 'zusatzinformationen', $zusatzinformationen );
+	// 		}
+	// 		if ( !empty( $_POST['telephone'] ) ) {
+	// 			$phone = $_POST['telephone'];
+	// 			update_user_meta( $user_id, 'telephone', $phone );
+	// 		}
 		
-			if ( !empty( $_POST['startdatumpick'] ) ) {
-				$start_date = $_POST['startdatumpick'];
-				update_user_meta( $user_id, 'start_date', $start_date );
-			}
+	// 		if ( !empty( $_POST['startdatumpick'] ) ) {
+	// 			$start_date = $_POST['startdatumpick'];
+	// 			update_user_meta( $user_id, 'start_date', $start_date );
+	// 		}
 
-			if ( !empty( $_POST['first_rezept_uploaded'] ) ) {
-				$first_rezept_uploaded = $_POST['first_rezept_uploaded'];
-				update_user_meta( $user_id, 'first_rezept_uploaded', $first_rezept_uploaded );
-			}
+	// 		if ( !empty( $_POST['first_rezept_uploaded'] ) ) {
+	// 			$first_rezept_uploaded = $_POST['first_rezept_uploaded'];
+	// 			update_user_meta( $user_id, 'first_rezept_uploaded', $first_rezept_uploaded );
+	// 		}
 
-	//TODO file upload
+	// //TODO file upload
 	
-				$rezept_type = $_POST['rezept_type'];
+	// 			$rezept_type = $_POST['rezept_type'];
 
-					if ( !empty( $_POST['listfilenames'] ) ) {
+	// 				if ( !empty( $_POST['listfilenames'] ) ) {
 
-						$listfilenames = $_POST['listfilenames'];
+	// 					function generate_unique_id() {
+	// 						$id = rand(1, 10);
+	// 						$user_ids = get_users(array(
+	// 							'fields' => 'ID',
+	// 						));
+	// 						$unique = true;
+	// 						foreach ($user_ids as $user_id) {
+	// 							$value = get_field('prescription_id', 'user_' . $user_id);
+	// 							if ($value == $id) {
+	// 								$unique = false;
+	// 								break;
+	// 							}
+	// 						}
+	// 						if (!$unique) {
+	// 							// ID already exists for some user, generate a new one
+	// 							generate_unique_id();
+	// 						} else {
+	// 							return $id;
+	// 						}
+	// 					}
+						
+	// 					$unique_prescription_id = generate_unique_id();
+						
+	// 					// $unique_id = generate_unique_id();
 
-						$listfilenamesarray = array();
-						foreach($listfilenames as $key => $value) {
-								$listfilenamesarray['rezept_file'][$key]['rezept_filename'] = $value;
-								$listfilenamesarray['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
-								$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
-								$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
-								$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
-						}
+	// 					$listfilenames = $_POST['listfilenames'];
+
+	// 					$listfilenamesarray = array();
+	// 					foreach($listfilenames as $key => $value) {
+	// 							$listfilenamesarray['rezept_file'][$key]['rezept_filename'] = $value;
+	// 							$listfilenamesarray['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
+	// 							$listfilenamesarray['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
+	// 							$listfilenamesarray['rezept_file'][$key]['rezept_directory'] = $user_id;
+	// 							$listfilenamesarray['rezept_file'][$key]['rezept_type'] = $rezept_type;
+	// 					}
 
 
 				
 
-						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
-						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
-						// print("<pre>".print_r($arr3,true)."</pre>");
-						// die;
+	// 					// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+	// 					// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+	// 					// print("<pre>".print_r($arr3,true)."</pre>");
+	// 					// die;
 
-						$listfilenamesarray2 = array();
-						$arr3 = array();
+	// 					$listfilenamesarray2 = array();
+	// 					$arr3 = array();
 
-						if ( !empty( $_POST['listfilenames2'] ) ) {
+	// 					if ( !empty( $_POST['listfilenames2'] ) ) {
 
-							$listfilenames2 = $_POST['listfilenames2'];
-
-					
-							foreach($listfilenames2 as $key => $value) {
-									$listfilenamesarray2['rezept_file'][$key]['rezept_filename'] = $value;
-									$listfilenamesarray2['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
-									$listfilenamesarray2['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
-									$listfilenamesarray2['rezept_file'][$key]['rezept_directory'] = $user_id;
-									$listfilenamesarray2['rezept_file'][$key]['rezept_type'] = "medplan";
-							}
-
-							foreach($listfilenamesarray as $key=>$val)
-								{
-									$arr3['rezept_file'] = array_merge($val, $listfilenamesarray2[$key]);
-									$arr3['new_user_id']= $user_id;
-								}
-						}
-
-							else{
-								$arr3 = $listfilenamesarray;
-								$arr3['new_user_id']= $user_id;
-							}
-
+	// 						$listfilenames2 = $_POST['listfilenames2'];
 
 					
+	// 						foreach($listfilenames2 as $key => $value) {
+	// 								$listfilenamesarray2['rezept_file'][$key]['rezept_filename'] = $value;
+	// 								$listfilenamesarray2['rezept_file'][$key]['file_url'] = "https://".$_SERVER['SERVER_NAME']."/wp-content/themes/hellomed/uploads/".$user_id."/". $value;
+	// 								$listfilenamesarray2['rezept_file'][$key]['rezept_uploaded_date'] = date('d.m.Y H:i:s');
+	// 								$listfilenamesarray2['rezept_file'][$key]['rezept_directory'] = $user_id;
+	// 								$listfilenamesarray2['rezept_file'][$key]['rezept_type'] = "medplan";
+	// 						}
 
-						add_row('rezept_input', $arr3, 'user_'.$user_id);
-						// print("<pre>".print_r($listfilenamesarray,true)."</pre>");
-						// print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
-						// print("<pre>".print_r($arr3,true)."</pre>");
-						// die;
-					}
+	// 						foreach($listfilenamesarray as $key=>$val)
+	// 							{
+	// 								$arr3['rezept_file'] = array_merge($val, $listfilenamesarray2[$key]);
+	// 								$arr3['new_user_id']= $user_id;
+	// 								$arr3['prescription_id']= $unique_prescription_id;
+	// 							}
+	// 					}
+
+	// 						else{
+	// 							$arr3 = $listfilenamesarray;
+	// 							$arr3['new_user_id']= $user_id;
+	// 							$arr3['prescription_id']= $unique_prescription_id;
+	// 						}
+
+						
+
+
+
+				
+
+	// 					add_row('rezept_input', $arr3, 'user_'.$user_id);
+	// 					print("<pre>".print_r($listfilenamesarray,true)."</pre>");
+	// 					print("<pre>".print_r($listfilenamesarray2,true)."</pre>");
+	// 					print("<pre>".print_r($arr3,true)."</pre>");
+	// 					die;
+	// 				}
 					
 
-				if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
-					$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
-					update_user_meta( $user_id, 'privat_or_gesetzlich', $privat_or_gesetzlich );
-				}
+	// 			if ( !empty( $_POST['privat_or_gesetzlich'] ) ) {
+	// 				$privat_or_gesetzlich = $_POST['privat_or_gesetzlich'];
+	// 				update_user_meta( $user_id, 'privat_or_gesetzlich', $privat_or_gesetzlich );
+	// 			}
 
-			if ( !empty( $_POST['insurance_company'] ) ) {
-				$insurance_company = $_POST['insurance_company'];
-				update_user_meta( $user_id, 'insurance_company', $insurance_company );
-			}
-			if ( !empty( $_POST['insurance_number'] ) ) {
-				$insurance_number = $_POST['insurance_number'];
-				update_user_meta( $user_id, 'insurance_number', $insurance_number );
-			}
+	// 		if ( !empty( $_POST['insurance_company'] ) ) {
+	// 			$insurance_company = $_POST['insurance_company'];
+	// 			update_user_meta( $user_id, 'insurance_company', $insurance_company );
+	// 		}
+	// 		if ( !empty( $_POST['insurance_number'] ) ) {
+	// 			$insurance_number = $_POST['insurance_number'];
+	// 			update_user_meta( $user_id, 'insurance_number', $insurance_number );
+	// 		}
 		
 
-			wp_redirect( $redirect_url );
-			exit;
-		}
-	}
+	// 		wp_redirect( $redirect_url );
+	// 		exit;
+	// 	}
+	// }
 
 
 
@@ -1385,7 +1448,6 @@ class Hellomed_Custom_Login_Plugin {
 
 		update_field('patient_caregiver', $patient_caregiver, 'user_' . $user_id);
 		update_field('confirmed_or_not', 0, 'user_' . $user_id);
-
 
 		update_field('agb_checkbox', $agb_checkbox, 'user_' . $user_id);
 		update_field('personal_data_checkbox', $personal_data_checkbox, 'user_' . $user_id);
