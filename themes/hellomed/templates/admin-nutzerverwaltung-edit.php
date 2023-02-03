@@ -81,8 +81,8 @@
                                 <?php echo $geschlecht_value; ?></option>
                             <?php 
                                 $geschlecht = array('Männlich', 'Weiblich');
-                                $selectedgeschlecht = get_user_meta($_GET['user_id'], 'geschlecht', true);
-                                $keygeschlecht = array_search($selectedgeschlecht, $geschlecht);
+                                $selectedgeschlecht = $geschlecht_value;
+                                $keygeschlecht = array_search($geschlecht_value, $geschlecht);
                                 unset($geschlecht[$keygeschlecht]);
                                     foreach ($geschlecht as $valuegeschlecht) {
                                     echo '<option value="' . $valuegeschlecht . '">' . $valuegeschlecht . '</option>';
@@ -183,14 +183,14 @@
                 </div>
                 <div class="col-12">
                     <div class="btn-group d-flex">
-                        <input id="privat_gesetzlich" type="radio" value="Privat" class="btn-check"
+                        <input id="privat_gesetzlich" type="radio" value="Private" class="btn-check"
                             name="privat_or_gesetzlich" autocomplete="off" <?php 
-                            if ( get_user_meta($user_id, 'privat_or_gesetzlich', true) =='Privat' ){
+                            if ( get_user_meta($user_id, 'privat_or_gesetzlich', true) =='Private' ){
                                 echo 'checked';} ?>>
                         <label class="btn btn-outline-primary" for="privat_gesetzlich">Privat versichert</label>
-                        <input id="gesetzlich_versichert" type="radio" value="Gesetzlich" class="btn-check"
+                        <input id="gesetzlich_versichert" type="radio" value="Public" class="btn-check"
                             name="privat_or_gesetzlich" autocomplete="off" <?php 
-                            if ( get_user_meta($user_id, 'privat_or_gesetzlich', true) =='Gesetzlich' ){
+                            if ( get_user_meta($user_id, 'privat_or_gesetzlich', true) =='Public' ){
                                 echo 'checked';} ?>>
                         <label class="btn btn-outline-primary" for="gesetzlich_versichert">Gesetzlich versichert</label>
                     </div>
