@@ -900,28 +900,68 @@ class Hellomed_Custom_Login_Plugin {
 
 					if ( !empty( $_POST['listfilenames'] ) ) {
 
-						function generate_unique_id() {
-							$id = rand(1, 1000000000);
+						// function generate_unique_id() {
+						// 	$id = rand(1000, 1000000000);
+						// 	$user_ids = get_users(array(
+						// 		'fields' => 'ID',
+						// 	));
+						// 	$unique = true;
+						// 	foreach ($user_ids as $user_id) {
+						// 		$value = get_field('prescription_id', 'user_' . $user_id);
+						// 		if ($value === false) {
+						// 			continue;
+						// 		}
+						// 		if ($value == $id) {
+						// 			$unique = false;
+						// 			break;
+						// 		}
+						// 	}
+						// 	if (!$unique) {
+						// 		return generate_unique_id();
+						// 	} else {
+						// 		return $id;
+						// 	}
+						// }
+
+
+						// function generate_unique_id() {
+						// 	static $counter = 1000;
+						// 	$counter++;
+						// 	$user_ids = get_users(array(
+						// 	  'fields' => 'ID',
+						// 	));
+						// 	foreach ($user_ids as $user_id) {
+						// 	  $value = get_field('prescription_id', 'user_' . $user_id);
+						// 	  if ($value === false) {
+						// 		continue;
+						// 	  }
+						// 	  if ($value == $counter) {
+						// 		return generate_unique_id();
+						// 	  }
+						// 	}
+						// 	return $counter;
+						//   }
+
+
+						  function generate_unique_id() {
+							static $counter = 1000;
 							$user_ids = get_users(array(
-								'fields' => 'ID',
+							  'fields' => 'ID',
 							));
-							$unique = true;
 							foreach ($user_ids as $user_id) {
-								$value = get_field('prescription_id', 'user_' . $user_id);
-								if ($value === false) {
-									continue;
-								}
-								if ($value == $id) {
-									$unique = false;
-									break;
-								}
+							  $value = get_field('prescription_id', 'user_' . $user_id);
+							  if ($value === false) {
+								continue;
+							  }
+							  if ($value > $counter) {
+								$counter = $value;
+							  }
 							}
-							if (!$unique) {
-								return generate_unique_id();
-							} else {
-								return $id;
-							}
-						}
+							$counter++;
+							return $counter;
+						  }
+
+
 
 						$unique_id = generate_unique_id();
 
