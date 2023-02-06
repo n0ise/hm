@@ -54,7 +54,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="form-floating">
                             <input id="new_user_id" type="text" class="new_user_id form-control"
                                 value="<?php echo $new_user_id; ?>" disabled>
-                            <label>User ID</label>
+                            <label>(Blister) User ID</label>
                         </div>
                     </div>
                     <div class="col-12">

@@ -63,7 +63,7 @@ $patient_result = json_decode($patient_result, true);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>(Blister) User ID</th>
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>E-Mail</th>
@@ -85,7 +85,7 @@ $patient_result = json_decode($patient_result, true);
                         $date = $patient['createdAt']; 
                         ?>
                 <tr>
-                    <td data-label="User ID"><?php echo $user_id; ?></td>
+                    <td data-label="(Blister) User ID"><?php echo $user_id; ?></td>
                     <td data-label="Name"><?php echo $user_firstname; ?></td>
                     <td data-label="Surname"><?php echo $user_lastname; ?></td>
                     <td data-label="Email"><?php echo $user_email; ?></td>
