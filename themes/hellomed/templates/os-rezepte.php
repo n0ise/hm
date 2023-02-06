@@ -36,7 +36,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Rezept ID</th>
+                        <th>Prescription ID</th>
                         <th>Arzt</th>
                         <th>Verschreibungsdatum</th>
                         <th>Startdatum</th>
@@ -52,7 +52,7 @@ $rezepte_file = get_field('rezept_input', 'user_' .$user_id);
             //    var_dump($rezept);
 ?>
                     <tr>
-                        <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
+                        <td data-label="Prescription ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Arzt"><?php echo $rezept['doctor_name']; ?></td>
                         <td data-label="Verschreibungsdatum"><?php echo date("d.m.Y", strtotime($rezept['prescription_date_by_doctor'])); ?></td>
                         <td data-label="Startdatum"><?php echo date("d.m.Y", strtotime($rezept['prescription_start_date'])); ?></td>

@@ -14,7 +14,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>(Blister) User ID</th>
                         <th>Name</th>
                         <th>Geburtsdatum</th>
                         <th>E-Mail</th>
@@ -58,7 +58,7 @@ $status="Alle";
                 $formatted_date = date("d.m.Y", strtotime($date));
         ?>
                     <tr>
-                        <td data-label="User ID"><?php echo $user_id; ?></td>
+                        <td data-label="(Blister) User ID"><?php echo $user_id; ?></td>
                         <td data-label="Name"><?php 
                             if ($patient_caregiver == 'caregiver') {
                                echo $user_firstname. " ".$user_lastname; echo "<br><span class=small>Caregiver: ".$user->user_firstname.' '.$user->user_lastname. "</span>"; 

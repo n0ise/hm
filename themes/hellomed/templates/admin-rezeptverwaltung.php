@@ -23,7 +23,7 @@ $users = get_users( array( 'role' => 'client' ) );
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Rezept ID</th>
+                        <th>Prescription ID</th>
                         <th>User E-Mail</th>
                         <th>Arzt</th>
                         <th>Datum der<br>Verschreibung</th>
@@ -66,7 +66,7 @@ $users = get_users( array( 'role' => 'client' ) );
                                   break;
                                 }?>
                     <tr>
-                        <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
+                        <td data-label="Prescription ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="User E-Mail"><?php echo $email; ?></td>
                         <td data-label="Arzt"><?php echo $name_doctor; ?></td>
                         <td data-label="Datum der Verschreibung"><?php echo $formatted_date_doctor; ?></td>
