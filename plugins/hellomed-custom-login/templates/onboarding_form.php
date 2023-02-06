@@ -654,7 +654,7 @@ $("#telefon").inputFilter(function(value) {
         })
 
         .use(XHRUpload, {
-            endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
+            endpoint: '/wp-content/themes/hellomed/upload.php',
             fieldName: 'my_file',
         })
 
@@ -907,7 +907,7 @@ $("#telefon").inputFilter(function(value) {
                 })
 
                 .use(XHRUpload, {
-                endpoint: '/wp-content/themes/hellomed/uploads/upload.php',
+                endpoint: '/wp-content/themes/hellomed/upload.php',
                 fieldName: 'my_file',
                 })
 

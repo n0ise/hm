@@ -1,12 +1,12 @@
 <?php
 
-require_once('../../../../wp-load.php');
+require_once('../../../wp-load.php');
 
 global $current_user;
 get_currentuserinfo();
 $logged_in_user = $current_user->ID;
 
-$uploaddir = './' .$logged_in_user. '/'; 
+$uploaddir = 'uploads/' .$logged_in_user. '/'; 
 
 if (!file_exists($uploaddir)) {
     mkdir($uploaddir);
