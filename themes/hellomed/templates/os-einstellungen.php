@@ -163,7 +163,7 @@ $user_id = get_current_user_id();
                         <label class="btn btn-outline-primary" for="gesetzlich_versichert">Gesetzlich versichert</label>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12">
                     <div class="form-floating">
                         <input id="insurance_company" type="text" class="form-control insurance_company" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'insurance_company', true); ?>"
@@ -175,13 +175,13 @@ $user_id = get_current_user_id();
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6">
+                <!-- <div class="col-12 col-md-6">
                     <div class="form-floating">
                         <input id="insurance_number" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($user_id, 'insurance_number', true); ?>">
                         <label>Versicherungsnummer</label>
                     </div>
-                </div>
+                </div> -->
                 <input type="hidden" id="user_id" value="<?php echo $user_id; ?>">
                 <div class="col-12">
                     <button id="save" type="button" class="btn btn-primary btn-lg">Speichern</button>
