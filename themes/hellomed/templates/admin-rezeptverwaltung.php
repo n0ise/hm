@@ -24,8 +24,9 @@ $users = get_users( array( 'role' => 'client' ) );
                 <thead>
                     <tr>
                         <th>Rezept ID</th>
+                        <th>User E-Mail</th>
                         <th>Arzt</th>
-                        <th>Verschreibungsdatum</th>
+                        <th>Datum der<br>Verschreibung</th>
                         <th>Medikamente</th>
                         <th>Status</th>
                         <th>Aktionen</th>
@@ -36,6 +37,7 @@ $users = get_users( array( 'role' => 'client' ) );
                      foreach ($users as $user) {
                         $user_id =  get_field( 'new_user_id', 'user_' . $user->ID );
                         $user_name = $user->display_name;
+                        $email = $user->user_email; 
                         $user_status = get_field('status', 'user_' . $user->ID);
                         $user_rezept = get_field('rezept_input', 'user_' . $user->ID);
                         $prescription_date_by_doctor = get_field('prescription_doctor_by_name', 'user_' . $user->ID);
@@ -65,8 +67,9 @@ $users = get_users( array( 'role' => 'client' ) );
                                 }?>
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
+                        <td data-label="User E-Mail"><?php echo $email; ?></td>
                         <td data-label="Arzt"><?php echo $name_doctor; ?></td>
-                        <td data-label="Verschreibungsdatum"><?php echo $formatted_date_doctor; ?></td>
+                        <td data-label="Datum der Verschreibung"><?php echo $formatted_date_doctor; ?></td>
                         <td data-label="Medikamente"><?php 
                                         if (!empty($rezept['medicine_section'])) {
                                             foreach ($rezept['medicine_section'] as $medicine) {
