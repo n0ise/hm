@@ -22,6 +22,8 @@ $rezept_input = get_field('rezept_input', 'user_'.$user_id);
 $new_user_id = get_field('new_user_id', 'user_'.$user_id);
 // echo $new_user_id;
 
+$user_rezept = get_user_by( 'id', $user_id  ); //this gets the user details, from the user ID in the browser 
+
 $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($rezept_id, $user_id) {
   return $record['prescription_id'] == $rezept_id;
 });
@@ -42,17 +44,23 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                     <div class="col-12">
                         <div class="h3 m-0">User</div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 col-lg-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder=" " value="<?php echo $user_rezept->user_email; ?>" disabled>
+                            <label>User E-Mail</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
                         <div class="form-floating">
                             <input id="new_user_id" type="text" class="new_user_id form-control"
-                                value="<?php echo $new_user_id; ?>">
+                                value="<?php echo $new_user_id; ?>" disabled>
                             <label>User ID</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
                             <input id="prescription_id_no" type="text" class="form-control"
-                                value="<?php echo $record['prescription_id']; ?>"disabled>
+                                value="<?php echo $record['prescription_id']; ?>" disabled>
                             <label>Prescription ID</label>
                         </div>
                     </div>
