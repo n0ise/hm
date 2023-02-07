@@ -558,21 +558,22 @@ add_action('wp_ajax_edit_patient', function() {
 		$success[] = "11";
 	}
 
-	// checking if user is set and id exists before saving 
-	if (isset($_POST['new_user_id']) && (empty($_POST['new_user_id']))) {
-		$hasError = true;
-		$errorMessages[] = "new_user_id: Bitte geben Sie eine Benutzer-ID ein.";
-		} else {
-		if ( !empty($_POST['new_user_id']) && $_POST['new_user_id'] != get_user_meta( $user_id, 'new_user_id', true )) {
-			$new_user_id=$_POST['new_user_id'];
-			$args = array(
-				  'meta_key'     => 'new_user_id',
-				  'meta_value'   => $_POST['new_user_id'],
-				  'meta_compare' => '=',
-				  'fields'       => 'ID'
-			);
+	// checking if user is set before saving aaaand can be empty
+	if (isset($_POST['new_user_id'])) {
+		$new_user_id = $_POST['new_user_id'];
 	
-			$existingUsers = get_users($args);
+		// Check if new_user_id is not equal to the current value
+		if ($new_user_id != get_user_meta($user_id, 'new_user_id', true)) {
+		$args = array(
+			'meta_key'     => 'new_user_id',
+			'meta_value'   => $new_user_id,
+			'meta_compare' => '=',
+			'fields'       => 'ID'
+		);
+	
+		$existingUsers = get_users($args);
+	
+		// Check if there are existing users with the same new_user_id
 		if (!empty($existingUsers)) {
 			$hasError = true;
 			$errorMessages[] = "new_user_id: Benutzer-ID existiert bereits, wählen Sie eine andere.";
@@ -583,9 +584,10 @@ add_action('wp_ajax_edit_patient', function() {
 			);
 			$updates_made = true;
 			$success[] = "12";
+			}
 		}
 	}
-}	
+  
 
 	if ( !empty($_POST['allergies']) && $_POST['allergies'] != get_user_meta( $user_id, 'allergies', true )) {
 			$allergies = $_POST['allergies'];
