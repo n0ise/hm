@@ -18,10 +18,10 @@ $user_id = get_current_user_id();
 
             <!-- show function in div content  -->
             <?php function edit_patient($user_id) {
-            $user = get_userdata($user_id);
-            $patient_caregiver = get_field('patient_caregiver', 'user_' . $user->ID);
-            $user_firstname = $user->user_firstname;
-            $user_lastname = $user->user_lastname;
+            // $user = get_userdata($user_id);
+            $patient_caregiver = get_field('patient_caregiver', 'user_' . $user_id);
+            $user_firstname = get_user_meta( $user_id, 'first_name', true );
+            $user_lastname = get_user_meta( $user_id, 'last_name', true );
             $geschlecht_value = get_user_meta($user_id, 'geschlecht', true);
                 if ($geschlecht_value === "Male") {
                   $geschlecht_value = "Männlich";
