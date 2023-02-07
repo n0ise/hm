@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<script src="https://ui.hellomed.com/src/v1.0/js/lodash.min.js"></script>
+<script src="https://ui.hellomed.com/src/v1.1/js/lodash.min.js"></script>
 <!-- child directory folder, assets/js  -->
 <script src="<?php echo get_stylesheet_directory_uri(); ?>/assets/js/os-medications.js"></script>
 

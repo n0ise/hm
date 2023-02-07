@@ -11,7 +11,7 @@
     <div class="hm-content">
 
       <div class="text-center">
-      <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/get_started.svg">
+      <img src="https://ui.hellomed.com/src/v1.1/img/icons/onboarding/get_started.svg">
         <div class="h2 my-4">Willkommen bei hellomed!</div>
       </div>
       <p>

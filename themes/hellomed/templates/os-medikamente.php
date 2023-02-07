@@ -23,7 +23,7 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
 
             <div class="h2 mb-5">
                 Medikamente
-                <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/otc.svg">
+                <img src="https://ui.hellomed.com/src/v1.1/img/icons/onboarding/otc.svg">
             </div>
             <table class="table table-striped">
                 <thead>

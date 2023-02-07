@@ -5,15 +5,15 @@
 
 <title><?php echo get_the_title(); ?> | hellomed</title>
 
-<link rel="icon" href="https://ui.hellomed.com/src/v1.0/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="https://ui.hellomed.com/src/v1.1/img/favicon.svg" type="image/svg+xml">
 
 
 
 <!-- jQuery  -->
-<script src="https://ui.hellomed.com/src/v1.0/js/jquery-3.6.3.min.js" type="text/javascript"></script>
+<script src="https://ui.hellomed.com/src/v1.1/js/jquery-3.6.3.min.js" type="text/javascript"></script>
 
 <!-- Custom -->
-<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/index.css">
+<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.1/css/index.css">
 
 <!-- include variables with all fields from acf/wp -->
 <?php 
@@ -28,7 +28,7 @@ $user_id = get_current_user_id();
     <div class="container">
         <div class="hm-logo">
             <!-- <a href="index.php"> -->
-                <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg">
+                <img src="https://ui.hellomed.com/src/v1.1/img/logo.svg">
             <!-- </a> -->
         </div>
         <!-- checking if logged in and show the whole nav header -->

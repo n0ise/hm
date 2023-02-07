@@ -14,7 +14,7 @@ if (!is_user_logged_in() || get_field('status', 'user_' . $user_id) != 'Aktiv') 
  ?>
 
 <!--  Lodash  -->
-<script src="https://ui.hellomed.com/src/v1.0/js/lodash.4.17.21.min.js"></script>
+<script src="https://ui.hellomed.com/src/v1.1/js/lodash.4.17.21.min.js"></script>
 
 <?php
 // TODO - Check if the user is logged in and various conditions
@@ -61,11 +61,11 @@ $rezepte_file = get_field('rezept_input', 'user_'. $user_id); ?>
         <div class="hm-content">
             <div class="h2 mb-5">
                 Medikationsplan
-                <img src="https://ui.hellomed.com/src/v1.0/img/icons/onboarding/packaging.svg">
+                <img src="https://ui.hellomed.com/src/v1.1/img/icons/onboarding/packaging.svg">
             </div>
             <!-- loading image  -->
             <div class="loading-logo">
-                <img src="https://ui.hellomed.com/src/v1.0/img/logo.svg" alt="Loading logo">
+                <img src="https://ui.hellomed.com/src/v1.1/img/logo.svg" alt="Loading logo">
             </div>
             <div class="hm-medplan-wrapper" style="display:none">
 

@@ -9,7 +9,7 @@
 
 
 <!--  include css.css from olly UI-->
-<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.0/css/index.css"> 
+<link rel="stylesheet" href="https://ui.hellomed.com/src/v1.1/css/index.css"> 
 
 <title><?php echo get_the_title(); ?> | hellomed</title>
 
