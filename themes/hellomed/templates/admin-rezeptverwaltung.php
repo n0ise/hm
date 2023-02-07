@@ -20,11 +20,10 @@ $users = get_users( array( 'role' => 'client' ) );
     <div class="container">
         <div class="hm-content">
             <div class="h2 mb-5">Rezeptverwaltung</div>
-            <table class="table table-striped" id="myTable">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th data-label="Prescription ID"><a href="#"><i
-                                    class="bi bi-sort-down sort-icon active"></i></a> Prescription ID</th>
+                        <th data-label="Prescription ID"><a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a> Prescription ID</th>
                         <th data-label="User E-Mail">User E-Mail <i class="fas fa-sort"></i></th>
                         <th data-label="Arzt">Arzt <i class="fas fa-sort"></i></th>
                         <th>Datum der<br>Verschreibung</th>
@@ -117,9 +116,9 @@ $(document).ready(function() {
 
     sortIcon.addEventListener('click', function() {
         // let table = document.querySelector('table');
-        if (sortIcon.classList.contains('bi-sort-numeric-down')) {
+        if (sortIcon.classList.contains('bi-sort-numeric-up')) {
             sortTable(table, 'desc');
-            sortIcon.classList.remove('bi-sort-numeric-down');
+            sortIcon.classList.remove('bi-sort-numeric-up');
         }
     })
 
@@ -127,16 +126,16 @@ $(document).ready(function() {
     $('th i').click(function() {
         $(this).toggleClass('active');
         if ($(this).hasClass('active')) {
-            $(this).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
+            $(this).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
             sortTable(table, 'desc');
         } else {
-            $(this).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
+            $(this).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
             sortTable(table, 'asc');
         }
     });
     // making the table with descendent ID on load 
     $('th i').eq(0).addClass('active');
-    $('th i').eq(0).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
+    $('th i').eq(0).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
     sortTable(table, 'desc');
 
     // the sorting magic 
