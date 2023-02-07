@@ -842,26 +842,38 @@ add_action('wp_ajax_new_prescription', function() {
 	$updates_made = false;
 	$errorMessages = array();
 	$updates_needed = array();
-	$user_id =  $_POST['user_id'];
+	$user_id = $_POST['user_id'];
 	$rezept_input = get_field('rezept_input', 'user_'.$user_id);
- 	// deutsche blister ID 
-	$new_user_id = 	$_POST['patient_select'];
-
-	// checking if the id is already existen, and then update 
-	if (!empty($rezept_input)) {
-		foreach ($rezept_input as $input) {
-		  if ($input['prescription_id'] == $_POST['prescription_id_no']) {
-			$hasError = true;
-			$errorMessages[] = "successdown: Sie hatten so viel Pech, dass die zufällige ID dieselbe wie eine andere in der Datenbank war. Bitte erneut einreichen.";
-			break;
+	$new_user_id = $_POST['patient_select'];
+	$new_prescription_id = 1000;
+	// look only for "client" users (those are the patients) 
+	$args = array(
+		'role' => 'client'
+	);
+	$all_users = get_users( $args );	
+	// look for their prescription_id value and when finding the last one by matching >= add +1 value
+	foreach ($all_users as $user) {
+	  $user_rezept_input = get_field('rezept_input', 'user_'.$user->ID);
+	  if (!empty($user_rezept_input)) {
+		foreach ($user_rezept_input as $input) {
+		  if ($input['prescription_id'] >= $new_prescription_id) {
+			$new_prescription_id = $input['prescription_id'] + 1;
 		  }
 		}
 	  }
-	  
-	  if (!$hasError) {
-		$new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
-		$updated_made = true;
+	}
+	
+	if (!$hasError) {
+	  $new_row = array('prescription_id' => $new_prescription_id, 'medicine_section' => [], 'blister_job' => []);
+	//  a new row, in case same ID have one already (or it would have been overwritten)
+	  if (!empty($rezept_input)) {
+		array_push($rezept_input, $new_row);
+	  } else {
+		$rezept_input = array($new_row);
 	  }
+	  update_field('rezept_input', $rezept_input, 'user_'.$new_user_id);
+	  $updated_made = true;
+	}
 	// $new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
 	
 

@@ -340,11 +340,13 @@ include_once('footer.php');
             var patient_select = $('#patient_select').val();
             // var prescription_id_no = $('#prescription_id_no').val();
             // generating randomID
-            function generateRandomID() {
-                return Math.floor(Math.random() * (1000000000 - 100) + 100);
-            }
-            var prescription_id_no = generateRandomID();
-            console.log("Prescription ID: ", prescription_id_no);
+            // let nextID = 1000;
+            // function generate_incrementalID() {
+            //     return nextID++;
+            // }
+            // var prescription_id_no = generate_incrementalID();
+            // console.log("Prescription ID: ", prescription_id_no);
+
             var user_id = $('#user_id').val();
             // for each value in blister_jobs, get the values and put it in an array
 
@@ -391,7 +393,7 @@ include_once('footer.php');
                 'blister_jobs': blister_jobs,
                 'medikament': medikament,
                 'patient_select': patient_select,
-                'prescription_id_no': prescription_id_no,
+                // 'prescription_id_no': prescription_id_no,
                 'user_id': user_id,
                 'rezept_type': 'by_admin'
             }
