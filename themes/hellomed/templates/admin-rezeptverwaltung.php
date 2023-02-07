@@ -20,12 +20,13 @@ $users = get_users( array( 'role' => 'client' ) );
     <div class="container">
         <div class="hm-content">
             <div class="h2 mb-5">Rezeptverwaltung</div>
-            <table class="table table-striped">
+            <table class="table table-striped" id="myTable">
                 <thead>
                     <tr>
-                        <th>Prescription ID</th>
-                        <th>User E-Mail</th>
-                        <th>Arzt</th>
+                        <th data-label="Prescription ID"><a href="#"><i
+                                    class="bi bi-sort-down sort-icon active"></i></a> Prescription ID</th>
+                        <th data-label="User E-Mail">User E-Mail <i class="fas fa-sort"></i></th>
+                        <th data-label="Arzt">Arzt <i class="fas fa-sort"></i></th>
                         <th>Datum der<br>Verschreibung</th>
                         <th>Medikamente</th>
                         <th>Status</th>
@@ -57,13 +58,12 @@ $users = get_users( array( 'role' => 'client' ) );
                         } else {
                         $formatted_date_doctor = date("d.m.Y", strtotime($date_doctor));
                         }
-                            foreach ($rezept['rezept_file'] as $rezept_file) {
-                              if (isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
+                        foreach ($rezept['rezept_file'] as $rezept_file) {
+                            if (isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
                                 if (!$displayed) {
-                                  // showing the first row 
-                                  $displayed = true;
+                                    $displayed = true;
                                 } else {
-                                  break;
+                                    break;
                                 }?>
                     <tr>
                         <td data-label="Prescription ID"><?php echo $rezept['prescription_id']; ?></td>
@@ -104,11 +104,75 @@ $users = get_users( array( 'role' => 'client' ) );
                     <a class="btn btn-primary btn-lg" href="admin-neu-rezeptverwaltung">Neues Rezept anlegen</a>
                 </div>
             </div>
-
         </div>
     </div>
 </main>
+<!-- js bits for the sorting toggle in the table  -->
+<script>
+$(document).ready(function() {
+    // this part will add a pointer cursor  
+    const sortIcon = document.querySelector('.sort-icon');
+    $(this).css('cursor', 'pointer');
+    let table = $('table');
 
+    sortIcon.addEventListener('click', function() {
+        // let table = document.querySelector('table');
+        if (sortIcon.classList.contains('bi-sort-numeric-down')) {
+            sortTable(table, 'desc');
+            sortIcon.classList.remove('bi-sort-numeric-down');
+        }
+    })
+
+    // this will makle upsidedown the icon on toggle 
+    $('th i').click(function() {
+        $(this).toggleClass('active');
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
+            sortTable(table, 'desc');
+        } else {
+            $(this).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
+            sortTable(table, 'asc');
+        }
+    });
+    // making the table with descendent ID on load 
+    $('th i').eq(0).addClass('active');
+    $('th i').eq(0).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
+    sortTable(table, 'desc');
+
+    // the sorting magic 
+    function sortTable(table, order) {
+        let rows, switching, i, x, y, shouldSwitch;
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.find('tr');
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = $(rows[i]).find('td').eq(0).text();
+                y = $(rows[i + 1]).find('td').eq(0).text();
+                if (order === 'asc') {
+                    if (Number(x) > Number(y)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (order === 'desc') {
+                    if (Number(x) < Number(y)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+
+
+
+});
+</script>
 
 <?php } 
 else { ?>
