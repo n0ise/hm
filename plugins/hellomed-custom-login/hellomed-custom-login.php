@@ -59,10 +59,8 @@ class Hellomed_Custom_Login_Plugin {
 		add_shortcode( 'custom-register-form', array( $this, 'render_register_form' ) );
 		add_shortcode( 'custom-password-lost-form', array( $this, 'render_password_lost_form' ) );
 		add_shortcode( 'custom-password-reset-form', array( $this, 'render_password_reset_form' ) );
-
 		add_shortcode( 'custom-onboarding-form', array( $this, 'render_onboarding_form' ) );
-		add_shortcode( 'custom-funnel-form', array( $this, 'render_funnel_form' ) );
-
+		// add_shortcode( 'custom-funnel-form', array( $this, 'render_funnel_form' ) );
 	}
 
 	/**
@@ -77,10 +75,6 @@ class Hellomed_Custom_Login_Plugin {
 				'title' => __( 'Anmelden', 'hellomed-custom-login' ),
 				'content' => '[custom-login-form]'
 			),
-			'member-account' => array(
-				'title' => __( 'Ihr Konto', 'hellomed-custom-login' ),
-				'content' => '[account-info]'
-			),
 			'registrieren' => array(
 				'title' => __( 'Registrieren', 'hellomed-custom-login' ),
 				'content' => '[custom-register-form]'
@@ -88,10 +82,6 @@ class Hellomed_Custom_Login_Plugin {
 			'onboarding' => array(
 				'title' => __( 'Onboarding', 'hellomed-custom-login' ),
 				'content' => '[custom-onboarding-form]'
-			),
-			'funnel' => array(
-				'title' => __( 'Funnel', 'hellomed-custom-login' ),
-				'content' => '[custom-funnel-form]'
 			),
 			'passwort-vergessen' => array(
 				'title' => __( 'Passwort vergessen?', 'hellomed-custom-login' ),
