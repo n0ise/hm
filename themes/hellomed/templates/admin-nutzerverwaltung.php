@@ -45,7 +45,7 @@ $status="Alle";
 
         <?php
         foreach ($users as $user) {
-        $user_confimed = get_field('confirmed_or_not', 'user_' . $user->ID);
+        $user_confimed = get_field('has_completed_onboarding', 'user_' . $user->ID);
             if ($user_confimed == 1){
                 // var_dump($user);
                 $user_id = $user->new_user_id;
