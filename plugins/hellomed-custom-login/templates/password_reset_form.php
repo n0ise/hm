@@ -62,7 +62,7 @@
 	</form>
 
 	<div class="text-center">
-    <a class="text-secondary" href="anmelden">Zurück zum Login</a>
+    <a class="text-secondary" href="login">Zurück zum Login</a>
     
   </div>	
 

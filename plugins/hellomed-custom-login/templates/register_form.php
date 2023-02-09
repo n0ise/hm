@@ -123,7 +123,7 @@
 	</form>
 
 	<div class="text-center">
-    <a class="text-secondary" href="anmelden">Bereits Registriert? Jetzt anmelden!</a>
+    <a class="text-secondary" href="login">Bereits Registriert? Jetzt anmelden!</a>
 
   </div>	
 	

@@ -1286,7 +1286,7 @@ function startdatumSelectedBlur(){
 
 <?php } 
 else { ?>
-    <?php header("Refresh:0; url=/anmelden"); 
+    <?php header("Refresh:0; url=/login"); 
 }
 
 ?>
