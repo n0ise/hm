@@ -1075,12 +1075,3 @@ function logout_without_confirm($action, $result)
         die;
     }
 }
-
-// login redirect
-function redirect_login() {
-    if ( $_SERVER['REQUEST_URI'] == '/anmelden' ) {
-        wp_redirect( '/login' );
-        exit;
-    }
-}
-add_action( 'template_redirect', 'redirect_login' );
