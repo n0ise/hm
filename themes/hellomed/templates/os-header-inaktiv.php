@@ -64,7 +64,7 @@ $user_id = get_current_user_id();
 
         <div class="d-lg-none">
             <nav class="hm-nav">
-                <a href="tel:+49306941132" class="active">030 6941132</a>
+                <a href="tel:+4930233295030" class="active">030 233 295 030</a>
             </nav>
         </div>
         <div class="d-lg-none">

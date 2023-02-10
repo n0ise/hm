@@ -1331,7 +1331,7 @@ class Hellomed_Custom_Login_Plugin {
 				// $message .= sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
 				$message .= __( 'Um Ihre Anmeldung fortzuführen und Identität zu bestätigen, klicken Sie auf diesen Link und legen Sie Ihr eigenes Passwort fest:' ) . "\r\n\r\n";
 				$message .= network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . "\r\n\r\n";
-				$message .= __( 'Wenn Sie Probleme beim Einloggen in Ihr Konto haben, kontaktieren Sie uns unter patient@hellomed.com oder telefonisch unter 030 6941132.' ) . "\r\n\r\n";
+				$message .= __( 'Wenn Sie Probleme beim Einloggen in Ihr Konto haben, kontaktieren Sie uns unter patient@hellomed.com oder telefonisch unter 030 233 295 030.' ) . "\r\n\r\n";
 				$message .= __( 'Schön das Sie bei uns sind.' ) . "\r\n\r\n";
 				$message .= __( 'Ihr hellomed Team' ) . "\r\n\r\n";
 				
