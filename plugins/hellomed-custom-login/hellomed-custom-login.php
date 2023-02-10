@@ -653,8 +653,8 @@ class Hellomed_Custom_Login_Plugin {
 					$redirect_url = add_query_arg( 'register-errors', $errors, $redirect_url );
 				} else {
 					// Success, redirect to login page.
-					$redirect_url = home_url( 'login' );
-					$redirect_url = add_query_arg( 'registered', $email, $redirect_url );
+					$redirect_url = home_url( 'erfolgreiche-registrierung' );
+					//$redirect_url = add_query_arg( 'registered', $email, $redirect_url );
 
 					include 'assets/api/api_requests.php';
 					include 'assets/api/refresh_token.php';
