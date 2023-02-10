@@ -48,29 +48,9 @@
 </main>
 
 <?php } 
-else { ?>
-<!-- here if the user is not logged in, going raaaus  -->
-<main>
-    <div class="container">
-        <div class="hm-content">
-
-            <div class="h2 mb-5">NO.</div>
-            <div class="alert alert-danger" role="alert">
-                <!-- image centered  -->
-                <div class="text-center">
-                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
-                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
-                </div>
-
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-            </div>
-        </div>
-    </div>
-</main>
-<?php header("Refresh:0; url=/anmelden"); 
+else { 
+//  here if the user is not logged in, redirects to /anmelden  -->
+ header("Refresh:0; url=/anmelden"); 
 }
 
 // da footer 
