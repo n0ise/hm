@@ -33,9 +33,11 @@ var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
 if (!preg_match('/^\/admin-/', $_SERVER['REQUEST_URI'])) {
   require( ABSPATH . 'wp-blog-header.php' );
   // $cookieStatus = BorlabsCookie\Cookie\Config::getInstance()->get('google-tag-manager');
+
+  // this is the borlabs attribute for the google-tag-manager ID, ids can be seen in the Cookie settings in the borlabs plugin
   $GTM_track_consent=BorlabsCookieHelper()->gaveConsent('google-tag-manager');
 
-  var_dump($GTM_track_consent);
+  // var_dump($GTM_track_consent);
 
   // Check the status of the GTM cookie consent , it's a boolean
   if ($GTM_track_consent === false || $GTM_track_consent === 0) {
