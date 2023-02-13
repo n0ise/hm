@@ -865,20 +865,10 @@ add_action('wp_ajax_new_prescription', function() {
 	  }
 	}
 	
-	if (!$hasError) {
-	  $new_row = array('prescription_id' => $new_prescription_id, 'medicine_section' => [], 'blister_job' => []);
-	//  a new row, in case same ID have one already (or it would have been overwritten)
-	  if (!empty($rezept_input)) {
-		array_push($rezept_input, $new_row);
-	  } else {
-		$rezept_input = array($new_row);
-	  }
-	  update_field('rezept_input', $rezept_input, 'user_'.$new_user_id);
-	  $updated_made = true;
-	}
-	// $new_row = array('prescription_id' => $_POST['prescription_id_no'], 'medicine_section' => [], 'blister_job' => []);
-	
 
+	// if (!$hasError) {
+		$new_row = array('prescription_id' => $new_prescription_id, 'medicine_section' => [], 'blister_job' => []);
+	//   }	
 
 	if ( !empty($_POST['patient_select'])) {
 		$new_row['new_user_id'] = $_POST['patient_select'];
@@ -975,9 +965,8 @@ add_action('wp_ajax_new_prescription', function() {
 
 
 	if (($updates_made) && (!$hasError)) {
-	// 	foreach ($updates_needed as $update) {
-			$rezept_input[] = $new_row;
-	// 	}
+		$rezept_input[] = $new_row;
+
 		update_field('rezept_input', $rezept_input, 'user_' . $user_id);
 		$response = array(
 			'status' => 'success',
