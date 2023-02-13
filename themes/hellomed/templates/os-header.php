@@ -123,7 +123,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                     <div class="hm-dropdown-user">
                         <div class="hm-dropdown-name"><?php echo $user_name; ?>
                         </div>
-                        <div class="hm-dropdown-role"><?php echo $user_role; ?></div>
+                        <div class="hm-dropdown-role"><?php echo "hellomed Patient"; ?></div>
                     </div>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
