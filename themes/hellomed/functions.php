@@ -438,7 +438,7 @@ add_action('wp_ajax_edit_patient', function() {
 			$hasError = true;
 			$errorMessages[] = "telephone: Bitte geben Sie Ihre Telefonnummer ein.";
 		} else {
-			if (preg_match("/^(\+49|0049|0)[1-9]{1}[0-9]{9}$/", $_POST['telephone'])) {
+			if (preg_match("/^(\+49|0049|0)[-\s]?(\()?(\d{1,3})?(\))?[^\d\n]*(\d{2,3}[^\d\n]*){1,3}\d{2,3}\.?\d{0,2}$/", $_POST['telephone'])) {
 				if ( !empty($_POST['telephone']) && $_POST['telephone'] != get_user_meta( $user_id, 'telephone', true )) {
 					$phone = $_POST['telephone'];
 					$updates_needed[] = array(
