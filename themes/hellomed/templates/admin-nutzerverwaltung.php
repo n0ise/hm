@@ -16,10 +16,12 @@
                     <tr>
                         <th>(Blister) User ID</th>
                         <th>Name</th>
-                        <th>Geburtsdatum<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
+                        <th class="sort-geburtsdatum">Geburtsdatum<a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon"></i></a></th>
                         <th>E-Mail</th>
                         <th>Telefon</th>
-                        <th>Registrierungsdatum<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
+                        <th class="sort-registrierungsdatum">Registrierungsdatum<a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon"></i></a></th>
                         <th>Status</th>
                         <th>Aktionen</th>
                     </tr>
@@ -37,14 +39,18 @@ $status="Alle";
             }
             ?>
 
-<!--  add 3 buttons to filter by status -->
-<small>Filter by &nbsp; </small>
-<a href="admin-nutzerverwaltung?status=Alle"> <button type="button" class="btn btn-primary btn-sm">Alle</button></a>
-<a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button" class="btn btn-success btn-sm">Aktiv</button>
-<a href="admin-nutzerverwaltung?status=Wartend"> <button type="button" class="btn btn-warning btn-sm">Wartend</button>
-<a href="admin-nutzerverwaltung?status=Inaktiv"> <button type="button" class="btn btn-secondary btn-sm" >Inaktiv</button>
+                    <!--  add 3 buttons to filter by status -->
+                    <small>Filter by &nbsp; </small>
+                    <a href="admin-nutzerverwaltung?status=Alle"> <button type="button"
+                            class="btn btn-primary btn-sm">Alle</button></a>
+                    <a href="admin-nutzerverwaltung?status=Aktiv"> <button type="button"
+                            class="btn btn-success btn-sm">Aktiv</button>
+                        <a href="admin-nutzerverwaltung?status=Wartend"> <button type="button"
+                                class="btn btn-warning btn-sm">Wartend</button>
+                            <a href="admin-nutzerverwaltung?status=Inaktiv"> <button type="button"
+                                    class="btn btn-secondary btn-sm">Inaktiv</button>
 
-        <?php
+                                <?php
         foreach ($users as $user) {
         $user_confimed = get_field('has_completed_onboarding', 'user_' . $user->ID);
             if ($user_confimed == 1){
@@ -64,30 +70,31 @@ $status="Alle";
 
 
         ?>
-                    <tr>
-                        <td data-label="(Blister) User ID"><?php echo $user_id; ?></td>
-                        <td data-label="Name"><?php 
+                                <tr>
+                                    <td data-label="(Blister) User ID"><?php echo $user_id; ?></td>
+                                    <td data-label="Name"><?php 
                             if ($patient_caregiver == 'caregiver') {
                                echo $user_firstname. " ".$user_lastname; echo "<br><span class=small>Caregiver: ".$user->user_firstname.' '.$user->user_lastname. "</span>"; 
                             } else {
                              echo $user->first_name. " ".$user->last_name; 
                             } 
-                            ?>                           
-                        </td>
-                        <td data-label="Geburtsdatum"><?php  echo $formatted_date; ?></td>
-                        <td data-label="E-Mail"><?php echo $user->user_email; ?></td>
-                        <td data-label="Telefon"><?php echo $user->telephone; ?></td>
-                        <td data-label="Registrierungsdatum"><?php echo $formatted_registration_date; ?></td>
+                            ?>
+                                    </td>
+                                    <td data-label="Geburtsdatum"><?php  echo $formatted_date; ?></td>
+                                    <td data-label="E-Mail"><?php echo $user->user_email; ?></td>
+                                    <td data-label="Telefon"><?php echo $user->telephone; ?></td>
+                                    <td data-label="Registrierungsdatum"><?php echo $formatted_registration_date; ?>
+                                    </td>
 
-                        <td data-label="Status"><span
-                                class="badge rounded-pill text-bg-<?php echo  strtolower($user->status); ?>"><?php echo $user->status; ?></span>
-                        </td>
-                        <td data-label="Aktionen"><a
-                                href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i
-                                    class="bi bi-pencil-fill"></i> Editieren</a>
-                        </td>
-                    </tr>
-                    <?php 
+                                    <td data-label="Status"><span
+                                            class="badge rounded-pill text-bg-<?php echo  strtolower($user->status); ?>"><?php echo $user->status; ?></span>
+                                    </td>
+                                    <td data-label="Aktionen"><a
+                                            href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i
+                                                class="bi bi-pencil-fill"></i> Editieren</a>
+                                    </td>
+                                </tr>
+                                <?php 
             } 
         }
     }   ?>
@@ -141,33 +148,24 @@ $(document).ready(function() {
             rows = table.find('tr');
             for (i = 1; i < (rows.length - 1); i++) {
                 shouldSwitch = false;
-                x = $(rows[i]).find('td').eq(columnIndex).text();
-                y = $(rows[i + 1]).find('td').eq(columnIndex).text();
-                if (columnIndex === 0) {
-                    if (order === 'asc') {
-                        if (x > y) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (order === 'desc') {
-                        if (x < y) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
+                let dateStr = $(rows[i]).find('td').eq(columnIndex).text();
+                if (columnIndex === 2) {
+                    let sortableDate = convertDateToSortable(dateStr);
+                    x = sortableDate;
+                    y = convertDateToSortable($(rows[i + 1]).find('td').eq(columnIndex).text());
                 } else {
-                    let x1 = $(rows[i]).find('td').eq(0).text();
-                    let y1 = $(rows[i + 1]).find('td').eq(0).text();
-                    if (order === 'asc') {
-                        if (x > y || (x === y && x1 > y1)) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (order === 'desc') {
-                        if (x < y || (x === y && x1 < y1)) {
-                            shouldSwitch = true;
-                            break;
-                        }
+                    x = $(rows[i]).find('td').eq(columnIndex).text();
+                    y = $(rows[i + 1]).find('td').eq(columnIndex).text();
+                }
+                if (order === 'asc') {
+                    if (x > y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (order === 'desc') {
+                    if (x < y) {
+                        shouldSwitch = true;
+                        break;
                     }
                 }
             }
@@ -176,10 +174,43 @@ $(document).ready(function() {
                 switching = true;
             }
         }
+
+        // Convert date strings back to 'dd.mm.yyyy' format for display
+        if (columnIndex === 2) {
+            let dateCells = $('td[data-label="Geburtsdatum"]');
+            dateCells.each(function() {
+                let dateValue = $(this).text();
+                let formattedDate = convertDateToDisplay(dateValue);
+                $(this).text(formattedDate);
+            });
+        }
     }
 
 
-});
+    // Convert a date string in 'dd.mm.yyyy' format to 'yyyy-mm-dd' format
+    function convertDateToSortable(dateString) {
+        let [day, month, year] = dateString.split('.');
+        if (!day || !month || !year) {
+            return null;
+        }
+        let sortableDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        return sortableDate;
+    }
+
+
+    // Convert a date string in 'yyyy-mm-dd' format to 'dd.mm.yyyy' format
+    function convertDateToDisplay(dateString) {
+        let [year, month, day] = dateString.split('-');
+        let displayDate = '';
+        if (day && month && year) {
+            displayDate = `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`;
+        } else {
+            displayDate = dateString;
+        }
+        return displayDate;
+    }
+
+})
 </script>
 <?php 
 } 
