@@ -23,10 +23,12 @@ $users = get_users( array( 'role' => 'client' ) );
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th data-label="Prescription ID">Prescription ID<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
+                        <th data-label="Prescription ID">Prescription ID<a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th data-label="User E-Mail">User E-Mail <i class="fas fa-sort"></i></th>
                         <th data-label="Arzt">Arzt <i class="fas fa-sort"></i></th>
-                        <th>Datum der<br>Verschreibung<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
+                        <th>Datum der<br>Verschreibung<a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th>Medikamente</th>
                         <th>Status</th>
                         <th>Aktionen</th>
@@ -48,6 +50,7 @@ $users = get_users( array( 'role' => 'client' ) );
                         foreach ($user_rezept as $rezept) {
                             $displayed = false;
                             $date_doctor = $rezept['prescription_date_by_doctor'];
+
                             $name_doctor = $rezept['doctor_name'];
                             if  (empty($name_doctor)) {
                                 $name_doctor = "Not set";
@@ -63,7 +66,8 @@ $users = get_users( array( 'role' => 'client' ) );
                                     $displayed = true;
                                 } else {
                                     break;
-                                }?>
+                                }
+                                ?>
                     <tr>
                         <td data-label="Prescription ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="User E-Mail"><?php echo $email; ?></td>
@@ -109,23 +113,10 @@ $users = get_users( array( 'role' => 'client' ) );
 <!-- js bits for the sorting toggle in the table  -->
 <script>
 $(document).ready(function() {
-    // this part will add a pointer cursor  
-    const sortIcon = document.querySelector('.sort-icon');
-    $(this).css('cursor', 'pointer');
     let table = $('table');
 
-    sortIcon.addEventListener('click', function() {
-        // let table = document.querySelector('table');
-        if (sortIcon.classList.contains('bi-sort-numeric-up')) {
-            sortTable(table, 'desc');
-            sortIcon.classList.remove('bi-sort-numeric-up');
-        }
-    })
-
-    // this will makle upsidedown the icon on toggle 
     $('th i').click(function() {
         $(this).toggleClass('active');
-        let table = $('table');
         let columnIndex = $(this).closest('th').index();
         if ($(this).hasClass('active')) {
             $(this).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
@@ -136,7 +127,6 @@ $(document).ready(function() {
         }
     });
 
-    // the sorting magic
     function sortTable(table, order, columnIndex) {
         let rows, switching, i, x, y, shouldSwitch;
         switching = true;
@@ -147,42 +137,54 @@ $(document).ready(function() {
                 shouldSwitch = false;
                 x = $(rows[i]).find('td').eq(columnIndex).text();
                 y = $(rows[i + 1]).find('td').eq(columnIndex).text();
-                if (columnIndex === 0) {
-                    if (order === 'asc') {
-                        if (x > y) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (order === 'desc') {
-                        if (x < y) {
-                            shouldSwitch = true;
-                            break;
-                        }
+
+                // Convert date strings from 'dd.mm.yyyy' to 'yyyy-mm-dd' format for sorting
+                if (columnIndex === 3) {
+                    x = convertDateToSortable(x);
+                    y = convertDateToSortable(y);
+                }
+
+                if (order === 'asc') {
+                    if (x > y) {
+                        shouldSwitch = true;
+                        break;
                     }
-                } else {
-                    let x1 = $(rows[i]).find('td').eq(0).text();
-                    let y1 = $(rows[i + 1]).find('td').eq(0).text();
-                    if (order === 'asc') {
-                        if (x > y || (x === y && x1 > y1)) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (order === 'desc') {
-                        if (x < y || (x === y && x1 < y1)) {
-                            shouldSwitch = true;
-                            break;
-                        }
+                } else if (order === 'desc') {
+                    if (x < y) {
+                        shouldSwitch = true;
+                        break;
                     }
                 }
             }
+
             if (shouldSwitch) {
                 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                 switching = true;
             }
         }
+
+        // Convert date strings back to 'dd.mm.yyyy' format for display
+        let dateCells = $('td[data-label="Datum der Verschreibung"]');
+        dateCells.each(function() {
+            let dateValue = $(this).text();
+            let formattedDate = convertDateToDisplay(dateValue);
+            $(this).text(formattedDate);
+        });
     }
 
+    // Convert a date string in 'dd.mm.yyyy' format to 'yyyy-mm-dd' format
+    function convertDateToSortable(dateString) {
+        let [day, month, year] = dateString.split('.');
+        let sortableDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        return sortableDate;
+    }
 
+    // Convert a date string in 'yyyy-mm-dd' format to 'dd.mm.yyyy' format
+    function convertDateToDisplay(dateString) {
+        let [year, month, day] = dateString.split('-');
+        let displayDate = `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`;
+        return displayDate;
+    }
 });
 </script>
 
