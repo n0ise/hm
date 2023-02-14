@@ -16,9 +16,10 @@
                     <tr>
                         <th>(Blister) User ID</th>
                         <th>Name</th>
-                        <th>Geburtsdatum</th>
+                        <th>Geburtsdatum<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th>E-Mail</th>
                         <th>Telefon</th>
+                        <th>Registrierungsdatum<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th>Status</th>
                         <th>Aktionen</th>
                     </tr>
@@ -56,6 +57,12 @@ $status="Alle";
                 $user_status = get_field('status', 'user_' . $user->ID);
                 $date = get_field('geburt', 'user_' . $user->ID); 
                 $formatted_date = date("d.m.Y", strtotime($date));
+                // registration date from WP 
+                $registration_date = $user->user_registered;
+                // removed time, and output to dd.mm.yyyy 
+                $formatted_registration_date = date('d.m.Y', strtotime($registration_date));
+
+
         ?>
                     <tr>
                         <td data-label="(Blister) User ID"><?php echo $user_id; ?></td>
@@ -70,6 +77,8 @@ $status="Alle";
                         <td data-label="Geburtsdatum"><?php  echo $formatted_date; ?></td>
                         <td data-label="E-Mail"><?php echo $user->user_email; ?></td>
                         <td data-label="Telefon"><?php echo $user->telephone; ?></td>
+                        <td data-label="Registrierungsdatum"><?php echo $formatted_registration_date; ?></td>
+
                         <td data-label="Status"><span
                                 class="badge rounded-pill text-bg-<?php echo  strtolower($user->status); ?>"><?php echo $user->status; ?></span>
                         </td>
@@ -93,7 +102,85 @@ $status="Alle";
         </div>
     </div>
 </main>
+<!-- js bits for the sorting toggle in the table  -->
+<script>
+$(document).ready(function() {
+    // this part will add a pointer cursor  
+    const sortIcon = document.querySelector('.sort-icon');
+    $(this).css('cursor', 'pointer');
+    let table = $('table');
 
+    sortIcon.addEventListener('click', function() {
+        // let table = document.querySelector('table');
+        if (sortIcon.classList.contains('bi-sort-numeric-up')) {
+            sortTable(table, 'desc');
+            sortIcon.classList.remove('bi-sort-numeric-up');
+        }
+    })
+
+    // this will makle upsidedown the icon on toggle 
+    $('th i').click(function() {
+        $(this).toggleClass('active');
+        let table = $('table');
+        let columnIndex = $(this).closest('th').index();
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
+            sortTable(table, 'desc', columnIndex);
+        } else {
+            $(this).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
+            sortTable(table, 'asc', columnIndex);
+        }
+    });
+
+    // the sorting magic
+    function sortTable(table, order, columnIndex) {
+        let rows, switching, i, x, y, shouldSwitch;
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.find('tr');
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = $(rows[i]).find('td').eq(columnIndex).text();
+                y = $(rows[i + 1]).find('td').eq(columnIndex).text();
+                if (columnIndex === 0) {
+                    if (order === 'asc') {
+                        if (x > y) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (order === 'desc') {
+                        if (x < y) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                } else {
+                    let x1 = $(rows[i]).find('td').eq(0).text();
+                    let y1 = $(rows[i + 1]).find('td').eq(0).text();
+                    if (order === 'asc') {
+                        if (x > y || (x === y && x1 > y1)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (order === 'desc') {
+                        if (x < y || (x === y && x1 < y1)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+
+
+});
+</script>
 <?php 
 } 
 else { ?>
