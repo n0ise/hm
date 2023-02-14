@@ -182,9 +182,15 @@ $(document).ready(function() {
     // Convert a date string in 'yyyy-mm-dd' format to 'dd.mm.yyyy' format
     function convertDateToDisplay(dateString) {
         let [year, month, day] = dateString.split('-');
-        let displayDate = `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`;
+        let displayDate = '';
+        if (day && month && year) {
+            displayDate = `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`;
+        } else {
+            displayDate = dateString;
+        }
         return displayDate;
     }
+
 });
 </script>
 
