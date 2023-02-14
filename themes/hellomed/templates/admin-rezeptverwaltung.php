@@ -23,12 +23,10 @@ $users = get_users( array( 'role' => 'client' ) );
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th data-label="Prescription ID">Prescription ID<a href="#"><i
-                                    class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
+                        <th data-label="Prescription ID">Prescription ID<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th data-label="User E-Mail">User E-Mail <i class="fas fa-sort"></i></th>
                         <th data-label="Arzt">Arzt <i class="fas fa-sort"></i></th>
-                        <th>Datum der<br>Verschreibung</a><a href="#"><i
-                                    class="bi bi-sort-numeric-up sort-icon active"></i></th>
+                        <th>Datum der<br>Verschreibung<a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th>Medikamente</th>
                         <th>Status</th>
                         <th>Aktionen</th>
