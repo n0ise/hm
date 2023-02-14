@@ -23,10 +23,12 @@ $users = get_users( array( 'role' => 'client' ) );
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th data-label="Prescription ID"><a href="#"><i class="bi bi-sort-numeric-up sort-icon active"></i></a> Prescription ID</th>
+                        <th data-label="Prescription ID">Prescription ID<a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th data-label="User E-Mail">User E-Mail <i class="fas fa-sort"></i></th>
                         <th data-label="Arzt">Arzt <i class="fas fa-sort"></i></th>
-                        <th>Datum der<br>Verschreibung</th>
+                        <th>Datum der<br>Verschreibung</a><a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon active"></i></th>
                         <th>Medikamente</th>
                         <th>Status</th>
                         <th>Aktionen</th>
@@ -125,21 +127,19 @@ $(document).ready(function() {
     // this will makle upsidedown the icon on toggle 
     $('th i').click(function() {
         $(this).toggleClass('active');
+        let table = $('table');
+        let columnIndex = $(this).closest('th').index();
         if ($(this).hasClass('active')) {
-            $(this).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
-            sortTable(table, 'desc');
-        } else {
             $(this).removeClass('bi-sort-numeric-up').addClass('bi-sort-numeric-down');
-            sortTable(table, 'asc');
+            sortTable(table, 'desc', columnIndex);
+        } else {
+            $(this).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
+            sortTable(table, 'asc', columnIndex);
         }
     });
-    // making the table with descendent ID on load 
-    $('th i').eq(0).addClass('active');
-    $('th i').eq(0).removeClass('bi-sort-numeric-down').addClass('bi-sort-numeric-up');
-    sortTable(table, 'desc');
 
-    // the sorting magic 
-    function sortTable(table, order) {
+    // the sorting magic
+    function sortTable(table, order, columnIndex) {
         let rows, switching, i, x, y, shouldSwitch;
         switching = true;
         while (switching) {
@@ -147,17 +147,33 @@ $(document).ready(function() {
             rows = table.find('tr');
             for (i = 1; i < (rows.length - 1); i++) {
                 shouldSwitch = false;
-                x = $(rows[i]).find('td').eq(0).text();
-                y = $(rows[i + 1]).find('td').eq(0).text();
-                if (order === 'asc') {
-                    if (Number(x) > Number(y)) {
-                        shouldSwitch = true;
-                        break;
+                x = $(rows[i]).find('td').eq(columnIndex).text();
+                y = $(rows[i + 1]).find('td').eq(columnIndex).text();
+                if (columnIndex === 0) {
+                    if (order === 'asc') {
+                        if (x > y) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (order === 'desc') {
+                        if (x < y) {
+                            shouldSwitch = true;
+                            break;
+                        }
                     }
-                } else if (order === 'desc') {
-                    if (Number(x) < Number(y)) {
-                        shouldSwitch = true;
-                        break;
+                } else {
+                    let x1 = $(rows[i]).find('td').eq(0).text();
+                    let y1 = $(rows[i + 1]).find('td').eq(0).text();
+                    if (order === 'asc') {
+                        if (x > y || (x === y && x1 > y1)) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (order === 'desc') {
+                        if (x < y || (x === y && x1 < y1)) {
+                            shouldSwitch = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -167,7 +183,6 @@ $(document).ready(function() {
             }
         }
     }
-
 
 
 });
