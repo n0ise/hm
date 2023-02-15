@@ -22,6 +22,9 @@
                 $patient_caregiver = get_field('patient_caregiver', 'user_' . $user->ID);
                 $user_firstname = $user->user_firstname;
                 $user_lastname = $user->user_lastname;
+                // Get the current checkboxes values for the user
+                $current_reminder_value = get_field('reminder_checkbox', 'user_'.$user->ID);
+                $current_newsletter_value = get_field('newsletter_checkbox', 'user_'.$user->ID);
                 $geschlecht_value = get_user_meta($_GET['user_id'], 'geschlecht', true);
                 if ($geschlecht_value === "Male") {
                   $geschlecht_value = "Männlich";
@@ -215,6 +218,41 @@
                     </div>
                 </div>
                 <div class="col-12">
+          <div class="h3 m-0 mt-5">Berechtigungen</div>
+        </div>
+        <div class="col-12">
+          <div class="form-check m-0">
+            <input class="form-check-input" type="checkbox" id="legal-3" checked disabled>
+            <label class="form-check-label text-legal" for="legal-3">
+              Ich habe die <a href>AGB</a> und die <a href>Datenschutzerklärung</a> zur Kenntnis genommen. *
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-check m-0">
+            <input class="form-check-input" type="checkbox" id="legal-4" checked disabled>
+            <label class="form-check-label text-legal" for="legal-4">
+              Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten, zum Zweck der Führung meines Kundenkontos wie aus der <a href>Datenschutzerklärung</a> ersichtlich verarbeitet werden. *
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-check m-0">
+            <input class="form-check-input" type="checkbox" id="reminder_checkbox" name="reminder_checkbox"
+                <?php echo $current_reminder_value == 'true' ? 'checked' : ''; ?>>
+              Ich willige ein, dass meine personenbezogenen Daten, inklusive meiner Gesundheitsdaten zum Zweck der Übersendung personalisierter Erinnerungsmails zur Einreichung eines Folgerezeptes und Produktempfehlungen per E-Mail verarbeitet werden.
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-check m-0">
+            <input class="form-check-input" type="checkbox" id="newsletter_checkbox" name="newsletter_checkbox"
+                <?php echo $current_newsletter_value == 'true' ? 'checked' : ''; ?>>
+              Ja ich möchte weitere Informationen zu Neuigkeiten und Angeboten von der hellomed Group GmbH per E-Mail oder Telefon erhalten. Ich willige ein, dass die Apotheke zu diesem Zweck meine E-Mail-Adresse, Telefonnummer meinen Namen und meine Adresse an die hellomed Group GmbH übermittelt und diese die Daten zum Zweck der Informationsübermittlung verarbeitet. Soweit dafür erforderlich, entbinde ich den Apotheker und seine Angestellten von der Schweigepflicht.
+            </label>
+          </div>
+        </div>
+                <div class="col-12">
                     <div class="h3 m-0 mt-5">Status</div>
                 </div>
                 <div class="col-12">
@@ -264,29 +302,7 @@ add_action('wp_ajax_nopriv_edit_patient', 'edit_patient');
 </main>
 
 <?php } 
-else { ?>
-<!-- here if the user is not logged in, going raaaus  -->
-<main>
-    <div class="container">
-        <div class="hm-content">
-
-            <div class="h2 mb-5">NO.</div>
-            <div class="alert alert-danger" role="alert">
-                <!-- image centered  -->
-                <div class="text-center">
-                    <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
-                        src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
-                </div>
-
-                <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                <hr>
-                <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-            </div>
-        </div>
-    </div>
-</main>
-<?php header("Refresh:0; url=/anmelden"); 
+else {  header("Refresh:0; url=/anmelden"); 
 }
 
 // da footer 
@@ -319,6 +335,8 @@ jQuery(document).ready(function($) {
         var new_user_id = $('#new_user_id').val();
         var status = $('#status').val();
         var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+        var newsletter_checkbox = $('#newsletter_checkbox').is(':checked') ? 'true' : 'false';
+        var reminder_checkbox = $('#reminder_checkbox').is(':checked') ? 'true' : 'false';
 
         var data = {
             'action': 'edit_patient',
@@ -342,6 +360,8 @@ jQuery(document).ready(function($) {
             'insurance_company': insurance_company,
             'insurance_number': insurance_number,
             'status': status,
+            'newsletter_checkbox': newsletter_checkbox,
+            'reminder_checkbox': reminder_checkbox,
             // 'email': email,
             'new_user_id': new_user_id
         };

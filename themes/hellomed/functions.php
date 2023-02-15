@@ -588,6 +588,27 @@ add_action('wp_ajax_edit_patient', function() {
 		}
 	}
   
+	/// Check if newsletter checkbox is set
+	if (isset($_POST['newsletter_checkbox'])) {
+		$newsletter_checkbox = ($_POST['newsletter_checkbox'] === 'true') ? 1 : 0;
+		$current_newsletter_value = get_field('newsletter_checkbox', 'user_'.$user_id);
+		// it will check if value is different than before
+		if ($newsletter_checkbox != $current_newsletter_value) {
+			update_user_meta( $user_id, 'newsletter_checkbox', $newsletter_checkbox );
+			$updates_made = true;
+		}
+	}
+
+	/// Check if newsletter checkbox is set
+	if (isset($_POST['reminder_checkbox'])) {
+		$reminder_checkbox = ($_POST['reminder_checkbox'] === 'true') ? 1 : 0;
+		$current_newsletter_value = get_field('reminder_checkbox', 'user_'.$user_id);
+		// it will check if value is different than before
+		if ($reminder_checkbox != $current_reminder_value) {
+			update_user_meta( $user_id, 'reminder_checkbox', $reminder_checkbox );
+			$updates_made = true;
+		}
+	}
 
 	if ( !empty($_POST['allergies']) && $_POST['allergies'] != get_user_meta( $user_id, 'allergies', true )) {
 			$allergies = $_POST['allergies'];
