@@ -111,7 +111,7 @@
                         <div class="form-floating">
                             <input id="prescription_date_by_doctor" type="date" class="form-control"
                                 placeholder="tt.mm.jjjj" value="">
-                            <label>Verschreibungsdatum</label>
+                            <label>Datum der Verschreibung</label>
                         </div>
                     </div>
 
@@ -345,7 +345,7 @@ include_once('footer.php');
             //     return nextID++;
             // }
             // var prescription_id_no = generate_incrementalID();
-            // console.log("Prescription ID: ", prescription_id_no);
+            // console.log("Rezept ID: ", prescription_id_no);
 
             var user_id = $('#user_id').val();
             // for each value in blister_jobs, get the values and put it in an array

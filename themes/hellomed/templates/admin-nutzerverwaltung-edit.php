@@ -38,7 +38,7 @@
                     <div class="form-floating">
                         <input id="new_user_id" type="text" class="form-control" placeholder=" "
                             value="<?php echo get_user_meta($_GET['user_id'], 'new_user_id', true); ?>">
-                        <label>(Blister) User ID</label>
+                        <label>(Blister) Nutzer ID</label>
                     </div>
                 </div>
                 <div class="col-12">

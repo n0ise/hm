@@ -42,26 +42,26 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                 <div class="h2 mb-5">Rezept bearbeiten</div>
                 <div class="row gy-4 hm-settings-grid">
                     <div class="col-12">
-                        <div class="h3 m-0">User</div>
+                        <div class="h3 m-0">Nutzer</div>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" placeholder=" " value="<?php echo $user_rezept->user_email; ?>" disabled>
-                            <label>User E-Mail</label>
+                            <label>Nutzer E-Mail</label>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="form-floating">
                             <input id="new_user_id" type="text" class="new_user_id form-control"
                                 value="<?php echo $new_user_id; ?>" disabled>
-                            <label>(Blister) User ID</label>
+                            <label>(Blister) Nutzer ID</label>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-floating">
                             <input id="prescription_id_no" type="text" class="form-control"
                                 value="<?php echo $record['prescription_id']; ?>" disabled>
-                            <label>Prescription ID</label>
+                            <label>Rezept ID</label>
                         </div>
                     </div>
                     <div class="col-12">
@@ -130,7 +130,7 @@ $filtered_rezept_input = array_filter($rezept_input, function ($record) use ($re
                         <div class="form-floating">
                             <input id="prescription_date_by_doctor" type="date" class="form-control"
                                 value="<?php echo $record['prescription_date_by_doctor']; ?>">
-                            <label>Verschreibungsdatum</label>
+                            <label>Datum der Verschreibung</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">

@@ -14,7 +14,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>(Blister) User ID</th>
+                        <th>(Blister) Nutzer ID</th>
                         <th>Name</th>
                         <th class="sort-geburtsdatum">Geburtsdatum<a href="#"><i
                                     class="bi bi-sort-numeric-up sort-icon"></i></a></th>
@@ -71,7 +71,7 @@ $status="Alle";
 
         ?>
                                 <tr>
-                                    <td data-label="(Blister) User ID"><?php echo $user_id; ?></td>
+                                    <td data-label="(Blister) Nutzer ID"><?php echo $user_id; ?></td>
                                     <td data-label="Name"><?php 
                             if ($patient_caregiver == 'caregiver') {
                                echo $user_firstname. " ".$user_lastname; echo "<br><span class=small>Caregiver: ".$user->user_firstname.' '.$user->user_lastname. "</span>"; 
