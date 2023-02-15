@@ -43,9 +43,6 @@ $user_id = get_current_user_id();
         </div>
         <div class="d-none d-lg-block">
             <div class="hm-dropdown dropdown-toggle" data-bs-toggle="dropdown">
-                <div class="hm-dropdown-photo">
-                    <img src="<?php echo get_avatar_url($user_id); ?>" />
-                </div>
                 <div class="hm-dropdown-user">
                     <div class="hm-dropdown-name"><?php echo $user_name; ?>
                     </div>
@@ -89,9 +86,6 @@ $user_id = get_current_user_id();
     </ul> -->
     <div class="hm-offcanvas-profile">
       <div class="hm-dropdown">
-        <div class="hm-dropdown-photo">
-          <img src="<?php echo get_avatar_url($user_id); ?>">
-        </div>
         <div class="hm-dropdown-user">
           <div class="hm-dropdown-name"><?php echo $user_name; ?></div>
           <div class="hm-dropdown-role"><?php echo $user_role; ?></div>
