@@ -16,12 +16,16 @@
                     <tr>
                         <th>(Blister) Nutzer ID</th>
                         <th>Name</th>
-                        <th class="sort-geburtsdatum">Geburtsdatum<a href="#"><i
-                                    class="bi bi-sort-numeric-up sort-icon"></i></a></th>
+                        <th class="sort-geburtsdatum"><a href="#"><i class="bi bi-sort-numeric-up sort-icon"></i></a>
+                            Geburts-<br>datum
+                        </th>
                         <th>E-Mail</th>
                         <th>Telefon</th>
-                        <th class="sort-registrierungsdatum">Registrierungsdatum<a href="#"><i
-                                    class="bi bi-sort-numeric-up sort-icon"></i></a></th>
+                        <th>Berechtigungen</th>
+                        <th class="sort-registrierungsdatum"> <a href="#"><i
+                                    class="bi bi-sort-numeric-up sort-icon"></i></a>
+                            Datum der<br>Registrierung
+                        </th>
                         <th>Status</th>
                         <th>Aktionen</th>
                     </tr>
@@ -67,6 +71,12 @@ $status="Alle";
                 $registration_date = $user->user_registered;
                 // removed time, and output to dd.mm.yyyy 
                 $formatted_registration_date = date('d.m.Y', strtotime($registration_date));
+                // 4 checkboxes
+                $agb_checkbox = get_field('agb_checkbox', 'user_' . $user->ID);
+                $newsletter_checkbox = get_field('newsletter_checkbox', 'user_' . $user->ID);
+                $reminder_checkbox = get_field('reminder_checkbox', 'user_' . $user->ID);
+                $personal_data_checkbox = get_field('personal_data_checkbox', 'user_' . $user->ID);
+
 
 
         ?>
@@ -74,7 +84,10 @@ $status="Alle";
                                     <td data-label="(Blister) Nutzer ID"><?php echo $user_id; ?></td>
                                     <td data-label="Name"><?php 
                             if ($patient_caregiver == 'caregiver') {
-                               echo $user_firstname. " ".$user_lastname; echo "<br><span class=small>Caregiver: ".$user->user_firstname.' '.$user->user_lastname. "</span>"; 
+                               echo "<div class=row>
+                               <div class=col-sm-12>".$user_firstname. " ".$user_lastname; echo "<div class=row>
+                               <div class=col-sm-12><span class=small>Caregiver: ".$user->user_firstname.' '.$user->user_lastname. "</span> </div>
+                               </div>"; 
                             } else {
                              echo $user->first_name. " ".$user->last_name; 
                             } 
@@ -83,15 +96,35 @@ $status="Alle";
                                     <td data-label="Geburtsdatum"><?php  echo $formatted_date; ?></td>
                                     <td data-label="E-Mail"><?php echo $user->user_email; ?></td>
                                     <td data-label="Telefon"><?php echo $user->telephone; ?></td>
+                                    <td data-label="Berechtigungen">
+                                        <span
+                                            class="consent-badge <?php echo ($agb_checkbox) ? 'is-checked' : 'is-unchecked'; ?>"><i
+                                                class="bi <?php echo ($agb_checkbox) ? 'bi-check-circle-fill' : 'bi-check-circle'; ?>"></i>
+                                            AGB und Datenschutz</span>
+                                        <span
+                                            class="consent-badge <?php echo ($personal_data_checkbox) ? 'is-checked' : 'is-unchecked'; ?>"><i
+                                                class="bi <?php echo ($personal_data_checkbox) ? 'bi-check-circle-fill' : 'bi-check-circle'; ?>"></i>
+                                            Führung Kundenkonto</span>
+                                        <span
+                                            class="consent-badge <?php echo ($reminder_checkbox) ? 'is-checked' : 'is-unchecked'; ?>"><i
+                                                class="bi <?php echo ($reminder_checkbox) ? 'bi-check-circle-fill' : 'bi-check-circle'; ?>"></i>
+                                            Erinnerungs-E-Mails</span>
+                                        <span
+                                            class="consent-badge <?php echo ($newsletter_checkbox) ? 'is-checked' : 'is-unchecked'; ?>"><i
+                                                class="bi <?php echo ($newsletter_checkbox) ? 'bi-check-circle-fill' : 'bi-check-circle'; ?>"></i>
+                                            News und Angebote</span>
+                                    </td>
+
                                     <td data-label="Registrierungsdatum"><?php echo $formatted_registration_date; ?>
                                     </td>
 
                                     <td data-label="Status"><span
                                             class="badge rounded-pill text-bg-<?php echo  strtolower($user->status); ?>"><?php echo $user->status; ?></span>
                                     </td>
-                                    <td data-label="Aktionen"><a
-                                            href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i
+                                    <td data-label="Aktionen">
+                                        <a href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i
                                                 class="bi bi-pencil-fill"></i> Editieren</a>
+                                        <!-- <a href><i class="bi bi-trash2-fill"></i> Löschen</a> -->
                                     </td>
                                 </tr>
                                 <?php 
