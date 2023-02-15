@@ -427,6 +427,8 @@ jQuery(document).ready(function($) {
             $('#start_date').val(start_date);
             $('#krankheiten').val(krankheiten);
             $('#status').val(status);
+            $('#newsletter_checkbox').val(newsletter_checkbox);
+            $('#reminder_checkbox').val(reminder_checkbox);
             // $('#email').val(email);
             $('#new_user_id').val(new_user_id);
             // debug sent data and response from functions.php
