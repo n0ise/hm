@@ -125,6 +125,7 @@ include_once( get_stylesheet_directory() . '/assets/php/variables.php' );
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="/hilfe-faq" target="_blank">FAQ & Hilfe</a></li>
+                    <li><a class="dropdown-item" href="/berechtigungen">Berechtigungen</a></li>
                     <li><a class="dropdown-item" href="/einstellungen">Einstellungen</a></li>
                     <li>
                         <hr class="dropdown-divider">
