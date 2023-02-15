@@ -988,6 +988,62 @@ echo json_encode($response);
 wp_die();
 });
 
+///////////////////////////////////////
+// Function for /berechtigungen
+///////////////////////////////////////
+
+add_action('wp_ajax_berechtigungen', function() {
+	$updates_made = false;
+	$errorMessages = array();
+	$updates_needed = array();
+	$user_id = $_POST['user_id'];
+	// $user_id = "36";
+	// error_log('berechtigungen called with post data: ' . print_r($_POST, true));
+	// error_log('current user ID: ' . $user_id);
+	
+ /// Check if newsletter checkbox is set
+ if (isset($_POST['newsletter_checkbox'])) {
+    $new_value = ($_POST['newsletter_checkbox'] === 'true') ? 1 : 0;
+    $current_value = get_field('newsletter_checkbox', 'user_'.$user_id);
+	// it will check if value is different than before
+    if ($new_value != $current_value) {
+        $new_row['newsletter_checkbox'] = $new_value;
+        $updates_made = true;
+    }
+}
+
+ /// Check if newsletter checkbox is set
+if (isset($_POST['reminder_checkbox'])) {
+    $new_value = ($_POST['reminder_checkbox'] === 'true') ? 1 : 0;
+    $current_value = get_field('reminder_checkbox', 'user_'.$user_id);
+	// it will check if value is different than before
+    if ($new_value != $current_value) {
+        $new_row['reminder_checkbox'] = $new_value;
+        $updates_made = true;
+    }
+}
+
+if ($updates_made) {
+    // Update the ACF fields for the current user
+    foreach ($new_row as $key => $value) {
+        update_field($key, $value, 'user_' . $user_id);
+    }
+
+    $response = array(
+        'status' => 'success',
+        'message' => 'Änderungen erfolgreich gespeichert'
+    );
+} else {
+    $response = array(
+        'status' => 'error',
+        'message' => 'Es gab keine neuen Kontrollkästchen zum Speichern.'
+    );
+}
+
+echo json_encode($response);
+
+wp_die();
+});
 
  // fill patient/caregiver filed in ninja form, with the custom field for patient/caregiver taken from the registration form
  add_filter( 'ninja_forms_render_default_value', 'fill_ninja_patient', 10, 3 );
