@@ -393,7 +393,11 @@ include_once('footer.php');
                     $(this).removeClass('is-invalid');
                     $(this).next('.invalid-feedback').remove();
                 });
-
+            // disable the button and change its color
+            $('#save_blister_job').prop('disabled', true).removeClass('btn-primary').addClass('btn-secondary');
+            $('#save_blister_job').on('click', function() {
+                $(this).prop('disabled', true);
+            });
                 if (response.status == 'success') {
                     //remove error classes and messages
                     $('#successdown').removeClass('alert alert-danger');
@@ -409,7 +413,7 @@ include_once('footer.php');
                         $('#successdown').fadeOut(1000);
                     }, 5000);
                     // disable the submit button (and add secondary color)
-                    $('#save_blister_job').prop('disabled', true).removeClass('btn-primary').addClass('btn-secondary');
+                    // $('#save_blister_job').prop('disabled', true).removeClass('btn-primary').addClass('btn-secondary');
                     // show a small "new one?" text with a link reloading the page
                     var add_New_Link = $('<a>').text('Möchten Sie eine neue hinzufügen?').attr('href', window.location.href).addClass('small text-pimary ml-2');
                     var add_New_Text = $('<div>').addClass('d-flex justify-content-end mt-2').append(add_New_Link);
@@ -428,6 +432,8 @@ include_once('footer.php');
                     $('#successdown').html(
                         'Fehler: Bitte überprüfen Sie die rot markierten Felde');
                     $('#successdown').fadeIn(1000);
+                     // enable the button and change its color
+                    $('#save_blister_job').prop('disabled', false).removeClass('btn-secondary').addClass('btn-primary');
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
                     }, 5000);
