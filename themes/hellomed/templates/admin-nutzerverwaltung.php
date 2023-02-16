@@ -14,17 +14,18 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>(Blister) Nutzer ID</th>
+                        <th>(Blister)<br>Nutzer ID</th>
                         <th>Name</th>
-                        <th class="sort-geburtsdatum"><a href="#"><i class="bi bi-sort-numeric-up sort-icon"></i></a>
+                        <th class="sort-geburtsdatum">
                             Geburts-<br>datum
+                            <i class="bi bi-sort-numeric-up sort-icon"></i>
                         </th>
                         <th>E-Mail</th>
                         <th>Telefon</th>
                         <th>Berechtigungen</th>
-                        <th class="sort-registrierungsdatum"> <a href="#"><i
-                                    class="bi bi-sort-numeric-up sort-icon"></i></a>
+                        <th class="sort-registrierungsdatum">
                             Datum der<br>Registrierung
+                            <i class="bi bi-sort-numeric-up sort-icon"></i>
                         </th>
                         <th>Status</th>
                         <th>Aktionen</th>
@@ -147,7 +148,6 @@ $status="Alle";
 $(document).ready(function() {
     // this part will add a pointer cursor  
     const sortIcon = document.querySelector('.sort-icon');
-    $(this).css('cursor', 'pointer');
     let table = $('table');
 
     sortIcon.addEventListener('click', function() {

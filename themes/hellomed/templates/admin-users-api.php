@@ -63,7 +63,7 @@ $patient_result = json_decode($patient_result, true);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>(Blister) Nutzer ID</th>
+                        <th>(Blister)<br>Nutzer ID</th>
                         <th>Vorname</th>
                         <th>Nachname</th>
                         <th>E-Mail</th>
