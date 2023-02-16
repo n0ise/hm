@@ -135,7 +135,7 @@ class Upload extends Field_Base {
 			'error',
 			'size',
 		];
-		$files = Utils::_unstable_get_super_global_value( $_FILES, 'form_fields' );
+		$files = $_FILES['form_fields']; // phpcs:ignore -- escaped when processing the file later on.
 		// iterate over each uploaded file
 		foreach ( $files as $key => $part ) {
 			$key = (string) $key;
