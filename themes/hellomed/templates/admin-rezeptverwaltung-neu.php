@@ -182,29 +182,7 @@
         </div>
     </main>
     <?php } 
-else { ?>
-    <!-- here if the user is not logged in, going raaaus  -->
-    <main>
-        <div class="container">
-            <div class="hm-content">
-
-                <div class="h2 mb-5">NO.</div>
-                <div class="alert alert-danger" role="alert">
-                    <!-- image centered  -->
-                    <div class="text-center">
-                        <img class="rounded img-fluid mx-auto img-thumbnail " width="300"
-                            src="wp-content/themes/hellomed/assets/img/why.jpeg" alt="nope">
-                    </div>
-
-                    <h4 class="alert-heading">Du bist nicht eingeloggt!</h4>
-                    <p>Bitte logge dich ein, um diese Seite zu sehen.</p>
-                    <hr>
-                    <p class="mb-0">Du wirst in 10 Sekunden weitergeleitet.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-    <?php header("Refresh:0; url=/anmelden"); 
+else {  header("Refresh:0; url=/anmelden"); 
 }
 
 // da footer 
@@ -430,7 +408,12 @@ include_once('footer.php');
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
                     }, 5000);
-
+                    // disable the submit button (and add secondary color)
+                    $('#save_blister_job').prop('disabled', true).removeClass('btn-primary').addClass('btn-secondary');
+                    // show a small "new one?" text with a link reloading the page
+                    var add_New_Link = $('<a>').text('Möchten Sie eine neue hinzufügen?').attr('href', window.location.href).addClass('small text-pimary ml-2');
+                    var add_New_Text = $('<div>').addClass('d-flex justify-content-end mt-2').append(add_New_Link);
+                    $('#save_blister_job').after(add_New_Text);
                 } else if (response.status == 'error') {
                     var errorMessages = response.message;
                     //loop through error messages and add to corresponding input fields
