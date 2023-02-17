@@ -36,6 +36,8 @@
                                 'new_user_id' => $new_user_id,
                                 'patient_first_name' => $patient_first_name,
                                 'patient_last_name' => $patient_last_name,
+                                'first_name' => $patient->first_name,
+                                'last_name' => $patient->last_name
                             ];
                         }
 
@@ -393,11 +395,12 @@ include_once('footer.php');
                     $(this).removeClass('is-invalid');
                     $(this).next('.invalid-feedback').remove();
                 });
-            // disable the button and change its color
-            $('#save_blister_job').prop('disabled', true).removeClass('btn-primary').addClass('btn-secondary');
-            $('#save_blister_job').on('click', function() {
-                $(this).prop('disabled', true);
-            });
+                // disable the button and change its color
+                $('#save_blister_job').prop('disabled', true).removeClass('btn-primary')
+                    .addClass('btn-secondary');
+                $('#save_blister_job').on('click', function() {
+                    $(this).prop('disabled', true);
+                });
                 if (response.status == 'success') {
                     //remove error classes and messages
                     $('#successdown').removeClass('alert alert-danger');
@@ -415,8 +418,10 @@ include_once('footer.php');
                     // disable the submit button (and add secondary color)
                     // $('#save_blister_job').prop('disabled', true).removeClass('btn-primary').addClass('btn-secondary');
                     // show a small "new one?" text with a link reloading the page
-                    var add_New_Link = $('<a>').text('Möchten Sie eine neue hinzufügen?').attr('href', window.location.href).addClass('small text-pimary ml-2');
-                    var add_New_Text = $('<div>').addClass('d-flex justify-content-end mt-2').append(add_New_Link);
+                    var add_New_Link = $('<a>').text('Möchten Sie eine neue hinzufügen?').attr(
+                        'href', window.location.href).addClass('small text-pimary ml-2');
+                    var add_New_Text = $('<div>').addClass('d-flex justify-content-end mt-2')
+                        .append(add_New_Link);
                     $('#save_blister_job').after(add_New_Text);
                 } else if (response.status == 'error') {
                     var errorMessages = response.message;
@@ -432,8 +437,9 @@ include_once('footer.php');
                     $('#successdown').html(
                         'Fehler: Bitte überprüfen Sie die rot markierten Felde');
                     $('#successdown').fadeIn(1000);
-                     // enable the button and change its color
-                    $('#save_blister_job').prop('disabled', false).removeClass('btn-secondary').addClass('btn-primary');
+                    // enable the button and change its color
+                    $('#save_blister_job').prop('disabled', false).removeClass('btn-secondary')
+                        .addClass('btn-primary');
                     setTimeout(function() {
                         $('#successdown').fadeOut(1000);
                     }, 5000);
@@ -443,7 +449,6 @@ include_once('footer.php');
     });
     </script>
     <script>
-    // function for searching patient 
     function search_patient() {
         const input = document.querySelector('#patient_select');
         const searchTerm = input.value;
@@ -454,42 +459,44 @@ include_once('footer.php');
         if (!searchTerm) {
             document.querySelector(`#patient_options`).innerHTML =
                 `<ul id="filter-records" class="p-2 hm-autocomplete"></ul>`;
-
             patients.forEach(result => {
-                const option = document.createElement('li');
-                option.classList.add('hm-autocomplete-item');
-                option.innerHTML = `
-              <div class="hm-autocomplete-name">ID: ${result.new_user_id} (${result.patient_first_name} ${result.patient_last_name})</div>
-            `;
-                option.setAttribute("data-patientid", result.ID);
+                const option = createPatientOption(result);
                 document.querySelector('#filter-records').appendChild(option);
-                option.addEventListener('click', function(event) {
-                    document.querySelector('#patient_select').value = `${result.new_user_id}`;
-                    document.querySelector('#patient_options').innerHTML = '';
-                    document.querySelector('#user_id').value = result.ID;
-                });
             });
         } else {
-            // Show all results that include the search term
-            const searchResults = patients.filter(patient => String(patient.new_user_id).includes(searchTerm));
+            // Show all results that include the search term in ID, first name, or last name
+            const searchResults = patients.filter(patient => {
+                const idMatch = String(patient.new_user_id).includes(searchTerm);
+                const nameMatch = (patient.first_name + ' ' + patient.last_name).toLowerCase().includes(
+                    searchTerm.toLowerCase());
+                return idMatch || nameMatch;
+            });
 
             document.querySelector(`#patient_options`).innerHTML =
                 `<ul id="filter-records" class="p-2 hm-autocomplete"></ul>`;
 
             searchResults.forEach(result => {
-                const option = document.createElement('li');
-                option.classList.add('hm-autocomplete-item');
-                option.innerHTML = `
-              <div class="hm-autocomplete-name">ID: ${result.new_user_id} (${result.patient_first_name} ${result.patient_last_name})</div>
-            `;
-                option.setAttribute("data-patientid", result.ID);
+                const option = createPatientOption(result);
                 document.querySelector('#filter-records').appendChild(option);
-                option.addEventListener('click', function(event) {
-                    document.querySelector('#patient_select').value = `${result.new_user_id}`;
-                    document.querySelector('#patient_options').innerHTML = '';
-                    document.querySelector('#user_id').value = result.ID;
-                });
             });
         }
+    }
+
+    function createPatientOption(patient) {
+        const option = document.createElement('li');
+        option.classList.add('hm-autocomplete-item');
+        const firstName = patient.first_name;
+        const lastName = patient.last_name;
+        option.innerHTML = `
+    <div class="hm-autocomplete-name">ID: ${patient.new_user_id} (${firstName} ${lastName})</div>
+  `;
+        option.setAttribute("data-patientid", patient.ID);
+        option.addEventListener('click', function(event) {
+            document.querySelector('#patient_select').value =
+                `${patient.new_user_id}  (${firstName} ${lastName})`;
+            document.querySelector('#patient_options').innerHTML = '';
+            document.querySelector('#user_id').value = patient.ID;
+        });
+        return option;
     }
     </script>
