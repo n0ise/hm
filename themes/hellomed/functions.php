@@ -1084,6 +1084,38 @@ function delete_user_ajax_handler() {
   }
   wp_die();
 }
+///////////////////////////////////////
+// Function for deleting a prescription, in /admin-rezeptverwaltung
+///////////////////////////////////////
+
+add_action('wp_ajax_delete_rezept', 'delete_rezept_ajax_handler');
+function delete_rezept_ajax_handler() {
+  // Check the security token
+  check_ajax_referer('delete_rezept');
+  // Get the user ID and rezept ID from the AJAX request
+  $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
+  $rezept_id = isset($_POST['rezept_id']) ? intval($_POST['rezept_id']) : 0;
+  // Get the current rezept input field value for the user
+  $rezept_input = get_field('rezept_input', 'user_' . $user_id);
+  // Find the rezept by ID
+  $rezept_index = -1;
+  foreach ($rezept_input as $index => $rezept) {
+    if ($rezept['prescription_id'] == $rezept_id) {
+      $rezept_index = $index;
+      break;
+    }
+  }
+  // Delete the rezept row
+  if ($rezept_index >= 0) {
+    unset($rezept_input[$rezept_index]);
+    // Save the updated rezept input field value
+    update_field('rezept_input', $rezept_input, 'user_' . $user_id);
+    echo 'success';
+  } else {
+    echo 'error';
+  }
+  wp_die();
+}
 
 
  // fill patient/caregiver filed in ninja form, with the custom field for patient/caregiver taken from the registration form

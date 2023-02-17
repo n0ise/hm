@@ -82,9 +82,11 @@ $users = get_users( array( 'role' => 'client' ) );
                                 class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']);?> "><?php echo $rezept['status_prescription']; ?></span>
                         </td>
                         <td data-label="Aktionen">
-                            <a
-                                href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
-                                <i class="bi bi-pencil-fill"></i> Editieren</a>
+                            <a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
+                            <i class="bi bi-pencil-fill"></i> Editieren</a>
+                            <a href="#" class="delete-rezept" data-user-id="<?php echo $user->ID; ?>" data-rezept-id="<?php echo $rezept['prescription_id']; ?>">
+                            <i class="bi bi-trash2-fill"></i> Löschen
+                            </a>                        
                         </td>
                     </tr>
                     <?php           
@@ -188,7 +190,35 @@ $(document).ready(function() {
 
 });
 </script>
-
+<!-- delete the prescritpion  -->
+<script>
+  jQuery(document).ready(function($) {
+    // Attach a click event to the "Löschen" button
+    $('.delete-rezept').click(function(e) {
+      e.preventDefault();
+      var userId = $(this).data('user-id');
+      var rezeptId = $(this).data('rezept-id');
+      // Show a confirmation dialog before deleting the rezept
+      if (confirm('Sind Sie sicher, dass Sie dieses Rezept löschen möchten?')) {
+        // Send an AJAX request to delete the rezept
+        $.ajax({
+          url: '<?php echo admin_url('admin-ajax.php'); ?>',
+          type: 'POST',
+          data: {
+            action: 'delete_rezept',
+            user_id: userId,
+            rezept_id: rezeptId,
+            _wpnonce: '<?php echo wp_create_nonce('delete_rezept'); ?>'
+          },
+          success: function(response) {
+            // Reload the page after the rezept is deleted
+            location.reload();
+          }
+        });
+      }
+    });
+  });
+</script>
 <?php } 
 else { ?>
 <!-- here if the user is not logged in, going raaaus  -->
