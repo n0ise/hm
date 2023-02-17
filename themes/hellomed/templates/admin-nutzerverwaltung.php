@@ -82,7 +82,8 @@ $status="Alle";
 
         ?>
                                 <tr>
-                                <td data-label="(Blister) Nutzer ID"><?php if (empty($user_id)) { ?><i class="empty">leer</i><?php } else { echo $user_id; } ?></td>
+                                    <td data-label="(Blister) Nutzer ID"><?php if (empty($user_id)) { ?><i
+                                            class="empty">leer</i><?php } else { echo $user_id; } ?></td>
                                     <td data-label="Name"><?php 
                             if ($patient_caregiver == 'caregiver') {
                                echo "<div class=row>
@@ -123,10 +124,9 @@ $status="Alle";
                                             class="badge rounded-pill text-bg-<?php echo  strtolower($user->status); ?>"><?php echo $user->status; ?></span>
                                     </td>
                                     <td data-label="Aktionen">
-                                        <a href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>"><i
-                                                class="bi bi-pencil-fill"></i> Editieren</a>
-                                        <!-- <a href><i class="bi bi-trash2-fill"></i> Löschen</a> -->
-                                    </td>
+                                        <a href="admin-nutzerverwaltung-edit?user_id=<?php echo $user->ID; ?>">
+                                        <i class="bi bi-pencil-fill"></i> Editieren</a>
+                                        <a href="#" class="delete-user" data-user-id="<?php echo $user->ID; ?>"><i class="bi bi-trash2-fill"></i> Löschen</a></td>                                    </td>
                                 </tr>
                                 <?php 
             } 
@@ -245,6 +245,36 @@ $(document).ready(function() {
 
 })
 </script>
+
+<!-- Ajax bits for deleting user  -->
+<script>
+jQuery(document).ready(function($) {
+    // Attach a click event to the "Löschen" button
+    $('.delete-user').click(function(e) {
+        e.preventDefault();
+        var userId = $(this).data('user-id');
+        // Show a confirmation dialog before deleting the user
+        if (confirm('Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?')) {
+            // Send an AJAX request to delete the user
+            $.ajax({
+                url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                type: 'POST',
+                data: {
+                    action: 'delete_user',
+                    user_id: userId,
+                    _wpnonce: '<?php echo wp_create_nonce('delete_user'); ?>'
+                },
+                success: function(response) {
+                    // Reload the page after the user is deleted
+                    location.reload();
+                }
+            });
+        }
+    });
+});
+</script>
+
+
 <?php 
 } 
 else { ?>

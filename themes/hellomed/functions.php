@@ -1066,6 +1066,26 @@ echo json_encode($response);
 wp_die();
 });
 
+///////////////////////////////////////
+// Function for deleting user, in /admin-nutzerverwaltung
+///////////////////////////////////////
+
+add_action('wp_ajax_delete_user', 'delete_user_ajax_handler');
+function delete_user_ajax_handler() {
+  // Check the security token
+  check_ajax_referer('delete_user');
+  // Get the user ID from the AJAX request in /admin-nutzerverwaltung
+  $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
+  // Delete the user
+  if (wp_delete_user($user_id)) {
+    echo 'success';
+  } else {
+    echo 'error';
+  }
+  wp_die();
+}
+
+
  // fill patient/caregiver filed in ninja form, with the custom field for patient/caregiver taken from the registration form
  add_filter( 'ninja_forms_render_default_value', 'fill_ninja_patient', 10, 3 );
  function fill_ninja_patient( $default_value, $field_type, $field_settings ) {
