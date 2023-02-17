@@ -82,7 +82,7 @@ $status="Alle";
 
         ?>
                                 <tr>
-                                    <td data-label="(Blister) Nutzer ID"><?php echo $user_id; ?></td>
+                                <td data-label="(Blister) Nutzer ID"><?php if (empty($user_id)) { ?><i class="empty">leer</i><?php } else { echo $user_id; } ?></td>
                                     <td data-label="Name"><?php 
                             if ($patient_caregiver == 'caregiver') {
                                echo "<div class=row>

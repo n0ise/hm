@@ -52,15 +52,9 @@ $users = get_users( array( 'role' => 'client' ) );
                             $date_doctor = $rezept['prescription_date_by_doctor'];
 
                             $name_doctor = $rezept['doctor_name'];
-                            if  (empty($name_doctor)) {
-                                $name_doctor = "Not set";
-                            } 
-                        if (empty($date_doctor) || $date_doctor == 0) {
-                        $formatted_date_doctor = "Not set";
-                        } else {
-                        $formatted_date_doctor = date("d.m.Y", strtotime($date_doctor));
-                        }
-                        foreach ($rezept['rezept_file'] as $rezept_file) {
+                           
+                            $formatted_date_doctor = date("d.m.Y", strtotime($date_doctor));
+                            foreach ($rezept['rezept_file'] as $rezept_file) {
                             if (isset($rezept_file['rezept_type']) && strtolower($rezept_file['rezept_type']) != 'medplan') {
                                 if (!$displayed) {
                                     $displayed = true;
@@ -71,8 +65,9 @@ $users = get_users( array( 'role' => 'client' ) );
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Nutzer E-Mail"><?php echo $email; ?></td>
-                        <td data-label="Arzt"><?php echo $name_doctor; ?></td>
-                        <td data-label="Datum der Verschreibung"><?php echo $formatted_date_doctor; ?></td>
+                        <td data-label="Arzt"><?php if (empty($name_doctor)) { ?><i class="empty">leer</i><?php } else { echo $name_doctor; } ?></td>
+                        <td data-label="Datum der Verschreibung"><?php if (empty($date_doctor)) { ?><i class="empty">leer</i><?php } else { echo $formatted_date_doctor; } ?></td>
+
                         <td data-label="Medikamente"><?php 
                                         if (!empty($rezept['medicine_section'])) {
                                             foreach ($rezept['medicine_section'] as $medicine) {
