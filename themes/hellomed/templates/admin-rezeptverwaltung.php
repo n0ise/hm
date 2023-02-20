@@ -27,8 +27,8 @@ $users = get_users( array( 'role' => 'client' ) );
                                     class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
                         <th data-label="Nutzer E-Mail">Nutzer E-Mail <i class="fas fa-sort"></i></th>
                         <th data-label="Arzt">Arzt <i class="fas fa-sort"></i></th>
-                        <th>Datum der<br>Verschreibung<a href="#"><i
-                                    class="bi bi-sort-numeric-up sort-icon active"></i></a></th>
+                        <th>Datum der<br>Verschreibung<i
+                                    class="bi bi-sort-numeric-up sort-icon active"></i></th>
                         <th>Medikamente</th>
                         <th>Status</th>
                         <th>Aktionen</th>
@@ -65,8 +65,10 @@ $users = get_users( array( 'role' => 'client' ) );
                     <tr>
                         <td data-label="Rezept ID"><?php echo $rezept['prescription_id']; ?></td>
                         <td data-label="Nutzer E-Mail"><?php echo $email; ?></td>
-                        <td data-label="Arzt"><?php if (empty($name_doctor)) { ?><i class="empty">leer</i><?php } else { echo $name_doctor; } ?></td>
-                        <td data-label="Datum der Verschreibung"><?php if (empty($date_doctor)) { ?><i class="empty">leer</i><?php } else { echo $formatted_date_doctor; } ?></td>
+                        <td data-label="Arzt"><?php if (empty($name_doctor)) { ?><i
+                                class="empty">leer</i><?php } else { echo $name_doctor; } ?></td>
+                        <td data-label="Datum der Verschreibung"><?php if (empty($date_doctor)) { ?><i
+                                class="empty">leer</i><?php } else { echo $formatted_date_doctor; } ?></td>
 
                         <td data-label="Medikamente"><?php 
                                         if (!empty($rezept['medicine_section'])) {
@@ -82,11 +84,13 @@ $users = get_users( array( 'role' => 'client' ) );
                                 class="badge rounded-pill text-bg-<?php echo strtolower($rezept['status_prescription']);?> "><?php echo $rezept['status_prescription']; ?></span>
                         </td>
                         <td data-label="Aktionen">
-                            <a href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
-                            <i class="bi bi-pencil-fill"></i> Editieren</a>
-                            <a href="#" class="delete-rezept" data-user-id="<?php echo $user->ID; ?>" data-rezept-id="<?php echo $rezept['prescription_id']; ?>">
-                            <i class="bi bi-trash2-fill"></i> Löschen
-                            </a>                        
+                            <a
+                                href="admin-rezeptverwaltung-edit?user_id=<?php echo $user->ID; ?>&rezept=<?php echo $rezept['prescription_id']; ?>">
+                                <i class="bi bi-pencil-fill"></i> Editieren</a>
+                            <a href="#" class="delete-rezept" data-user-id="<?php echo $user->ID; ?>"
+                                data-rezept-id="<?php echo $rezept['prescription_id']; ?>">
+                                <i class="bi bi-trash2-fill"></i> Löschen
+                            </a>
                         </td>
                     </tr>
                     <?php           
@@ -141,16 +145,21 @@ $(document).ready(function() {
                     y = convertDateToSortable(y);
                 }
 
-                if (order === 'asc') {
-                    if (x > y) {
-                        shouldSwitch = true;
-                        break;
+                if (x !== null && y !== null) {
+                    if (order === 'asc') {
+                        if (x > y) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (order === 'desc') {
+                        if (x < y) {
+                            shouldSwitch = true;
+                            break;
+                        }
                     }
-                } else if (order === 'desc') {
-                    if (x < y) {
-                        shouldSwitch = true;
-                        break;
-                    }
+                } else if (x === null && y !== null) {
+                    shouldSwitch = true;
+                    break;
                 }
             }
 
@@ -171,9 +180,13 @@ $(document).ready(function() {
 
     // Convert a date string in 'dd.mm.yyyy' format to 'yyyy-mm-dd' format
     function convertDateToSortable(dateString) {
-        let [day, month, year] = dateString.split('.');
-        let sortableDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-        return sortableDate;
+        if (dateString === '' || dateString.toLowerCase() === 'leer') {
+            return null;
+        } else {
+            let [day, month, year] = dateString.split('.');
+            let sortableDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+            return sortableDate;
+        }
     }
 
     // Convert a date string in 'yyyy-mm-dd' format to 'dd.mm.yyyy' format
@@ -192,32 +205,32 @@ $(document).ready(function() {
 </script>
 <!-- delete the prescritpion  -->
 <script>
-  jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {
     // Attach a click event to the "Löschen" button
     $('.delete-rezept').click(function(e) {
-      e.preventDefault();
-      var userId = $(this).data('user-id');
-      var rezeptId = $(this).data('rezept-id');
-      // Show a confirmation dialog before deleting the rezept
-      if (confirm('Sind Sie sicher, dass Sie dieses Rezept löschen möchten?')) {
-        // Send an AJAX request to delete the rezept
-        $.ajax({
-          url: '<?php echo admin_url('admin-ajax.php'); ?>',
-          type: 'POST',
-          data: {
-            action: 'delete_rezept',
-            user_id: userId,
-            rezept_id: rezeptId,
-            _wpnonce: '<?php echo wp_create_nonce('delete_rezept'); ?>'
-          },
-          success: function(response) {
-            // Reload the page after the rezept is deleted
-            location.reload();
-          }
-        });
-      }
+        e.preventDefault();
+        var userId = $(this).data('user-id');
+        var rezeptId = $(this).data('rezept-id');
+        // Show a confirmation dialog before deleting the rezept
+        if (confirm('Sind Sie sicher, dass Sie dieses Rezept löschen möchten?')) {
+            // Send an AJAX request to delete the rezept
+            $.ajax({
+                url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                type: 'POST',
+                data: {
+                    action: 'delete_rezept',
+                    user_id: userId,
+                    rezept_id: rezeptId,
+                    _wpnonce: '<?php echo wp_create_nonce('delete_rezept'); ?>'
+                },
+                success: function(response) {
+                    // Reload the page after the rezept is deleted
+                    location.reload();
+                }
+            });
+        }
     });
-  });
+});
 </script>
 <?php } 
 else { ?>
